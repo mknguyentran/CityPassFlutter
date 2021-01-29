@@ -1,5 +1,6 @@
-import 'package:CityPass/models/Attraction.dart';
-import 'package:CityPass/shared/recommendation_card.dart';
+import 'package:CityPass/models/activity.dart';
+import 'package:CityPass/screens/activity_detail/activity_detail.dart';
+import 'package:CityPass/screens/home/components/recommendation_card.dart';
 import 'package:CityPass/shared/section_title.dart';
 import 'package:CityPass/size_config.dart';
 import 'package:flutter/material.dart';
@@ -26,13 +27,20 @@ class RecommendationCards extends StatelessWidget {
           child: Row(
             children: [
               ...List.generate(
-                travelSpots.length,
+                mockupActivities.length,
                 (index) => Padding(
                   padding:
                       EdgeInsets.only(left: getProportionateScreenWidth(20)),
                   child: RecommendationCard(
-                    attraction: travelSpots[index],
-                    press: () {},
+                    activity: mockupActivities[index],
+                    press: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return ActivityDetail(activity: mockupActivities[index],);
+                        }),
+                      );
+                    },
                   ),
                 ),
               ),
