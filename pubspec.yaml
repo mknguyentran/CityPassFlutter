@@ -58,6 +58,26 @@ flutter:
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
+  fonts: 
+    - family: SFProRounded
+      fonts: 
+        - asset: assets/fonts/SF-Pro-Rounded-Regular.otf
+        - asset: assets/fonts/SF-Pro-Rounded-Ultralight.otf
+          weight: 100 
+        - asset: assets/fonts/SF-Pro-Rounded-Thin.otf
+          weight: 200 
+        - asset: assets/fonts/SF-Pro-Rounded-Light.otf
+          weight: 300 
+        - asset: assets/fonts/SF-Pro-Rounded-Medium.otf
+          weight: 500 
+        - asset: assets/fonts/SF-Pro-Rounded-Semibold.otf
+          weight: 600 
+        - asset: assets/fonts/SF-Pro-Rounded-Bold.otf
+          weight: 700 
+        - asset: assets/fonts/SF-Pro-Rounded-Heavy.otf
+          weight: 800 
+        - asset: assets/fonts/SF-Pro-Rounded-Black.otf
+          weight: 900 
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
