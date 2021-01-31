@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:CityPass/screens/home/home_screen.dart';
+import 'package:city_pass/screens/home/home_screen.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,5 +1,5 @@
-import 'package:CityPass/screens/home/components/search_field.dart';
-import 'package:CityPass/size_config.dart';
+import 'package:city_pass/screens/home/components/search_field.dart';
+import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
 class HomeHeader extends StatelessWidget {
@@ -10,7 +10,7 @@ class HomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      overflow: Overflow.visible,
+      clipBehavior: Clip.none,
       alignment: Alignment.center,
       children: [
         Image.asset(

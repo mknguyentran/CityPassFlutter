@@ -1,5 +1,5 @@
-import 'package:CityPass/constants.dart';
-import 'package:CityPass/size_config.dart';
+import 'package:city_pass/constants.dart';
+import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
 class SectionTitle extends StatelessWidget {
@@ -23,7 +23,7 @@ class SectionTitle extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 21,
               fontWeight: FontWeight.bold,
             ),
           ),

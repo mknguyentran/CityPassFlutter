@@ -20,3 +20,10 @@ final kDefaultShadow = BoxShadow(
   blurRadius: 10,
   color: Color(0xFFB0B0B0).withOpacity(0.56),
 );
+
+final smallShadow = BoxShadow(
+  offset: Offset(0, 2),
+  blurRadius: 3,
+  color: Color(0xFFA0A0A0).withOpacity(0.56),
+);
+

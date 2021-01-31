@@ -1,12 +1,12 @@
-import 'package:CityPass/screens/home/components/history.dart';
-import 'package:CityPass/screens/home/components/location.dart';
-import 'package:CityPass/screens/home/components/my_passes.dart';
-import 'package:CityPass/screens/home/components/passes.dart';
-import 'package:CityPass/shared/custom_nav_bar.dart';
+import 'package:city_pass/screens/home/components/history.dart';
+import 'package:city_pass/screens/home/components/location.dart';
+import 'package:city_pass/screens/home/components/my_passes.dart';
+import 'package:city_pass/screens/home/components/passes.dart';
+import 'package:city_pass/shared/custom_nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:CityPass/screens/home/components/featured.dart';
-import 'package:CityPass/constants.dart';
-import 'package:CityPass/size_config.dart';
+import 'package:city_pass/screens/home/components/featured.dart';
+import 'package:city_pass/constants.dart';
+import 'package:city_pass/size_config.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

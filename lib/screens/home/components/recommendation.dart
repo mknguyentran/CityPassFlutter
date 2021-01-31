@@ -1,8 +1,9 @@
-import 'package:CityPass/models/activity.dart';
-import 'package:CityPass/screens/activity_detail/activity_detail.dart';
-import 'package:CityPass/screens/home/components/recommendation_card.dart';
-import 'package:CityPass/shared/section_title.dart';
-import 'package:CityPass/size_config.dart';
+import 'package:city_pass/models/activity.dart';
+import 'package:city_pass/screens/activity_detail/activity_detail.dart';
+import 'package:city_pass/screens/home/components/recommendation_card.dart';
+import 'package:city_pass/shared/section_title.dart';
+import 'package:city_pass/size_config.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RecommendationCards extends StatelessWidget {
@@ -36,8 +37,10 @@ class RecommendationCards extends StatelessWidget {
                     press: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) {
-                          return ActivityDetail(activity: mockupActivities[index],);
+                        CupertinoPageRoute(builder: (context) {
+                          return ActivityDetail(
+                            activity: mockupActivities[index],
+                          );
                         }),
                       );
                     },
