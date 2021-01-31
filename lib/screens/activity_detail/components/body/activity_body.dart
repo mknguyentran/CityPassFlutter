@@ -31,7 +31,6 @@ class _ActivityBodyState extends State<ActivityBody>
     return Padding(
       padding: const EdgeInsets.all(kDefaultPadding),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             width: getProportionateScreenWidth(300),

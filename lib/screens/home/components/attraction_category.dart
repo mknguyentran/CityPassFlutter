@@ -12,7 +12,7 @@ class AttractionCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SectionTitle(title: "Bạn muốn đi đâu?", showAllCallback: null),
+        SectionTitle(title: "Bạn muốn đi đâu?", showAllCallback: null, hasPadding: true,),
         VerticalSpacing(
           of: 20,
         ),

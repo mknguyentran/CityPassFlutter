@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Pass {
-  final String name, image, briefDescription;
+  final String name, image;
+  final double overallRating;
 
   Pass({
-    @required this.briefDescription,
+    @required this.overallRating,
     @required this.name,
     @required this.image,
   });
@@ -14,11 +15,16 @@ List<Pass> mockupPasses = [
   Pass(
     name: "Đi hết Hồ Chí Minh",
     image: "assets/images/thao_cam_vien.jpg",
-    briefDescription: "Tìm hiểu hơn 1000 cá thể động, thực vật khác nhau",
+    overallRating: 4.7,
   ),
   Pass(
     name: "Thổ địa Sài Gòn",
     image: "assets/images/dinh_doc_lap.jpg",
-    briefDescription: "Biểu tượng chiến thắng và hòa bình của thành phố",
+    overallRating: 4.5,
+  ),
+  Pass(
+    name: "Thổ địa Sài Gòn",
+    image: "assets/images/dia_dao_cu_chi.jpg",
+    overallRating: 4.5,
   ),
 ];

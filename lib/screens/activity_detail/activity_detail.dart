@@ -21,7 +21,6 @@ class _ActivityDetailState extends State<ActivityDetail> {
       body: SingleChildScrollView(
         clipBehavior: Clip.none,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
             ActivityHeader(activity: widget.activity,),
             ActivityBody()

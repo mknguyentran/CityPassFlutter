@@ -17,6 +17,7 @@ class RecommendationCards extends StatelessWidget {
       children: [
         SectionTitle(
           title: "CityPass đề xuất",
+          hasPadding: true,
           showAllCallback: () {},
         ),
         VerticalSpacing(

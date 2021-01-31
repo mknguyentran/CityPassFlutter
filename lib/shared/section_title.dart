@@ -7,8 +7,10 @@ class SectionTitle extends StatelessWidget {
     Key key,
     this.showAllCallback,
     @required this.title,
+    this.hasPadding = false,
   }) : super(key: key);
 
+  final bool hasPadding;
   final String title;
   final GestureTapCallback showAllCallback;
 
@@ -16,7 +18,7 @@ class SectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: getProportionateScreenWidth(kDefaultPadding),
+        horizontal: hasPadding ? getProportionateScreenWidth(kDefaultPadding) : 0,
       ),
       child: Row(
         children: [
@@ -29,10 +31,10 @@ class SectionTitle extends StatelessWidget {
           ),
           Spacer(),
           if (showAllCallback != null)
-              GestureDetector(
-                onTap: showAllCallback,
-                child: Text('Xem tất cả'),
-              )
+            GestureDetector(
+              onTap: showAllCallback,
+              child: Text('Xem tất cả'),
+            )
         ],
       ),
     );

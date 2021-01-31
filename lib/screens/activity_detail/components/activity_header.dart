@@ -16,10 +16,9 @@ class ActivityHeader extends StatelessWidget {
       clipBehavior: Clip.none,
       alignment: Alignment.center,
       children: [
-        Image.asset(
-          activity.image,
+        Container(
           height: getProportionateScreenWidth(280),
-          fit: BoxFit.cover,
+          child: SizedBox.expand(child: Image.asset(activity.image, fit: BoxFit.cover))
         ),
         Positioned(
             bottom: 0,
