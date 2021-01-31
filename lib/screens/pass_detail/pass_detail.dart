@@ -1,5 +1,8 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/pass.dart';
+import 'package:city_pass/screens/order_detail/order_result.dart';
+import 'package:city_pass/size_config.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PassDetail extends StatefulWidget {
@@ -27,10 +30,38 @@ class _PassDetailState extends State<PassDetail> {
       ),
       bottomNavigationBar: BottomAppBar(
         child: Padding(
-          padding:
-              const EdgeInsets.fromLTRB(kDefaultPadding, 10, kDefaultPadding, 10),
+          padding: const EdgeInsets.fromLTRB(
+              kDefaultPadding, 10, kDefaultPadding, 10),
           child: RaisedButton(
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Container(
+                      height: getProportionateScreenHeight(300),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            const Text('Choose Amount'),
+                            ElevatedButton(
+                                child: const Text("Thanh toán"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(builder: (context) {
+                                      return OrderResult();
+                                    }),
+                                  );
+                                })
+                          ],
+                        ),
+                      ),
+                    );
+                  });
+            },
             child: Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: const Text('Mua ngay', style: TextStyle(fontSize: 20)),
