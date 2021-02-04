@@ -34,8 +34,6 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
   }
 
   void decreaseAmount({bool decreaseChild = false}) {
-    print(decreaseChild);
-    print(childrenAmount);
     if (decreaseChild) {
       if (childrenAmount > 0) {
         setState(() {
