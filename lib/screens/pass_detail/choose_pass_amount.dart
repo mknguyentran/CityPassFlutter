@@ -173,7 +173,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
   ElevatedButton _buildBuyButton(BuildContext context) {
     return ElevatedButton(
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(cityPassPrimaryColor),
+            backgroundColor: MaterialStateProperty.all(primaryLightColor),
             textStyle: MaterialStateProperty.all(
               TextStyle(
                 fontFamily: "SFProRounded",
@@ -228,7 +228,7 @@ class AmountPicker extends StatelessWidget {
             IconButton(
               padding: EdgeInsets.all(0),
               iconSize: 40,
-              color: cityPassDarkColor,
+              color: primaryDarkColor,
               disabledColor: lightGray,
               icon: Icon(Icons.remove_circle_outline_rounded),
               onPressed: amount > minAmount ? decreaseFunction : null,
@@ -250,7 +250,7 @@ class AmountPicker extends StatelessWidget {
             IconButton(
               iconSize: 40,
               padding: EdgeInsets.all(0),
-              color: cityPassDarkColor,
+              color: primaryDarkColor,
               disabledColor: lightGray,
               icon: Icon(Icons.add_circle_outline_rounded),
               onPressed: increaseFunction,
