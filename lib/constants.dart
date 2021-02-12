@@ -8,10 +8,14 @@ const kWhiteIconColor = Color(0xFFFFFFFF);
 const primaryLightColor = Color(0xFF59BB4A);
 const primaryDarkColor = Color(0xFF4C9F40);
 const darkBackgroundColor = Color(0xFF2B5525);
-const lightGrayBackground = Color(0xFFFCFCFC);
 const textBlack = Color(0xFF212121);
+const subtitleTextColor = Color(0xFF818884);
+const lightGray = Color(0xFFA5A5A5);
+const lightGrayBackground = Color(0xFFFCFCFC);
 
 const kDefaultPadding = 20.0;
+
+final vndCurrencyFormat = new NumberFormat.currency(locale: "vi_VN", symbol: "₫");
 
 final kPopShadow = BoxShadow(
   offset: Offset(0, 0),
