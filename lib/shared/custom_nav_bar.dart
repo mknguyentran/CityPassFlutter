@@ -1,12 +1,45 @@
-import 'package:CityPass/constants.dart';
-import 'package:CityPass/size_config.dart';
+import 'package:city_pass/constants.dart';
+import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
-class CustomNavBar extends StatelessWidget {
+class CustomNavBar extends StatefulWidget {
+  final Color backgroundColor;
+  final Color itemColor;
+  final List<CustomNavItem> children;
+  final int currentIndex;
+  final int focusedIndex;
+  final Function(int) onChange;
+  final Function() focusedAction;
+
   const CustomNavBar({
     Key key,
-  }) : super(key: key);
+    this.backgroundColor = Colors.white,
+    this.itemColor = primaryDarkColor,
+    this.currentIndex = 0,
+    @required this.children,
+    @required this.focusedIndex,
+    @required this.onChange,
+    @required this.focusedAction,
+  })  : assert(focusedIndex >= 0 && focusedIndex < children.length),
+        super(key: key);
+
+  @override
+  _CustomNavBarState createState() => _CustomNavBarState();
+}
+
+class _CustomNavBarState extends State<CustomNavBar> {
+
+  void _changeIndex(int index) {
+    if (widget.onChange != null) {
+      widget.onChange(index);
+    }
+  }
+
+  void _focusedAction() {
+    if (widget.focusedAction != null) {
+      widget.focusedAction();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,84 +52,78 @@ class CustomNavBar extends StatelessWidget {
       child: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(kDefaultPadding),
+            horizontal: getProportionateScreenWidth(10),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              NavItem(
-                icon: Icons.star,
-                title: "Đề xuất",
-                isSelected: true,
-                press: () {},
-              ),
-              NavItem(
-                icon: Icons.qr_code_rounded,
-                title: "CityPass",
-                isFocused: true,
-                press: () {},
-              ),
-              NavItem(
-                icon: Icons.list_alt_rounded,
-                title: "Lịch sử",
-                press: () {},
-              ),
-            ],
+            children: widget.children.map((item) {
+              int index = widget.children.indexOf(item);
+              bool isCurrent = widget.currentIndex == index;
+              bool isFocused =
+                  widget.focusedIndex != null && widget.focusedIndex == index;
+              return GestureDetector(
+                onTap: () {
+                  isFocused ? _focusedAction() : _changeIndex(index);
+                },
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  height: getProportionateScreenWidth(60),
+                  width: getProportionateScreenWidth(60),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [if (isFocused) kDefaultShadow],
+                  ),
+                  child: _buildNavItem(item, isCurrent, isFocused),
+                ),
+              );
+            }).toList(),
           ),
         ),
       ),
     );
   }
+
+  Column _buildNavItem(
+      CustomNavItem item, bool isCurrentIndex, bool isFocused) {
+    if (item.label != null) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            item.icon,
+            size: 28,
+            color: isCurrentIndex ? widget.itemColor : kIconColor,
+          ),
+          Spacer(),
+          Text(
+            item.label,
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.bold,
+              color: isCurrentIndex ? widget.itemColor : kIconColor,
+            ),
+          )
+        ],
+      );
+    } else {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            item.icon,
+            size: 45,
+            color: isFocused ? widget.itemColor : kIconColor,
+          ),
+        ],
+      );
+    }
+  }
 }
 
-class NavItem extends StatelessWidget {
-  const NavItem({
-    Key key,
-    @required this.icon,
-    @required this.title,
-    @required this.press,
-    this.isSelected = false,
-    this.isFocused = false,
-  }) : super(key: key);
-
-  final String title;
+class CustomNavItem {
   final IconData icon;
-  final bool isSelected;
-  final bool isFocused;
-  final GestureTapCallback press;
+  final String label;
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: press,
-      child: Container(
-        padding: EdgeInsets.all(5),
-        height: getProportionateScreenWidth(60),
-        width: getProportionateScreenWidth(60),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [if (isFocused) kDefaultShadow],
-        ),
-        child: Column(
-          children: [
-            Icon(
-              icon,
-              size: 28,
-              color: isSelected ? cityPassDarkColor : kTextColor,
-            ),
-            Spacer(),
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.bold,
-                color: isSelected ? cityPassDarkColor : kTextColor,
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+  CustomNavItem({@required this.icon, this.label});
 }

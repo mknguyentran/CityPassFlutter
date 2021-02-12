@@ -1,6 +1,6 @@
-import 'package:CityPass/constants.dart';
-import 'package:CityPass/shared/section_title.dart';
-import 'package:CityPass/size_config.dart';
+import 'package:city_pass/constants.dart';
+import 'package:city_pass/shared/section_title.dart';
+import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
 class AttractionCategory extends StatelessWidget {
@@ -12,7 +12,7 @@ class AttractionCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SectionTitle(title: "Bạn muốn đi đâu?", showAllCallback: null),
+        SectionTitle(title: "Bạn muốn đi đâu?", showAllCallback: null, hasPadding: true,),
         VerticalSpacing(
           of: 20,
         ),

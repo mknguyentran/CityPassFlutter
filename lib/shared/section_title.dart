@@ -1,5 +1,5 @@
-import 'package:CityPass/constants.dart';
-import 'package:CityPass/size_config.dart';
+import 'package:city_pass/constants.dart';
+import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
 class SectionTitle extends StatelessWidget {
@@ -7,8 +7,10 @@ class SectionTitle extends StatelessWidget {
     Key key,
     this.showAllCallback,
     @required this.title,
+    this.hasPadding = false,
   }) : super(key: key);
 
+  final bool hasPadding;
   final String title;
   final GestureTapCallback showAllCallback;
 
@@ -16,23 +18,23 @@ class SectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: getProportionateScreenWidth(kDefaultPadding),
+        horizontal: hasPadding ? getProportionateScreenWidth(kDefaultPadding) : 0,
       ),
       child: Row(
         children: [
           Text(
             title,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 21,
               fontWeight: FontWeight.bold,
             ),
           ),
           Spacer(),
           if (showAllCallback != null)
-              GestureDetector(
-                onTap: showAllCallback,
-                child: Text('Xem tất cả'),
-              )
+            GestureDetector(
+              onTap: showAllCallback,
+              child: Text('Xem tất cả'),
+            )
         ],
       ),
     );
