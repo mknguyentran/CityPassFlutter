@@ -9,16 +9,18 @@ class CustomNavBar extends StatefulWidget {
   final int currentIndex;
   final int focusedIndex;
   final Function(int) onChange;
+  final Function() focusedAction;
 
-  const CustomNavBar(
-      {Key key,
-      this.backgroundColor = Colors.white,
-      this.itemColor = cityPassDarkColor,
-      this.currentIndex = 0,
-      @required this.children,
-      @required this.focusedIndex,
-      this.onChange})
-      : assert(focusedIndex >= 0 && focusedIndex < children.length),
+  const CustomNavBar({
+    Key key,
+    this.backgroundColor = Colors.white,
+    this.itemColor = primaryDarkColor,
+    this.currentIndex = 0,
+    @required this.children,
+    @required this.focusedIndex,
+    @required this.onChange,
+    @required this.focusedAction,
+  })  : assert(focusedIndex >= 0 && focusedIndex < children.length),
         super(key: key);
 
   @override
@@ -26,9 +28,16 @@ class CustomNavBar extends StatefulWidget {
 }
 
 class _CustomNavBarState extends State<CustomNavBar> {
+
   void _changeIndex(int index) {
     if (widget.onChange != null) {
       widget.onChange(index);
+    }
+  }
+
+  void _focusedAction() {
+    if (widget.focusedAction != null) {
+      widget.focusedAction();
     }
   }
 
@@ -54,7 +63,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   widget.focusedIndex != null && widget.focusedIndex == index;
               return GestureDetector(
                 onTap: () {
-                  _changeIndex(index);
+                  isFocused ? _focusedAction() : _changeIndex(index);
                 },
                 child: Container(
                   padding: EdgeInsets.all(5),

@@ -5,14 +5,15 @@ const kPrimaryColor = Color(0xFF3E4067);
 const kTextColor = Color(0xFF3F4168);
 const kIconColor = Color(0xFF5E5E5E);
 const kWhiteIconColor = Color(0xFFFFFFFF);
-const cityPassPrimaryColor = Color(0xFF59BB4A);
-const cityPassDarkColor = Color(0xFF4C9F40);
+const primaryLightColor = Color(0xFF59BB4A);
+const primaryDarkColor = Color(0xFF4C9F40);
+const darkBackgroundColor = Color(0xFF2B5525);
+const textBlack = Color(0xFF212121);
 const subtitleTextColor = Color(0xFF818884);
 const lightGray = Color(0xFFA5A5A5);
+const lightGrayBackground = Color(0xFFFCFCFC);
 
 const kDefaultPadding = 20.0;
-
-const currencySymbol = "₫";
 
 final vndCurrencyFormat = new NumberFormat.currency(locale: "vi_VN", symbol: "₫");
 
@@ -33,3 +34,5 @@ final smallShadow = BoxShadow(
   blurRadius: 3,
   color: Color(0xFFA0A0A0).withOpacity(0.56),
 );
+
+final DateFormat simpleDateFormat = new DateFormat("d LLL y", "vi_VN");

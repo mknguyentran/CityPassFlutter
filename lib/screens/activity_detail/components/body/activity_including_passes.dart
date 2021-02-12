@@ -21,22 +21,23 @@ class ActivityIncludingPasses extends StatelessWidget {
           of: 10,
         ),
         ...List.generate(
-            mockupPasses.length,
-            (index) => Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: PassCard(
-                      pass: mockupPasses[index],
-                      press: () {
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(builder: (context) {
-                            return PassDetail(
-                              pass: mockupPasses[index],
-                            );
-                          }),
-                        );
-                      }),
-                ))
+          mockupPasses.length,
+          (index) => Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: PassCard(
+                pass: mockupPasses[index],
+                press: () {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(builder: (context) {
+                      return PassDetail(
+                        pass: mockupPasses[index],
+                      );
+                    }),
+                  );
+                }),
+          ),
+        )
       ],
     );
   }

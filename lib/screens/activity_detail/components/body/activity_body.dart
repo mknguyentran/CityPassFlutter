@@ -55,7 +55,7 @@ class _ActivityBodyState extends State<ActivityBody>
                 borderRadius: BorderRadius.circular(
                   7,
                 ),
-                color: cityPassDarkColor,
+                color: primaryDarkColor,
               ),
               labelColor: Colors.white,
               unselectedLabelColor: Colors.black,

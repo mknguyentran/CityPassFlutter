@@ -1,8 +1,9 @@
 import 'package:city_pass/screens/home/components/history.dart';
 import 'package:city_pass/screens/home/components/location.dart';
-import 'package:city_pass/screens/home/components/my_passes.dart';
 import 'package:city_pass/screens/home/components/passes.dart';
+import 'package:city_pass/screens/user_passes/user_passes.dart';
 import 'package:city_pass/shared/custom_nav_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:city_pass/screens/home/components/featured.dart';
 import 'package:city_pass/constants.dart';
@@ -14,7 +15,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static List<Widget> tabs = [Featured(), Locations(), MyPasses(), Passes(), History()];
+  static List<Widget> tabs = [
+    Featured(),
+    Locations(),
+    UserPasses(),
+    Passes(),
+    History()
+  ];
   int _currentIndex = 0;
 
   void _onItemTapped(int index) {
@@ -41,6 +48,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         focusedIndex: 2,
         onChange: _onItemTapped,
+        focusedAction: () {
+          Navigator.push(
+            context,
+            CupertinoPageRoute(builder: (context) {
+              return UserPasses();
+            }),
+          );
+        },
       ),
     );
   }

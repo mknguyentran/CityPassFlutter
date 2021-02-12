@@ -24,7 +24,7 @@ class SearchField extends StatelessWidget {
           hintText: 'Tìm theo điểm đến hoặc hoạt động',
           hintStyle: TextStyle(
               fontSize: getProportionateScreenWidth(12),
-              color: cityPassDarkColor.withOpacity(0.7)),
+              color: primaryDarkColor.withOpacity(0.7)),
           border: InputBorder.none,
           focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
@@ -32,7 +32,7 @@ class SearchField extends StatelessWidget {
           disabledBorder: InputBorder.none,
           suffixIcon: Icon(
             Icons.search,
-            color: cityPassDarkColor,
+            color: primaryDarkColor,
           ),
           contentPadding: EdgeInsets.symmetric(
             horizontal: getProportionateScreenWidth(kDefaultPadding),
