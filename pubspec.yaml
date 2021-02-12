@@ -33,6 +33,7 @@ dependencies:
   flutter_svg: ^0.18.1
   # Date and number formatting and parsing
   intl: ^0.16.1
+  qr_flutter: ^3.2.0
 
 dev_dependencies:
   flutter_test:

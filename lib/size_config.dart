@@ -29,6 +29,18 @@ double getProportionateScreenWidth(double inputWidth) {
   return (inputWidth / 414.0) * screenWidth;
 }
 
+double percentageOfScreenWidth(double percentage) {
+  double screenWidth = SizeConfig.screenWidth;
+  return (screenWidth/100) * percentage;
+}
+
+double percentageOfScreenHeight(double percentage) {
+  double screenHeight = SizeConfig.screenHeight;
+  return (screenHeight/100) * percentage;
+}
+
+
+
 // For add free space vertically
 class VerticalSpacing extends StatelessWidget {
   const VerticalSpacing({

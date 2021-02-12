@@ -66,7 +66,7 @@ class _PassDetailState extends State<PassDetail> {
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: const Text('Mua ngay', style: TextStyle(fontSize: 20)),
             ),
-            color: cityPassPrimaryColor,
+            color: primaryLightColor,
             textColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),

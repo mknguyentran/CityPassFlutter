@@ -14,7 +14,7 @@ class CustomNavBar extends StatefulWidget {
   const CustomNavBar({
     Key key,
     this.backgroundColor = Colors.white,
-    this.itemColor = cityPassDarkColor,
+    this.itemColor = primaryDarkColor,
     this.currentIndex = 0,
     @required this.children,
     @required this.focusedIndex,

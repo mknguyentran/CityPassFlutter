@@ -13,35 +13,35 @@ class UserPass {
     @required this.image,
   })  : assert(usedDestination >= 0 && totalDestination > 0),
         assert(usedDestination <= totalDestination);
-}
 
-List<UserPass> mockupUserPasses = [
-  UserPass(
-    totalDestination: 6,
-    usedDestination: 2,
-    expiredAt: new DateTime(2021, 2, 14),
-    name: "Đi hết Hồ Chí Minh",
-    image: "assets/images/thao_cam_vien.jpg",
-  ),
-  UserPass(
-    totalDestination: 6,
-    usedDestination: 2,
-    expiredAt: new DateTime(2021, 2, 14),
-    name: "Đi hết Hồ Chí Minh",
-    image: "assets/images/thao_cam_vien.jpg",
-  ),
-  UserPass(
-    totalDestination: 6,
-    usedDestination: 2,
-    expiredAt: new DateTime(2021, 2, 14),
-    name: "Đi hết Hồ Chí Minh",
-    image: "assets/images/thao_cam_vien.jpg",
-  ),
-  UserPass(
-    totalDestination: 6,
-    usedDestination: 2,
-    expiredAt: new DateTime(2021, 2, 14),
-    name: "Đi hết Hồ Chí Minh",
-    image: "assets/images/thao_cam_vien.jpg",
-  ),
-];
+  static List<UserPass> mockupUserPasses = [
+    UserPass(
+      totalDestination: 6,
+      usedDestination: 2,
+      expiredAt: new DateTime(2021, 2, 14),
+      name: "Đi hết Hồ Chí Minh",
+      image: "assets/images/thao_cam_vien.jpg",
+    ),
+    UserPass(
+      totalDestination: 6,
+      usedDestination: 2,
+      expiredAt: new DateTime(2021, 2, 14),
+      name: "Đi hết Hồ Chí Minh",
+      image: "assets/images/thao_cam_vien.jpg",
+    ),
+    UserPass(
+      totalDestination: 6,
+      usedDestination: 2,
+      expiredAt: new DateTime(2021, 2, 14),
+      name: "Đi hết Hồ Chí Minh",
+      image: "assets/images/thao_cam_vien.jpg",
+    ),
+    UserPass(
+      totalDestination: 6,
+      usedDestination: 2,
+      expiredAt: new DateTime(2021, 2, 14),
+      name: "Đi hết Hồ Chí Minh",
+      image: "assets/images/thao_cam_vien.jpg",
+    ),
+  ];
+}
