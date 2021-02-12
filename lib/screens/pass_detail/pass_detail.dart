@@ -5,6 +5,8 @@ import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'choose_pass_amount.dart';
+
 class PassDetail extends StatefulWidget {
   final Pass pass;
 
@@ -37,29 +39,7 @@ class _PassDetailState extends State<PassDetail> {
               showModalBottomSheet<void>(
                   context: context,
                   builder: (BuildContext context) {
-                    return Container(
-                      height: getProportionateScreenHeight(300),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            const Text('Choose Amount'),
-                            ElevatedButton(
-                                child: const Text("Thanh toán"),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                  Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(builder: (context) {
-                                      return OrderResult();
-                                    }),
-                                  );
-                                })
-                          ],
-                        ),
-                      ),
-                    );
+                    return ChoosePassAmount(pass: widget.pass);
                   });
             },
             child: Padding(
