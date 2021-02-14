@@ -34,6 +34,7 @@ dependencies:
   # Date and number formatting and parsing
   intl: ^0.16.1
   qr_flutter: ^3.2.0
+  animations: ^1.1.2
 
 dev_dependencies:
   flutter_test:
