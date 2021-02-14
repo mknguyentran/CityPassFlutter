@@ -12,6 +12,7 @@ const textBlack = Color(0xFF212121);
 const subtitleTextColor = Color(0xFF818884);
 const lightGray = Color(0xFFA5A5A5);
 const lightGrayBackground = Color(0xFFFCFCFC);
+const darkGrayBackground = Color(0xFFebecf0);
 
 const kDefaultPadding = 20.0;
 

@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/screens/activity_detail/activity_detail.dart';
 import 'package:city_pass/screens/home/components/recommendation_card.dart';
@@ -33,18 +34,13 @@ class RecommendationCards extends StatelessWidget {
                 (index) => Padding(
                   padding:
                       EdgeInsets.only(left: getProportionateScreenWidth(20)),
-                  child: RecommendationCard(
-                    activity: mockupActivities[index],
-                    press: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(builder: (context) {
-                          return ActivityDetail(
-                            activity: mockupActivities[index],
-                          );
-                        }),
-                      );
-                    },
+                  child: OpenContainer(
+                    closedBuilder: (context, action) => RecommendationCard(
+                      activity: mockupActivities[index],
+                    ),
+                    openBuilder: (context, action) => ActivityDetail(
+                      activity: mockupActivities[index],
+                    ),
                   ),
                 ),
               ),
