@@ -7,16 +7,27 @@ const kIconColor = Color(0xFF5E5E5E);
 const kWhiteIconColor = Color(0xFFFFFFFF);
 const primaryLightColor = Color(0xFF59BB4A);
 const primaryDarkColor = Color(0xFF4C9F40);
+const lightBackgroundColor = Color(0xFFD5EED1);
 const darkBackgroundColor = Color(0xFF2B5525);
 const textBlack = Color(0xFF212121);
 const subtitleTextColor = Color(0xFF818884);
+const fadedTextColor = Color(0xFFC4C4C4);
 const lightGray = Color(0xFFA5A5A5);
 const lightGrayBackground = Color(0xFFFCFCFC);
 const darkGrayBackground = Color(0xFFebecf0);
+const dividerColor = Color(0xFFECECEC);
+
+const defaultTextStyle = TextStyle(
+  fontFamily: "SFProRounded",
+  color: textBlack,
+  fontSize: 14,
+  fontWeight: FontWeight.normal,
+);
 
 const kDefaultPadding = 20.0;
 
-final vndCurrencyFormat = new NumberFormat.currency(locale: "vi_VN", symbol: "₫");
+final vndCurrencyFormat =
+    new NumberFormat.currency(locale: "vi_VN", symbol: "₫");
 
 final kPopShadow = BoxShadow(
   offset: Offset(0, 0),

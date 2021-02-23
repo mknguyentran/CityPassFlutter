@@ -1,11 +1,14 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/pass.dart';
-import 'package:city_pass/screens/order_detail/order_result.dart';
+import 'package:city_pass/screens/pass_detail/components/pass_detail_content.dart';
+import 'package:city_pass/screens/pass_detail/components/pass_detail_header.dart';
+import 'package:city_pass/screens/pass_detail/components/pass_detail_price_bar.dart';
+import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'choose_pass_amount.dart';
+import 'components/choose_pass_amount.dart';
 
 class PassDetail extends StatefulWidget {
   final Pass pass;
@@ -26,7 +29,14 @@ class _PassDetailState extends State<PassDetail> {
         clipBehavior: Clip.none,
         child: Column(
           children: [
-            Center(child: Text(widget.pass.name)),
+            PassDetailHeader(pass: widget.pass),
+            PassDetailPriceBar(pass: widget.pass),
+            Divider(
+              color: dividerColor,
+              thickness: 10,
+              height: 20,
+            ),
+            PassDetailContent(),
           ],
         ),
       ),
@@ -34,26 +44,43 @@ class _PassDetailState extends State<PassDetail> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(
               kDefaultPadding, 10, kDefaultPadding, 10),
-          child: RaisedButton(
-            onPressed: () {
-              showModalBottomSheet<void>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return ChoosePassAmount(pass: widget.pass);
-                  });
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: const Text('Mua ngay', style: TextStyle(fontSize: 20)),
-            ),
-            color: primaryLightColor,
-            textColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            elevation: 1,
+          child: Container(
+            height: 50,
+            width: double.infinity,
+            child: _buildBuyButton(context),
           ),
         ),
+      ),
+    );
+  }
+
+  ElevatedButton _buildBuyButton(BuildContext context) {
+    return ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(primaryLightColor),
+        textStyle: MaterialStateProperty.all(
+          TextStyle(
+            fontFamily: "SFProRounded",
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      ),
+      onPressed: () {
+        showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return ChoosePassAmount(pass: widget.pass);
+            });
+      },
+      child: Text(
+        'Mua ngay',
+        style: TextStyle(fontSize: 20),
       ),
     );
   }
@@ -77,3 +104,5 @@ class _PassDetailState extends State<PassDetail> {
     );
   }
 }
+
+

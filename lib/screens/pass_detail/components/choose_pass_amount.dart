@@ -53,7 +53,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
   Widget build(BuildContext context) {
     total = widget.pass.price * amount;
     if (widget.pass.childrenPrice != null) {
-      total += widget.pass.childrenPrice * childrenAmount;
+      total += widget.pass.childrenPrice.price * childrenAmount;
     }
     return Container(
       height: 500,
