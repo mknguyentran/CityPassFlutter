@@ -30,7 +30,7 @@ List<Pass> mockupPasses = [
     destinationList: [
       ["a"],
       ["b"],
-      ["c", "d"], //List<String>
+      ["c", "d"], 
       ["e", "f", "g"]
     ],
   ),

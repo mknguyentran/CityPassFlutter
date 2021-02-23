@@ -1,4 +1,5 @@
 import 'package:city_pass/constants.dart';
+import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
@@ -6,11 +7,13 @@ import 'package:flutter/material.dart';
 class PassDetailContent extends StatelessWidget {
   const PassDetailContent({
     Key key,
+    @required this.pass,
   }) : super(key: key);
+
+  final Pass pass;
 
   @override
   Widget build(BuildContext context) {
-    const destinationListLineSpacing = 7.0;
     return Padding(
       padding:
           const EdgeInsets.fromLTRB(kDefaultPadding, 20, kDefaultPadding, 20),
@@ -22,31 +25,55 @@ class PassDetailContent extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildDestinationListItem(
-                  context: context,
-                  index: 1,
-                  name: "ĐẦM SEN NƯỚC",
-                ),
-                _buildDestinationListItem(
-                  context: context,
-                  index: 2,
-                  name: "ĐẦM SEN KHÔ",
-                  secondName: "ABC",
-                ),
-                _buildDestinationListItem(
-                  context: context,
-                  name: "ĐẦM SEN KHÔ",
-                  secondName: "ABC",
-                ),
-                OptionalDestinationListHeader(
-                  lineSpacing: destinationListLineSpacing,
-                  itemAmount: 3,
-                )
+                ...List.generate(pass.destinationList.length, (index) {
+                  switch (pass.destinationList[index].length) {
+                    case 1:
+                      return _buildDestinationListItem(
+                        index: index + 1,
+                        name: pass.destinationList[index][0],
+                        context: context,
+                      );
+                      break;
+                    case 2:
+                      return _buildDestinationListItem(
+                        index: index + 1,
+                        name: pass.destinationList[index][0],
+                        secondName: pass.destinationList[index][1],
+                        context: context,
+                      );
+                      break;
+                    default:
+                      return _buildOptionalDestinationList(
+                        itemList: pass.destinationList[index],
+                        context: context,
+                      );
+                      break;
+                  }
+                }),
               ],
             ),
           )
         ],
       ),
+    );
+  }
+
+  Column _buildOptionalDestinationList({
+    @required List<String> itemList,
+    @required BuildContext context,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        OptionalDestinationListHeader(itemAmount: itemList.length),
+        ...List.generate(
+          itemList.length,
+          (index) => _buildDestinationListItem(
+            name: itemList[index],
+            context: context,
+          ),
+        )
+      ],
     );
   }
 
@@ -107,7 +134,7 @@ class PassDetailContent extends StatelessWidget {
 class OptionalDestinationListHeader extends StatelessWidget {
   const OptionalDestinationListHeader({
     Key key,
-    @required this.lineSpacing,
+    this.lineSpacing = 7.0,
     @required this.itemAmount,
   })  : assert(itemAmount > 2),
         super(key: key);

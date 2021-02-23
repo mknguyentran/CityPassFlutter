@@ -36,7 +36,7 @@ class _PassDetailState extends State<PassDetail> {
               thickness: 10,
               height: 20,
             ),
-            PassDetailContent(),
+            PassDetailContent(pass: widget.pass),
           ],
         ),
       ),
