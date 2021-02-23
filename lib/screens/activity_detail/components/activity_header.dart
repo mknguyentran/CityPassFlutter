@@ -17,65 +17,77 @@ class ActivityHeader extends StatelessWidget {
       children: [
         Container(
           height: getProportionateScreenWidth(280),
-          child: SizedBox.expand(child: Image.asset(activity.image, fit: BoxFit.cover))
+          child: SizedBox.expand(
+              child: Image.asset(activity.image, fit: BoxFit.cover)
+          )
         ),
         Positioned(
-            bottom: 0,
-            child: Container(
-              padding: EdgeInsets.fromLTRB(15,10,15,10),
-              height: 100,
-              width: MediaQuery.of(context).size.width,
-              color: Colors.black.withOpacity(0.6),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    activity.name,
-                    style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+          bottom: 0,
+          child: Container(
+            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+            height: 125,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.black.withOpacity(0.6),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  activity.name,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white
                   ),
-                  Row(
+                ),
+                VerticalSpacing(of: 5),
+                RichText(
+                  text: TextSpan(
                     children: [
-                      Icon(
-                        Icons.circle,
-                        color: Colors.green,
-                        size: 18,
+                      WidgetSpan(
+                        child: Container(
+                          padding: EdgeInsets.only(right: 5),
+                          child: Icon(
+                            Icons.circle,
+                            size: 16,
+                            color: Colors.green,
+                          )
+                        )
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 5),
-                        child: Text(
-                          "Đang hoạt động",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.white),
-                        ),
-                      ),
+                      TextSpan(
+                        text: "Đang hoạt động",
+                        style: TextStyle(fontSize: 16)
+                      )
                     ],
                   ),
-                  Row(
+                ),
+                VerticalSpacing(of: 5),
+                RichText(
+                  text: TextSpan(
                     children: [
-                      Icon(
-                        Icons.location_on_rounded,
-                        color: Colors.yellow,
-                        size: 18,
+                      WidgetSpan(
+                        child: Container(
+                          padding: EdgeInsets.only(right: 5),
+                          child: Icon(
+                            Icons.location_on_rounded,
+                            size: 16,
+                            color: Colors.yellow,
+                          )
+                        )
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 5),
-                        child: Text(
-                          "Địa chỉ",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.white),
-                        ),
-                      ),
+                      TextSpan(
+                        text: "2 Nguyễn Bỉnh Khiêm, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh",
+                        style: TextStyle(
+                          fontSize: 16,
+                          height: 1.4
+                        )
+                      )
                     ],
                   ),
-                ],
-              ),
-            ))
+                )
+              ],
+            ),
+          )
+        )
       ],
     );
   }

@@ -1,11 +1,8 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/activity.dart';
+import 'package:city_pass/shared/timetable_row.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
-
-//Replace with activity data
-String test = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
-String image = "assets/images/dinh_doc_lap.jpg";
 
 class ActivityInfo extends StatelessWidget {
   final Activity activity;
@@ -23,8 +20,9 @@ class ActivityInfo extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Container(
               child: Text(
-                test, //Replace with activity description
+                "Là một trong những công trình mang tính lịch sử và lâu đời nhất TP. HCM, Thảo Cầm Viên Sài Gòn không chỉ là một di tích lịch sử mà còn là biểu tượng văn hóa đặc trưng của thành phố. Được xây dựng cùng lúc với Bưu điện TP. HCM, Nhà thờ Đức Bà và chợ Bến Thành, Thảo Cầm Viên Sài Gòn được xem như một chứng nhân của lịch sử, đã cùng đi qua những thăng trầm của con người và vùng đất này. Sức sống bền bỉ cùng những giá trị văn hóa đặc trưng đã mang đến cho Thảo Cầm Viên Sài Gòn một sắc thái riêng biệt và không thể nhầm lẫn với bất kỳ nơi nào khác.", //Replace with activity description
                 style: TextStyle(
+                  fontSize: 16,
                   height: 1.4),
               ),
             ),
@@ -43,7 +41,7 @@ class ActivityInfo extends StatelessWidget {
                   (index) => Padding(
                     padding: index != 0 ? EdgeInsets.only(left: 20) : EdgeInsets.zero,
                     child: Image.asset(
-                      image,
+                      "assets/images/thao_cam_vien.jpg",
                       width: getProportionateScreenWidth(350),
                       fit: BoxFit.cover
                     ),
@@ -79,45 +77,13 @@ class ActivityInfo extends StatelessWidget {
                     ],
                   ),
                   VerticalSpacing(of: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Thứ hai")
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("09:00 - 11:30 và 11:30 - 19:00")
-                        ],
-                      ),
-                    ],
-                  ),
-                  VerticalSpacing(of: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Thứ ba", style: TextStyle(color: primaryDarkColor),)
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("09:00 - 11:30 và 11:30 - 19:00", style: TextStyle(color: primaryDarkColor),)
-                        ],
-                      ),
-                    ],
-                  ),
+                  TimetableRow(dayOfWeek: "Thứ hai", openTime: "07:00 - 17:30"),
+                  TimetableRow(dayOfWeek: "Thứ ba", openTime: "07:00 - 17:30"),
+                  TimetableRow(dayOfWeek: "Thứ tư", openTime: "07:00 - 17:30"),
+                  TimetableRow(dayOfWeek: "Thứ năm", openTime: "07:00 - 17:30"),
+                  TimetableRow(dayOfWeek: "Thứ sáu", openTime: "07:00 - 17:30"),
+                  TimetableRow(dayOfWeek: "Thứ bảy", openTime: "07:00 - 17:30"),
+                  TimetableRow(dayOfWeek: "Chủ nhật", openTime: "07:00 - 17:30"),
                 ],
               ),
             ),
