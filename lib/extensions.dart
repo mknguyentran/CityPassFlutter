@@ -5,11 +5,12 @@ extension Neumorphism on Widget {
     double borderRadius = 10.0,
     Offset offset = const Offset(5, 5),
     double blurRadius = 10,
-    Color topShadowColor = Colors.white,
-    Color bottomShadowColor = const Color(0xffc8c9cc),
+    Color topShadowColor = const Color(0xFFECECEC),
+    Color bottomShadowColor = const Color(0xFFA1A1A1),
   }) {
     return Container(
       decoration: BoxDecoration(
+        border: Border(),
         borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
         boxShadow: [
           BoxShadow(

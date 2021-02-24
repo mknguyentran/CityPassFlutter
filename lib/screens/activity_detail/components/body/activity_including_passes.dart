@@ -18,7 +18,7 @@ class ActivityIncludingPasses extends StatelessWidget {
       children: [
         SectionTitle(title: "Hoạt động này có trong"),
         VerticalSpacing(
-          of: 10,
+          of: 20,
         ),
         ...List.generate(
           mockupPasses.length,
