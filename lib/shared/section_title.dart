@@ -6,19 +6,23 @@ class SectionTitle extends StatelessWidget {
   const SectionTitle({
     Key key,
     this.showAllCallback,
-    @required this.title,
     this.hasPadding = false,
+    @required this.title,
+    this.lineSpacing = 0,
   }) : super(key: key);
 
   final bool hasPadding;
   final String title;
   final GestureTapCallback showAllCallback;
+  final double lineSpacing;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: hasPadding ? getProportionateScreenWidth(kDefaultPadding) : 0,
+        horizontal:
+            hasPadding ? getProportionateScreenWidth(kDefaultPadding) : 0,
+        vertical: lineSpacing,
       ),
       child: Row(
         children: [
