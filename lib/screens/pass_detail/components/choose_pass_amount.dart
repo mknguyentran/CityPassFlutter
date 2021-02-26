@@ -1,4 +1,5 @@
 import 'package:city_pass/constants.dart';
+import 'package:city_pass/models/order_detail.dart';
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/screens/order_detail/order_result.dart';
 import 'package:city_pass/size_config.dart';
@@ -125,7 +126,12 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
                 Container(
                   height: 50,
                   width: double.infinity,
-                  child: _buildBuyButton(context),
+                  child: _buildBuyButton(
+                    context,
+                    pass: widget.pass,
+                    amount: amount,
+                    childrenAmount: childrenAmount,
+                  ),
                 ),
               ],
             ),
@@ -170,7 +176,12 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
     }
   }
 
-  ElevatedButton _buildBuyButton(BuildContext context) {
+  ElevatedButton _buildBuyButton(
+    BuildContext context, {
+    @required Pass pass,
+    int amount,
+    int childrenAmount,
+  }) {
     return ElevatedButton(
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(primaryLightColor),
@@ -192,7 +203,11 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
           Navigator.push(
             context,
             CupertinoPageRoute(builder: (context) {
-              return OrderResult();
+              OrderDetail orderDetail =
+                  new OrderDetail(pass, amount, childrenAmount);
+              return OrderResult(
+                orderDetail: orderDetail,
+              );
             }),
           );
         });
