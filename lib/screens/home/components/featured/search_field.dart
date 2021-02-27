@@ -6,25 +6,33 @@ import '../../../../size_config.dart';
 class SearchField extends StatelessWidget {
   const SearchField({
     Key key,
+    this.width = 300,
+    this.height = 50,
+    this.hintText,
+    this.boxShadow,
   }) : super(key: key);
+
+  final double width, height;
+  final String hintText;
+  final List<BoxShadow> boxShadow;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: getProportionateScreenWidth(313),
-      height: getProportionateScreenHeight(50),
+      width: width,
+      height: height,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [kPopShadow],
+        boxShadow: boxShadow,
       ),
       child: TextField(
         onChanged: (value) {},
         decoration: InputDecoration(
-          hintText: 'Tìm theo điểm đến hoặc hoạt động',
+          hintText: hintText,
           hintStyle: TextStyle(
-              fontSize: getProportionateScreenWidth(12),
-              color: primaryDarkColor.withOpacity(0.7)),
+              fontSize: 12,
+              color: primaryDarkColor,),
           border: InputBorder.none,
           focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
@@ -35,9 +43,8 @@ class SearchField extends StatelessWidget {
             color: primaryDarkColor,
           ),
           contentPadding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(kDefaultPadding),
-            vertical:
-                getProportionateScreenWidth(kDefaultPadding / 1.5),
+            horizontal: kDefaultPadding,
+            vertical: height/4
           ),
         ),
       ),
