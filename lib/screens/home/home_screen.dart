@@ -1,11 +1,11 @@
-import 'package:city_pass/screens/home/components/history.dart';
-import 'package:city_pass/screens/home/components/location.dart';
-import 'package:city_pass/screens/home/components/passes.dart';
+import 'package:city_pass/screens/home/components/account/account.dart';
+import 'package:city_pass/screens/home/components/location/location.dart';
+import 'package:city_pass/screens/home/components/passes/passes.dart';
 import 'package:city_pass/screens/user_passes/user_passes.dart';
 import 'package:city_pass/shared/custom_nav_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:city_pass/screens/home/components/featured.dart';
+import 'package:city_pass/screens/home/components/featured/featured.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/size_config.dart';
 
@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Locations(),
     UserPasses(),
     Passes(),
-    History()
+    Account()
   ];
   int _currentIndex = 0;
 
@@ -40,11 +40,11 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: CustomNavBar(
         currentIndex: _currentIndex,
         children: [
-          CustomNavItem(icon: Icons.star, label: "Đề xuất"),
+          CustomNavItem(icon: Icons.star_rounded, label: "Đề xuất"),
           CustomNavItem(icon: Icons.location_on, label: "Địa điểm"),
-          CustomNavItem(icon: Icons.qr_code),
+          CustomNavItem(icon: CupertinoIcons.qrcode),
           CustomNavItem(icon: Icons.local_activity_rounded, label: "CityPass"),
-          CustomNavItem(icon: Icons.history, label: "Lịch sử"),
+          CustomNavItem(icon: CupertinoIcons.person_circle_fill, label: "Tài khoản"),
         ],
         focusedIndex: 2,
         onChange: _onItemTapped,
@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.black.withOpacity(0.2),
       brightness: Brightness.dark,
       centerTitle: false,
       title: Row(
@@ -79,11 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      actions: [
-        IconButton(
-            icon: ClipOval(child: Image.asset("assets/images/profile.png")),
-            onPressed: () {})
-      ],
     );
   }
 }

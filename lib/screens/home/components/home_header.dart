@@ -1,4 +1,4 @@
-import 'package:city_pass/screens/home/components/search_field.dart';
+import 'package:city_pass/screens/home/components/featured/search_field.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 

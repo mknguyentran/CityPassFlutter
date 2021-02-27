@@ -1,8 +1,8 @@
-import 'package:city_pass/screens/home/components/recommendation.dart';
+import 'package:city_pass/screens/home/components/featured/recommendation.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
-import 'attraction_category.dart';
-import 'home_header.dart';
+import '../featured/attraction_category.dart';
+import '../home_header.dart';
 
 class Featured extends StatelessWidget {
   @override
