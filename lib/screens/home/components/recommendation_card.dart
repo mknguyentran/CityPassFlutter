@@ -14,7 +14,7 @@ class RecommendationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: getProportionateScreenWidth(350),
+      width: 330,
       child: Stack(
         children: [
           AspectRatio(

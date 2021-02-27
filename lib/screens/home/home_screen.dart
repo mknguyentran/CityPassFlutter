@@ -64,6 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return AppBar(
       backgroundColor: Colors.transparent,
       brightness: Brightness.dark,
+      centerTitle: false,
       title: Row(
         children: [
           Text(

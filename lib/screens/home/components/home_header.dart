@@ -15,7 +15,8 @@ class HomeHeader extends StatelessWidget {
       children: [
         Image.asset(
           "assets/images/home_bg3.jpg",
-          height: getProportionateScreenWidth(280),
+          height: percentageOfScreenHeight(30),
+          width: double.infinity,
           fit: BoxFit.cover,
         ),
         Positioned(
