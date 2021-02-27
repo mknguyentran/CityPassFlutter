@@ -17,7 +17,7 @@ class PassDetailHeader extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         Container(
-            height: getProportionateScreenWidth(280),
+            height: percentageOfScreenHeight(30),
             child: SizedBox.expand(
                 child: Image.asset(pass.image, fit: BoxFit.cover))),
         Positioned(

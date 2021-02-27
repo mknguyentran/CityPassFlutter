@@ -33,8 +33,9 @@ class _ActivityBodyState extends State<ActivityBody>
       child: Column(
         children: [
           Container(
+            alignment: Alignment.center,
             width: getProportionateScreenWidth(300),
-            height: getProportionateScreenHeight(35),
+            height: 35,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey[300], width: 4),
               color: Colors.grey[300],
@@ -59,6 +60,11 @@ class _ActivityBodyState extends State<ActivityBody>
               ),
               labelColor: Colors.white,
               unselectedLabelColor: Colors.black,
+              labelStyle: TextStyle(
+                fontWeight: FontWeight.w500,
+                letterSpacing: -1,
+                fontSize: 16,
+              ),
               tabs: [
                 Tab(
                   text: "Thông tin",

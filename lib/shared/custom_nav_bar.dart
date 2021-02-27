@@ -44,7 +44,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: getProportionateScreenWidth(80),
+      height: getProportionateScreenWidth(70),
       decoration: BoxDecoration(
         boxShadow: [kDefaultShadow],
         color: widget.backgroundColor,
@@ -52,10 +52,10 @@ class _CustomNavBarState extends State<CustomNavBar> {
       child: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: percentageOfScreenWidth(2),
+            horizontal: kDefaultPadding,
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: widget.children.map((item) {
               int index = widget.children.indexOf(item);
               bool isCurrent = widget.currentIndex == index;
@@ -67,8 +67,8 @@ class _CustomNavBarState extends State<CustomNavBar> {
                 },
                 child: Container(
                   padding: EdgeInsets.all(0),
-                  height: getProportionateScreenWidth(60),
-                  width: getProportionateScreenWidth(60),
+                  height: getProportionateScreenWidth(55),
+                  width: getProportionateScreenWidth(55),
                   decoration: BoxDecoration(
                     color: widget.backgroundColor,
                     borderRadius: BorderRadius.circular(10),
