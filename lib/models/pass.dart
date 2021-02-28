@@ -4,7 +4,7 @@ class Pass {
   final String name, image;
   final double overallRating, price, originalPrice;
   final PassChildrenPrice childrenPrice;
-  final List<List<String>> destinationList;
+  final List<IncludingDestination> destinationList;
 
   int get discountedPercentage {
     return ((originalPrice - price) / originalPrice * 100).floor();
@@ -28,10 +28,9 @@ List<Pass> mockupPasses = [
     price: 250000,
     originalPrice: 460000,
     destinationList: [
-      ["a"],
-      ["b"],
-      ["c", "d"], 
-      ["e", "f", "g"]
+      IncludingDestination(["a", "b"], 2),
+      IncludingDestination(["c", "d"], 1),
+      IncludingDestination(["e", "f", "g"], 2),
     ],
   ),
   Pass(
@@ -45,10 +44,9 @@ List<Pass> mockupPasses = [
       originalPrice: 300000,
     ),
     destinationList: [
-      ["a"],
-      ["b"],
-      ["c", "d"],
-      ["e", "f", "g"]
+      IncludingDestination(["a", "b"], 2),
+      IncludingDestination(["c", "d"], 1),
+      IncludingDestination(["e", "f", "g","h"], 2),
     ],
   ),
   Pass(
@@ -58,10 +56,9 @@ List<Pass> mockupPasses = [
     price: 250000,
     originalPrice: 372000,
     destinationList: [
-      ["a"],
-      ["b"],
-      ["c", "d"],
-      ["e", "f", "g"]
+      IncludingDestination(["a", "b"], 2),
+      IncludingDestination(["c", "d"], 1),
+      IncludingDestination(["e", "f", "g"], 2),
     ],
   ),
 ];
@@ -73,4 +70,35 @@ class PassChildrenPrice {
     @required this.price,
     @required this.originalPrice,
   });
+}
+
+class IncludingDestination {
+  final List<String> destinationList;
+  final int includingQuota;
+
+  bool get isAllIncluded {
+    return includingQuota == destinationList.length;
+  }
+
+  bool get isBinaryOptional {
+    return destinationList.length == 2 && includingQuota == 1;
+  }
+
+  int get type {
+    if (isAllIncluded) {
+      return allIncluded;
+    } else if (isBinaryOptional) {
+      return binaryOptional;
+    } else {
+      return optional;
+    }
+  }
+
+  static const int allIncluded = 1;
+  static const int binaryOptional = 2;
+  static const int optional = 3;
+
+  IncludingDestination(this.destinationList, this.includingQuota)
+      : assert(includingQuota <= destinationList.length),
+        assert(includingQuota > 0);
 }

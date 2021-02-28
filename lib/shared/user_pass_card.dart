@@ -68,8 +68,7 @@ class UserPassCard extends StatelessWidget {
                                 color: Colors.white),
                           ),
                           Text(
-                            "HẾT HẠN VÀO " +
-                                simpleDateFormat.format(pass.expiredAt),
+                            "HẾT HẠN VÀO ${simpleDateFormat.format(pass.expiredAt)}".toUpperCase(),
                             style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w300,

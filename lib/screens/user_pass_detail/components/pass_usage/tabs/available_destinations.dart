@@ -1,71 +1,55 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/pass.dart';
-import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
-class PassDetailContent extends StatelessWidget {
-  const PassDetailContent({
-    Key key,
-    @required this.pass,
-  }) : super(key: key);
+class AvailableDestinations extends StatelessWidget {
+  final List<IncludingDestination> destinationList;
 
-  final Pass pass;
+  const AvailableDestinations({Key key, @required this.destinationList})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     int _currentIndex = 1;
     return Padding(
-      padding:
-          const EdgeInsets.fromLTRB(kDefaultPadding, 20, kDefaultPadding, 20),
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SectionTitle(title: "CityPass này bao gồm"),
-          Padding(
-            padding: const EdgeInsets.only(left: kDefaultPadding, top: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ...List.generate(
-                  pass.destinationList.length,
-                  (index) {
-                    Widget result;
-                    switch (pass.destinationList[index].type) {
-                      case IncludingDestination.allIncluded:
-                        result = _buildDestinationList(
-                          itemList: pass.destinationList[index].destinationList,
-                          context: context,
-                          currentIndex: _currentIndex,
-                        );
-                        _currentIndex +=
-                            pass.destinationList[index].destinationList.length;
-                        break;
-                      case IncludingDestination.binaryOptional:
-                        result = _buildDestinationListItem(
-                            name:
-                                pass.destinationList[index].destinationList[0],
-                            secondName:
-                                pass.destinationList[index].destinationList[1],
-                            context: context,
-                            index: _currentIndex++);
-                        break;
-                      case IncludingDestination.optional:
-                        result = _buildOptionalDestinationList(
-                            itemList:
-                                pass.destinationList[index].destinationList,
-                            includingQuota:
-                                pass.destinationList[index].includingQuota,
-                            context: context);
-                        break;
-                      default:
-                        break;
-                    }
-                    return result;
-                  },
-                ),
-              ],
-            ),
-          )
+          ...List.generate(
+            destinationList.length,
+            (index) {
+              Widget result;
+              switch (destinationList[index].type) {
+                case IncludingDestination.allIncluded:
+                  result = _buildDestinationList(
+                    itemList: destinationList[index].destinationList,
+                    context: context,
+                    currentIndex: _currentIndex,
+                  );
+                  _currentIndex +=
+                      destinationList[index].destinationList.length;
+                  break;
+                case IncludingDestination.binaryOptional:
+                  result = _buildDestinationListItem(
+                      name: destinationList[index].destinationList[0],
+                      secondName: destinationList[index].destinationList[1],
+                      context: context,
+                      index: _currentIndex++);
+                  break;
+                case IncludingDestination.optional:
+                  result = _buildOptionalDestinationList(
+                      itemList: destinationList[index].destinationList,
+                      includingQuota: destinationList[index].includingQuota,
+                      context: context);
+                  break;
+                default:
+                  break;
+              }
+              return result;
+            },
+          ),
         ],
       ),
     );

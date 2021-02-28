@@ -1,8 +1,10 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/user_pass.dart';
-import 'package:city_pass/size_config.dart';
+import 'package:city_pass/screens/user_pass_detail/components/user_pass_detail_progress_bar.dart';
+import 'package:city_pass/screens/user_pass_detail/components/user_pass_detail_top_info.dart';
+import 'package:city_pass/screens/user_pass_detail/components/pass_usage/user_pass_detail_usage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class UserPassDetail extends StatelessWidget {
   final UserPass pass;
@@ -14,36 +16,17 @@ class UserPassDetail extends StatelessWidget {
     return Scaffold(
       appBar: _buildAppBar(context),
       backgroundColor: lightGrayBackground,
-      body: Padding(
-        padding:
-            const EdgeInsets.fromLTRB(kDefaultPadding, 25, kDefaultPadding, 0),
-        child: Column(
-          children: [
-            Text(
-              "Đưa mã này cho nhân viên soát vé",
-              style: TextStyle(fontSize: 16),
-            ),
-            Container(
-              padding: EdgeInsets.all(kDefaultPadding),
-              alignment: Alignment.center,
-              child: QrImage(
-                data: pass.name,
-                version: QrVersions.auto,
-                size: percentageOfScreenHeight(30),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                pass.name,
-                style: TextStyle(
-                  color: primaryDarkColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                ),
-              ),
-            )
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: kDefaultPadding, vertical: 15),
+          child: Column(
+            children: [
+              UserPassDetailTopInfo(pass: pass),
+              UserPassDetailProgressBar(pass: pass),
+              UserPassDetailUsage(pass: pass,)
+            ],
+          ),
         ),
       ),
     );
@@ -65,7 +48,10 @@ class UserPassDetail extends StatelessWidget {
       ),
       title: Text(
         pass.name,
-        style: TextStyle(color: textBlack, fontWeight: FontWeight.bold,),
+        style: TextStyle(
+          color: textBlack,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       centerTitle: true,
       actions: [
