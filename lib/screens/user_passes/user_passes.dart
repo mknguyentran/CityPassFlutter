@@ -12,11 +12,7 @@ class UserPasses extends StatelessWidget {
         appBar: _buildAppBar(context),
         backgroundColor: lightGrayBackground,
         body: Padding(
-          padding: EdgeInsets.only(
-            top: kDefaultPadding,
-            left: kDefaultPadding,
-            right: kDefaultPadding,
-          ),
+          padding: EdgeInsets.all(kDefaultPadding),
           child: SingleChildScrollView(
             clipBehavior: Clip.none,
             child: Column(

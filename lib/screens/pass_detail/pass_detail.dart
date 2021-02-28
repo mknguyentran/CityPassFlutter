@@ -3,8 +3,6 @@ import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/screens/pass_detail/components/pass_detail_content.dart';
 import 'package:city_pass/screens/pass_detail/components/pass_detail_header.dart';
 import 'package:city_pass/screens/pass_detail/components/pass_detail_price_bar.dart';
-import 'package:city_pass/shared/section_title.dart';
-import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

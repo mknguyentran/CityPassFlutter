@@ -26,6 +26,13 @@ class _ActivityBodyState extends State<ActivityBody>
     _tabController.dispose();
   }
 
+  _changeTab(index) {
+    setState(() {
+      selectedIndex = index;
+      _tabController.animateTo(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,10 +53,7 @@ class _ActivityBodyState extends State<ActivityBody>
             child: TabBar(
               controller: _tabController,
               onTap: (index) {
-                setState(() {
-                  selectedIndex = index;
-                  _tabController.animateTo(index);
-                });
+                _changeTab(index);
               },
               indicator: BoxDecoration(
                 boxShadow: [smallShadow],

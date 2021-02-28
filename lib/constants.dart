@@ -48,3 +48,4 @@ final smallShadow = BoxShadow(
 );
 
 final DateFormat simpleDateFormat = new DateFormat("d LLL y", "vi_VN");
+final DateFormat simpleDateAndTimeFormat = new DateFormat.Hm("vi_VN").addPattern(", d LLL y");

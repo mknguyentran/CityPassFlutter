@@ -1,13 +1,12 @@
 import 'package:city_pass/models/pass.dart';
-import 'package:flutter/material.dart';
 
 class OrderDetail {
   final Pass pass;
   final int amount, childrenAmount;
 
   OrderDetail(
-    @required this.pass,
-    @required this.amount,
+    this.pass,
+    this.amount,
     this.childrenAmount,
   );
 
