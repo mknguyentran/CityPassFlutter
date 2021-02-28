@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class History extends StatelessWidget {
+class Account extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: Text("History Tab")
+      child: Text("Account Tab")
     );
   }
 }

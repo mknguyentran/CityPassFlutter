@@ -1,4 +1,5 @@
-import 'package:city_pass/screens/home/components/search_field.dart';
+import 'package:city_pass/constants.dart';
+import 'package:city_pass/screens/home/components/featured/search_field.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,10 @@ class HomeHeader extends StatelessWidget {
         ),
         Positioned(
           bottom: getProportionateScreenWidth(-25),
-          child: SearchField(),
+          child: SearchField(
+            hintText: "Tìm theo điểm đến hoặc hoạt động",
+            boxShadow: [kPopShadow],
+          ),
         )
       ],
     );

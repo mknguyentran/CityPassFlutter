@@ -36,9 +36,9 @@ final kPopShadow = BoxShadow(
 );
 
 final kDefaultShadow = BoxShadow(
-  offset: Offset(5, 5),
+  offset: Offset(4, 4),
   blurRadius: 10,
-  color: Color(0xFFB0B0B0).withOpacity(0.56),
+  color: Color(0xFFB0B0B0).withOpacity(0.5),
 );
 
 final smallShadow = BoxShadow(
