@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SizeConfig().init(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: buildAppBar(),
+      appBar: _currentIndex != 4 ? buildAppBar() : null,
       body: tabs.elementAt(_currentIndex),
       bottomNavigationBar: CustomNavBar(
         currentIndex: _currentIndex,
