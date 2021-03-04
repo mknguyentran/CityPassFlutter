@@ -65,8 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      appBar: _currentIndex != 4 ? buildAppBar(_currentIndex) : null,
-      extendBodyBehindAppBar: _currentIndex == 0,
+      appBar: buildAppBar(_currentIndex),
+      extendBodyBehindAppBar: _currentIndex == 0 || _currentIndex == 4,
       body: tabs.elementAt(_currentIndex),
       bottomNavigationBar: CustomNavBar(
         currentIndex: _currentIndex,
@@ -117,7 +117,13 @@ class _HomeScreenState extends State<HomeScreen> {
       _brightness = Brightness.dark;
       _foregroundColor = Colors.white;
       _bottom = null;
-    } 
+    } else if (tab == 4) {
+      return AppBar(
+        brightness: _brightness,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      );
+    }
     return AppBar(
       backgroundColor: _backgroundColor,
       brightness: _brightness,
