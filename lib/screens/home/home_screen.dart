@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:city_pass/models/city.dart';
 import 'package:city_pass/screens/home/components/account/account.dart';
 import 'package:city_pass/screens/home/components/city_picker/city_picker.dart';
+import 'package:city_pass/shared/search_field.dart';
 import 'package:city_pass/screens/home/components/location/location.dart';
 import 'package:city_pass/screens/home/components/passes/passes.dart';
 import 'package:city_pass/screens/user_passes/user_passes.dart';
@@ -64,8 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: buildAppBar(),
+      extendBodyBehindAppBar: _currentIndex == 0,
+      appBar: buildAppBar(_currentIndex),
       body: tabs.elementAt(_currentIndex),
       bottomNavigationBar: CustomNavBar(
         currentIndex: _currentIndex,
@@ -93,10 +94,34 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  AppBar buildAppBar() {
+  AppBar buildAppBar(int tab, [String hintText]) {
+    var _backgroundColor = Colors.white;
+    var _brightness = Brightness.light;
+    var _foregroundColor = textBlack;
+    var _bottom = PreferredSize(
+      preferredSize: Size.fromHeight(80),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding).add(
+          const EdgeInsets.only(bottom: 20),
+        ),
+        child: SearchField(
+          height: 45,
+          width: double.infinity,
+          hintText: "Tìm kiếm điểm đến, hoạt đông,...",
+          boxShadow: [kDefaultShadow],
+        ),
+      ),
+    );
+    if (tab == 0) {
+      _backgroundColor = Colors.black.withOpacity(0.5);
+      _brightness = Brightness.dark;
+      _foregroundColor = Colors.white;
+      _bottom = null;
+    } 
     return AppBar(
-      backgroundColor: Colors.black.withOpacity(0.2),
-      brightness: Brightness.dark,
+      backgroundColor: _backgroundColor,
+      brightness: _brightness,
+      elevation: 0,
       centerTitle: false,
       title: GestureDetector(
         onTap: () {
@@ -106,14 +131,16 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Text(
               'CityPass tại ${_currentCity.name}',
+              style: TextStyle(color: _foregroundColor),
             ),
             Icon(
               Icons.arrow_drop_down,
-              color: kWhiteIconColor,
+              color: _foregroundColor,
             ),
           ],
         ),
       ),
+      bottom: _bottom,
     );
   }
 
