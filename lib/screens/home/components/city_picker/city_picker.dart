@@ -1,6 +1,6 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/city.dart';
-import 'package:city_pass/screens/home/components/featured/search_field.dart';
+import 'package:city_pass/shared/search_field.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class CityPicker extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: kDefaultPadding, vertical: 30),
+              horizontal: kDefaultPadding, vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -140,9 +140,10 @@ AppBar _buildAppBar(BuildContext context) {
     ),
     centerTitle: true,
     bottom: PreferredSize(
-      preferredSize: Size.fromHeight(60),
+      preferredSize: Size.fromHeight(80),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding)
+            .add(const EdgeInsets.only(bottom: 20)),
         child: SearchField(
           height: 45,
           width: double.infinity,
