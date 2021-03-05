@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'components/attraction_category.dart';
 import 'components/home_header.dart';
 
-class Featured extends StatelessWidget {
+class Explore extends StatelessWidget {
   final City city;
 
-  const Featured({Key key, @required this.city}) : super(key: key);
-  
+  const Explore({Key key, this.city}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -20,11 +20,11 @@ class Featured extends StatelessWidget {
           VerticalSpacing(
             of: 50,
           ),
-          RecommendationCards(),
+          AttractionCategory(),
           VerticalSpacing(
             of: 35,
           ),
-          AttractionCategory(),
+          RecommendationCards(),
         ],
       ),
     );

@@ -10,7 +10,7 @@ import 'package:city_pass/screens/user_passes/user_passes.dart';
 import 'package:city_pass/shared/custom_nav_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:city_pass/screens/home/components/featured/featured.dart';
+import 'package:city_pass/screens/home/components/featured/explore.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/size_config.dart';
 
@@ -40,20 +40,17 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void _removeCity() {
+    setState(() {
+      _currentCity = null;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    if (widget.currentCity != null) {
-      _currentCity = widget.currentCity;
-    } else {
-      var random = new Random();
-      var randomCityGroupIndex = random.nextInt(mockupCities.length - 1);
-      var randomCityIndex =
-          random.nextInt(mockupCities[randomCityGroupIndex].length - 1);
-      _currentCity = mockupCities[randomCityGroupIndex][randomCityIndex];
-    }
     tabs = [
-      Featured(city: _currentCity),
+      Explore(city: _currentCity),
       Locations(city: _currentCity),
       UserPasses(),
       Passes(city: _currentCity),
@@ -71,12 +68,22 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: CustomNavBar(
         currentIndex: _currentIndex,
         children: [
-          CustomNavItem(icon: Icons.star_rounded, label: "Đề xuất"),
-          CustomNavItem(icon: Icons.location_on, label: "Địa điểm"),
-          CustomNavItem(icon: CupertinoIcons.qrcode),
-          CustomNavItem(icon: Icons.local_activity_rounded, label: "CityPass"),
           CustomNavItem(
-            icon: CupertinoIcons.person_circle_fill,
+              icon: CupertinoIcons.compass,
+              selectedIcon: CupertinoIcons.compass_fill,
+              label: _currentCity != null ? _currentCity.name : "Khám phá"),
+          CustomNavItem(
+              icon: Icons.location_on_outlined,
+              selectedIcon: Icons.location_on,
+              label: "Địa điểm"),
+          CustomNavItem(icon: CupertinoIcons.qrcode),
+          CustomNavItem(
+              icon: Icons.local_activity_outlined,
+              selectedIcon: Icons.local_activity_rounded,
+              label: "CityPass"),
+          CustomNavItem(
+            icon: CupertinoIcons.person_circle,
+            selectedIcon: CupertinoIcons.person_circle_fill,
             label: "Tài khoản",
           ),
         ],
@@ -136,7 +143,9 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Row(
           children: [
             Text(
-              'CityPass tại ${_currentCity.name}',
+              _currentCity != null
+                  ? 'CityPass tại ${_currentCity.name}'
+                  : "Khám phá địa điểm mới",
               style: TextStyle(color: _foregroundColor),
             ),
             Icon(
@@ -158,8 +167,10 @@ class _HomeScreenState extends State<HomeScreen> {
       }),
     );
 
-    if (pickedCity != null) {
+    if (pickedCity is City) {
       _changeCity(pickedCity);
+    } else if (pickedCity is bool) {
+      _removeCity();
     }
   }
 }

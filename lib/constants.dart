@@ -5,8 +5,8 @@ const kPrimaryColor = Color(0xFF3E4067);
 const kTextColor = Color(0xFF3F4168);
 const kIconColor = Color(0xFF5E5E5E);
 const kWhiteIconColor = Color(0xFFFFFFFF);
-const primaryLightColor = Color(0xFF59BB4A);
-const primaryDarkColor = Color(0xFF4C9F40);
+const primaryLightColor = Color(0xFFFF9900);
+const primaryDarkColor = Color.fromRGBO(235, 98, 54, 1);
 const lightBackgroundColor = Color(0xFFD5EED1);
 const darkBackgroundColor = Color(0xFF2B5525);
 const textBlack = Color(0xFF212121);
@@ -48,4 +48,5 @@ final smallShadow = BoxShadow(
 );
 
 final DateFormat simpleDateFormat = new DateFormat("d LLL y", "vi_VN");
-final DateFormat simpleDateAndTimeFormat = new DateFormat.Hm("vi_VN").addPattern(", d LLL y");
+final DateFormat simpleDateAndTimeFormat =
+    new DateFormat.Hm("vi_VN").addPattern(", d LLL y");
