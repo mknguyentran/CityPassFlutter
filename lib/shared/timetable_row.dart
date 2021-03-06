@@ -22,7 +22,7 @@ class TimetableRow extends StatelessWidget {
               Text(
                 dayOfWeek,
                 style: TextStyle(
-                  color: dayOfWeek == "Thứ tư" ? Colors.green : null
+                  color: dayOfWeek == "Thứ bảy" ? Colors.green : null
                 ),
               )
             ],
@@ -32,7 +32,7 @@ class TimetableRow extends StatelessWidget {
               Text(
                 openTime,
                 style: TextStyle(
-                  color: dayOfWeek == "Thứ tư" ? Colors.green : null
+                  color: dayOfWeek == "Thứ bảy" ? Colors.green : null
                 ),
               )
             ],
