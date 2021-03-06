@@ -68,7 +68,7 @@ class ActivityHeader extends StatelessWidget {
                           )),
                       Expanded(
                         child: Text(
-                          "2 Nguyễn Bỉnh Khiêm, Bến Nghé, Quận 1",
+                          activity.address,
                           style: TextStyle(
                             fontSize: 14,
                             height: 1.2,

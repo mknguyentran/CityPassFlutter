@@ -1,10 +1,18 @@
 import 'package:city_pass/constants.dart';
+import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/screens/activity_detail/components/body/activity_including_passes.dart';
 import 'package:city_pass/screens/activity_detail/components/body/activity_info.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
 class ActivityBody extends StatefulWidget {
+  final Activity activity;
+
+  const ActivityBody({
+    Key key,
+    @required this.activity,
+  }) : super(key: key);
+
   @override
   _ActivityBodyState createState() => _ActivityBodyState();
 }
@@ -74,7 +82,7 @@ class _ActivityBodyState extends State<ActivityBody>
                   text: "Thông tin",
                 ),
                 Tab(
-                  text: "Mua CityPass",
+                  text: "Hình ảnh",
                 ),
               ],
             ),
@@ -83,12 +91,12 @@ class _ActivityBodyState extends State<ActivityBody>
           IndexedStack(
             children: [
               Visibility(
-                child: ActivityInfo(),
+                child: ActivityInfo(activity: widget.activity),
                 maintainState: true,
                 visible: selectedIndex == 0,
               ),
               Visibility(
-                child: ActivityIncludingPasses(),
+                child: ActivityIncludingPasses(activity: widget.activity),
                 maintainState: true,
                 visible: selectedIndex == 1,
               ),
