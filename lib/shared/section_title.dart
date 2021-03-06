@@ -9,12 +9,14 @@ class SectionTitle extends StatelessWidget {
     this.hasPadding = false,
     @required this.title,
     this.lineSpacing = 0,
+    this.titleColor = textBlack
   }) : super(key: key);
 
   final bool hasPadding;
   final String title;
   final GestureTapCallback showAllCallback;
   final double lineSpacing;
+  final Color titleColor;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +31,9 @@ class SectionTitle extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              fontSize: 21,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
+              color: titleColor
             ),
           ),
           Spacer(),

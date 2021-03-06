@@ -47,7 +47,7 @@ class ActivityHeader extends StatelessWidget {
                           child: Icon(
                             Icons.circle,
                             size: 16,
-                            color: primaryLightColor,
+                            color: Colors.green,
                           )),
                       Text(
                         "Đang hoạt động",

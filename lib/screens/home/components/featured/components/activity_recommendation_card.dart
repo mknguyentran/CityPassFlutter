@@ -3,8 +3,8 @@ import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
-class RecommendationCard extends StatelessWidget {
-  const RecommendationCard({
+class ActivityRecommendationCard extends StatelessWidget {
+  const ActivityRecommendationCard({
     Key key,
     @required this.activity,
   }) : super(key: key);
@@ -19,7 +19,7 @@ class RecommendationCard extends StatelessWidget {
       child: Stack(
         children: [
           AspectRatio(
-            aspectRatio: 1.5,
+            aspectRatio: 1.2,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),

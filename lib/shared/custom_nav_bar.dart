@@ -45,7 +45,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
     return Container(
       height: getProportionateScreenWidth(70),
       decoration: BoxDecoration(
-        boxShadow: [kDefaultShadow],
+        boxShadow: [topShadow],
         color: widget.backgroundColor,
       ),
       child: SafeArea(

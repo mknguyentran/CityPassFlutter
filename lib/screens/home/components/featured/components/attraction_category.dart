@@ -2,6 +2,7 @@ import 'package:city_pass/constants.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AttractionCategory extends StatelessWidget {
   const AttractionCategory({
@@ -10,47 +11,66 @@ class AttractionCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SectionTitle(title: "Bạn muốn đi đâu?", showAllCallback: null, hasPadding: true,),
-        VerticalSpacing(
-          of: 20,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(20,20,20,5),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [kDefaultShadow],
         ),
-        Wrap(
-          alignment: WrapAlignment.start,
-          spacing: getProportionateScreenWidth(10),
-          runSpacing: getProportionateScreenWidth(20),
+        child: Column(
           children: [
-            AttractionCategoryButton(
-              name: "Nhà hàng",
-              color: Colors.orange,
-              icon: Icons.restaurant,
+            SectionTitle(title: "Bạn muốn đi đâu?", titleColor: primaryLightColor),
+            VerticalSpacing(
+              of: 30,
             ),
-            AttractionCategoryButton(
-              name: "Công viên giải trí",
-              color: Colors.green,
-              icon: Icons.park,
+            Wrap(
+              alignment: WrapAlignment.start,
+              spacing: getProportionateScreenWidth(30),
+              runSpacing: getProportionateScreenWidth(15),
+              children: [
+                AttractionCategoryButton(
+                  name: "Nhà hàng",
+                  color: Colors.orange,
+                  icon: Icons.restaurant,
+                ),
+                AttractionCategoryButton(
+                  name: "Công viên giải trí",
+                  color: Colors.lightGreen,
+                  icon: Icons.park,
+                ),
+                AttractionCategoryButton(
+                  name: "Bảo tàng",
+                  color: Colors.brown[300],
+                  icon: Icons.museum,
+                ),
+                AttractionCategoryButton(
+                  name: "Cuộc sống về đêm",
+                  color: Colors.deepOrange,
+                  icon: Icons.nightlife,
+                ),
+                AttractionCategoryButton(
+                  name: "Triển lãm",
+                  color: Colors.purple[200],
+                  icon: Icons.brush_rounded,
+                ),
+                AttractionCategoryButton(
+                  name: "Biển",
+                  color: Colors.teal[400],
+                  icon: Icons.beach_access,
+                ),
+                AttractionCategoryButton(
+                  name: "Leo núi",
+                  color: Colors.yellow[700],
+                  icon: FontAwesomeIcons.mountain,
+                ),
+              ],
             ),
-            AttractionCategoryButton(
-              name: "Bảo tàng",
-              color: Colors.brown,
-              icon: Icons.museum,
-            ),
-            AttractionCategoryButton(
-              name: "Cuộc sống về đêm",
-              color: Colors.blueGrey,
-              icon: Icons.nightlife,
-            ),
-            AttractionCategoryButton(
-                name: "Triển lãm",
-                color: Colors.deepPurple,
-                icon: Icons.brush_rounded),
           ],
         ),
-        VerticalSpacing(
-          of: 20,
-        )
-      ],
+      ),
     );
   }
 }
@@ -74,19 +94,13 @@ class AttractionCategoryButton extends StatelessWidget {
     return GestureDetector(
       onTap: tapCallback,
       child: Container(
-        padding: EdgeInsets.all(7),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [kDefaultShadow],
-        ),
-        height: getProportionateScreenWidth(80),
-        width: getProportionateScreenWidth(120),
+        width: 55,
+        height: 70,
         child: Column(
           children: [
-            Icon(
+            FaIcon(
               icon,
-              size: 35,
+              size: 30,
               color: color,
             ),
             VerticalSpacing(

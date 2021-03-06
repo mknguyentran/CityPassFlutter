@@ -17,6 +17,11 @@ List<Activity> mockupActivities = [
     briefDescription: "Tìm hiểu hơn 1000 cá thể động, thực vật khác nhau",
   ),
   Activity(
+    name: "Tham quan trọn gói Bà Nà Hills Đà Nẵng",
+    image: "assets/images/banahill.jpg",
+    briefDescription: "Thưởng thức cảnh sắc thuyệt vời cùng gần 100 trò chơi thú vị",
+  ),
+  Activity(
     name: "Dinh Độc Lập",
     image: "assets/images/dinh_doc_lap.jpg",
     briefDescription: "Biểu tượng chiến thắng và hòa bình của thành phố",
