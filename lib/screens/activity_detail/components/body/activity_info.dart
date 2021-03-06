@@ -1,5 +1,6 @@
 import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/models/pass.dart';
+import 'package:city_pass/screens/map/map_screen.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
 import 'package:city_pass/shared/pass_card.dart';
 import 'package:city_pass/shared/timetable_row.dart';
@@ -69,7 +70,32 @@ class ActivityInfo extends StatelessWidget {
               ],
             ),
           ),
-          VerticalSpacing(of: 50),
+          VerticalSpacing(of: 40),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Bản đồ",
+              style: TextStyle(
+                fontSize: 21,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+          ),
+          VerticalSpacing(of: 20),
+          GestureDetector(
+            onTap: () => {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (context) {
+                  return MapScreen();
+                })),
+            },
+            child: SizedBox(
+              width: 400,
+              child: Image.asset("assets/images/map_small.png"),
+            ),
+          ),
+          VerticalSpacing(of: 40),
           Align(
             alignment: Alignment.centerLeft,
             child: Container(

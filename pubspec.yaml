@@ -35,7 +35,12 @@ dependencies:
   intl: ^0.16.1
   qr_flutter: ^3.2.0
   animations: ^2.0.0
+<<<<<<< HEAD
   font_awesome_flutter: ^9.0.0-nullsafety
+=======
+  # Zoom and pan photos
+  photo_view: ^0.10.3
+>>>>>>> feature/activity_location_and_refactor_pass
   
 
 dev_dependencies:
