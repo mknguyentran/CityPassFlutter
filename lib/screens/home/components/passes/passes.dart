@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 class Passes extends StatelessWidget {
   final City city;
 
-  const Passes({Key key, @required this.city}) : super(key: key);
+  const Passes({Key key, this.city}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

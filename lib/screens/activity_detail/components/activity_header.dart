@@ -47,7 +47,7 @@ class ActivityHeader extends StatelessWidget {
                           child: Icon(
                             Icons.circle,
                             size: 16,
-                            color: primaryLightColor,
+                            color: Colors.green,
                           )),
                       Text(
                         "Đang hoạt động",
@@ -68,7 +68,7 @@ class ActivityHeader extends StatelessWidget {
                           )),
                       Expanded(
                         child: Text(
-                          "2 Nguyễn Bỉnh Khiêm, Bến Nghé, Quận 1",
+                          activity.address,
                           style: TextStyle(
                             fontSize: 14,
                             height: 1.2,

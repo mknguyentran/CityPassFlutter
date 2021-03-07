@@ -3,8 +3,8 @@ import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
-class RecommendationCard extends StatelessWidget {
-  const RecommendationCard({
+class ActivityRecommendationCard extends StatelessWidget {
+  const ActivityRecommendationCard({
     Key key,
     @required this.activity,
   }) : super(key: key);
@@ -13,12 +13,13 @@ class RecommendationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _cardWidth = 330.0;
     return SizedBox(
-      width: 330,
+      width: _cardWidth,
       child: Stack(
         children: [
           AspectRatio(
-            aspectRatio: 1.5,
+            aspectRatio: 1.2,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -30,10 +31,10 @@ class RecommendationCard extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: getProportionateScreenWidth(0),
+            bottom: 0,
             child: Container(
               alignment: Alignment.centerLeft,
-              width: getProportionateScreenWidth(350),
+              width: _cardWidth,
               padding: EdgeInsets.all(
                 getProportionateScreenWidth(kDefaultPadding),
               ),
