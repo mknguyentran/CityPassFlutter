@@ -1,6 +1,11 @@
+import 'dart:math';
+
 import 'package:city_pass/constants.dart';
+import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/models/city.dart';
+import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/screens/home/components/featured/components/activity_recommendation.dart';
+import 'package:city_pass/screens/home/components/featured/components/activity_recommendation_vertical.dart';
 import 'package:city_pass/screens/home/components/featured/components/pass_recommendation.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +19,7 @@ class Explore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var verticalSpacing = 20.0;
+    var verticalSpacing = 60.0;
     return SingleChildScrollView(
       clipBehavior: Clip.none,
       child: Column(
@@ -37,11 +42,39 @@ class Explore extends StatelessWidget {
           VerticalSpacing(
             of: verticalSpacing,
           ),
-          PassRecommendation(),
+          PassRecommendation(
+            title: "Combo được yêu thích",
+            children: mockupPasses,
+          ),
           VerticalSpacing(
             of: verticalSpacing,
           ),
-          ActivityRecommendation(),
+          PassRecommendation(
+            title: "Deal tốt Tháng 3 🎉",
+            subtitle: "Giảm đến 50% khi mua trong tháng này",
+            children: mockupPasses,
+          ),
+          VerticalSpacing(
+            of: verticalSpacing,
+          ),
+          ActivityRecommendation(
+            title: "Gần bạn nhất",
+            children: mockupNearYouActivities,
+          ),
+          VerticalSpacing(
+            of: verticalSpacing,
+          ),
+          ActivityRecommendation(
+            title: "Điểm đến nổi bật",
+            children: mockupActivities,
+          ),
+          ActivityRecommendationVertical(
+            children: List.generate(30, (index) {
+              var ran = new Random();
+              var ranInt = ran.nextInt(mockupActivities.length - 1);
+              return mockupActivities[ranInt];
+            }),
+          ),
           VerticalSpacing(
             of: verticalSpacing,
           ),
