@@ -66,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: buildAppBar(_currentIndex),
       body: tabs.elementAt(_currentIndex),
       backgroundColor: lightGrayBackground,
+      extendBodyBehindAppBar: _currentIndex == 4,
       bottomNavigationBar: CustomNavBar(
         currentIndex: _currentIndex,
         children: [
@@ -103,9 +104,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   AppBar buildAppBar(int tab, [String hintText]) {
-    var _backgroundColor = Colors.white;
-    var _brightness = Brightness.light;
-    var _foregroundColor = textBlack;
+    var _brightness = Brightness.dark;
+    var _foregroundColor = Colors.white;
     var _bottom = PreferredSize(
       preferredSize: Size.fromHeight(40),
       child: Padding(
@@ -120,13 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-    if (tab == 0) {
-      _backgroundColor = Colors.black.withOpacity(0.5);
-      _brightness = Brightness.dark;
-      _foregroundColor = Colors.white;
-    } else if (tab == 4) {
+    if (tab == 4) {
       return AppBar(
-        brightness: _brightness,
+        brightness: Brightness.light,
         backgroundColor: Colors.transparent,
         elevation: 0,
       );
@@ -138,7 +134,6 @@ class _HomeScreenState extends State<HomeScreen> {
           gradient: LinearGradient(colors: [primaryDarkColor, secondaryColor]),
         ),
       ),
-      // backgroundColor: _backgroundColor,
       brightness: _brightness,
       elevation: 5,
       centerTitle: false,

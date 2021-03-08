@@ -14,7 +14,7 @@ class _AccountState extends State<Account> {
     return SingleChildScrollView(
         child: Padding(
       padding:
-          const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+          const EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: 50),
       child: Column(
         children: [
           Row(
