@@ -14,7 +14,7 @@ class Explore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var verticalSpacing = 20.0;
+    var verticalSpacing = 60.0;
     return SingleChildScrollView(
       clipBehavior: Clip.none,
       child: Column(
