@@ -6,8 +6,8 @@ import 'package:city_pass/shared/info_tag.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
-class ActivityRecommendationCard extends StatelessWidget {
-  const ActivityRecommendationCard({
+class ActivityRecommendationCardVertical extends StatelessWidget {
+  const ActivityRecommendationCardVertical({
     Key key,
     @required this.activity,
   }) : super(key: key);
@@ -16,29 +16,33 @@ class ActivityRecommendationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _cardWidth = 250.0;
-    var _cardheight = 350.0;
+    var _cardheight = 150.0;
     return Container(
+      padding: EdgeInsets.all(10),
       clipBehavior: Clip.hardEdge,
-      width: _cardWidth,
       height: _cardheight,
       decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [kDefaultShadow],
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(children: [
+          color: Colors.white,
+          border: Border(
+              bottom: BorderSide(
+            color: fadedTextColor,
+            width: 0.5,
+          ))),
+      child: Row(children: [
         Container(
-          height: 180,
+          height: 120,
+          width: 120,
           decoration: BoxDecoration(
-              image: DecorationImage(
-            image: AssetImage(activity.image),
-            fit: BoxFit.cover,
-          )),
+            borderRadius: BorderRadius.circular(3),
+            image: DecorationImage(
+              image: AssetImage(activity.image),
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
         Expanded(
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            padding: EdgeInsets.only(left: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -102,7 +106,9 @@ class ActivityRecommendationCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Text(
-                            "${activity.travelDistance}km • ${activity.travelTime} phút",style: TextStyle(color: subtitleTextColor),),
+                          "${activity.travelDistance}km • ${activity.travelTime} phút",
+                          style: TextStyle(color: subtitleTextColor),
+                        ),
                       )
                   ],
                 )

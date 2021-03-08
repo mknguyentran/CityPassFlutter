@@ -1,16 +1,18 @@
 import 'package:animations/animations.dart';
+import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/screens/activity_detail/activity_detail.dart';
 import 'package:city_pass/screens/home/components/featured/components/activity_recommendation_card.dart';
+import 'package:city_pass/screens/home/components/featured/components/activity_recommendation_card_vertical.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ActivityRecommendation extends StatelessWidget {
-  const ActivityRecommendation({
+class ActivityRecommendationVertical extends StatelessWidget {
+  const ActivityRecommendationVertical({
     Key key,
-    @required this.title,
+    this.title,
     @required this.children,
   }) : super(key: key);
 
@@ -19,30 +21,31 @@ class ActivityRecommendation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    children.shuffle();
     return Column(
       children: [
-        SectionTitle(
-          title: title,
-          hasPadding: true,
-          showAllCallback: () {},
-        ),
+        if (title != null)
+          SectionTitle(
+            title: title,
+            hasPadding: true,
+            showAllCallback: () {},
+          ),
         VerticalSpacing(
           of: 20,
         ),
         SingleChildScrollView(
           clipBehavior: Clip.none,
-          scrollDirection: Axis.horizontal,
-          child: Row(
+          child: Column(
             children: [
               ...List.generate(
                 children.length,
                 (index) => Padding(
-                  padding:
-                      EdgeInsets.only(left: getProportionateScreenWidth(20)),
+                  padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
                   child: OpenContainer(
+                    closedElevation: 0,
+                    closedShape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0)),
                     closedBuilder: (context, action) =>
-                        ActivityRecommendationCard(
+                        ActivityRecommendationCardVertical(
                       activity: children[index],
                     ),
                     openBuilder: (context, action) => ActivityDetail(

@@ -1,8 +1,6 @@
 import 'package:animations/animations.dart';
-import 'package:city_pass/models/activity.dart';
+import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/pass.dart';
-import 'package:city_pass/screens/activity_detail/activity_detail.dart';
-import 'package:city_pass/screens/home/components/featured/components/activity_recommendation_card.dart';
 import 'package:city_pass/screens/home/components/featured/components/pass_recommendation_card.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
 import 'package:city_pass/shared/section_title.dart';
@@ -13,17 +11,29 @@ import 'package:flutter/material.dart';
 class PassRecommendation extends StatelessWidget {
   const PassRecommendation({
     Key key,
+    @required this.title,
+    @required this.children,
+    this.subtitle,
   }) : super(key: key);
 
+  final String title, subtitle;
+  final List<Pass> children;
   @override
   Widget build(BuildContext context) {
+    children.shuffle();
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SectionTitle(
-          title: "CityPass được yêu thích",
+          title: title,
           hasPadding: true,
           showAllCallback: () {},
         ),
+        if (subtitle != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5,horizontal: kDefaultPadding),
+            child: Text(subtitle,),
+          ),
         VerticalSpacing(
           of: 20,
         ),
@@ -33,18 +43,19 @@ class PassRecommendation extends StatelessWidget {
           child: Row(
             children: [
               ...List.generate(
-                mockupPasses.length,
+                children.length,
                 (index) => Padding(
                   padding:
                       EdgeInsets.only(left: getProportionateScreenWidth(20)),
                   child: OpenContainer(
                     closedElevation: 1,
-                    closedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    closedShape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
                     closedBuilder: (context, action) => PassRecommendationCard(
-                      pass: mockupPasses[index],
+                      pass: children[index],
                     ),
                     openBuilder: (context, action) => PassDetail(
-                      pass: mockupPasses[index],
+                      pass: children[index],
                     ),
                   ),
                 ),
