@@ -18,9 +18,11 @@ class PassRecommendation extends StatelessWidget {
 
   final String title, subtitle;
   final List<Pass> children;
+
   @override
   Widget build(BuildContext context) {
-    children.shuffle();
+    List<Pass> _passList = new List.from(children);
+    _passList.shuffle();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -31,8 +33,11 @@ class PassRecommendation extends StatelessWidget {
         ),
         if (subtitle != null)
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5,horizontal: kDefaultPadding),
-            child: Text(subtitle,),
+            padding: const EdgeInsets.symmetric(
+                vertical: 5, horizontal: kDefaultPadding),
+            child: Text(
+              subtitle,
+            ),
           ),
         VerticalSpacing(
           of: 20,
@@ -43,7 +48,7 @@ class PassRecommendation extends StatelessWidget {
           child: Row(
             children: [
               ...List.generate(
-                children.length,
+                _passList.length,
                 (index) => Padding(
                   padding:
                       EdgeInsets.only(left: getProportionateScreenWidth(20)),
@@ -52,10 +57,10 @@ class PassRecommendation extends StatelessWidget {
                     closedShape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     closedBuilder: (context, action) => PassRecommendationCard(
-                      pass: children[index],
+                      pass: _passList[index],
                     ),
                     openBuilder: (context, action) => PassDetail(
-                      pass: children[index],
+                      pass: _passList[index],
                     ),
                   ),
                 ),

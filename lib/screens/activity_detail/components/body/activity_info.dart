@@ -1,3 +1,4 @@
+import 'package:city_pass/mockupData/mockup_pass.dart';
 import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/screens/map/map_screen.dart';
@@ -32,10 +33,7 @@ class ActivityInfo extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               "Bao gồm trong các CityPass",
-              style: TextStyle(
-                fontSize: 21,
-                fontWeight: FontWeight.bold
-              ),
+              style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
             ),
           ),
           VerticalSpacing(of: 20),
@@ -45,28 +43,28 @@ class ActivityInfo extends StatelessWidget {
             child: Row(
               children: [
                 ...List.generate(
-                  mockupPasses.length,
-                  (index) => Padding(
-                    padding: index != 0 ? EdgeInsets.only(left: 20) : EdgeInsets.zero,
-                    child: SizedBox(
-                      width: 350,
-                      child: PassCard(
-                        pass: mockupPasses[index],
-                        press: () => {
-                          Navigator.push(
-                            context,
-                            CupertinoPageRoute(builder: (context) {
-                              return PassDetail(
-                                pass: mockupPasses[index],
-                              );
-                            }),
-                          )
-                        },
-                      ),
-                    ),
-                  )
-                  
-                ),
+                    mockupPasses.length,
+                    (index) => Padding(
+                          padding: index != 0
+                              ? EdgeInsets.only(left: 20)
+                              : EdgeInsets.zero,
+                          child: SizedBox(
+                            width: 350,
+                            child: PassCard(
+                              pass: mockupPasses[index],
+                              press: () => {
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(builder: (context) {
+                                    return PassDetail(
+                                      pass: mockupPasses[index],
+                                    );
+                                  }),
+                                )
+                              },
+                            ),
+                          ),
+                        )),
               ],
             ),
           ),
@@ -75,20 +73,15 @@ class ActivityInfo extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               "Bản đồ",
-              style: TextStyle(
-                fontSize: 21,
-                fontWeight: FontWeight.bold
-              ),
+              style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
             ),
           ),
           VerticalSpacing(of: 20),
           GestureDetector(
             onTap: () => {
-              Navigator.push(
-                context,
-                CupertinoPageRoute(builder: (context) {
-                  return MapScreen();
-                })),
+              Navigator.push(context, CupertinoPageRoute(builder: (context) {
+                return MapScreen();
+              })),
             },
             child: SizedBox(
               width: 400,
@@ -118,12 +111,14 @@ class ActivityInfo extends StatelessWidget {
                     ],
                   ),
                   VerticalSpacing(of: 10),
-                  ...List.generate(
-                    activity.activityTimetable.length,
-                    (index) => TimetableRow(
+                  ...List.generate(activity.activityTimetable.length, (index) {
+                    int todayWeekday = DateTime.now().weekday - 1;
+                    return TimetableRow(
                       dayOfWeek: activity.activityTimetable[index].dayOfWeek,
-                      openTime: activity.activityTimetable[index].openTime)
-                  ),
+                      openTime: activity.activityTimetable[index].openTime,
+                      isToday: todayWeekday == index,
+                    );
+                  }),
                 ],
               ),
             ),

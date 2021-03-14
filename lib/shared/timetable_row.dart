@@ -4,11 +4,13 @@ class TimetableRow extends StatelessWidget {
   const TimetableRow({
     Key key,
     @required this.dayOfWeek,
-    @required this.openTime
+    @required this.openTime,
+    this.isToday,
   }) : super(key: key);
 
   final String dayOfWeek;
   final String openTime;
+  final bool isToday;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,8 @@ class TimetableRow extends StatelessWidget {
               Text(
                 dayOfWeek,
                 style: TextStyle(
-                  color: dayOfWeek == "Thứ bảy" ? Colors.green : null
+                  color: isToday ? Colors.green : null,
+                  fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
                 ),
               )
             ],
@@ -32,7 +35,8 @@ class TimetableRow extends StatelessWidget {
               Text(
                 openTime,
                 style: TextStyle(
-                  color: dayOfWeek == "Thứ bảy" ? Colors.green : null
+                  color: isToday ? Colors.green : null,
+                  fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
                 ),
               )
             ],
