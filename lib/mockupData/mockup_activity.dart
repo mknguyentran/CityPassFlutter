@@ -132,14 +132,14 @@ Activity artInParadise = Activity(
       "Không chỉ được chiêm ngưỡng các tác phẩm 3D, hoạt động thú vị và chủ yếu ở Art in Paradise chính là tạo dáng và chụp ảnh. Bạn có thể hóa thân thành những nhân vật cổ tích trong thế giới thần tiên, đặt chân vào khu rừng bí ẩn giữa những lăng mộ Ai Cập cổ đại hay hóa thân thành những chú chim đại bàng tung cánh…",
   name: "Lạc vào thế giới tranh 3D cùng Bảo tàng Art in Paradise",
   shortName: "Bảo tàng 3D Art in Paradise",
-  image: "assets/images/art_in_paradise.jpeg",
+  image: "assets/images/art_in_paradise/art_in_paradise.jpeg",
   address:
       "Lô C2-10 đường Trần Nhân Tông, phường Thọ Quang, quận Sơn Trà, thành phố Đà Nẵng",
   moreImages: [
-    "assets/images/art_in_paradise1.jpeg",
-    "assets/images/art_in_paradise2.jpeg",
-    "assets/images/art_in_paradise3.jpeg",
-    "assets/images/art_in_paradise4.jpeg"
+    "assets/images/art_in_paradise/art_in_paradise1.jpeg",
+    "assets/images/art_in_paradise/art_in_paradise2.jpeg",
+    "assets/images/art_in_paradise/art_in_paradise3.jpeg",
+    "assets/images/art_in_paradise/art_in_paradise4.jpeg"
   ],
   city: daNangCity,
   visitedCounter: 345,
