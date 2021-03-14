@@ -44,9 +44,9 @@ class PassDetailContent extends StatelessWidget {
                       case IncludingDestination.binaryOptional:
                         result = _buildDestinationListItem(
                             name:
-                                pass.includingDestination[index].destinationList[0].name,
+                                pass.includingDestination[index].destinationList[0].getShortName,
                             secondName:
-                                pass.includingDestination[index].destinationList[1].name,
+                                pass.includingDestination[index].destinationList[1].getShortName,
                             context: context,
                             index: _currentIndex++);
                         break;
@@ -85,7 +85,7 @@ Column _buildOptionalDestinationList({
       ...List.generate(
         itemList.length,
         (index) => _buildDestinationListItem(
-          name: itemList[index].name,
+          name: itemList[index].getShortName,
           context: context,
         ),
       )
@@ -104,7 +104,7 @@ Column _buildDestinationList({
       ...List.generate(
         itemList.length,
         (index) => _buildDestinationListItem(
-          name: itemList[index].name,
+          name: itemList[index].getShortName,
           context: context,
           index: currentIndex++,
         ),

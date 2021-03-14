@@ -4,6 +4,7 @@ import 'package:city_pass/models/city.dart';
 
 Activity thaoCamVien = Activity(
   name: "Tham quan Thảo Cầm Viên",
+  shortName: "Thảo Cầm Viên",
   image: "assets/images/thao_cam_vien.jpg",
   address: "2 Nguyễn Bỉnh Khiêm, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh",
   briefDescription: "Tìm hiểu hơn 1000 cá thể động, thực vật khác nhau",
@@ -34,6 +35,7 @@ Activity thaoCamVien = Activity(
 
 Activity baNaHills = Activity(
   name: "Tham quan trọn gói Bà Nà Hills Đà Nẵng",
+  shortName: "Bà Nà Hills Đà Nẵng",
   image: "assets/images/banahill.jpg",
   address: "Thôn An Sơn, xã Hòa Ninh, huyện Hòa Vang, TP Đà Nẵng",
   briefDescription:
@@ -93,6 +95,7 @@ Activity dinhDocLap = Activity(
 
 Activity diadaoCuChi = Activity(
   name: "Tham quan Địa đạo Củ Chi",
+  shortName: "Địa đạo Củ Chi",
   image: "assets/images/dia_dao_cu_chi.jpg",
   address: "Đường Tỉnh Lộ 15, Phú Hiệp, Củ Chi, Thành phố Hồ Chí Minh",
   briefDescription: "Tham quan hệ thống đường hầm dài đến 220km",
@@ -128,6 +131,7 @@ Activity artInParadise = Activity(
   detailedDescription:
       "Không chỉ được chiêm ngưỡng các tác phẩm 3D, hoạt động thú vị và chủ yếu ở Art in Paradise chính là tạo dáng và chụp ảnh. Bạn có thể hóa thân thành những nhân vật cổ tích trong thế giới thần tiên, đặt chân vào khu rừng bí ẩn giữa những lăng mộ Ai Cập cổ đại hay hóa thân thành những chú chim đại bàng tung cánh…",
   name: "Lạc vào thế giới tranh 3D cùng Bảo tàng Art in Paradise",
+  shortName: "Bảo tàng 3D Art in Paradise",
   image: "assets/images/art_in_paradise.jpeg",
   address:
       "Lô C2-10 đường Trần Nhân Tông, phường Thọ Quang, quận Sơn Trà, thành phố Đà Nẵng",
@@ -157,6 +161,7 @@ Activity baoTangMyThuat = Activity(
   detailedDescription:
       "Nếu có ai là “người hâm mộ” của phong cách vintage, của những tấm ảnh phim thì nhất định phải một lần ghé thăm nơi đây. Ta có thể ví bảo tàng mỹ thuật Hồ Chí Minh như là một chiều không gian xưa cũ, nơi thời gian dừng trôi, lấy màu vàng làm tông màu chính. Từ cổng chính bước vào, bạn sẽ dễ dàng nhận thấy cả tòa nhà là một công trình kiến trúc đồ sộ màu vàng nằm giữa không gian xanh mát rộng lớn. \n\nKhi bước dọc theo những hành lang, màu vàng dần biến mất và thay vào đó là gam màu xám xịt của bức tường, của những song cửa sổ hai bên. Bạn sẽ phản bác rằng màu xám là một tông màu hiện đại cơ mà, nhưng không, trong không gian của bảo tàng, gam màu này như đánh mất sự máy móc lạnh lẽo vốn có của mình mà lại đượm sắc thái nhàn nhạt của quá khứ, về một thời đã qua.\n\n",
   name: "Tham quan Bảo tàng Mỹ thuật TP HCM",
+  shortName: "Bảo tàng Mỹ thuật TP HCM",
   image: "assets/images/bao_tang_my_thuat/bao_tang_my_thuat.jpg",
   address: "address",
   activityTimetable: [
