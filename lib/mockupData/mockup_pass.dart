@@ -1,5 +1,5 @@
 import 'package:city_pass/mockupData/mockup_activity.dart';
-import 'package:city_pass/models/city.dart';
+import 'package:city_pass/mockupData/mockup_city.dart';
 import 'package:city_pass/models/pass.dart';
 
 Pass daNangPass = Pass(
@@ -11,7 +11,7 @@ Pass daNangPass = Pass(
   includingDestination: [
     IncludingDestination([baNaHills, artInParadise], 2),
   ],
-  city: City("Đà Nẵng"),
+  city: daNangCity,
   isGoodSeller: true,
 );
 
@@ -31,7 +31,7 @@ Pass hcmPass1 = Pass(
       baoTangMyThuat,
     ], 2),
   ],
-  city: City("TP. Hồ Chí Minh"),
+  city: hcmCity,
   isGoodSeller: true,
 );
 
