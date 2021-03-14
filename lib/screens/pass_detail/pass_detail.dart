@@ -102,5 +102,3 @@ class _PassDetailState extends State<PassDetail> {
     );
   }
 }
-
-

@@ -37,7 +37,7 @@ Activity baNaHills = Activity(
   name: "Tham quan trọn gói Bà Nà Hills Đà Nẵng",
   shortName: "Bà Nà Hills Đà Nẵng",
   image: "assets/images/banahill.jpg",
-  address: "Thôn An Sơn, xã Hòa Ninh, huyện Hòa Vang, TP Đà Nẵng",
+  address: "Thôn An Sơn, xã Hòa Ninh, huyện Hòa Vang, Đà Nẵng",
   briefDescription:
       "Thưởng thức cảnh sắc thuyệt vời cùng gần 100 trò chơi thú vị",
   detailedDescription:
@@ -134,7 +134,7 @@ Activity artInParadise = Activity(
   shortName: "Bảo tàng 3D Art in Paradise",
   image: "assets/images/art_in_paradise/art_in_paradise.jpeg",
   address:
-      "Lô C2-10 đường Trần Nhân Tông, phường Thọ Quang, quận Sơn Trà, thành phố Đà Nẵng",
+      "Lô C2-10 đường Trần Nhân Tông, phường Thọ Quang, quận Sơn Trà, Đà Nẵng",
   moreImages: [
     "assets/images/art_in_paradise/art_in_paradise1.jpeg",
     "assets/images/art_in_paradise/art_in_paradise2.jpeg",
@@ -163,7 +163,7 @@ Activity baoTangMyThuat = Activity(
   name: "Tham quan Bảo tàng Mỹ thuật TP HCM",
   shortName: "Bảo tàng Mỹ thuật TP HCM",
   image: "assets/images/bao_tang_my_thuat/bao_tang_my_thuat.jpg",
-  address: "address",
+  address: "97A Phó Đức Chính, Phường Nguyễn Thái Bình, Quận 1, Thành phố Hồ Chí Minh",
   activityTimetable: [
     ActivityTimetable(dayOfWeek: "Thứ hai", openTime: "07:00 - 17:00"),
     ActivityTimetable(dayOfWeek: "Thứ ba", openTime: "07:00 - 17:00"),
