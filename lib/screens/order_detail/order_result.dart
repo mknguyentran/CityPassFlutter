@@ -1,5 +1,7 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/order_detail.dart';
+import 'package:city_pass/models/payment_method.dart';
+import 'package:city_pass/screens/pass_detail/components/choose_pass_amount.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
@@ -45,7 +47,7 @@ class _OrderResultState extends State<OrderResult> {
             padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
             child: Column(
               children: [
-                PaymentMethodInfo(),
+                PaymentMethodInfo(widget.orderDetail.paymentMethod),
                 OrderTotalInfo(total: widget.orderDetail.total),
               ],
             ),
@@ -75,13 +77,13 @@ class _OrderResultState extends State<OrderResult> {
           price: orderDetail.pass.price,
           hasAdultLabel: orderDetail.childrenAmount > 0,
         ),
-        if(orderDetail.childrenAmount > 0)
-        OrderDetailItem(
-          passName: orderDetail.pass.name,
-          amount: orderDetail.childrenAmount,
-          price: orderDetail.pass.childrenPrice.price,
-          hasChildrenLabel: true,
-        ),
+        if (orderDetail.childrenAmount > 0)
+          OrderDetailItem(
+            passName: orderDetail.pass.name,
+            amount: orderDetail.childrenAmount,
+            price: orderDetail.pass.childrenPrice.price,
+            hasChildrenLabel: true,
+          ),
       ],
     );
   }
@@ -126,12 +128,14 @@ class OrderTotalInfo extends StatelessWidget {
 }
 
 class PaymentMethodInfo extends StatelessWidget {
-  const PaymentMethodInfo({
+  const PaymentMethodInfo(
+    this.paymentMethod, {
     Key key,
     this.lineSpacing = 7.0,
   }) : super(key: key);
 
   final double lineSpacing;
+  final PaymentMethod paymentMethod;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -143,21 +147,7 @@ class PaymentMethodInfo extends StatelessWidget {
             "Phương thức thanh toán",
             style: TextStyle(color: Colors.black, fontSize: 15),
           ),
-          Row(
-            children: [
-              Container(
-                child: Image.asset(
-                  "assets/images/paypal_icon.png",
-                  height: 20,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Text(
-                "PayPal",
-                style: TextStyle(color: Colors.black, fontSize: 15),
-              ),
-            ],
-          )
+          PaymentMethodRow(paymentMethod)
         ],
       ),
     );

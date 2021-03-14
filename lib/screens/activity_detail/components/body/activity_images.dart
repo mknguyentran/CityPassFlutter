@@ -2,10 +2,10 @@ import 'package:city_pass/models/activity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ActivityIncludingPasses extends StatelessWidget {
+class ActivityImages extends StatelessWidget {
   final Activity activity;
 
-  const ActivityIncludingPasses({Key key, @required this.activity})
+  const ActivityImages({Key key, @required this.activity})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
