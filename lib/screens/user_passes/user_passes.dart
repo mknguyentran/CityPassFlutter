@@ -1,9 +1,9 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/user_pass.dart';
 import 'package:city_pass/screens/user_pass_detail/user_pass_detail.dart';
 import 'package:city_pass/shared/user_pass_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:city_pass/mockupData/mockup_user_pass.dart';
 
 class UserPasses extends StatelessWidget {
   @override
@@ -18,17 +18,17 @@ class UserPasses extends StatelessWidget {
             child: Column(
               children: [
                 ...List.generate(
-                  UserPass.mockupUserPasses.length,
+                  mockupUserPasses.length,
                   (index) => Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: UserPassCard(
-                        pass: UserPass.mockupUserPasses[index],
+                        pass: mockupUserPasses[index],
                         press: () {
                           Navigator.push(
                             context,
                             CupertinoPageRoute(builder: (context) {
                               return UserPassDetail(
-                                pass: UserPass.mockupUserPasses[index],
+                                pass: mockupUserPasses[index],
                               );
                             }),
                           );

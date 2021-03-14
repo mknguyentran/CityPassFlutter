@@ -1,4 +1,5 @@
 import 'package:city_pass/constants.dart';
+import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
@@ -20,41 +21,41 @@ class PassDetailContent extends StatelessWidget {
           const EdgeInsets.fromLTRB(kDefaultPadding, 20, kDefaultPadding, 20),
       child: Column(
         children: [
-          SectionTitle(title: "CityPass này bao gồm"),
+          SectionTitle(title: "Combo này bao gồm"),
           Padding(
             padding: const EdgeInsets.only(left: kDefaultPadding, top: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ...List.generate(
-                  pass.destinationList.length,
+                  pass.includingDestination.length,
                   (index) {
                     Widget result;
-                    switch (pass.destinationList[index].type) {
+                    switch (pass.includingDestination[index].type) {
                       case IncludingDestination.allIncluded:
                         result = _buildDestinationList(
-                          itemList: pass.destinationList[index].destinationList,
+                          itemList: pass.includingDestination[index].destinationList,
                           context: context,
                           currentIndex: _currentIndex,
                         );
                         _currentIndex +=
-                            pass.destinationList[index].destinationList.length;
+                            pass.includingDestination[index].destinationList.length;
                         break;
                       case IncludingDestination.binaryOptional:
                         result = _buildDestinationListItem(
                             name:
-                                pass.destinationList[index].destinationList[0],
+                                pass.includingDestination[index].destinationList[0].name,
                             secondName:
-                                pass.destinationList[index].destinationList[1],
+                                pass.includingDestination[index].destinationList[1].name,
                             context: context,
                             index: _currentIndex++);
                         break;
                       case IncludingDestination.optional:
                         result = _buildOptionalDestinationList(
                             itemList:
-                                pass.destinationList[index].destinationList,
+                                pass.includingDestination[index].destinationList,
                             includingQuota:
-                                pass.destinationList[index].includingQuota,
+                                pass.includingDestination[index].includingQuota,
                             context: context);
                         break;
                       default:
@@ -73,7 +74,7 @@ class PassDetailContent extends StatelessWidget {
 }
 
 Column _buildOptionalDestinationList({
-  @required List<String> itemList,
+  @required List<Activity> itemList,
   @required int includingQuota,
   @required BuildContext context,
 }) {
@@ -84,7 +85,7 @@ Column _buildOptionalDestinationList({
       ...List.generate(
         itemList.length,
         (index) => _buildDestinationListItem(
-          name: itemList[index],
+          name: itemList[index].name,
           context: context,
         ),
       )
@@ -93,7 +94,7 @@ Column _buildOptionalDestinationList({
 }
 
 Column _buildDestinationList({
-  @required List<String> itemList,
+  @required List<Activity> itemList,
   @required int currentIndex,
   @required BuildContext context,
 }) {
@@ -103,7 +104,7 @@ Column _buildDestinationList({
       ...List.generate(
         itemList.length,
         (index) => _buildDestinationListItem(
-          name: itemList[index],
+          name: itemList[index].name,
           context: context,
           index: currentIndex++,
         ),
@@ -148,20 +149,24 @@ Widget _buildDestinationListItem(
 
 Widget _buildItemName(String name, String secondName, BuildContext context) {
   if (secondName != null) {
-    return RichText(
-      text: TextSpan(
-        style: DefaultTextStyle.of(context).style,
-        children: [
-          TextSpan(text: name.toUpperCase() + " "),
-          TextSpan(text: "HOẶC ", style: TextStyle(color: primaryLightColor)),
-          TextSpan(text: secondName.toUpperCase()),
-        ],
+    return Expanded(
+          child: RichText(
+        text: TextSpan(
+          style: DefaultTextStyle.of(context).style,
+          children: [
+            TextSpan(text: name.toUpperCase() + " "),
+            TextSpan(text: "HOẶC ", style: TextStyle(color: primaryLightColor)),
+            TextSpan(text: secondName.toUpperCase()),
+          ],
+        ),
       ),
     );
   }
-  return Text(
-    name.toUpperCase(),
-    style: TextStyle(fontSize: 14),
+  return Expanded(
+      child: Text(
+      name.toUpperCase(),
+      style: TextStyle(fontSize: 14),
+    ),
   );
 }
 

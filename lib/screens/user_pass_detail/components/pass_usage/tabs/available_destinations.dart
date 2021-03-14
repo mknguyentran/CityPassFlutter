@@ -1,4 +1,5 @@
 import 'package:city_pass/constants.dart';
+import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +34,8 @@ class AvailableDestinations extends StatelessWidget {
                   break;
                 case IncludingDestination.binaryOptional:
                   result = _buildDestinationListItem(
-                      name: destinationList[index].destinationList[0],
-                      secondName: destinationList[index].destinationList[1],
+                      name: destinationList[index].destinationList[0].name,
+                      secondName: destinationList[index].destinationList[1].name,
                       context: context,
                       index: _currentIndex++);
                   break;
@@ -57,7 +58,7 @@ class AvailableDestinations extends StatelessWidget {
 }
 
 Column _buildOptionalDestinationList({
-  @required List<String> itemList,
+  @required List<Activity> itemList,
   @required int includingQuota,
   @required BuildContext context,
 }) {
@@ -68,7 +69,7 @@ Column _buildOptionalDestinationList({
       ...List.generate(
         itemList.length,
         (index) => _buildDestinationListItem(
-          name: itemList[index],
+          name: itemList[index].name,
           context: context,
         ),
       )
@@ -77,7 +78,7 @@ Column _buildOptionalDestinationList({
 }
 
 Column _buildDestinationList({
-  @required List<String> itemList,
+  @required List<Activity> itemList,
   @required int currentIndex,
   @required BuildContext context,
 }) {
@@ -87,7 +88,7 @@ Column _buildDestinationList({
       ...List.generate(
         itemList.length,
         (index) => _buildDestinationListItem(
-          name: itemList[index],
+          name: itemList[index].name,
           context: context,
           index: currentIndex++,
         ),

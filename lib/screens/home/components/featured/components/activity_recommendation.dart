@@ -19,7 +19,8 @@ class ActivityRecommendation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    children.shuffle();
+    List<Activity> _activityList = new List.from(children);
+    _activityList.shuffle();
     return Column(
       children: [
         SectionTitle(
@@ -36,17 +37,17 @@ class ActivityRecommendation extends StatelessWidget {
           child: Row(
             children: [
               ...List.generate(
-                children.length,
+                _activityList.length,
                 (index) => Padding(
                   padding:
                       EdgeInsets.only(left: getProportionateScreenWidth(20)),
                   child: OpenContainer(
                     closedBuilder: (context, action) =>
                         ActivityRecommendationCard(
-                      activity: children[index],
+                      activity: _activityList[index],
                     ),
                     openBuilder: (context, action) => ActivityDetail(
-                      activity: children[index],
+                      activity: _activityList[index],
                     ),
                   ),
                 ),

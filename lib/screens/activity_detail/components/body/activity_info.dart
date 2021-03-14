@@ -1,3 +1,4 @@
+import 'package:city_pass/mockupData/mockup_pass.dart';
 import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/screens/map/map_screen.dart';

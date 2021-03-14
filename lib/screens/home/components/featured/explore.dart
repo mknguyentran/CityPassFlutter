@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/activity.dart';
+import 'package:city_pass/mockupData/mockup_activity.dart';
+import 'package:city_pass/mockupData/mockup_pass.dart';
 import 'package:city_pass/models/city.dart';
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/screens/home/components/featured/components/activity_recommendation.dart';
@@ -10,7 +11,6 @@ import 'package:city_pass/screens/home/components/featured/components/pass_recom
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 import 'components/attraction_category.dart';
-import 'components/home_header.dart';
 
 class Explore extends StatelessWidget {
   final City city;

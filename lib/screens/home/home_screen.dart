@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var _brightness = Brightness.dark;
     var _foregroundColor = Colors.white;
     var _bottom = PreferredSize(
-      preferredSize: Size.fromHeight(40),
+      preferredSize: Size.fromHeight(55),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding).add(
           const EdgeInsets.only(bottom: 10),
@@ -141,20 +141,31 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: () {
           _navigateToCityPicker();
         },
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              _currentCity != null
-                  ? 'CityPass tại ${_currentCity.name}'
-                  : "Khám phá địa điểm mới",
+              "Hiển thị đề xuất tại".toUpperCase(),
               style: TextStyle(
-                  color: _foregroundColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+                fontWeight: FontWeight.w400,
+                fontSize: 14
+              ),
             ),
-            Icon(
-              Icons.arrow_drop_down,
-              color: _foregroundColor,
+            VerticalSpacing(of:3),
+            Row(
+              children: [
+                Text(
+                  _currentCity != null ? _currentCity.name : "Việt Nam",
+                  style: TextStyle(
+                      color: _foregroundColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  Icons.arrow_drop_down,
+                  color: _foregroundColor,
+                ),
+              ],
             ),
           ],
         ),
