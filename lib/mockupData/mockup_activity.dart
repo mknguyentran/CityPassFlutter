@@ -25,7 +25,7 @@ Activity thaoCamVien = Activity(
     "assets/images/thao_cam_vien_2.jpg",
     "assets/images/thao_cam_vien_3.jpg",
   ],
-  city: City("TP. Hồ Chí Minh"),
+  city: hcmCity,
   travelTime: 26,
   travelDistance: 4.2,
   overallRating: 4.8,

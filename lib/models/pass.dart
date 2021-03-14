@@ -60,16 +60,13 @@ class IncludingDestination {
   int get type {
     if (isAllIncluded) {
       return allIncluded;
-    } else if (isBinaryOptional) {
-      return binaryOptional;
     } else {
       return optional;
     }
   }
 
   static const int allIncluded = 1;
-  static const int binaryOptional = 2;
-  static const int optional = 3;
+  static const int optional = 2;
 
   IncludingDestination(this.destinationList, this.includingQuota)
       : assert(includingQuota <= destinationList.length),

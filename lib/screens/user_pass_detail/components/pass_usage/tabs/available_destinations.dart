@@ -1,7 +1,9 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/models/pass.dart';
+import 'package:city_pass/screens/activity_detail/activity_detail.dart';
 import 'package:city_pass/size_config.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AvailableDestinations extends StatelessWidget {
@@ -31,13 +33,6 @@ class AvailableDestinations extends StatelessWidget {
                   );
                   _currentIndex +=
                       destinationList[index].destinationList.length;
-                  break;
-                case IncludingDestination.binaryOptional:
-                  result = _buildDestinationListItem(
-                      name: destinationList[index].destinationList[0].name,
-                      secondName: destinationList[index].destinationList[1].name,
-                      context: context,
-                      index: _currentIndex++);
                   break;
                 case IncludingDestination.optional:
                   result = _buildOptionalDestinationList(
@@ -69,7 +64,7 @@ Column _buildOptionalDestinationList({
       ...List.generate(
         itemList.length,
         (index) => _buildDestinationListItem(
-          name: itemList[index].name,
+          activity: itemList[index],
           context: context,
         ),
       )
@@ -88,7 +83,7 @@ Column _buildDestinationList({
       ...List.generate(
         itemList.length,
         (index) => _buildDestinationListItem(
-          name: itemList[index].name,
+          activity: itemList[index],
           context: context,
           index: currentIndex++,
         ),
@@ -100,8 +95,7 @@ Column _buildDestinationList({
 Widget _buildDestinationListItem(
     {int index,
     double lineSpacing = 7.0,
-    @required String name,
-    String secondName,
+    @required Activity activity,
     @required BuildContext context}) {
   return Padding(
     padding: EdgeInsets.symmetric(vertical: lineSpacing),
@@ -125,28 +119,30 @@ Widget _buildDestinationListItem(
             ),
           ),
         ),
-        _buildItemName(name, secondName, context)
+        _buildItemName(activity, context)
       ],
     ),
   );
 }
 
-Widget _buildItemName(String name, String secondName, BuildContext context) {
-  if (secondName != null) {
-    return RichText(
-      text: TextSpan(
-        style: DefaultTextStyle.of(context).style,
-        children: [
-          TextSpan(text: name.toUpperCase() + " "),
-          TextSpan(text: "HOẶC ", style: TextStyle(color: primaryLightColor)),
-          TextSpan(text: secondName.toUpperCase()),
-        ],
+Widget _buildItemName(Activity activity, BuildContext context) {
+  return Expanded(
+    child: GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          CupertinoPageRoute(builder: (context) {
+            return ActivityDetail(
+              activity: activity,
+            );
+          }),
+        );
+      },
+      child: Text(
+        activity.getShortName.toUpperCase(),
+        style: TextStyle(fontSize: 14),
       ),
-    );
-  }
-  return Text(
-    name.toUpperCase(),
-    style: TextStyle(fontSize: 14),
+    ),
   );
 }
 

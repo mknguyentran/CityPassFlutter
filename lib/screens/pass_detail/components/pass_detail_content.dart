@@ -1,8 +1,10 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/models/pass.dart';
+import 'package:city_pass/screens/activity_detail/activity_detail.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PassDetailContent extends StatelessWidget {
@@ -34,26 +36,18 @@ class PassDetailContent extends StatelessWidget {
                     switch (pass.includingDestination[index].type) {
                       case IncludingDestination.allIncluded:
                         result = _buildDestinationList(
-                          itemList: pass.includingDestination[index].destinationList,
+                          itemList:
+                              pass.includingDestination[index].destinationList,
                           context: context,
                           currentIndex: _currentIndex,
                         );
-                        _currentIndex +=
-                            pass.includingDestination[index].destinationList.length;
-                        break;
-                      case IncludingDestination.binaryOptional:
-                        result = _buildDestinationListItem(
-                            name:
-                                pass.includingDestination[index].destinationList[0].getShortName,
-                            secondName:
-                                pass.includingDestination[index].destinationList[1].getShortName,
-                            context: context,
-                            index: _currentIndex++);
+                        _currentIndex += pass
+                            .includingDestination[index].destinationList.length;
                         break;
                       case IncludingDestination.optional:
                         result = _buildOptionalDestinationList(
-                            itemList:
-                                pass.includingDestination[index].destinationList,
+                            itemList: pass
+                                .includingDestination[index].destinationList,
                             includingQuota:
                                 pass.includingDestination[index].includingQuota,
                             context: context);
@@ -85,7 +79,7 @@ Column _buildOptionalDestinationList({
       ...List.generate(
         itemList.length,
         (index) => _buildDestinationListItem(
-          name: itemList[index].getShortName,
+          activity: itemList[index],
           context: context,
         ),
       )
@@ -104,7 +98,7 @@ Column _buildDestinationList({
       ...List.generate(
         itemList.length,
         (index) => _buildDestinationListItem(
-          name: itemList[index].getShortName,
+          activity: itemList[index],
           context: context,
           index: currentIndex++,
         ),
@@ -116,8 +110,7 @@ Column _buildDestinationList({
 Widget _buildDestinationListItem(
     {int index,
     double lineSpacing = 7.0,
-    @required String name,
-    String secondName,
+    @required Activity activity,
     @required BuildContext context}) {
   return Padding(
     padding: EdgeInsets.symmetric(vertical: lineSpacing),
@@ -141,31 +134,30 @@ Widget _buildDestinationListItem(
             ),
           ),
         ),
-        _buildItemName(name, secondName, context)
+        _buildItemName(activity, context)
       ],
     ),
   );
 }
 
-Widget _buildItemName(String name, String secondName, BuildContext context) {
-  if (secondName != null) {
-    return Expanded(
-          child: RichText(
-        text: TextSpan(
-          style: DefaultTextStyle.of(context).style,
-          children: [
-            TextSpan(text: name.toUpperCase() + " "),
-            TextSpan(text: "HOẶC ", style: TextStyle(color: primaryLightColor)),
-            TextSpan(text: secondName.toUpperCase()),
-          ],
-        ),
-      ),
-    );
-  }
+Widget _buildItemName(
+    Activity activity, BuildContext context) {
   return Expanded(
+    child: GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          CupertinoPageRoute(builder: (context) {
+            return ActivityDetail(
+              activity: activity,
+            );
+          }),
+        );
+      },
       child: Text(
-      name.toUpperCase(),
-      style: TextStyle(fontSize: 14),
+        activity.getShortName.toUpperCase(),
+        style: TextStyle(fontSize: 14),
+      ),
     ),
   );
 }

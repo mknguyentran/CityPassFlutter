@@ -23,14 +23,17 @@ Pass hcmPass1 = Pass(
   originalPrice: 460000,
   includingDestination: [
     IncludingDestination([thaoCamVien, dinhDocLap], 2),
-    IncludingDestination([baoTangMyThuat, baoTangMyThuat], 1),
-    IncludingDestination([thaoCamVien, thaoCamVien, thaoCamVien], 2),
+    IncludingDestination([
+      thaoCamVien,
+      thaoCamVien,
+      thaoCamVien,
+      baoTangMyThuat,
+      baoTangMyThuat,
+    ], 2),
   ],
   city: City("TP. Hồ Chí Minh"),
   isGoodSeller: true,
 );
-
-
 
 List<Pass> mockupPasses = [
   daNangPass,
