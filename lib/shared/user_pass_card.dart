@@ -2,7 +2,6 @@ import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/user_pass.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 class UserPassCard extends StatelessWidget {
   const UserPassCard({
@@ -16,7 +15,6 @@ class UserPassCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    initializeDateFormatting("vi_VN", null);
     return GestureDetector(
       onTap: press,
       child: Container(

@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:city_pass/screens/home/components/featured/explore.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/size_config.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key, this.currentCity}) : super(key: key);
@@ -61,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    initializeDateFormatting("vi_VN", null);
     SizeConfig().init(context);
     return Scaffold(
       appBar: buildAppBar(_currentIndex),
