@@ -111,14 +111,21 @@ class ActivityInfo extends StatelessWidget {
                     ],
                   ),
                   VerticalSpacing(of: 10),
-                  ...List.generate(activity.activityTimetable.length, (index) {
-                    int todayWeekday = DateTime.now().weekday - 1;
-                    return TimetableRow(
-                      dayOfWeek: activity.activityTimetable[index].dayOfWeek,
-                      openTime: activity.activityTimetable[index].openTime,
-                      isToday: todayWeekday == index,
-                    );
-                  }),
+                  Column(
+                    children: [
+                      ...List.generate(activity.activityTimetable.length,
+                          (index) {
+                        int todayWeekday = DateTime.now().weekday - 1;
+                        return TimetableRow(
+                          dayOfWeek:
+                              activity.activityTimetable[index].dayOfWeek,
+                          openTime:
+                              activity.activityTimetable[index].openTime,
+                          isToday: todayWeekday == index,
+                        );
+                      })
+                    ],
+                  ),
                 ],
               ),
             ),

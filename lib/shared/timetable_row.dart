@@ -14,32 +14,33 @@ class TimetableRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _fontSize = 15.0;
     return Container(
       padding: EdgeInsets.only(bottom: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            children: [
-              Text(
-                dayOfWeek,
-                style: TextStyle(
-                  color: isToday ? Colors.green : null,
-                  fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
-                ),
-              )
-            ],
+          Expanded(
+            flex: 2,
+            child: Text(
+              dayOfWeek,
+              style: TextStyle(
+                fontSize: _fontSize,
+                color: isToday ? Colors.green : null,
+                fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
           ),
-          Column(
-            children: [
-              Text(
-                openTime,
-                style: TextStyle(
-                  color: isToday ? Colors.green : null,
-                  fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
-                ),
-              )
-            ],
+          Expanded(
+            flex: 4,
+            child: Text(
+              openTime,
+              style: TextStyle(
+                fontSize: _fontSize,
+                color: isToday ? Colors.green : null,
+                fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
           )
         ],
       ),
