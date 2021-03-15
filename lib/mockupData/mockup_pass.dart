@@ -8,6 +8,7 @@ Pass daNangPass = Pass(
   overallRating: 4.9,
   price: 780000,
   originalPrice: 1200000,
+  childrenPrice: PassChildrenPrice(price: 740000, originalPrice: 1150000),
   includingDestination: [
     IncludingDestination([baNaHills, artInParadise], 2),
   ],

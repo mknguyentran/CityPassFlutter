@@ -39,6 +39,7 @@ dependencies:
   # Zoom and pan photos
   photo_view: ^0.10.3
   loader_overlay: ^2.0.0
+  dotted_line: ^3.0.0
   
 
 dev_dependencies:
