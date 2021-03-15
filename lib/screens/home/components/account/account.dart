@@ -1,4 +1,5 @@
 import 'package:city_pass/constants.dart';
+import 'package:city_pass/screens/history/history.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,9 @@ class _AccountState extends State<Account> {
                     title: Text("Danh sách yêu thích"),
                   ),
                   Divider(thickness: 1),
-                  ListTile(
+                  GestureDetector(
+                    onTap: clickToHistory,
+                      child: ListTile(
                     dense: true,
                     leading: Icon(
                       Icons.history,
@@ -73,6 +76,8 @@ class _AccountState extends State<Account> {
                     ),
                     title: Text("Lịch sử giao dịch"),
                   ),
+                  ),
+                  
                   Divider(thickness: 1),
                   ListTile(
                     dense: true,
@@ -143,5 +148,11 @@ class _AccountState extends State<Account> {
         ],
       ),
     ));
+  }
+
+  void clickToHistory(){
+    setState(() {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => HistoryForm()));
+    });
   }
 }
