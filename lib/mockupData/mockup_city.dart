@@ -16,6 +16,8 @@ City nhaTrangCity = City("Nha Trang");
 City phuYenCity = City("Phú Yên");
 City quangNgaiCity = City("Quảng Ngãi");
 City phanThietCity = City("Phan Thiết");
+City dalatCity = City("Đà Lạt");
+
 
 City hcmCity = City("TP. Hồ Chí Minh");
 City vungTauCity = City("Vũng Tàu");
@@ -44,6 +46,7 @@ List<List<City>> mockupCities = [
     phuYenCity,
     quangNgaiCity,
     phanThietCity,
+    dalatCity
   ],
   [
     hcmCity,

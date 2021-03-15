@@ -59,7 +59,7 @@ class Explore extends StatelessWidget {
           ),
           ActivityRecommendation(
             title: "Gần bạn nhất",
-            children: mockupNearYouActivities,
+            children: mockupNearYouActivities_1,
           ),
           VerticalSpacing(
             of: verticalSpacing,
