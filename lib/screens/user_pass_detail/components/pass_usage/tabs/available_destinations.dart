@@ -1,13 +1,12 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/activity.dart';
-import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/screens/activity_detail/activity_detail.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AvailableDestinations extends StatelessWidget {
-  final List<IncludingDestination> destinationList;
+  final List<Activity> destinationList;
 
   const AvailableDestinations({Key key, @required this.destinationList})
       : super(key: key);
@@ -20,56 +19,15 @@ class AvailableDestinations extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ...List.generate(
-            destinationList.length,
-            (index) {
-              Widget result;
-              switch (destinationList[index].type) {
-                case IncludingDestination.allIncluded:
-                  result = _buildDestinationList(
-                    itemList: destinationList[index].destinationList,
-                    context: context,
-                    currentIndex: _currentIndex,
-                  );
-                  _currentIndex +=
-                      destinationList[index].destinationList.length;
-                  break;
-                case IncludingDestination.optional:
-                  result = _buildOptionalDestinationList(
-                      itemList: destinationList[index].destinationList,
-                      includingQuota: destinationList[index].includingQuota,
-                      context: context);
-                  break;
-                default:
-                  break;
-              }
-              return result;
-            },
+          _buildDestinationList(
+            itemList: destinationList,
+            context: context,
+            currentIndex: _currentIndex,
           ),
         ],
       ),
     );
   }
-}
-
-Column _buildOptionalDestinationList({
-  @required List<Activity> itemList,
-  @required int includingQuota,
-  @required BuildContext context,
-}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      OptionalDestinationListHeader(includingQuota: includingQuota),
-      ...List.generate(
-        itemList.length,
-        (index) => _buildDestinationListItem(
-          activity: itemList[index],
-          context: context,
-        ),
-      )
-    ],
-  );
 }
 
 Column _buildDestinationList({
@@ -113,7 +71,7 @@ Widget _buildDestinationListItem(
           child: Text(
             (index != null) ? index.toString() : "",
             style: TextStyle(
-              color: primaryDarkColor,
+              color: primaryLightColor,
               fontWeight: FontWeight.bold,
               fontSize: 14,
             ),
@@ -144,37 +102,4 @@ Widget _buildItemName(Activity activity, BuildContext context) {
       ),
     ),
   );
-}
-
-class OptionalDestinationListHeader extends StatelessWidget {
-  const OptionalDestinationListHeader({
-    Key key,
-    this.lineSpacing = 7.0,
-    @required this.includingQuota,
-  }) : super(key: key);
-
-  final double lineSpacing;
-  final int includingQuota;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: lineSpacing),
-      child: RichText(
-        text: TextSpan(
-            style:
-                DefaultTextStyle.of(context).style.apply(fontWeightDelta: -1),
-            children: [
-              TextSpan(text: "Cộng với "),
-              TextSpan(
-                text: "$includingQuota địa điểm ",
-                style: DefaultTextStyle.of(context)
-                    .style
-                    .apply(fontSizeDelta: 2, fontWeightDelta: 2),
-              ),
-              TextSpan(text: "tuỳ chọn trong số các địa điểm sau:"),
-            ]),
-      ),
-    );
-  }
 }

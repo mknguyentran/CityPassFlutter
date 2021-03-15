@@ -1,11 +1,13 @@
+import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/models/pass.dart';
 import 'package:flutter/material.dart';
 
 class UserPass {
   final String name, image;
   final DateTime expiredAt;
-  final List<IncludingDestination> availableDestinationList;
+  final List<Activity> availableDestinationList;
   final List<UserPassHistoryEntry> usedDestinationList;
+  final Pass originalPass;
 
   UserPass({
     @required this.expiredAt,
@@ -13,14 +15,11 @@ class UserPass {
     @required this.image,
     @required this.availableDestinationList,
     @required this.usedDestinationList,
+    @required this.originalPass
   });
 
   int get totalDestination {
-    int result = 0;
-    for (var destinationCollection in availableDestinationList) {
-      result += destinationCollection.includingQuota;
-    }
-    return result;
+    return availableDestinationList.length + usedDestinationList.length;
   }
 
   int get usedDestination {

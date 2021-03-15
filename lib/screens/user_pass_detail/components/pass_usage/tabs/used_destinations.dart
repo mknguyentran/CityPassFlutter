@@ -16,13 +16,20 @@ class UsedDestinations extends StatelessWidget {
           (index) => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                entryList[index].destination,
-                style: TextStyle(fontSize: 14),
+              Expanded(
+                flex: 3,
+                child: Text(
+                  entryList[index].destination,
+                  style: TextStyle(fontSize: 15),
+                ),
               ),
-              Text(
-                simpleDateAndTimeFormat.format(entryList[index].usedAt),
-                style: TextStyle(fontSize: 14),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  simpleDateAndTimeFormat.format(entryList[index].usedAt),
+                  style: TextStyle(fontSize: 15),
+                  textAlign: TextAlign.right,
+                ),
               )
             ],
           ),
