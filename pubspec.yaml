@@ -61,6 +61,19 @@ flutter:
     - assets/images/
     - assets/images/bao_tang_my_thuat/
     - assets/images/art_in_paradise/
+    - assets/images/asiaWorld/
+    - assets/images/bao_tang_3D/
+    - assets/images/bao_tang_HN/
+    - assets/images/bao_tang_LSQG/
+    - assets/images/bao_tang_y_duoc/
+    - assets/images/baraland/
+    - assets/images/cong_vien_nuoc_Ho_Tay/
+    - assets/images/dam_sen/
+    - assets/images/landmark_72/
+    - assets/images/ngoi_nha_up_nguoc/
+    - assets/images/suoi_khoang_than_tai/
+    - assets/images/van_mieu_quoc_tu_giam/
+    - assets/images/suoi_tien/
 
   #   - images/a_dot_ham.jpeg
 
