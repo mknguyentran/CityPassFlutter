@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/order_detail.dart';
 import 'package:city_pass/models/payment_method.dart';
 import 'package:city_pass/screens/pass_detail/components/choose_pass_amount.dart';
+import 'package:city_pass/screens/user_passes/user_passes.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,33 +29,57 @@ class _OrderResultState extends State<OrderResult> {
     );
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: Column(
-        children: [
-          SuccessfulOrderResult(),
-          divider,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-            child: Column(
-              children: [
-                SectionTitle(
-                  title: "Tóm tắt đơn hàng",
-                  lineSpacing: 5,
-                ),
-                _buildOrderDetailItems(widget.orderDetail),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SuccessfulOrderResult(),
+            divider,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+              child: Column(
+                children: [
+                  SectionTitle(
+                    title: "Tóm tắt đơn hàng",
+                    lineSpacing: 5,
+                  ),
+                  _buildOrderDetailItems(widget.orderDetail),
+                ],
+              ),
             ),
-          ),
-          divider,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-            child: Column(
-              children: [
-                PaymentMethodInfo(widget.orderDetail.paymentMethod),
-                OrderTotalInfo(total: widget.orderDetail.total),
-              ],
+            divider,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+              child: Column(
+                children: [
+                  PaymentInfo(
+                    lineSpacing: 4,
+                    title: "Phương thức thanh toán",
+                    rightWidget: PaymentMethodRow(
+                      widget.orderDetail.paymentMethod,
+                      fontSize: 15,
+                    ),
+                  ),
+                  PaymentInfo(
+                    title: "Tổng tạm tính",
+                    content: vndCurrencyFormat.format(widget.orderDetail.total),
+                  ),
+                  if (widget.orderDetail.discountCode != null)
+                    PaymentInfo(
+                      title:
+                          "Mã ưu đãi (${widget.orderDetail.discountCode.codeName.toUpperCase()})",
+                      content:
+                          "-${vndCurrencyFormat.format(widget.orderDetail.discountedAmount)}",
+                    ),
+                  Divider(
+                    height: 40,
+                    color: subtitleTextColor,
+                  ),
+                  OrderTotalInfo(total: widget.orderDetail.finalTotal),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
         child: Padding(
@@ -61,7 +88,7 @@ class _OrderResultState extends State<OrderResult> {
           child: Container(
             height: 50,
             width: double.infinity,
-            child: _buildGoToUserPassButton(),
+            child: _buildGoToUserPassButton(context),
           ),
         ),
       ),
@@ -127,15 +154,19 @@ class OrderTotalInfo extends StatelessWidget {
   }
 }
 
-class PaymentMethodInfo extends StatelessWidget {
-  const PaymentMethodInfo(
-    this.paymentMethod, {
+class PaymentInfo extends StatelessWidget {
+  const PaymentInfo({
     Key key,
-    this.lineSpacing = 7.0,
+    this.lineSpacing = 6.0,
+    this.title,
+    this.content,
+    this.rightWidget,
   }) : super(key: key);
 
   final double lineSpacing;
-  final PaymentMethod paymentMethod;
+  final String title, content;
+  final Widget rightWidget;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -144,10 +175,15 @@ class PaymentMethodInfo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "Phương thức thanh toán",
+            title,
             style: TextStyle(color: Colors.black, fontSize: 15),
           ),
-          PaymentMethodRow(paymentMethod)
+          content != null
+              ? Text(
+                  content,
+                  style: TextStyle(color: Colors.black, fontSize: 15),
+                )
+              : rightWidget
         ],
       ),
     );
@@ -212,7 +248,7 @@ class OrderDetailItem extends StatelessWidget {
   }
 }
 
-ElevatedButton _buildGoToUserPassButton() {
+ElevatedButton _buildGoToUserPassButton(BuildContext context) {
   return ElevatedButton(
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all(primaryLightColor),
@@ -229,7 +265,15 @@ ElevatedButton _buildGoToUserPassButton() {
         ),
       ),
     ),
-    onPressed: () {},
+    onPressed: () {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      Navigator.push(
+        context,
+        CupertinoPageRoute(builder: (context) {
+          return UserPasses();
+        }),
+      );
+    },
     child: Text(
       'Xem CityPass của tôi',
       style: TextStyle(fontSize: 20),
