@@ -23,33 +23,44 @@ class PassDetailHeader extends StatelessWidget {
         Positioned(
             bottom: 0,
             child: Container(
-              padding: EdgeInsets.fromLTRB(kDefaultPadding, 20, kDefaultPadding, 20),
+              padding:
+                  EdgeInsets.fromLTRB(kDefaultPadding, 20, kDefaultPadding, 20),
               width: MediaQuery.of(context).size.width,
               color: Colors.black.withOpacity(0.6),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    pass.name,
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                  Expanded(
+                    flex: 5,
+                    child: Text(
+                      pass.name,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                  Row(
-                    children: [
-                      Icon(Icons.star_rounded,color: Colors.amber,),
-                      Text(
-                        pass.overallRating.toString(),
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                  Expanded(
+                    flex: 2,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(
+                          Icons.star_rounded,
+                          color: Colors.amber,
                         ),
-                      ),
-                    ],
+                        Text(
+                          pass.overallRating.toString(),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

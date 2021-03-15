@@ -16,7 +16,7 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _cardheight = 150.0;
+    var _cardheight = 170.0;
     return Container(
       padding: EdgeInsets.all(10),
       clipBehavior: Clip.hardEdge,

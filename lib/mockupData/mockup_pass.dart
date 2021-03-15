@@ -89,7 +89,7 @@ Pass daNangPass_1 = Pass(
   childrenPrice: PassChildrenPrice(price: 740000, originalPrice: 1150000),
   includingDestination: [
     IncludingDestination(
-        [suoiKhoangThanTai, artInParadise, upsideDownHouse], 2),
+        [suoiKhoangThanTai, artInParadise, upsideDownHouse], 3),
   ],
   city: daNangCity,
   isGoodSeller: true,
@@ -102,7 +102,7 @@ Pass daNangPass_2 = Pass(
   price: 1200000,
   originalPrice: 2000000,
   includingDestination: [
-    IncludingDestination([baNaHills, artInParadise, sunWorldDN], 2),
+    IncludingDestination([baNaHills, artInParadise, sunWorldDN], 3),
   ],
   city: daNangCity,
   isGoodSeller: true,
@@ -120,7 +120,7 @@ Pass daNangPass_3 = Pass(
       artInParadise,
       baoTang3D,
       upsideDownHouse,
-    ], 2),
+    ], 4),
   ],
   city: daNangCity,
   isGoodSeller: true,
@@ -137,7 +137,7 @@ Pass daNangPass_4 = Pass(
       baNaHills,
       artInParadise,
       suoiKhoangThanTai,
-    ], 2),
+    ], 3),
   ],
   city: daNangCity,
   isGoodSeller: true,
@@ -174,7 +174,7 @@ Pass hcmPass_2 = Pass(
       dinhDocLap,
       damSen,
       baoTangMyThuat,
-    ], 2),
+    ], 4),
   ],
   city: hcmCity,
   isGoodSeller: true,
@@ -188,13 +188,13 @@ Pass hcmPass_3 = Pass(
   originalPrice: 1500000,
   includingDestination: [
     IncludingDestination([
-      thaoCamVien,
+      baoTangYDuoc,
       dinhDocLap,
       diadaoCuChi,
-    ], 2),
+    ], 3),
     IncludingDestination([
+      thaoCamVien,
       baoTangMyThuat,
-      baoTangYDuoc,
       damSen,
       suoiTien,
     ], 2),
@@ -221,13 +221,13 @@ Pass hcmPass_4 = Pass(
 );
 
 Pass hcmPass_5 = Pass(
-  name: "HCM-Chơi ngay quà liền tay",
+  name: "Tinh hoa Thành phố Bác",
   image: "assets/images/suoi_tien/st_5.jpg",
   overallRating: 4.7,
   price: 250000,
   originalPrice: 460000,
   includingDestination: [
-    IncludingDestination([thaoCamVien, dinhDocLap], 2),
+    IncludingDestination([suoiTien, thaoCamVien, dinhDocLap,], 3),
   ],
   city: hcmCity,
   isGoodSeller: true,
