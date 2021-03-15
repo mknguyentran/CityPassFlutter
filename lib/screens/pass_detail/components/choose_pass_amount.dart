@@ -145,7 +145,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
                           },
                           child: Container(
                             color: Colors.transparent,
-                            padding: const EdgeInsets.symmetric(vertical:10),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
                             child: DiscountCodeInfo(
                               discountCode: _currentDiscountCode,
                               onRemove: () {
@@ -315,8 +315,8 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
           Navigator.push(
             context,
             CupertinoPageRoute(builder: (context) {
-              OrderDetail orderDetail = new OrderDetail(
-                  pass, amount, childrenAmount, _currentPaymentMethod);
+              OrderDetail orderDetail = new OrderDetail(pass, amount,
+                  childrenAmount, _currentPaymentMethod, _currentDiscountCode);
               return OrderResult(
                 orderDetail: orderDetail,
               );
@@ -387,16 +387,19 @@ class DiscountCodeInfo extends StatelessWidget {
 }
 
 class PaymentMethodRow extends StatelessWidget {
-  const PaymentMethodRow(this.paymentMethod,
-      {Key key,
-      this.withChangeButton = false,
-      this.isChosen = false,
-      this.padding = EdgeInsets.zero})
-      : super(key: key);
+  const PaymentMethodRow(
+    this.paymentMethod, {
+    Key key,
+    this.withChangeButton = false,
+    this.isChosen = false,
+    this.padding = EdgeInsets.zero,
+    this.fontSize = 16,
+  }) : super(key: key);
 
   final PaymentMethod paymentMethod;
   final bool withChangeButton, isChosen;
   final EdgeInsetsGeometry padding;
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -426,7 +429,7 @@ class PaymentMethodRow extends StatelessWidget {
                 paymentMethod.name,
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 16,
+                  fontSize: fontSize,
                   fontWeight: isChosen ? FontWeight.bold : FontWeight.normal,
                 ),
               ),
