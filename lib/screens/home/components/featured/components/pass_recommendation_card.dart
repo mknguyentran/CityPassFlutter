@@ -1,5 +1,4 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/shared/info_tag.dart';
 import 'package:city_pass/size_config.dart';

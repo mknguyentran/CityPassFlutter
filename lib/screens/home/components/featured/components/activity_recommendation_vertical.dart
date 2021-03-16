@@ -2,7 +2,6 @@ import 'package:animations/animations.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/screens/activity_detail/activity_detail.dart';
-import 'package:city_pass/screens/home/components/featured/components/activity_recommendation_card.dart';
 import 'package:city_pass/screens/home/components/featured/components/activity_recommendation_card_vertical.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
@@ -10,23 +9,33 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ActivityRecommendationVertical extends StatelessWidget {
-  const ActivityRecommendationVertical({
-    Key key,
-    this.title,
-    @required this.children,
-  }) : super(key: key);
+  const ActivityRecommendationVertical(
+      {Key key, this.title, @required this.children, this.hasPadding = true})
+      : super(key: key);
 
   final String title;
   final List<Activity> children;
+  final bool hasPadding;
 
   @override
   Widget build(BuildContext context) {
+    children.sort((a, b) {
+      if (a.travelDistance != null && b.travelDistance != null) {
+        return (a.travelDistance - b.travelDistance).toInt();
+      } else if (a.travelDistance == null && b.travelDistance == null) {
+        return 0;
+      } else {
+        return a.travelDistance != null
+            ? a.travelDistance.toInt()
+            : b.travelDistance.toInt();
+      }
+    });
     return Column(
       children: [
         if (title != null)
           SectionTitle(
             title: title,
-            hasPadding: true,
+            hasPadding: hasPadding,
             showAllCallback: () {},
           ),
         VerticalSpacing(
@@ -39,7 +48,8 @@ class ActivityRecommendationVertical extends StatelessWidget {
               ...List.generate(
                 children.length,
                 (index) => Padding(
-                  padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: hasPadding ? kDefaultPadding : 0),
                   child: OpenContainer(
                     closedElevation: 0,
                     closedShape: RoundedRectangleBorder(

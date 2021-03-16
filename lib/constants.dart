@@ -56,6 +56,12 @@ final smallShadow = BoxShadow(
   color: Color(0xFFA0A0A0).withOpacity(0.56),
 );
 
+final textShadow = BoxShadow(
+  offset: Offset(0, 3),
+  blurRadius: 10,
+  color: Color(0xFF000000),
+);
+
 final DateFormat simpleDateFormat = new DateFormat("d LLL y", "vi_VN");
 final DateFormat simpleDateAndTimeFormat =
     new DateFormat.Hm("vi_VN").addPattern(", d LLL y");

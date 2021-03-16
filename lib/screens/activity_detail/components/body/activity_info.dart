@@ -1,6 +1,5 @@
 import 'package:city_pass/mockupData/mockup_pass.dart';
 import 'package:city_pass/models/activity.dart';
-import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/screens/map/map_screen.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
 import 'package:city_pass/shared/pass_card.dart';
