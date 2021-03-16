@@ -646,37 +646,36 @@ Activity damSen = Activity(
 );
 //7. Suoi Tien
 Activity suoiTien = Activity(
-  briefDescription:
-      "Khu Du lịch Văn hóa Suối Tiên là một công viên liên hợp vui chơi giải trí kết hợp truyền thống các yếu tố văn hóa - lịch sử - tâm linh.",
-  detailedDescription:
-      "Suối Tiên của chúng ta là Miền Đất Tứ Linh với Long – Lân – Quy – Phụng" +
-          "Nơi an lành, hạnh phúc, luôn mang lại nhiều may mắn cho gia đình bạn.",
-  name: "Suoi Tien Theme Park",
-  shortName: "Suoi Tien Theme Park",
-  image: "assets/images/suoi_tien/st_1.jpg",
-  address: "120 Xa lộ Hà Nội, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh",
-  activityTimetable: [
-    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:00 - 17:00"),
-  ],
-  moreImages: [
-    "assets/images/suoi_tien/st_2.jpg",
-    "assets/images/suoi_tien/st_3.jpg",
-    "assets/images/suoi_tien/st_4.jpg",
-    "assets/images/suoi_tien/st_5.jpg"
-  ],
-  city: hcmCity,
-  visitedCounter: 254,
-  overallRating: 3.5,
-  isPopular: true,
-  travelDistance: 3.1,
-  travelTime: 20
-);
+    briefDescription:
+        "Khu Du lịch Văn hóa Suối Tiên là một công viên liên hợp vui chơi giải trí kết hợp truyền thống các yếu tố văn hóa - lịch sử - tâm linh.",
+    detailedDescription:
+        "Suối Tiên của chúng ta là Miền Đất Tứ Linh với Long – Lân – Quy – Phụng" +
+            "Nơi an lành, hạnh phúc, luôn mang lại nhiều may mắn cho gia đình bạn.",
+    name: "Suoi Tien Theme Park",
+    shortName: "Suoi Tien Theme Park",
+    image: "assets/images/suoi_tien/st_1.jpg",
+    address: "120 Xa lộ Hà Nội, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh",
+    activityTimetable: [
+      ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:00 - 17:00"),
+    ],
+    moreImages: [
+      "assets/images/suoi_tien/st_2.jpg",
+      "assets/images/suoi_tien/st_3.jpg",
+      "assets/images/suoi_tien/st_4.jpg",
+      "assets/images/suoi_tien/st_5.jpg"
+    ],
+    city: hcmCity,
+    visitedCounter: 254,
+    overallRating: 3.5,
+    isPopular: true,
+    travelDistance: 3.1,
+    travelTime: 20);
 List<Activity> mockupActivities = [
 //1. Ha Noi
   baaraLand,
@@ -731,4 +730,66 @@ List<Activity> mockupNearYouActivities_3 = [
   baoTangYDuoc,
   damSen,
   suoiTien
+];
+
+List<Activity> historicalHeritage = [
+  vanMieuQuocTuGiam,
+  baotangLSQG,
+  dinhDocLap,
+  diadaoCuChi,
+  suoiTien,
+];
+
+List<Activity> themePark = [
+  baaraLand,
+  congVienNuocHoTay,
+  baNaHills,
+  sunWorldDN,
+  suoiKhoangThanTai,
+  damSen,
+  suoiTien,
+];
+
+List<Activity> museum = [
+  baoTangHN,
+  baotangLSQG,
+  artInParadise,
+  baoTang3D,
+  upsideDownHouse,
+  baoTangMyThuat,
+  baoTangYDuoc,
+];
+
+List<Activity> sightseeing = [
+  thaoCamVien,
+  diadaoCuChi,
+  keangnamHN,
+  baNaHills,
+  damSen,
+  suoiTien,
+];
+
+List<Activity> forKids = [
+  baNaHills,
+  congVienNuocHoTay,
+  artInParadise,
+  baaraLand,
+  sunWorldDN,
+  baoTang3D,
+  upsideDownHouse,
+  thaoCamVien,
+  diadaoCuChi,
+  damSen,
+  suoiTien,
+];
+
+List<Activity> leisureTravel = [
+  baaraLand,
+  congVienNuocHoTay,
+  keangnamHN,
+  baNaHills,
+  sunWorldDN,
+  suoiKhoangThanTai,
+  damSen,
+  suoiTien,
 ];
