@@ -32,8 +32,6 @@ Activity baaraLand = Activity(
     "assets/images/baraland/bara_3.jpg",
   ],
   city: haNoiCity,
-  travelTime: 26,
-  travelDistance: 4.2,
   overallRating: 4.8,
   visitedCounter: 167,
   isPopular: true,
@@ -70,8 +68,6 @@ Activity vanMieuQuocTuGiam = Activity(
     "assets/images/van_mieu_quoc_tu_giam/van_mieu_quoc_tu_giam_3.jpg",
   ],
   city: haNoiCity,
-  travelTime: 26,
-  travelDistance: 4.2,
   overallRating: 4.8,
   visitedCounter: 167,
   isPopular: true,
@@ -107,8 +103,6 @@ Activity baoTangHN = Activity(
     "assets/images/bao_tang_HN/bao_tang_HN_4.jpg",
   ],
   city: haNoiCity,
-  travelTime: 26,
-  travelDistance: 4.2,
   overallRating: 4.8,
   visitedCounter: 167,
   isPopular: true,
@@ -145,8 +139,6 @@ Activity baotangLSQG = Activity(
     "assets/images/bao_tang_LSQG/bao_tang_LSQG_4.jpg",
   ],
   city: haNoiCity,
-  travelTime: 26,
-  travelDistance: 4.2,
   overallRating: 4.8,
   visitedCounter: 167,
   isPopular: true,
@@ -182,8 +174,6 @@ Activity congVienNuocHoTay = Activity(
     "assets/images/cong_vien_nuoc_Ho_Tay/cong_vien_nuoc_HT_4.jpg",
   ],
   city: haNoiCity,
-  travelTime: 26,
-  travelDistance: 4.2,
   overallRating: 4.8,
   visitedCounter: 167,
   isPopular: true,
@@ -220,8 +210,6 @@ Activity keangnamHN = Activity(
     "assets/images/landmark_72/landmark72_3.jpg",
   ],
   city: haNoiCity,
-  travelTime: 26,
-  travelDistance: 4.2,
   overallRating: 4.8,
   visitedCounter: 167,
   isPopular: true,
@@ -320,8 +308,6 @@ Activity sunWorldDN = Activity(
     "assets/images/asiaWorld/asiaWorld_4.jpg",
   ],
   city: daNangCity,
-  travelTime: 26,
-  travelDistance: 4.2,
   overallRating: 4.8,
   visitedCounter: 167,
   isPopular: true,
@@ -358,8 +344,6 @@ Activity suoiKhoangThanTai = Activity(
     "assets/images/suoi_khoang_than_tai/sktt_4.jpg",
   ],
   city: daNangCity,
-  travelTime: 26,
-  travelDistance: 4.2,
   overallRating: 4.8,
   visitedCounter: 167,
   isPopular: true,
@@ -396,8 +380,6 @@ Activity baoTang3D = Activity(
     "assets/images/bao_tang_3D/bao_tang_3D_4.jpg",
   ],
   city: daNangCity,
-  travelTime: 26,
-  travelDistance: 4.2,
   overallRating: 4.8,
   visitedCounter: 167,
   isPopular: true,
@@ -434,8 +416,6 @@ Activity upsideDownHouse = Activity(
     "assets/images/ngoi_nha_up_nguoc/nha_up_nguoc_4.jpg",
   ],
   city: daNangCity,
-  travelTime: 26,
-  travelDistance: 4.2,
   overallRating: 4.8,
   visitedCounter: 167,
   isPopular: true,
@@ -732,7 +712,7 @@ List<Activity> mockupNearYouActivities_3 = [
   suoiTien
 ];
 
-List<Activity> historicalHeritage = [
+List<Activity> historicalHeritageList = [
   vanMieuQuocTuGiam,
   baotangLSQG,
   dinhDocLap,
@@ -740,7 +720,7 @@ List<Activity> historicalHeritage = [
   suoiTien,
 ];
 
-List<Activity> themePark = [
+List<Activity> themeParkList = [
   baaraLand,
   congVienNuocHoTay,
   baNaHills,
@@ -750,7 +730,7 @@ List<Activity> themePark = [
   suoiTien,
 ];
 
-List<Activity> museum = [
+List<Activity> museumList = [
   baoTangHN,
   baotangLSQG,
   artInParadise,
@@ -760,7 +740,7 @@ List<Activity> museum = [
   baoTangYDuoc,
 ];
 
-List<Activity> sightseeing = [
+List<Activity> sightseeingList = [
   thaoCamVien,
   diadaoCuChi,
   keangnamHN,
@@ -769,7 +749,7 @@ List<Activity> sightseeing = [
   suoiTien,
 ];
 
-List<Activity> forKids = [
+List<Activity> forKidsList = [
   baNaHills,
   congVienNuocHoTay,
   artInParadise,
@@ -783,7 +763,7 @@ List<Activity> forKids = [
   suoiTien,
 ];
 
-List<Activity> leisureTravel = [
+List<Activity> leisureTravelList = [
   baaraLand,
   congVienNuocHoTay,
   keangnamHN,

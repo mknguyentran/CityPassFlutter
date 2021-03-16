@@ -1,8 +1,10 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/mockupData/mockup_category.dart';
 import 'package:city_pass/models/category.dart';
+import 'package:city_pass/screens/activity_category/activity_category.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -38,6 +40,19 @@ class AttractionCategory extends StatelessWidget {
                   categoryList.length,
                   (index) => ActivityCategoryButton(
                     category: categoryList[index],
+                    tapCallback: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) {
+                            return ActivityCategoryScreen(
+                              category: categoryList[index],
+                              
+                            );
+                          },
+                        ),
+                      );
+                    },
                   ),
                 )
               ],
@@ -71,7 +86,7 @@ class ActivityCategoryButton extends StatelessWidget {
             FaIcon(
               category.icon,
               size: 30,
-              color: category.iconColor,
+              color: category.themeColor,
             ),
             VerticalSpacing(
               of: 10,
