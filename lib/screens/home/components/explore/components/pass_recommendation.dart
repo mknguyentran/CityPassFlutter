@@ -1,7 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/pass.dart';
-import 'package:city_pass/screens/home/components/featured/components/pass_recommendation_card.dart';
+import 'package:city_pass/screens/home/components/explore/components/pass_recommendation_card.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
