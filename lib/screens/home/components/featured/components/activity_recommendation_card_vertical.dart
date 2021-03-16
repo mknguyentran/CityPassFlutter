@@ -16,7 +16,7 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _cardheight = 170.0;
+    var _cardheight = 150.0;
     return Container(
       padding: EdgeInsets.all(10),
       clipBehavior: Clip.hardEdge,
@@ -61,8 +61,10 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
                     VerticalSpacing(of: 5),
                     Text(
                       activity.name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 14,),
                     ),
                     VerticalSpacing(of: 5),
                     Wrap(

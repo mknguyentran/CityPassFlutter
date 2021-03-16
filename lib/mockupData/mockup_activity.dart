@@ -1,6 +1,5 @@
 import 'package:city_pass/mockupData/mockup_city.dart';
 import 'package:city_pass/models/activity.dart';
-import 'package:city_pass/models/city.dart';
 
 //1. Hà Nội
 //+ Baara Land
@@ -14,11 +13,16 @@ Activity baaraLand = Activity(
       "Được ví như là Tuần Châu giữa lòng Hà Nội, vì vậy khi đến đây bạn sẽ không khỏi bị choáng ngợp bởi không gian," +
           "cơ sở hạ tầng, trang thiết bị, trò chơi, màn biểu diễn, dịch vụ tầm cỡ quốc tế.",
   activityTimetable: [
-    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
     ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:30 - 17:30"),
     ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:30 - 17:30"),
   ],
@@ -47,11 +51,16 @@ Activity vanMieuQuocTuGiam = Activity(
   detailedDescription:
       "Là quần thể di tích về trường đại học đầu tiên của nước ta, Văn Miếu không chỉ là di tích lịch sử văn hóa mà còn là nơi được rất nhiều sĩ tử, học trò tới đây để cầu may mắn trong thi cử, học hành",
   activityTimetable: [
-    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
     ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:30 - 17:30"),
     ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:30 - 17:30"),
   ],
@@ -79,11 +88,16 @@ Activity baoTangHN = Activity(
   detailedDescription:
       "Thủ đô cũng có riêng cho mình một địa điểm để trưng bày những nét độc đáo trong nền văn hóa của mảnh đất hơn một ngàn năm tuổi",
   activityTimetable: [
-    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
     ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:30 - 17:30"),
     ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:30 - 17:30"),
   ],
@@ -112,11 +126,16 @@ Activity baotangLSQG = Activity(
   detailedDescription:
       "Tọa lạc ở quận Hoàn Kiếm đã từ lâu đời, bảo tàng lịch sử quốc gia là nơi trưng bày, lưu giữ và bảo quản khoảng 200.000 hiện vật, tư liệu lịch sử văn hóa Việt Nam. Nơi đây còn trưng bày hiện vật thuộc các nền văn hóa khảo cổ từ sơ kỳ thời đại đồ đá cũ, những kiệt tác của các nền văn hóa nổi tiếng như Văn hóa Đông Sơn, Điêu khắc đá Chăm-pa",
   activityTimetable: [
-    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
     ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:30 - 17:30"),
     ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:30 - 17:30"),
   ],
@@ -144,11 +163,16 @@ Activity congVienNuocHoTay = Activity(
   detailedDescription:
       "Thủy cung Hà Nội là một trong những điểm đến được yêu thích tại thủ đô. Với không gian thủy cung hoành tráng cùng hàng ngàn loài sinh vật biển độc đáo. Thủy cung Vinpearl Land Aquarium đã trở thành một điểm đến hấp dẫn và hút khách nhất",
   activityTimetable: [
-    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
     ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:30 - 17:30"),
     ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:30 - 17:30"),
   ],
@@ -177,11 +201,16 @@ Activity keangnamHN = Activity(
   detailedDescription:
       "Landmark 72 với diện tích hơn 300 000m2 là tòa nhà cao nhất Việt Nam từ năm 2010-2018 (350m), nơi đây có thể được coi là biểu tượng cho sự tăng trưởng kinh tế của Việt Nam, đặc biệt là sự tăng trưởng về xây dựng cũng như ngành công nghiệp dịch vụ, những ngành đang thúc đẩy mạnh mẽ sự phát triển của thành phố Hà Nội.",
   activityTimetable: [
-    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
     ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:30 - 17:30"),
     ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:30 - 17:30"),
   ],
@@ -272,11 +301,16 @@ Activity sunWorldDN = Activity(
   detailedDescription:
       "Bạn có thể đi monorail ngắm cảnh công viên, hoặc lên ngay cabin Sunwheel để ngắm Đà Nẵng cả đêm lẫn ngày.",
   activityTimetable: [
-    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
     ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:30 - 17:30"),
     ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:30 - 17:30"),
   ],
@@ -305,11 +339,16 @@ Activity suoiKhoangThanTai = Activity(
   detailedDescription:
       "Tại đây, bạn có thể chiêm ngưỡng, khám phá nét đẹp hùng vĩ của núi rừng cũng như hòa mình, thư giãn cùng những dịch vụ hấp dẫn như tắm bùn, tắm rượu vang,…",
   activityTimetable: [
-    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
     ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:30 - 17:30"),
     ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:30 - 17:30"),
   ],
@@ -338,11 +377,16 @@ Activity baoTang3D = Activity(
   detailedDescription:
       "Bạn có thể hóa thân thành những nhân vật cổ tích trong thế giới thần tiên, đặt chân vào khu rừng bí ẩn giữa những lăng mộ Ai Cập cổ đại hay hóa thân thành những chú chim đại bàng tung cánh",
   activityTimetable: [
-    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
     ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:30 - 17:30"),
     ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:30 - 17:30"),
   ],
@@ -371,11 +415,16 @@ Activity upsideDownHouse = Activity(
   detailedDescription:
       " Tại Việt Nam, mô hình nhà úp ngược này đã có tại Vũng Tàu, Đà Lạt, Đà Nẵng và Sài Gòn. Điểm chung của những ngôi nhà này là các đồ vật và cả căn nhà dường như bị xoay ngược, phá vỡ các quy luật thông thường về vị trí của con người.",
   activityTimetable: [
-    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
     ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:30 - 17:30"),
     ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:30 - 17:30"),
   ],
@@ -405,11 +454,16 @@ Activity thaoCamVien = Activity(
       "Không chỉ là một công viên giải trí lành mạnh với không khí trong lành và hệ động thực vật phong phú, " +
           "Thảo Cầm Viên Sài Gòn còn giữ vai trò quan trọng trong việc giáo dục, bảo tồn và nghiên cứu về tự nhiên",
   activityTimetable: [
-    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
     ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:30 - 17:30"),
     ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:30 - 17:30"),
   ],
@@ -495,64 +549,68 @@ Activity diadaoCuChi = Activity(
 //4. Bao Tang Mi Thuat
 
 Activity baoTangMyThuat = Activity(
-  briefDescription:
-      "Điểm dừng chân lý tưởng cho những tâm hồn yêu văn hóa và đam mê nghệ thuật",
-  detailedDescription:
-      "Nếu có ai là “người hâm mộ” của phong cách vintage, của những tấm ảnh phim thì nhất định phải một lần ghé thăm nơi đây. Ta có thể ví bảo tàng mỹ thuật Hồ Chí Minh như là một chiều không gian xưa cũ, nơi thời gian dừng trôi, lấy màu vàng làm tông màu chính. Từ cổng chính bước vào, bạn sẽ dễ dàng nhận thấy cả tòa nhà là một công trình kiến trúc đồ sộ màu vàng nằm giữa không gian xanh mát rộng lớn. \n\nKhi bước dọc theo những hành lang, màu vàng dần biến mất và thay vào đó là gam màu xám xịt của bức tường, của những song cửa sổ hai bên. Bạn sẽ phản bác rằng màu xám là một tông màu hiện đại cơ mà, nhưng không, trong không gian của bảo tàng, gam màu này như đánh mất sự máy móc lạnh lẽo vốn có của mình mà lại đượm sắc thái nhàn nhạt của quá khứ, về một thời đã qua.\n\n",
-  name: "Tham quan Bảo tàng Mỹ thuật TP HCM",
-  shortName: "Bảo tàng Mỹ thuật TP HCM",
-  image: "assets/images/bao_tang_my_thuat/bao_tang_my_thuat.jpg",
-  address:
-      "97A Phó Đức Chính, Phường Nguyễn Thái Bình, Quận 1, Thành phố Hồ Chí Minh",
-  activityTimetable: [
-    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:00 - 17:00"),
-  ],
-  moreImages: [
-    "assets/images/bao_tang_my_thuat/bao-tang-my-thuat-1.jpg",
-    "assets/images/bao_tang_my_thuat/bao-tang-my-thuat-2.jpg",
-    "assets/images/bao_tang_my_thuat/bao-tang-my-thuat-3.jpg",
-    "assets/images/bao_tang_my_thuat/bao-tang-my-thuat-4.jpg"
-  ],
-  city: hcmCity,
-  visitedCounter: 254,
-  overallRating: 3.5,
-);
+    briefDescription:
+        "Điểm dừng chân lý tưởng cho những tâm hồn yêu văn hóa và đam mê nghệ thuật",
+    detailedDescription:
+        "Nếu có ai là “người hâm mộ” của phong cách vintage, của những tấm ảnh phim thì nhất định phải một lần ghé thăm nơi đây. Ta có thể ví bảo tàng mỹ thuật Hồ Chí Minh như là một chiều không gian xưa cũ, nơi thời gian dừng trôi, lấy màu vàng làm tông màu chính. Từ cổng chính bước vào, bạn sẽ dễ dàng nhận thấy cả tòa nhà là một công trình kiến trúc đồ sộ màu vàng nằm giữa không gian xanh mát rộng lớn. \n\nKhi bước dọc theo những hành lang, màu vàng dần biến mất và thay vào đó là gam màu xám xịt của bức tường, của những song cửa sổ hai bên. Bạn sẽ phản bác rằng màu xám là một tông màu hiện đại cơ mà, nhưng không, trong không gian của bảo tàng, gam màu này như đánh mất sự máy móc lạnh lẽo vốn có của mình mà lại đượm sắc thái nhàn nhạt của quá khứ, về một thời đã qua.\n\n",
+    name: "Tham quan Bảo tàng Mỹ thuật TP HCM",
+    shortName: "Bảo tàng Mỹ thuật TP HCM",
+    image: "assets/images/bao_tang_my_thuat/bao_tang_my_thuat.jpg",
+    address:
+        "97A Phó Đức Chính, Phường Nguyễn Thái Bình, Quận 1, Thành phố Hồ Chí Minh",
+    activityTimetable: [
+      ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:00 - 17:00"),
+    ],
+    moreImages: [
+      "assets/images/bao_tang_my_thuat/bao-tang-my-thuat-1.jpg",
+      "assets/images/bao_tang_my_thuat/bao-tang-my-thuat-2.jpg",
+      "assets/images/bao_tang_my_thuat/bao-tang-my-thuat-3.jpg",
+      "assets/images/bao_tang_my_thuat/bao-tang-my-thuat-4.jpg"
+    ],
+    city: hcmCity,
+    visitedCounter: 254,
+    overallRating: 3.7,
+    isPopular: true,
+    travelDistance: 5.8,
+    travelTime: 30);
 
 //5. Bao tang Y Duoc
 Activity baoTangYDuoc = Activity(
-  briefDescription:
-      "Tòa nhà của bảo tàng gồm một trệt 6 lầu gồm 18 phòng cho khách tham quan với tổng diện tích gần 600 mét vuông, nội thất được xây dựng chủ yếu từ nguyên liệu gỗ theo phong cách kiến trúc truyền thống Việt Nam.",
-  detailedDescription:
-      "Bảo tàng được trang bị nghe nhìn hiện đại. Khách tham quan được xem bộ phim tài liệu Kinh nghiệm thế kỷ phục vụ sức khỏe giới thiệu về lịch sử y học cổ truyền Việt Nam.\n\n",
-  name: "Bảo tàng Y Học Cổ Truyền Việt Nam",
-  shortName: "Bảo tàng Y Học Cổ Truyền Việt Nam",
-  image: "assets/images/bao_tang_y_duoc/btyd_1.jpg",
-  address: "41 Hoàng Dư Khương, Phường 12, Quận 10, Thành phố Hồ Chí Minh",
-  activityTimetable: [
-    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:00 - 17:00"),
-    ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:00 - 17:00"),
-  ],
-  moreImages: [
-    "assets/images/bao_tang_y_duoc/btyd_2.jpg",
-    "assets/images/bao_tang_y_duoc/btyd_4.jpg",
-    "assets/images/bao_tang_y_duoc/btyd_5.jpg",
-    "assets/images/bao_tang_y_duoc/btyd_6.jpg"
-  ],
-  city: hcmCity,
-  visitedCounter: 254,
-  overallRating: 3.5,
-);
+    briefDescription:
+        "Tòa nhà của bảo tàng gồm một trệt 6 lầu gồm 18 phòng cho khách tham quan với tổng diện tích gần 600 mét vuông, nội thất được xây dựng chủ yếu từ nguyên liệu gỗ theo phong cách kiến trúc truyền thống Việt Nam.",
+    detailedDescription:
+        "Bảo tàng được trang bị nghe nhìn hiện đại. Khách tham quan được xem bộ phim tài liệu Kinh nghiệm thế kỷ phục vụ sức khỏe giới thiệu về lịch sử y học cổ truyền Việt Nam.\n\n",
+    name: "Bảo tàng Y Học Cổ Truyền Việt Nam",
+    shortName: "Bảo tàng Y Học Cổ Truyền Việt Nam",
+    image: "assets/images/bao_tang_y_duoc/btyd_1.jpg",
+    address: "41 Hoàng Dư Khương, Phường 12, Quận 10, Thành phố Hồ Chí Minh",
+    activityTimetable: [
+      ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:00 - 17:00"),
+      ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:00 - 17:00"),
+    ],
+    moreImages: [
+      "assets/images/bao_tang_y_duoc/btyd_2.jpg",
+      "assets/images/bao_tang_y_duoc/btyd_4.jpg",
+      "assets/images/bao_tang_y_duoc/btyd_5.jpg",
+      "assets/images/bao_tang_y_duoc/btyd_6.jpg"
+    ],
+    city: hcmCity,
+    visitedCounter: 254,
+    overallRating: 4.5,
+    isNew: true,
+    travelDistance: 6.5,
+    travelTime: 35);
 //6. Dam Sen
 Activity damSen = Activity(
   briefDescription:
@@ -580,7 +638,11 @@ Activity damSen = Activity(
   ],
   city: hcmCity,
   visitedCounter: 254,
-  overallRating: 3.5,
+  overallRating: 3.9,
+  isPopular: true,
+  isNew: true,
+  travelDistance: 7.2,
+  travelTime: 45,
 );
 //7. Suoi Tien
 Activity suoiTien = Activity(
@@ -611,62 +673,62 @@ Activity suoiTien = Activity(
   city: hcmCity,
   visitedCounter: 254,
   overallRating: 3.5,
+  isPopular: true,
+  travelDistance: 3.1,
+  travelTime: 20
 );
 List<Activity> mockupActivities = [
 //1. Ha Noi
-baaraLand,
-vanMieuQuocTuGiam,
-baoTangHN,
-baotangLSQG,
-congVienNuocHoTay,
-keangnamHN,
+  baaraLand,
+  vanMieuQuocTuGiam,
+  baoTangHN,
+  baotangLSQG,
+  congVienNuocHoTay,
+  keangnamHN,
 //2. Da Nang
-baNaHills,
-artInParadise,
-sunWorldDN,
-suoiKhoangThanTai,
-baoTang3D,
-upsideDownHouse,
+  baNaHills,
+  artInParadise,
+  sunWorldDN,
+  suoiKhoangThanTai,
+  baoTang3D,
+  upsideDownHouse,
 //3. HCM
-thaoCamVien,
-dinhDocLap,
-diadaoCuChi,
-baoTangMyThuat,
-baoTangYDuoc,
-damSen,
-suoiTien
- 
+  thaoCamVien,
+  dinhDocLap,
+  diadaoCuChi,
+  baoTangMyThuat,
+  baoTangYDuoc,
+  damSen,
+  suoiTien
 ];
 
 List<Activity> mockupNearYouActivities_1 = [
- //1. Ha Noi
-baaraLand,
-vanMieuQuocTuGiam,
-baoTangHN,
-baotangLSQG,
-congVienNuocHoTay,
-keangnamHN,
+  //1. Ha Noi
+  baaraLand,
+  vanMieuQuocTuGiam,
+  baoTangHN,
+  baotangLSQG,
+  congVienNuocHoTay,
+  keangnamHN,
 ];
 
 List<Activity> mockupNearYouActivities_2 = [
 //2. Da Nang
-baNaHills,
-artInParadise,
-sunWorldDN,
-suoiKhoangThanTai,
-baoTang3D,
-upsideDownHouse,
+  baNaHills,
+  artInParadise,
+  sunWorldDN,
+  suoiKhoangThanTai,
+  baoTang3D,
+  upsideDownHouse,
 ];
 
 List<Activity> mockupNearYouActivities_3 = [
 //3. HCM
-thaoCamVien,
-dinhDocLap,
-diadaoCuChi,
-baoTangMyThuat,
-baoTangYDuoc,
-damSen,
-suoiTien
+  thaoCamVien,
+  dinhDocLap,
+  diadaoCuChi,
+  baoTangMyThuat,
+  baoTangYDuoc,
+  damSen,
+  suoiTien
 ];
-
-

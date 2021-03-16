@@ -4,7 +4,6 @@ import 'package:city_pass/constants.dart';
 import 'package:city_pass/mockupData/mockup_activity.dart';
 import 'package:city_pass/mockupData/mockup_pass.dart';
 import 'package:city_pass/models/city.dart';
-import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/screens/home/components/featured/components/activity_recommendation.dart';
 import 'package:city_pass/screens/home/components/featured/components/activity_recommendation_vertical.dart';
 import 'package:city_pass/screens/home/components/featured/components/pass_recommendation.dart';
@@ -59,7 +58,7 @@ class Explore extends StatelessWidget {
           ),
           ActivityRecommendation(
             title: "Gần bạn nhất",
-            children: mockupNearYouActivities_1,
+            children: mockupNearYouActivities_3,
           ),
           VerticalSpacing(
             of: verticalSpacing,

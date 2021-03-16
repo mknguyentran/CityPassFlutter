@@ -1,5 +1,4 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/mockupData/mockup_discount_code.dart';
 import 'package:city_pass/mockupData/mockup_payment_method.dart';
 import 'package:city_pass/models/discount_code.dart';
 import 'package:city_pass/models/order_detail.dart';

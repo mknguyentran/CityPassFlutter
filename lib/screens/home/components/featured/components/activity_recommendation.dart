@@ -8,14 +8,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ActivityRecommendation extends StatelessWidget {
-  const ActivityRecommendation({
-    Key key,
-    @required this.title,
-    @required this.children,
-  }) : super(key: key);
+  const ActivityRecommendation(
+      {Key key,
+      @required this.title,
+      @required this.children,
+      this.hasPadding = true})
+      : super(key: key);
 
   final String title;
   final List<Activity> children;
+  final bool hasPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class ActivityRecommendation extends StatelessWidget {
       children: [
         SectionTitle(
           title: title,
-          hasPadding: true,
+          hasPadding: hasPadding,
           showAllCallback: () {},
         ),
         VerticalSpacing(
@@ -34,28 +36,33 @@ class ActivityRecommendation extends StatelessWidget {
         SingleChildScrollView(
           clipBehavior: Clip.none,
           scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              ...List.generate(
-                _activityList.length,
-                (index) => Padding(
-                  padding:
-                      EdgeInsets.only(left: getProportionateScreenWidth(20)),
-                  child: OpenContainer(
-                    closedBuilder: (context, action) =>
-                        ActivityRecommendationCard(
-                      activity: _activityList[index],
+          child: Padding(
+            padding: EdgeInsets.only(
+                left: hasPadding ? getProportionateScreenWidth(20) : 0),
+            child: Row(
+              children: [
+                ...List.generate(
+                  _activityList.length,
+                  (index) => Padding(
+                    padding: EdgeInsets.only(
+                      right: getProportionateScreenWidth(20),
                     ),
-                    openBuilder: (context, action) => ActivityDetail(
-                      activity: _activityList[index],
+                    child: OpenContainer(
+                      closedBuilder: (context, action) =>
+                          ActivityRecommendationCard(
+                        activity: _activityList[index],
+                      ),
+                      openBuilder: (context, action) => ActivityDetail(
+                        activity: _activityList[index],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: getProportionateScreenWidth(20),
-              )
-            ],
+                SizedBox(
+                  width: getProportionateScreenWidth(20),
+                )
+              ],
+            ),
           ),
         ),
       ],
