@@ -626,36 +626,71 @@ Activity damSen = Activity(
 );
 //7. Suoi Tien
 Activity suoiTien = Activity(
-    briefDescription:
-        "Khu Du lịch Văn hóa Suối Tiên là một công viên liên hợp vui chơi giải trí kết hợp truyền thống các yếu tố văn hóa - lịch sử - tâm linh.",
-    detailedDescription:
-        "Suối Tiên của chúng ta là Miền Đất Tứ Linh với Long – Lân – Quy – Phụng" +
-            "Nơi an lành, hạnh phúc, luôn mang lại nhiều may mắn cho gia đình bạn.",
-    name: "Suoi Tien Theme Park",
-    shortName: "Suoi Tien Theme Park",
-    image: "assets/images/suoi_tien/st_1.jpg",
-    address: "120 Xa lộ Hà Nội, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh",
-    activityTimetable: [
-      ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:00 - 17:00"),
-      ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:00 - 17:00"),
-      ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:00 - 17:00"),
-      ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:00 - 17:00"),
-      ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:00 - 17:00"),
-      ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:00 - 17:00"),
-      ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:00 - 17:00"),
-    ],
-    moreImages: [
-      "assets/images/suoi_tien/st_2.jpg",
-      "assets/images/suoi_tien/st_3.jpg",
-      "assets/images/suoi_tien/st_4.jpg",
-      "assets/images/suoi_tien/st_5.jpg"
-    ],
-    city: hcmCity,
-    visitedCounter: 254,
-    overallRating: 3.5,
-    isPopular: true,
-    travelDistance: 3.1,
-    travelTime: 20);
+  briefDescription:
+      "Khu Du lịch Văn hóa Suối Tiên là một công viên liên hợp vui chơi giải trí kết hợp truyền thống các yếu tố văn hóa - lịch sử - tâm linh.",
+  detailedDescription:
+      "Suối Tiên của chúng ta là Miền Đất Tứ Linh với Long – Lân – Quy – Phụng" +
+          "Nơi an lành, hạnh phúc, luôn mang lại nhiều may mắn cho gia đình bạn.",
+  name: "Suoi Tien Theme Park",
+  shortName: "Suoi Tien Theme Park",
+  image: "assets/images/suoi_tien/st_1.jpg",
+  address: "120 Xa lộ Hà Nội, Phường Tân Phú, Quận 9, Thành phố Hồ Chí Minh",
+  activityTimetable: [
+    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:00 - 17:00"),
+    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:00 - 17:00"),
+    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:00 - 17:00"),
+    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:00 - 17:00"),
+    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:00 - 17:00"),
+    ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:00 - 17:00"),
+    ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:00 - 17:00"),
+  ],
+  moreImages: [
+    "assets/images/suoi_tien/st_2.jpg",
+    "assets/images/suoi_tien/st_3.jpg",
+    "assets/images/suoi_tien/st_4.jpg",
+    "assets/images/suoi_tien/st_5.jpg"
+  ],
+  city: hcmCity,
+  visitedCounter: 254,
+  overallRating: 3.5,
+  isPopular: true,
+  travelDistance: 3.1,
+  travelTime: 20,
+);
+
+//8. TiniWorld
+Activity tiniWorld = Activity(
+  briefDescription: "Khu vui chơi dành cho trẻ em hàng đầu Việt Nam",
+  detailedDescription:
+      "Được thành lập vào tháng 9 năm 2009, tiNiWorld là thương hiệu đầu tiên phát triển các trung tâm mang tính giáo dục và giải trí (Giáo – Trí) cho trẻ em từ 0 đến 12 tuổi tại Việt Nam. Với sứ mệnh tạo nên một môi trường an toàn, lành mạnh, vui nhộn, mang tính quốc tế và cộng đồng dành cho tất cả trẻ em, tiNiWorld đã không ngừng đầu tư và phát triển hệ thống chuỗi sân chơi với 60 trung tâm khắp cả nước, đem lại nụ cười cho 12.000 trẻ em mỗi ngày. \n\n Qua các trò chơi, hoạt động và chương trình tại tiNiWorld, các bé sẽ hoàn thiện 5 yếu tố cần thiết cho sự phát triển toàn diện: Trí tuệ/nhận thức, Cảm xúc/quan hệ xã hội, Năng khiếu/nghệ thuật, Thể chất/vận động và Ngôn ngữ/giao tiếp. ",
+  name: "tiNiWorld - Xứ sở thần kỳ cho trẻ em",
+  shortName: "Khu vui chơi tiNiWorld",
+  image: "assets/images/tini_world/tini_world.jpg",
+  address:
+      "Tầng 3, Vincom Plaza Lê Văn Việt, 50 Lê Văn Việt, phường Hiệp Phú, quận 9, Thành phố Hồ Chí Minh",
+  activityTimetable: [
+    ActivityTimetable(dayOfWeek: "Thứ Hai", openTime: "07:00 - 17:00"),
+    ActivityTimetable(dayOfWeek: "Thứ Ba", openTime: "07:00 - 17:00"),
+    ActivityTimetable(dayOfWeek: "Thứ Tư", openTime: "07:00 - 17:00"),
+    ActivityTimetable(dayOfWeek: "Thứ Năm", openTime: "07:00 - 17:00"),
+    ActivityTimetable(dayOfWeek: "Thứ Sáu", openTime: "07:00 - 17:00"),
+    ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:00 - 17:00"),
+    ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:00 - 17:00"),
+  ],
+  moreImages: [
+    "assets/images/tini_world/tini_world_1.jpg",
+    "assets/images/tini_world/tini_world_2.jpg",
+    "assets/images/tini_world/tini_world_3.jpg",
+    "assets/images/tini_world/tini_world_4.jpg"
+  ],
+  city: hcmCity,
+  visitedCounter: 117,
+  overallRating: 4.9,
+  isPopular: true,
+  isNew: true,
+  travelDistance: 1.3,
+  travelTime: 10,
+);
 List<Activity> mockupActivities = [
 //1. Ha Noi
   baaraLand,
@@ -678,7 +713,8 @@ List<Activity> mockupActivities = [
   baoTangMyThuat,
   baoTangYDuoc,
   damSen,
-  suoiTien
+  suoiTien,
+  tiniWorld,
 ];
 
 List<Activity> mockupNearYouActivities_1 = [
@@ -709,7 +745,8 @@ List<Activity> mockupNearYouActivities_3 = [
   baoTangMyThuat,
   baoTangYDuoc,
   damSen,
-  suoiTien
+  suoiTien,
+  tiniWorld,
 ];
 
 List<Activity> historicalHeritageList = [
@@ -728,6 +765,7 @@ List<Activity> themeParkList = [
   suoiKhoangThanTai,
   damSen,
   suoiTien,
+  tiniWorld,
 ];
 
 List<Activity> museumList = [
@@ -761,6 +799,7 @@ List<Activity> forKidsList = [
   diadaoCuChi,
   damSen,
   suoiTien,
+  tiniWorld,
 ];
 
 List<Activity> leisureTravelList = [

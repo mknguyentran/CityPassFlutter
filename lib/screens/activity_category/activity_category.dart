@@ -17,7 +17,7 @@ class ActivityCategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(context),
+      appBar: _buildAppBar(context, category.themeColor),
       backgroundColor: darkGrayBackground,
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
@@ -26,7 +26,8 @@ class ActivityCategoryScreen extends StatelessWidget {
             ActivityCategoryHeader(category: category),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 60),
-              child: ActivityRecommendationVertical(children: category.activityList),
+              child: ActivityRecommendationVertical(
+                  children: category.activityList),
             ),
           ],
         ),
@@ -34,17 +35,23 @@ class ActivityCategoryScreen extends StatelessWidget {
     );
   }
 
-  AppBar _buildAppBar(BuildContext context) {
+  AppBar _buildAppBar(BuildContext context, Color color) {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
       brightness: Brightness.light,
       leading: IconButton(
-        color: primaryDarkColor,
-        icon: Icon(
-          CupertinoIcons.chevron_left_circle_fill,
-          size: 30,
-          color: Colors.white,
+        color: color,
+        icon: Container(
+          width: 30,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            CupertinoIcons.chevron_left_circle_fill,
+            size: 35,
+          ),
         ),
         onPressed: () {
           Navigator.of(context).pop();
