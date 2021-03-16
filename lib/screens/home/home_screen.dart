@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:city_pass/models/city.dart';
 import 'package:city_pass/screens/home/components/account/account.dart';
@@ -10,9 +11,10 @@ import 'package:city_pass/screens/user_passes/user_passes.dart';
 import 'package:city_pass/shared/custom_nav_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:city_pass/screens/home/components/featured/featured.dart';
+import 'package:city_pass/screens/home/components/featured/explore.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/size_config.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key, this.currentCity}) : super(key: key);
@@ -40,20 +42,17 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void _removeCity() {
+    setState(() {
+      _currentCity = null;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    if (widget.currentCity != null) {
-      _currentCity = widget.currentCity;
-    } else {
-      var random = new Random();
-      var randomCityGroupIndex = random.nextInt(mockupCities.length - 1);
-      var randomCityIndex =
-          random.nextInt(mockupCities[randomCityGroupIndex].length - 1);
-      _currentCity = mockupCities[randomCityGroupIndex][randomCityIndex];
-    }
     tabs = [
-      Featured(city: _currentCity),
+      Explore(city: _currentCity),
       Locations(city: _currentCity),
       UserPasses(),
       Passes(city: _currentCity),
@@ -63,20 +62,32 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    initializeDateFormatting("vi_VN", null);
     SizeConfig().init(context);
     return Scaffold(
       appBar: buildAppBar(_currentIndex),
-      extendBodyBehindAppBar: _currentIndex == 0 || _currentIndex == 4,
       body: tabs.elementAt(_currentIndex),
+      backgroundColor: lightGrayBackground,
+      extendBodyBehindAppBar: _currentIndex == 4,
       bottomNavigationBar: CustomNavBar(
         currentIndex: _currentIndex,
         children: [
-          CustomNavItem(icon: Icons.star_rounded, label: "Đề xuất"),
-          CustomNavItem(icon: Icons.location_on, label: "Địa điểm"),
-          CustomNavItem(icon: CupertinoIcons.qrcode),
-          CustomNavItem(icon: Icons.local_activity_rounded, label: "CityPass"),
           CustomNavItem(
-            icon: CupertinoIcons.person_circle_fill,
+              icon: CupertinoIcons.compass,
+              selectedIcon: CupertinoIcons.compass_fill,
+              label: _currentCity != null ? _currentCity.name : "Khám phá"),
+          CustomNavItem(
+              icon: Icons.location_on_outlined,
+              selectedIcon: Icons.location_on,
+              label: "Địa điểm"),
+          CustomNavItem(icon: CupertinoIcons.qrcode),
+          CustomNavItem(
+              icon: Icons.local_activity_outlined,
+              selectedIcon: Icons.local_activity_rounded,
+              label: "CityPass"),
+          CustomNavItem(
+            icon: CupertinoIcons.person_circle,
+            selectedIcon: CupertinoIcons.person_circle_fill,
             label: "Tài khoản",
           ),
         ],
@@ -95,53 +106,68 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   AppBar buildAppBar(int tab, [String hintText]) {
-    var _backgroundColor = Colors.white;
-    var _brightness = Brightness.light;
-    var _foregroundColor = textBlack;
+    var _brightness = Brightness.dark;
+    var _foregroundColor = Colors.white;
     var _bottom = PreferredSize(
-      preferredSize: Size.fromHeight(80),
+      preferredSize: Size.fromHeight(55),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding).add(
-          const EdgeInsets.only(bottom: 20),
+          const EdgeInsets.only(bottom: 10),
         ),
         child: SearchField(
-          height: 45,
+          height: 40,
           width: double.infinity,
           hintText: "Tìm kiếm điểm đến, hoạt đông,...",
           boxShadow: [kDefaultShadow],
         ),
       ),
     );
-    if (tab == 0) {
-      _backgroundColor = Colors.black.withOpacity(0.5);
-      _brightness = Brightness.dark;
-      _foregroundColor = Colors.white;
-      _bottom = null;
-    } else if (tab == 4) {
+    if (tab == 4) {
       return AppBar(
-        brightness: _brightness,
+        brightness: Brightness.light,
         backgroundColor: Colors.transparent,
         elevation: 0,
       );
     }
     return AppBar(
-      backgroundColor: _backgroundColor,
+      shadowColor: secondaryColor,
+      flexibleSpace: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [primaryDarkColor, secondaryColor]),
+        ),
+      ),
       brightness: _brightness,
-      elevation: 0,
+      elevation: 5,
       centerTitle: false,
       title: GestureDetector(
         onTap: () {
           _navigateToCityPicker();
         },
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'CityPass tại ${_currentCity.name}',
-              style: TextStyle(color: _foregroundColor),
+              "Hiển thị đề xuất tại".toUpperCase(),
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 14
+              ),
             ),
-            Icon(
-              Icons.arrow_drop_down,
-              color: _foregroundColor,
+            VerticalSpacing(of:3),
+            Row(
+              children: [
+                Text(
+                  _currentCity != null ? _currentCity.name : "Việt Nam",
+                  style: TextStyle(
+                      color: _foregroundColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  Icons.arrow_drop_down,
+                  color: _foregroundColor,
+                ),
+              ],
             ),
           ],
         ),
@@ -158,8 +184,10 @@ class _HomeScreenState extends State<HomeScreen> {
       }),
     );
 
-    if (pickedCity != null) {
+    if (pickedCity is City) {
       _changeCity(pickedCity);
+    } else if (pickedCity is bool) {
+      _removeCity();
     }
   }
 }

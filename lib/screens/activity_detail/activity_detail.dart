@@ -23,7 +23,7 @@ class _ActivityDetailState extends State<ActivityDetail> {
         child: Column(
           children: [
             ActivityHeader(activity: widget.activity,),
-            ActivityBody()
+            ActivityBody(activity: widget.activity,)
           ],
         ),
       ),

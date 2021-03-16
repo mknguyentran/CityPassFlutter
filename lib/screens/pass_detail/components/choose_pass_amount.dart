@@ -1,7 +1,13 @@
 import 'package:city_pass/constants.dart';
+import 'package:city_pass/mockupData/mockup_discount_code.dart';
+import 'package:city_pass/mockupData/mockup_payment_method.dart';
+import 'package:city_pass/models/discount_code.dart';
 import 'package:city_pass/models/order_detail.dart';
 import 'package:city_pass/models/pass.dart';
+import 'package:city_pass/models/payment_method.dart';
 import 'package:city_pass/screens/order_detail/order_result.dart';
+import 'package:city_pass/screens/pass_detail/components/discount_code_picker.dart';
+import 'package:city_pass/screens/pass_detail/components/payment_method_picker.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +27,8 @@ class ChoosePassAmount extends StatefulWidget {
 class _ChoosePassAmountState extends State<ChoosePassAmount> {
   int amount = 1, childrenAmount = 0;
   double total = 0;
+  PaymentMethod _currentPaymentMethod = visa;
+  DiscountCode _currentDiscountCode;
 
   void increaseAmount({bool increaseChild = false}) {
     if (increaseChild) {
@@ -56,89 +64,193 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
     if (widget.pass.childrenPrice != null) {
       total += widget.pass.childrenPrice.price * childrenAmount;
     }
-    return Container(
-      height: 500,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              boxShadow: [kDefaultShadow],
-              color: Colors.white,
-            ),
-            height: 50,
-            child: Align(
-              alignment: Alignment.center,
-              child: Text(
-                widget.pass.name,
-                style: TextStyle(fontSize: 20),
+    return Scaffold(
+      body: Container(
+        height: 500,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                boxShadow: [kDefaultShadow],
+                color: Colors.white,
+              ),
+              height: 50,
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  widget.pass.name,
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-                kDefaultPadding, 0, kDefaultPadding, 50),
-            child: _buildAmountPicker(),
-          ),
-          Container(
-            height: 130,
-            width: double.infinity,
-            padding:
-                EdgeInsets.fromLTRB(kDefaultPadding, 10, kDefaultPadding, 10),
-            decoration: BoxDecoration(
-              boxShadow: [kDefaultShadow],
-              color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                  kDefaultPadding, 0, kDefaultPadding, 50),
+              child: _buildAmountPicker(),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          "Phương thức thanh toán",
-                          style: TextStyle(color: subtitleTextColor),
+            Container(
+              height: 150,
+              width: double.infinity,
+              padding:
+                  EdgeInsets.fromLTRB(kDefaultPadding, 10, kDefaultPadding, 10),
+              decoration: BoxDecoration(
+                boxShadow: [kDefaultShadow],
+                color: Colors.white,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: GestureDetector(
+                          onTap: () {
+                            _navigateToPaymentMethodPicker(context);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border(
+                                right: BorderSide(color: fadedTextColor),
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Phương thức thanh toán",
+                                  style: TextStyle(color: subtitleTextColor),
+                                ),
+                                VerticalSpacing(
+                                  of: 8,
+                                ),
+                                PaymentMethodRow(
+                                  _currentPaymentMethod,
+                                  withChangeButton: true,
+                                )
+                              ],
+                            ),
+                          ),
                         ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          "Tổng cộng",
-                          style: TextStyle(color: subtitleTextColor),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: GestureDetector(
+                          onTap: () {
+                            _navigateToDiscountCodePicker(context);
+                          },
+                          child: Container(
+                            color: Colors.transparent,
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: DiscountCodeInfo(
+                              discountCode: _currentDiscountCode,
+                              onRemove: () {
+                                setState(() {
+                                  _currentDiscountCode = null;
+                                });
+                              },
+                            ),
+                          ),
                         ),
-                        VerticalSpacing(
-                          of: 6,
-                        ),
-                        Text(
-                          vndCurrencyFormat.format(total),
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 24),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Container(
-                  height: 50,
-                  width: double.infinity,
-                  child: _buildBuyButton(
-                    context,
-                    pass: widget.pass,
-                    amount: amount,
-                    childrenAmount: childrenAmount,
+                      )
+                    ],
                   ),
-                ),
-              ],
+                  Container(
+                    height: 50,
+                    width: double.infinity,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                _currentDiscountCode == null
+                                    ? "Tổng cộng"
+                                    : vndCurrencyFormat.format(
+                                        total.discountedAmount(
+                                            _currentDiscountCode)),
+                                style: TextStyle(
+                                    color: subtitleTextColor,
+                                    decoration: _currentDiscountCode == null
+                                        ? null
+                                        : TextDecoration.lineThrough),
+                              ),
+                              VerticalSpacing(
+                                of: 5,
+                              ),
+                              Text(
+                                _currentDiscountCode == null
+                                    ? vndCurrencyFormat.format(total)
+                                    : vndCurrencyFormat.format(
+                                        total.withDiscountCode(
+                                            _currentDiscountCode)),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Container(
+                            height: 50,
+                            child: _buildBuyButton(
+                              context,
+                              pass: widget.pass,
+                              amount: amount,
+                              childrenAmount: childrenAmount,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
+  }
+
+  void _navigateToPaymentMethodPicker(BuildContext context) async {
+    final pickedMethod = await Navigator.push(
+      context,
+      CupertinoPageRoute(builder: (context) {
+        return PaymentMethodPicker(
+          currentPaymentMethod: _currentPaymentMethod,
+        );
+      }),
+    );
+
+    if (pickedMethod is PaymentMethod) {
+      setState(() {
+        _currentPaymentMethod = pickedMethod;
+      });
+    }
+  }
+
+  void _navigateToDiscountCodePicker(BuildContext context) async {
+    final pickedCode = await Navigator.push(
+      context,
+      CupertinoPageRoute(builder: (context) {
+        return DiscountCodePicker();
+      }),
+    );
+
+    if (pickedCode is DiscountCode) {
+      setState(() {
+        _currentDiscountCode = pickedCode;
+      });
+    }
   }
 
   Widget _buildAmountPicker() {
@@ -194,7 +306,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
             ),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(7),
               ),
             )),
         child: Text("Thanh toán"),
@@ -203,14 +315,144 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
           Navigator.push(
             context,
             CupertinoPageRoute(builder: (context) {
-              OrderDetail orderDetail =
-                  new OrderDetail(pass, amount, childrenAmount);
+              OrderDetail orderDetail = new OrderDetail(pass, amount,
+                  childrenAmount, _currentPaymentMethod, _currentDiscountCode);
               return OrderResult(
                 orderDetail: orderDetail,
               );
             }),
           );
         });
+  }
+}
+
+class DiscountCodeInfo extends StatelessWidget {
+  const DiscountCodeInfo({
+    Key key,
+    this.discountCode,
+    this.onRemove,
+    this.onPick,
+  }) : super(key: key);
+
+  final DiscountCode discountCode;
+  final GestureTapCallback onRemove, onPick;
+
+  @override
+  Widget build(BuildContext context) {
+    if (discountCode == null) {
+      return GestureDetector(
+        onTap: onPick,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Thêm ưu đãi".toUpperCase(),
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  color: primaryDarkColor, fontWeight: FontWeight.bold),
+            )
+          ],
+        ),
+      );
+    } else {
+      return GestureDetector(
+        onTap: onPick,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              flex: 5,
+              child: Text(
+                discountCode.codeName.toUpperCase(),
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    color: primaryDarkColor, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: GestureDetector(
+                  onTap: onRemove,
+                  child: Icon(
+                    Icons.cancel,
+                    color: fadedTextColor,
+                  )),
+            )
+          ],
+        ),
+      );
+    }
+  }
+}
+
+class PaymentMethodRow extends StatelessWidget {
+  const PaymentMethodRow(
+    this.paymentMethod, {
+    Key key,
+    this.withChangeButton = false,
+    this.isChosen = false,
+    this.padding = EdgeInsets.zero,
+    this.fontSize = 16,
+  }) : super(key: key);
+
+  final PaymentMethod paymentMethod;
+  final bool withChangeButton, isChosen;
+  final EdgeInsetsGeometry padding;
+  final double fontSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: padding,
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 40,
+                decoration: BoxDecoration(
+                    border: Border.all(color: kIconColor, width: 1.2),
+                    borderRadius: BorderRadius.circular(5)),
+                child: Image.asset(
+                  paymentMethod.logoPath,
+                  height: 20,
+                  fit: BoxFit.contain,
+                ),
+              ),
+              VerticalDivider(
+                width: 10,
+              ),
+              Text(
+                paymentMethod.name,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: fontSize,
+                  fontWeight: isChosen ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
+              if (withChangeButton)
+                VerticalDivider(
+                  width: 10,
+                ),
+              if (withChangeButton)
+                Icon(
+                  CupertinoIcons.chevron_up,
+                  size: 15,
+                )
+            ],
+          ),
+          if (isChosen)
+            Icon(
+              CupertinoIcons.check_mark,
+              color: Colors.green,
+              size: 18,
+            )
+        ],
+      ),
+    );
   }
 }
 

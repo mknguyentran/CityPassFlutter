@@ -1,67 +1,40 @@
+import 'package:city_pass/models/activity.dart';
+import 'package:city_pass/models/city.dart';
 import 'package:flutter/material.dart';
 
 class Pass {
   final String name, image;
+  final City city;
   final double overallRating, price, originalPrice;
   final PassChildrenPrice childrenPrice;
-  final List<IncludingDestination> destinationList;
+  final List<IncludingDestination> includingDestination;
+  final bool isGoodSeller, isBestSaving;
 
   int get discountedPercentage {
     return ((originalPrice - price) / originalPrice * 100).floor();
   }
 
-  Pass(
-      {@required this.overallRating,
-      @required this.name,
-      @required this.image,
-      @required this.price,
-      @required this.originalPrice,
-      @required this.destinationList,
-      this.childrenPrice});
-}
+  int get destinationAmount {
+    int result = 0;
+    for (var destinationCollection in includingDestination) {
+      result += destinationCollection.includingQuota;
+    }
+    return result;
+  }
 
-List<Pass> mockupPasses = [
-  Pass(
-    name: "Đi hết Hồ Chí Minh",
-    image: "assets/images/thao_cam_vien.jpg",
-    overallRating: 4.7,
-    price: 250000,
-    originalPrice: 460000,
-    destinationList: [
-      IncludingDestination(["a", "b"], 2),
-      IncludingDestination(["c", "d"], 1),
-      IncludingDestination(["e", "f", "g"], 2),
-    ],
-  ),
-  Pass(
-    name: "Thổ địa Sài Gòn",
-    image: "assets/images/dinh_doc_lap.jpg",
-    overallRating: 4.5,
-    price: 250000,
-    originalPrice: 500000,
-    childrenPrice: PassChildrenPrice(
-      price: 125000,
-      originalPrice: 300000,
-    ),
-    destinationList: [
-      IncludingDestination(["a", "b"], 2),
-      IncludingDestination(["c", "d"], 1),
-      IncludingDestination(["e", "f", "g","h"], 2),
-    ],
-  ),
-  Pass(
-    name: "Thổ địa Sài Gòn",
-    image: "assets/images/dia_dao_cu_chi.jpg",
-    overallRating: 4.5,
-    price: 250000,
-    originalPrice: 372000,
-    destinationList: [
-      IncludingDestination(["a", "b"], 2),
-      IncludingDestination(["c", "d"], 1),
-      IncludingDestination(["e", "f", "g"], 2),
-    ],
-  ),
-];
+  Pass({
+    @required this.overallRating,
+    @required this.name,
+    @required this.image,
+    @required this.price,
+    @required this.originalPrice,
+    @required this.includingDestination,
+    @required this.city,
+    this.childrenPrice,
+    this.isBestSaving = false,
+    this.isGoodSeller = false,
+  });
+}
 
 class PassChildrenPrice {
   final double price, originalPrice;
@@ -73,7 +46,7 @@ class PassChildrenPrice {
 }
 
 class IncludingDestination {
-  final List<String> destinationList;
+  final List<Activity> destinationList;
   final int includingQuota;
 
   bool get isAllIncluded {
@@ -87,16 +60,13 @@ class IncludingDestination {
   int get type {
     if (isAllIncluded) {
       return allIncluded;
-    } else if (isBinaryOptional) {
-      return binaryOptional;
     } else {
       return optional;
     }
   }
 
   static const int allIncluded = 1;
-  static const int binaryOptional = 2;
-  static const int optional = 3;
+  static const int optional = 2;
 
   IncludingDestination(this.destinationList, this.includingQuota)
       : assert(includingQuota <= destinationList.length),

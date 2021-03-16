@@ -15,7 +15,7 @@ class _AccountState extends State<Account> {
     return SingleChildScrollView(
         child: Padding(
       padding:
-          const EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: 30),
+          const EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: 50),
       child: Column(
         children: [
           Row(
@@ -139,7 +139,7 @@ class _AccountState extends State<Account> {
                   ],
                   borderRadius: BorderRadius.circular(10)),
               child: Text(
-                "Đổi tài khoản",
+                "Đăng xuất",
                 style: TextStyle(
                     color: Colors.red,
                     fontSize: 20,

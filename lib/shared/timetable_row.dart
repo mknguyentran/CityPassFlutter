@@ -4,38 +4,43 @@ class TimetableRow extends StatelessWidget {
   const TimetableRow({
     Key key,
     @required this.dayOfWeek,
-    @required this.openTime
+    @required this.openTime,
+    this.isToday,
   }) : super(key: key);
 
   final String dayOfWeek;
   final String openTime;
+  final bool isToday;
 
   @override
   Widget build(BuildContext context) {
+    var _fontSize = 15.0;
     return Container(
       padding: EdgeInsets.only(bottom: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            children: [
-              Text(
-                dayOfWeek,
-                style: TextStyle(
-                  color: dayOfWeek == "Thứ tư" ? Colors.green : null
-                ),
-              )
-            ],
+          Expanded(
+            flex: 2,
+            child: Text(
+              dayOfWeek,
+              style: TextStyle(
+                fontSize: _fontSize,
+                color: isToday ? Colors.green : null,
+                fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
           ),
-          Column(
-            children: [
-              Text(
-                openTime,
-                style: TextStyle(
-                  color: dayOfWeek == "Thứ tư" ? Colors.green : null
-                ),
-              )
-            ],
+          Expanded(
+            flex: 4,
+            child: Text(
+              openTime,
+              style: TextStyle(
+                fontSize: _fontSize,
+                color: isToday ? Colors.green : null,
+                fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
           )
         ],
       ),

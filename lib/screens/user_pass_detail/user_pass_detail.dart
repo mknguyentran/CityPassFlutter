@@ -15,7 +15,7 @@ class UserPassDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      backgroundColor: lightGrayBackground,
+      backgroundColor: Colors.grey[50],
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -54,13 +54,6 @@ class UserPassDetail extends StatelessWidget {
         ),
       ),
       centerTitle: true,
-      actions: [
-        IconButton(
-          icon: Icon(Icons.ios_share),
-          color: primaryDarkColor,
-          onPressed: () {},
-        )
-      ],
     );
   }
 }

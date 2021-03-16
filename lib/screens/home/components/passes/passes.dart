@@ -1,4 +1,5 @@
 import 'package:city_pass/constants.dart';
+import 'package:city_pass/mockupData/mockup_pass.dart';
 import 'package:city_pass/models/city.dart';
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/shared/search_field.dart';
@@ -11,7 +12,7 @@ import 'package:flutter/material.dart';
 class Passes extends StatelessWidget {
   final City city;
 
-  const Passes({Key key, @required this.city}) : super(key: key);
+  const Passes({Key key, this.city}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +23,21 @@ class Passes extends StatelessWidget {
         child: Column(
           children: [
             ...List.generate(
-                mockupPasses.length,
-                (index) => Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: PassCard(
+              mockupPasses.length,
+              (index) => Padding(
+                padding: EdgeInsets.only(bottom: 20),
+                child: PassCard(
+                    pass: mockupPasses[index],
+                    press: () {
+                      Navigator.push(context,
+                          CupertinoPageRoute(builder: (context) {
+                        return PassDetail(
                           pass: mockupPasses[index],
-                          press: () {
-                            Navigator.push(context,
-                                CupertinoPageRoute(builder: (context) {
-                              return PassDetail(
-                                pass: mockupPasses[index],
-                              );
-                            }));
-                          }),
-                    ))
+                        );
+                      }));
+                    }),
+              ),
+            )
           ],
         ),
       ),

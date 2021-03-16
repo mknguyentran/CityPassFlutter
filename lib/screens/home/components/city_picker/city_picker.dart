@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:city_pass/constants.dart';
+import 'package:city_pass/mockupData/mockup_city.dart';
 import 'package:city_pass/models/city.dart';
 import 'package:city_pass/shared/search_field.dart';
 import 'package:city_pass/shared/section_title.dart';
@@ -9,11 +12,12 @@ class CityPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     var buttonGroupPadding = EdgeInsets.only(bottom: 20);
     return Scaffold(
+      extendBody: true,
       appBar: _buildAppBar(context),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(
-              horizontal: kDefaultPadding, vertical: 20),
+              horizontal: kDefaultPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -32,7 +36,51 @@ class CityPicker extends StatelessWidget {
                 cityList: mockupCities[2],
                 padding: buttonGroupPadding,
               ),
+              Padding(padding: EdgeInsets.symmetric(vertical: 50))
             ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(kDefaultPadding),
+        child: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.75),
+                  borderRadius: BorderRadius.circular(10)),
+              height: 70,
+              padding: const EdgeInsets.symmetric(
+                horizontal: kDefaultPadding,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(child: Text("Bạn cũng có thể khám phá CityPass trên khắp cả nước",style: TextStyle(color: Colors.white),)),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.white),
+                      elevation: MaterialStateProperty.all(0),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop(false);
+                    },
+                    child: Text(
+                      'Khám phá',
+                      style: TextStyle(fontSize: 16,color: primaryDarkColor),
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),

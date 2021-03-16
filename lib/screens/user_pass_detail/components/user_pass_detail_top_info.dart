@@ -1,5 +1,6 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/user_pass.dart';
+import 'package:city_pass/screens/pass_detail/pass_detail.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,18 @@ class UserPassDetailTopInfo extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              CupertinoPageRoute(
+                builder: (context) {
+                  return PassDetail(
+                    pass: pass.originalPass,
+                  );
+                },
+              ),
+            );
+          },
           style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all(primaryLightColor),
             textStyle: MaterialStateProperty.all(
