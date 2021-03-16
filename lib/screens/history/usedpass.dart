@@ -1,12 +1,12 @@
 import 'package:city_pass/constants.dart';
 import 'package:flutter/material.dart';
 
-class AvailablePass extends StatefulWidget {
+class UsedPass extends StatefulWidget {
   @override
-  _AvailablePassState createState() => _AvailablePassState();
+  _UsedPassState createState() => _UsedPassState();
 }
 
-class _AvailablePassState extends State<AvailablePass> {
+class _UsedPassState extends State<UsedPass> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,74 +24,8 @@ class _AvailablePassState extends State<AvailablePass> {
                   width: 120,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage("assets/images/sg_phon_hoa.jpg"),
-                          fit: BoxFit.cover)),
-                ),
-                SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  // mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 0),
-                      child: Text("Sài Gòn-Thành phố phồn hoa",
-                          style: TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.w500)),
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: <Widget>[
-                        Text("450.000VNĐ",
-                            style: TextStyle(
-                                fontSize: 15, color: subtitleTextColor)),
-                        SizedBox(width: 20),
-                        Text("500.000VNĐ",
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.redAccent,
-                                fontWeight: FontWeight.w500,
-                                decoration: TextDecoration.lineThrough)),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: <Widget>[
-                        Text(
-                          "Còn hiệu lực",
-                          style:
-                              TextStyle(color: subtitleTextColor, fontSize: 15),
-                        ),
-                        SizedBox(width: 45),
-                        RaisedButton(
-                          onPressed: clickToBookAgain,
-                          color: primaryDarkColor,
-                          child: Text(
-                            "Đặt lại",
-                            style: TextStyle(color: Colors.white, fontSize: 17),
-                          ),
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(6))),
-                        ),
-                      ],
-                    )
-                  ],
-                )
-              ],
-            )),
-            SizedBox(
-              height: 30,
-            ),
-            Card(
-                child: Row(
-              children: <Widget>[
-                Container(
-                  height: 120,
-                  width: 120,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
                           image: AssetImage(
-                              "assets/images/suoi_khoang_than_tai/sktt_3.jpg"),
+                              "assets/images/landmark_72/landmark72_4.jpg"),
                           fit: BoxFit.cover)),
                 ),
                 SizedBox(width: 10),
@@ -101,7 +35,7 @@ class _AvailablePassState extends State<AvailablePass> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(top: 0),
-                      child: Text("Khám phá Cầu Bàn Tay",
+                      child: Text("Thủ Đô Special Trip",
                           style: TextStyle(
                               fontSize: 17, fontWeight: FontWeight.w500)),
                     ),
@@ -112,7 +46,7 @@ class _AvailablePassState extends State<AvailablePass> {
                             style: TextStyle(
                                 fontSize: 15, color: subtitleTextColor)),
                         SizedBox(width: 20),
-                        Text("1.300.000VNĐ",
+                        Text("1.600.000VNĐ",
                             style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.redAccent,
@@ -124,7 +58,7 @@ class _AvailablePassState extends State<AvailablePass> {
                     Row(
                       children: <Widget>[
                         Text(
-                          "Còn hiệu lực",
+                          "Đã sử dụng",
                           style:
                               TextStyle(color: subtitleTextColor, fontSize: 15),
                         ),
@@ -157,8 +91,7 @@ class _AvailablePassState extends State<AvailablePass> {
                   width: 120,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage(
-                              "assets/images/asiaWorld/asiaWorld_3.jpg"),
+                          image: AssetImage("assets/images/banahill_2.jpg"),
                           fit: BoxFit.cover)),
                 ),
                 SizedBox(width: 10),
@@ -168,18 +101,18 @@ class _AvailablePassState extends State<AvailablePass> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(top: 0),
-                      child: Text("Thành phố Biển Đà Nẵng",
+                      child: Text("Thành phố bên Sông Hàn",
                           style: TextStyle(
                               fontSize: 17, fontWeight: FontWeight.w500)),
                     ),
                     SizedBox(height: 10),
                     Row(
                       children: <Widget>[
-                        Text("1.200.000VNĐ",
+                        Text("780.000VNĐ",
                             style: TextStyle(
                                 fontSize: 15, color: subtitleTextColor)),
                         SizedBox(width: 20),
-                        Text("2.000.000VNĐ",
+                        Text("1.200.000VNĐ",
                             style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.redAccent,
@@ -191,7 +124,7 @@ class _AvailablePassState extends State<AvailablePass> {
                     Row(
                       children: <Widget>[
                         Text(
-                          "Còn hiệu lực",
+                          "Đã sử dụng",
                           style:
                               TextStyle(color: subtitleTextColor, fontSize: 15),
                         ),
@@ -213,6 +146,9 @@ class _AvailablePassState extends State<AvailablePass> {
                 )
               ],
             )),
+            SizedBox(
+              height: 30,
+            ),
           ],
         ),
       ),

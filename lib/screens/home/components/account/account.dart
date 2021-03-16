@@ -88,7 +88,9 @@ class _AccountState extends State<Account> {
                     title: Text("Phương thức thanh toán"),
                   ),
                   Divider(thickness: 1),
-                  ListTile(
+                 GestureDetector(
+                   onTap: clickToHistory,
+                    child :ListTile(
                     dense: true,
                     leading: Icon(
                       CupertinoIcons.text_bubble_fill,
@@ -96,6 +98,7 @@ class _AccountState extends State<Account> {
                     ),
                     title: Text("Lịch sử đánh giá"),
                   ),
+                 )
                 ],
               )),
           VerticalSpacing(of: 20),
