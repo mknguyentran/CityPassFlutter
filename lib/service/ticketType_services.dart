@@ -27,4 +27,25 @@ class TicketTypeAPI {
     }
     return ticketTypes;
   }
+
+
+   Future<TicketType> getTicketTypeByID({Function(String) onError, String id}) async {
+    String endpoint = ticketTypeByIDGETUrl + id;
+
+    TicketType ticketType;
+    http.Response response = await http.get(endpoint);
+    if (response.statusCode == 200) {
+      try {
+        dynamic jsonRaw = json.decode(response.body);
+         ticketType = TicketType.formJson(jsonRaw[0]);
+        
+      } catch (e) {
+        print(e);
+        onError("Something get wrong!");
+      }
+    } else {
+      onError("Something get wrong! Status code ${response.statusCode}");
+    }
+    return ticketType;
+  }
 }
