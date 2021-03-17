@@ -137,39 +137,45 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       brightness: _brightness,
       elevation: 5,
-      centerTitle: false,
+      leading: Container(),
+      // title: GestureDetector(
+      //   onTap: () {
+      //     _navigateToCityPicker();
+      //   },
+      //   child: Column(
+      //     crossAxisAlignment: CrossAxisAlignment.start,
+      //     children: [
+      //       Text(
+      //         "Hiển thị đề xuất tại".toUpperCase(),
+      //         style: TextStyle(
+      //           fontWeight: FontWeight.w400,
+      //           fontSize: 14
+      //         ),
+      //       ),
+      //       VerticalSpacing(of:3),
+      //       Row(
+      //         children: [
+      //           Text(
+      //             _currentCity != null ? _currentCity.name : "Việt Nam",
+      //             style: TextStyle(
+      //                 color: _foregroundColor,
+      //                 fontSize: 18,
+      //                 fontWeight: FontWeight.bold),
+      //           ),
+      //           Icon(
+      //             Icons.arrow_drop_down,
+      //             color: _foregroundColor,
+      //           ),
+      //         ],
+      //       ),
+      //     ],
+      //   ),
+      // ),
       title: GestureDetector(
+        child: Text("CityPass"),
         onTap: () {
-          _navigateToCityPicker();
+          _onItemTapped(0);
         },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Hiển thị đề xuất tại".toUpperCase(),
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 14
-              ),
-            ),
-            VerticalSpacing(of:3),
-            Row(
-              children: [
-                Text(
-                  _currentCity != null ? _currentCity.name : "Việt Nam",
-                  style: TextStyle(
-                      color: _foregroundColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                ),
-                Icon(
-                  Icons.arrow_drop_down,
-                  color: _foregroundColor,
-                ),
-              ],
-            ),
-          ],
-        ),
       ),
       bottom: _bottom,
     );

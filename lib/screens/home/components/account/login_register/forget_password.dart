@@ -14,6 +14,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _buildAppBar(context),
       body: Container(
         alignment: Alignment.center,
         constraints: BoxConstraints.expand(),
@@ -56,13 +57,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   child: TextField(
                     style: TextStyle(color: Colors.grey, fontSize: 20),
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.mail),
-                      labelText: "Email",
-                      errorText: _invalidEmail ? _emailError : null,
-                      errorStyle: TextStyle(fontSize: 15, color: Colors.red)
-                    ),
+                        prefixIcon: Icon(Icons.mail),
+                        labelText: "Email",
+                        errorText: _invalidEmail ? _emailError : null,
+                        errorStyle: TextStyle(fontSize: 15, color: Colors.red)),
                     controller: _emailController,
-                    
                   ),
                 ),
                 Padding(
@@ -93,19 +92,36 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   void clickToResetPassword() {
     setState(() {
       String email = _emailController.text;
-       if (!RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
+      if (!RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
           .hasMatch(email)) {
         _invalidEmail = true;
       } else {
         _invalidEmail = false;
       }
 
-      if(!_invalidEmail){
-          Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ResetPassword()));
-  
+      if (!_invalidEmail) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ResetPassword()));
       }
     });
-  
-}
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      brightness: Brightness.light,
+      leading: IconButton(
+        color: primaryDarkColor,
+        icon: Icon(
+          Icons.chevron_left_rounded,
+          size: 30,
+        ),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+      centerTitle: true,
+    );
+  }
 }
