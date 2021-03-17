@@ -2,7 +2,6 @@ import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/category.dart';
 import 'package:city_pass/screens/activity_category/components/activity_category_header.dart';
 import 'package:city_pass/screens/home/components/explore/components/activity_recommendation_vertical.dart';
-import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

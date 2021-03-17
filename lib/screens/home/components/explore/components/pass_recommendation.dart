@@ -29,7 +29,6 @@ class PassRecommendation extends StatelessWidget {
         SectionTitle(
           title: title,
           hasPadding: true,
-          showAllCallback: () {},
         ),
         if (subtitle != null)
           Padding(
