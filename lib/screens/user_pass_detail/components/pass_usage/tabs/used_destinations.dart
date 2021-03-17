@@ -1,5 +1,5 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/user_pass.dart';
+import 'package:city_pass/model/user_pass.dart';
 import 'package:flutter/material.dart';
 
 class UsedDestinations extends StatelessWidget {

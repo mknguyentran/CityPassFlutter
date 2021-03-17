@@ -1,4 +1,4 @@
-import 'package:city_pass/models/payment_method.dart';
+import 'package:city_pass/model/payment_method.dart';
 
 PaymentMethod momo = PaymentMethod("Ví MoMo", "assets/images/momo.png");
 PaymentMethod tpbank = PaymentMethod("ATM 8998", "assets/images/tpbank.png");

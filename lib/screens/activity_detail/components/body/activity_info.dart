@@ -1,8 +1,8 @@
 import 'package:city_pass/mockupData/mockup_pass.dart';
-import 'package:city_pass/models/activity.dart';
+import 'package:city_pass/model/activity.dart';
 import 'package:city_pass/screens/map/map_screen.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
-import 'package:city_pass/service/ticketType.dart';
+import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/shared/pass_card.dart';
 import 'package:city_pass/shared/timetable_row.dart';
 import 'package:city_pass/size_config.dart';

@@ -1,8 +1,8 @@
 import 'package:animations/animations.dart';
-import 'package:city_pass/models/activity.dart';
+import 'package:city_pass/model/activity.dart';
 import 'package:city_pass/screens/activity_detail/activity_detail.dart';
 import 'package:city_pass/screens/home/components/featured/components/activity_recommendation_card.dart';
-import 'package:city_pass/service/ticketType.dart';
+import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';

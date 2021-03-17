@@ -1,5 +1,5 @@
 import 'package:city_pass/mockupData/mockup_city.dart';
-import 'package:city_pass/models/activity.dart';
+import 'package:city_pass/model/activity.dart';
 
 //1. Hà Nội
 //+ Baara Land

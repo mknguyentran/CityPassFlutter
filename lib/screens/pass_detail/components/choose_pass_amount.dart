@@ -1,9 +1,9 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/mockupData/mockup_payment_method.dart';
-import 'package:city_pass/models/discount_code.dart';
-import 'package:city_pass/models/order_detail.dart';
-import 'package:city_pass/models/pass.dart';
-import 'package:city_pass/models/payment_method.dart';
+import 'package:city_pass/model/discount_code.dart';
+import 'package:city_pass/model/order_detail.dart';
+import 'package:city_pass/model/pass.dart';
+import 'package:city_pass/model/payment_method.dart';
 import 'package:city_pass/screens/order_detail/order_result.dart';
 import 'package:city_pass/screens/pass_detail/components/discount_code_picker.dart';
 import 'package:city_pass/screens/pass_detail/components/payment_method_picker.dart';

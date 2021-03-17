@@ -1,5 +1,5 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/pass.dart';
+import 'package:city_pass/model/pass.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:city_pass/extensions.dart';

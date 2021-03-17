@@ -3,13 +3,13 @@ import 'dart:math';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/mockupData/mockup_activity.dart';
 import 'package:city_pass/mockupData/mockup_pass.dart';
-import 'package:city_pass/models/city.dart';
+import 'package:city_pass/model/city.dart';
 
 import 'package:city_pass/screens/home/components/featured/components/activity_recommendation.dart';
 import 'package:city_pass/screens/home/components/featured/components/activity_recommendation_vertical.dart';
 import 'package:city_pass/screens/home/components/featured/components/pass_recommendation.dart';
-import 'package:city_pass/service/api.services.dart';
-import 'package:city_pass/service/ticketType.dart';
+import 'package:city_pass/service/ticketType_services.dart';
+import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 import 'components/attraction_category.dart';
@@ -17,7 +17,7 @@ import 'components/attraction_category.dart';
 class Explore extends StatefulWidget {
   final City city;
 
- Explore({Key key, this.city}) : super(key: key);
+  Explore({Key key, this.city}) : super(key: key);
 
   @override
   _ExploreState createState() => _ExploreState();
@@ -25,28 +25,18 @@ class Explore extends StatefulWidget {
 
 class _ExploreState extends State<Explore> {
   List<TicketType> listRealActivitiesNearYou_3;
- void initState() {
+  void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      
-      List<TicketType> listRealActivitiesNearYou_3 =
-          await Api().getAllTicketTypes(onError: (msg) {
-            
-            print("Mistake: " + msg);
-          });
-      // listRealActivitiesNearYou_3 = Api().getAllTicketTypes(onError: (msg) {
-      //   print(msg);
-      // });
+      listRealActivitiesNearYou_3 =
+          await TicketTypeAPI().getAllTicketTypes(onError: (msg) {
+        print("Mistake: " + msg);
+      });
     });
-    
   }
 
-
   @override
-  Widget build(BuildContext context){
-    
-    
-       
+  Widget build(BuildContext context) {
     var verticalSpacing = 60.0;
     return SingleChildScrollView(
       clipBehavior: Clip.none,

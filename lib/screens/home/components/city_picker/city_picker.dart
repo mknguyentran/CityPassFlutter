@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/mockupData/mockup_city.dart';
-import 'package:city_pass/models/city.dart';
+import 'package:city_pass/model/city.dart';
 import 'package:city_pass/shared/search_field.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:flutter/material.dart';

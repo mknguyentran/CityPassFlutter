@@ -1,12 +1,11 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/mockupData/mockup_activity.dart';
-import 'package:city_pass/models/activity.dart';
-import 'package:city_pass/models/city.dart';
-import 'package:city_pass/realData/real_activity.dart';
+import 'package:city_pass/model/activity.dart';
+import 'package:city_pass/model/city.dart';
 import 'package:city_pass/screens/activity_detail/activity_detail.dart';
 import 'package:city_pass/screens/home/components/featured/components/activity_recommendation_vertical.dart';
-import 'package:city_pass/service/api.services.dart';
-import 'package:city_pass/service/ticketType.dart';
+import 'package:city_pass/service/ticketType_services.dart';
+import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,7 +29,7 @@ class _LocationsState extends State<Locations> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       
       List<TicketType> values =
-          await Api().getAllTicketTypes(onError: (msg) {
+          await TicketTypeAPI().getAllTicketTypes(onError: (msg) {
             
             print("Mistake: " + msg);
           });

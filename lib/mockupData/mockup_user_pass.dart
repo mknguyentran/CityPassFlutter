@@ -1,6 +1,6 @@
 import 'package:city_pass/mockupData/mockup_activity.dart';
 import 'package:city_pass/mockupData/mockup_pass.dart';
-import 'package:city_pass/models/user_pass.dart';
+import 'package:city_pass/model/user_pass.dart';
 
 UserPass userPass1 = UserPass(
   expiredAt: new DateTime(2021, 3, 31),

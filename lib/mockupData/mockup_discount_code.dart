@@ -1,4 +1,4 @@
-import 'package:city_pass/models/discount_code.dart';
+import 'package:city_pass/model/discount_code.dart';
 
 DiscountCode thangBa = PercentageDiscountCode(
   "UUDAITHANG3",

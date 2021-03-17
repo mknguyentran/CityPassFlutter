@@ -1,6 +1,6 @@
 
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/order_detail.dart';
+import 'package:city_pass/model/order_detail.dart';
 import 'package:city_pass/screens/pass_detail/components/choose_pass_amount.dart';
 import 'package:city_pass/screens/user_passes/user_passes.dart';
 import 'package:city_pass/shared/section_title.dart';

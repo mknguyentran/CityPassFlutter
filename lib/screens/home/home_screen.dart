@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:city_pass/models/city.dart';
+import 'package:city_pass/model/city.dart';
 import 'package:city_pass/screens/home/components/account/account.dart';
 import 'package:city_pass/screens/home/components/city_picker/city_picker.dart';
 import 'package:city_pass/shared/search_field.dart';

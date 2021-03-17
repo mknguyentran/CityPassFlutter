@@ -1,6 +1,6 @@
 import 'package:city_pass/mockupData/mockup_activity.dart';
 import 'package:city_pass/mockupData/mockup_city.dart';
-import 'package:city_pass/models/pass.dart';
+import 'package:city_pass/model/pass.dart';
 
 // 1. HaNoi
 

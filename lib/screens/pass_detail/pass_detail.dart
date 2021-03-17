@@ -1,5 +1,5 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/pass.dart';
+import 'package:city_pass/model/pass.dart';
 import 'package:city_pass/screens/pass_detail/components/pass_detail_content.dart';
 import 'package:city_pass/screens/pass_detail/components/pass_detail_header.dart';
 import 'package:city_pass/screens/pass_detail/components/pass_detail_price_bar.dart';

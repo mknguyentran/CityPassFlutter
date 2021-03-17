@@ -1,7 +1,7 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/activity.dart';
+import 'package:city_pass/model/activity.dart';
 import 'package:city_pass/screens/activity_detail/activity_detail.dart';
-import 'package:city_pass/service/ticketType.dart';
+import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

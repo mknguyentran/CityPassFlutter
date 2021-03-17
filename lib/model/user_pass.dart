@@ -1,5 +1,5 @@
-import 'package:city_pass/models/activity.dart';
-import 'package:city_pass/models/pass.dart';
+import 'package:city_pass/model/activity.dart';
+import 'package:city_pass/model/pass.dart';
 import 'package:flutter/material.dart';
 
 class UserPass {

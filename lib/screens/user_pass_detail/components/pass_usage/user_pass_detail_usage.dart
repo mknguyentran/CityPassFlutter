@@ -1,5 +1,5 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/user_pass.dart';
+import 'package:city_pass/model/user_pass.dart';
 import 'package:city_pass/screens/user_pass_detail/components/pass_usage/tabs/available_destinations.dart';
 import 'package:city_pass/screens/user_pass_detail/components/pass_usage/tabs/used_destinations.dart';
 import 'package:city_pass/size_config.dart';

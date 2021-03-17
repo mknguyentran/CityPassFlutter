@@ -1,6 +1,6 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/mockupData/mockup_pass.dart';
-import 'package:city_pass/models/city.dart';
+import 'package:city_pass/model/city.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
 import 'package:city_pass/shared/pass_card.dart';
 import 'package:flutter/cupertino.dart';

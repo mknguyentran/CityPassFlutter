@@ -1,6 +1,6 @@
-import 'package:city_pass/models/discount_code.dart';
-import 'package:city_pass/models/pass.dart';
-import 'package:city_pass/models/payment_method.dart';
+import 'package:city_pass/model/discount_code.dart';
+import 'package:city_pass/model/pass.dart';
+import 'package:city_pass/model/payment_method.dart';
 
 class OrderDetail {
   final Pass pass;
