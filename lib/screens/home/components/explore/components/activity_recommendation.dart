@@ -28,7 +28,6 @@ class ActivityRecommendation extends StatelessWidget {
         SectionTitle(
           title: title,
           hasPadding: hasPadding,
-          showAllCallback: () {},
         ),
         VerticalSpacing(
           of: 20,

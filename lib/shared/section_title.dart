@@ -35,6 +35,7 @@ class SectionTitle extends StatelessWidget {
               fontWeight: FontWeight.bold,
               color: titleColor
             ),
+            overflow: TextOverflow.ellipsis,
           ),
           Spacer(),
           if (showAllCallback != null)
