@@ -58,15 +58,6 @@ class _AccountState extends State<Account> {
                   borderRadius: BorderRadius.circular(10)),
               child: Column(
                 children: [
-                  ListTile(
-                    dense: true,
-                    leading: Icon(
-                      Icons.favorite,
-                      color: Colors.red,
-                    ),
-                    title: Text("Danh sách yêu thích"),
-                  ),
-                  Divider(thickness: 1),
                   GestureDetector(
                     onTap: clickToHistory,
                     child: ListTile(
@@ -78,27 +69,6 @@ class _AccountState extends State<Account> {
                       title: Text("Lịch sử giao dịch"),
                     ),
                   ),
-                  Divider(thickness: 1),
-                  ListTile(
-                    dense: true,
-                    leading: Icon(
-                      CupertinoIcons.creditcard_fill,
-                      color: primaryDarkColor,
-                    ),
-                    title: Text("Phương thức thanh toán"),
-                  ),
-                  Divider(thickness: 1),
-                  GestureDetector(
-                    onTap: clickToHistory,
-                    child: ListTile(
-                      dense: true,
-                      leading: Icon(
-                        CupertinoIcons.text_bubble_fill,
-                        color: Colors.orange,
-                      ),
-                      title: Text("Lịch sử đánh giá"),
-                    ),
-                  )
                 ],
               )),
           VerticalSpacing(of: 20),
