@@ -1,10 +1,11 @@
 import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/screens/activity_detail/components/activity_header.dart';
 import 'package:city_pass/screens/activity_detail/components/body/activity_body.dart';
+import 'package:city_pass/service/ticketType.dart';
 import 'package:flutter/material.dart';
 
 class ActivityDetail extends StatefulWidget {
-  final Activity activity;
+  final TicketType activity;
 
   const ActivityDetail({Key key, @required this.activity}) : super(key: key);
 

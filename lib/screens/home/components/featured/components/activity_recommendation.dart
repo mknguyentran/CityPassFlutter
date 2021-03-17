@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/screens/activity_detail/activity_detail.dart';
 import 'package:city_pass/screens/home/components/featured/components/activity_recommendation_card.dart';
+import 'package:city_pass/service/ticketType.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,12 +17,14 @@ class ActivityRecommendation extends StatelessWidget {
       : super(key: key);
 
   final String title;
-  final List<Activity> children;
+ // final List<Activity> children;
+  final List<TicketType> children;
   final bool hasPadding;
 
   @override
   Widget build(BuildContext context) {
-    List<Activity> _activityList = new List.from(children);
+    //List<Activity> _activityList = new List.from(children);
+    List<TicketType> _activityList = new List.from(children);
     _activityList.shuffle();
     return Column(
       children: [

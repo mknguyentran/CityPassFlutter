@@ -86,11 +86,11 @@ class _UserPassDetailUsageState extends State<UserPassDetailUsage>
         VerticalSpacing(),
         IndexedStack(
           children: [
-            Visibility(
-              child: AvailableDestinations(destinationList: widget.pass.availableDestinationList,),
-              maintainState: true,
-              visible: _selectedIndex == 0,
-            ),
+            // Visibility(
+            //   child: AvailableDestinations(destinationList: widget.pass.availableDestinationList,),
+            //   maintainState: true,
+            //   visible: _selectedIndex == 0,
+            // ),
             Visibility(
               child: UsedDestinations(entryList: widget.pass.usedDestinationList,),
               maintainState: true,

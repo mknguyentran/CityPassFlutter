@@ -1,12 +1,14 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/screens/activity_detail/activity_detail.dart';
+import 'package:city_pass/service/ticketType.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AvailableDestinations extends StatelessWidget {
-  final List<Activity> destinationList;
+  //final List<Activity> destinationList;
+  final List<TicketType> destinationList;
 
   const AvailableDestinations({Key key, @required this.destinationList})
       : super(key: key);
@@ -20,7 +22,7 @@ class AvailableDestinations extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildDestinationList(
-            itemList: destinationList,
+           itemList: destinationList,
             context: context,
             currentIndex: _currentIndex,
           ),
@@ -31,7 +33,8 @@ class AvailableDestinations extends StatelessWidget {
 }
 
 Column _buildDestinationList({
-  @required List<Activity> itemList,
+  //@required List<Activity> itemList,
+  @required List<TicketType> itemList,
   @required int currentIndex,
   @required BuildContext context,
 }) {
@@ -53,7 +56,8 @@ Column _buildDestinationList({
 Widget _buildDestinationListItem(
     {int index,
     double lineSpacing = 7.0,
-    @required Activity activity,
+    //@required Activity activity,
+    @required TicketType activity,
     @required BuildContext context}) {
   return Padding(
     padding: EdgeInsets.symmetric(vertical: lineSpacing),
@@ -83,7 +87,7 @@ Widget _buildDestinationListItem(
   );
 }
 
-Widget _buildItemName(Activity activity, BuildContext context) {
+Widget _buildItemName(TicketType activity, BuildContext context) {
   return Expanded(
     child: GestureDetector(
       onTap: () {
@@ -97,7 +101,7 @@ Widget _buildItemName(Activity activity, BuildContext context) {
         );
       },
       child: Text(
-        activity.getShortName.toUpperCase(),
+        activity.name.toUpperCase(),
         style: TextStyle(fontSize: 14),
       ),
     ),

@@ -148,9 +148,9 @@ Widget _buildItemName(
         Navigator.push(
           context,
           CupertinoPageRoute(builder: (context) {
-            return ActivityDetail(
-              activity: activity,
-            );
+            // return ActivityDetail(
+            //   activity: activity,
+            // );
           }),
         );
       },

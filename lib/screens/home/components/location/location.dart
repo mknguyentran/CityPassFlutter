@@ -2,17 +2,42 @@ import 'package:city_pass/constants.dart';
 import 'package:city_pass/mockupData/mockup_activity.dart';
 import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/models/city.dart';
+import 'package:city_pass/realData/real_activity.dart';
 import 'package:city_pass/screens/activity_detail/activity_detail.dart';
 import 'package:city_pass/screens/home/components/featured/components/activity_recommendation_vertical.dart';
+import 'package:city_pass/service/api.services.dart';
+import 'package:city_pass/service/ticketType.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Locations extends StatelessWidget {
+class Locations extends StatefulWidget {
   final City city;
+  
 
   const Locations({Key key, this.city}) : super(key: key);
+
+  @override
+  _LocationsState createState() => _LocationsState();
+}
+
+class _LocationsState extends State<Locations> {
+
+   List<TicketType> listRealActivitiesNearYou_3;
+ void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      
+      List<TicketType> values =
+          await Api().getAllTicketTypes(onError: (msg) {
+            
+            print("Mistake: " + msg);
+          });
+      listRealActivitiesNearYou_3 = values;
+    });
+    
+  }
   @override
   Widget build(BuildContext context) {
     List<Activity> _favoriteList = new List.from(mockupActivities);
@@ -29,7 +54,8 @@ class Locations extends StatelessWidget {
             ActivityRecommendationVertical(
               hasPadding: false,
               title: "Gần bạn nhất",
-              children: mockupNearYouActivities_3,
+              //children: mockupNearYouActivities_3,
+              children: listRealActivitiesNearYou_3,
             ),
           ],
         ),
@@ -115,9 +141,9 @@ class TopDestinationCard extends StatelessWidget {
           context,
           CupertinoPageRoute(
             builder: (context) {
-              return ActivityDetail(
-                activity: activity,
-              );
+              // return ActivityDetail(
+              //   activity: activity,
+              // );
             },
           ),
         );

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/activity.dart';
+import 'package:city_pass/service/ticketType.dart';
 import 'package:city_pass/shared/info_tag.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class ActivityRecommendationCard extends StatelessWidget {
     @required this.activity,
   }) : super(key: key);
 
-  final Activity activity;
+  final TicketType activity;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class ActivityRecommendationCard extends StatelessWidget {
           height: 180,
           decoration: BoxDecoration(
               image: DecorationImage(
-            image: AssetImage(activity.image),
+            image: AssetImage(activity.imageUrl),
             fit: BoxFit.cover,
           )),
         ),
@@ -49,7 +50,7 @@ class ActivityRecommendationCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "${activity.city.name} • ${activity.visitedCounter} lượt tham quan",
+                          "${activity.city} • 3000 lượt tham quan",
                           style: TextStyle(color: subtitleTextColor),
                         ),
                       ],
@@ -71,20 +72,22 @@ class ActivityRecommendationCard extends StatelessWidget {
                               size: 16,
                               color: starYellowColor,
                             ),
-                            Text(
-                              activity.overallRating.toString(),
-                              style: TextStyle(
-                                  fontSize: 14, color: starYellowColor),
-                            ),
+                            // Text(
+                            //   activity.overallRating.toString(),
+                            //   style: TextStyle(
+                            //       fontSize: 14, color: starYellowColor),
+                            // ),
                           ],
                         ),
-                        if (activity.isNew)
+                       // if (activity.isNew)
+                        if (true)
                           InfoTag(
                             "Mới",
                             backgroundColor: lightGreenBackgroundColor,
                             foregroundColor: Colors.green[800],
                           ),
-                        if (activity.isPopular)
+                        //if (activity.isPopular)
+                        if (true)
                           InfoTag(
                             "Phổ biến",
                             backgroundColor: orangeBackgroundColor,
@@ -94,18 +97,18 @@ class ActivityRecommendationCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (activity.travelDistance != null &&
-                        activity.travelTime != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Text(
-                            "${activity.travelDistance}km • ${activity.travelTime} phút",style: TextStyle(color: subtitleTextColor),),
-                      )
-                  ],
-                )
+                // Column(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: [
+                //     if (activity.travelDistance != null &&
+                //         activity.travelTime != null)
+                //       Padding(
+                //         padding: const EdgeInsets.only(top: 10),
+                //         child: Text(
+                //             "${activity.travelDistance}km • ${activity.travelTime} phút",style: TextStyle(color: subtitleTextColor),),
+                //       )
+                //   ],
+                // )
               ],
             ),
           ),

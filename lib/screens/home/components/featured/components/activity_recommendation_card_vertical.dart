@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/activity.dart';
+import 'package:city_pass/service/ticketType.dart';
 import 'package:city_pass/shared/info_tag.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,8 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
     @required this.activity,
   }) : super(key: key);
 
-  final Activity activity;
+  //final Activity activity;
+  final TicketType activity;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(3),
             image: DecorationImage(
-              image: AssetImage(activity.image),
+              image: AssetImage(activity.imageUrl),
               fit: BoxFit.cover,
             ),
           ),
@@ -52,10 +54,10 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(
-                          "${activity.city.name} • ${activity.visitedCounter} lượt tham quan",
-                          style: TextStyle(color: subtitleTextColor),
-                        ),
+                        // Text(
+                        //   "${activity.city.name} • ${activity.visitedCounter} lượt tham quan",
+                        //   style: TextStyle(color: subtitleTextColor),
+                        // ),
                       ],
                     ),
                     VerticalSpacing(of: 5),
@@ -77,43 +79,43 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
                               size: 16,
                               color: starYellowColor,
                             ),
-                            Text(
-                              activity.overallRating.toString(),
-                              style: TextStyle(
-                                  fontSize: 14, color: starYellowColor),
-                            ),
+                            // Text(
+                            //   activity.overallRating.toString(),
+                            //   style: TextStyle(
+                            //       fontSize: 14, color: starYellowColor),
+                            // ),
                           ],
                         ),
-                        if (activity.isNew)
-                          InfoTag(
-                            "Mới",
-                            backgroundColor: lightGreenBackgroundColor,
-                            foregroundColor: Colors.green[800],
-                          ),
-                        if (activity.isPopular)
-                          InfoTag(
-                            "Phổ biến",
-                            backgroundColor: orangeBackgroundColor,
-                            foregroundColor: primaryDarkColor,
-                          )
+                        // if (activity.isNew)
+                        //   InfoTag(
+                        //     "Mới",
+                        //     backgroundColor: lightGreenBackgroundColor,
+                        //     foregroundColor: Colors.green[800],
+                        //   ),
+                        // if (activity.isPopular)
+                        //   InfoTag(
+                        //     "Phổ biến",
+                        //     backgroundColor: orangeBackgroundColor,
+                        //     foregroundColor: primaryDarkColor,
+                        //   )
                       ],
                     ),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (activity.travelDistance != null &&
-                        activity.travelTime != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Text(
-                          "${activity.travelDistance}km • ${activity.travelTime} phút",
-                          style: TextStyle(color: subtitleTextColor),
-                        ),
-                      )
-                  ],
-                )
+            //     Column(
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+            //         if (activity.travelDistance != null &&
+            //             activity.travelTime != null)
+            //           Padding(
+            //             padding: const EdgeInsets.only(top: 10),
+            //             child: Text(
+            //               "${activity.travelDistance}km • ${activity.travelTime} phút",
+            //               style: TextStyle(color: subtitleTextColor),
+            //             ),
+            //           )
+            //       ],
+            //     )
               ],
             ),
           ),

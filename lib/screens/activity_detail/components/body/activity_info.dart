@@ -2,6 +2,7 @@ import 'package:city_pass/mockupData/mockup_pass.dart';
 import 'package:city_pass/models/activity.dart';
 import 'package:city_pass/screens/map/map_screen.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
+import 'package:city_pass/service/ticketType.dart';
 import 'package:city_pass/shared/pass_card.dart';
 import 'package:city_pass/shared/timetable_row.dart';
 import 'package:city_pass/size_config.dart';
@@ -9,7 +10,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ActivityInfo extends StatelessWidget {
-  final Activity activity;
+  //final Activity activity;
+  final TicketType activity;
   const ActivityInfo({
     Key key,
     @required this.activity,
@@ -22,10 +24,10 @@ class ActivityInfo extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              activity.detailedDescription,
-              style: TextStyle(fontSize: 14, height: 1.4),
-            ),
+            // child: Text(
+            //   activity.detailedDescription,
+            //   style: TextStyle(fontSize: 14, height: 1.4),
+            // ),
           ),
           VerticalSpacing(of: 40),
           Align(
@@ -110,21 +112,21 @@ class ActivityInfo extends StatelessWidget {
                     ],
                   ),
                   VerticalSpacing(of: 10),
-                  Column(
-                    children: [
-                      ...List.generate(activity.activityTimetable.length,
-                          (index) {
-                        int todayWeekday = DateTime.now().weekday - 1;
-                        return TimetableRow(
-                          dayOfWeek:
-                              activity.activityTimetable[index].dayOfWeek,
-                          openTime:
-                              activity.activityTimetable[index].openTime,
-                          isToday: todayWeekday == index,
-                        );
-                      })
-                    ],
-                  ),
+                  // Column(
+                  //   children: [
+                  //     ...List.generate(activity.activityTimetable.length,
+                  //         (index) {
+                  //       int todayWeekday = DateTime.now().weekday - 1;
+                  //       return TimetableRow(
+                  //         dayOfWeek:
+                  //             activity.activityTimetable[index].dayOfWeek,
+                  //         openTime:
+                  //             activity.activityTimetable[index].openTime,
+                  //         isToday: todayWeekday == index,
+                  //       );
+                  //     })
+                  //   ],
+                  // ),
                 ],
               ),
             ),
