@@ -11,7 +11,8 @@ class ActivityRecommendationCard extends StatelessWidget {
   const ActivityRecommendationCard({
     Key key,
     @required this.activity,
-  }) : super(key: key);
+  }) : 
+  super(key: key);
 
   final TicketType activity;
 

@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:city_pass/models/ticketType.dart';
+import 'package:city_pass/models/ticketTypeDetail.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 import 'package:http/http.dart' as http;
 import 'package:city_pass/api_constant.dart';
 
@@ -29,15 +31,15 @@ class TicketTypeAPI {
   }
 
 
-   Future<TicketType> getTicketTypeByID({Function(String) onError, String id}) async {
+   Future<TicketTypeDetail> getTicketTypeByID({Function(String) onError, String id}) async {
     String endpoint = ticketTypeByIDGETUrl + id;
 
-    TicketType ticketType;
+    TicketTypeDetail ticketType;
     http.Response response = await http.get(endpoint);
     if (response.statusCode == 200) {
       try {
         dynamic jsonRaw = json.decode(response.body);
-         ticketType = TicketType.formJson(jsonRaw[0]);
+         ticketType = TicketTypeDetail.formJson(jsonRaw[0]);
         
       } catch (e) {
         print(e);
@@ -48,4 +50,6 @@ class TicketTypeAPI {
     }
     return ticketType;
   }
+
+  
 }

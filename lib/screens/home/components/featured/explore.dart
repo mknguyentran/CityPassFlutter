@@ -25,6 +25,7 @@ class Explore extends StatefulWidget {
 
 class _ExploreState extends State<Explore> {
   Future<List<TicketType>> listRealActivitiesNearYou_3;
+  // Future<TicketType> ticketTypeDetail;
   void initState() {
     super.initState();
     // WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -42,75 +43,81 @@ class _ExploreState extends State<Explore> {
   @override
   Widget build(BuildContext context) {
     var verticalSpacing = 60.0;
-    return FutureBuilder(
-        future: listRealActivitiesNearYou_3,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return SingleChildScrollView(
-              clipBehavior: Clip.none,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: kDefaultPadding, vertical: 20),
-                    child: Container(
-                      clipBehavior: Clip.hardEdge,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [kDefaultShadow]),
-                      child: Image(
-                        image: AssetImage("assets/images/tiniworld.png"),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                  AttractionCategory(),
-                  VerticalSpacing(
-                    of: verticalSpacing,
-                  ),
-                  PassRecommendation(
-                    title: "Combo được yêu thích",
-                    children: mockupPasses,
-                  ),
-                  VerticalSpacing(
-                    of: verticalSpacing,
-                  ),
-                  PassRecommendation(
-                    title: "Deal tốt Tháng 3 🎉",
-                    subtitle: "Giảm đến 50% khi mua trong tháng này",
-                    children: mockupPasses,
-                  ),
-                  VerticalSpacing(
-                    of: verticalSpacing,
-                  ),
-                  ActivityRecommendation(
-                    title: "Gần bạn nhất",
-                    // children: mockupNearYouActivities_3,
-                    children: snapshot.data,
-                  ),
-                  VerticalSpacing(
-                    of: verticalSpacing,
-                  ),
-                  // ActivityRecommendation(
-                  //   title: "Điểm đến nổi bật",
-                  //   children: listRealActivitiesNearYou_3,
-                  // ),
-                  // ActivityRecommendationVertical(
-                  //   children: List.generate(30, (index) {
-                  //     var ran = new Random();
-                  //     var ranInt = ran.nextInt(mockupActivities.length - 1);
-                  //     return mockupActivities[ranInt];
-                  //   }),
-                  // ),
-                  VerticalSpacing(
-                    of: verticalSpacing,
-                  ),
-                ],
+    // return FutureBuilder(
+    //     future: listRealActivitiesNearYou_3,
+    //     builder: (context, snapshot) {
+    //       if (snapshot.hasData) {
+    return SingleChildScrollView(
+      clipBehavior: Clip.none,
+      child: Column(
+        children: [
+          Padding(
+            padding:
+                EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: 20),
+            child: Container(
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [kDefaultShadow]),
+              child: Image(
+                image: AssetImage("assets/images/tiniworld.png"),
+                fit: BoxFit.fill,
               ),
-            );
-          }
+            ),
+          ),
+          AttractionCategory(),
+          VerticalSpacing(
+            of: verticalSpacing,
+          ),
+          PassRecommendation(
+            title: "Combo được yêu thích",
+            children: mockupPasses,
+          ),
+          VerticalSpacing(
+            of: verticalSpacing,
+          ),
+          PassRecommendation(
+            title: "Deal tốt Tháng 3 🎉",
+            subtitle: "Giảm đến 50% khi mua trong tháng này",
+            children: mockupPasses,
+          ),
+          VerticalSpacing(
+            of: verticalSpacing,
+          ),
+          FutureBuilder(
+              future: listRealActivitiesNearYou_3,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ActivityRecommendation(
+                    title: "Gần bạn nhất",
+                    children: snapshot.data,
+                  );
+                }
+                return CircularProgressIndicator();
+              }),
+          VerticalSpacing(
+            of: verticalSpacing,
+          ),
+          // ActivityRecommendation(
+          //   title: "Điểm đến nổi bật",
+          //   children: listRealActivitiesNearYou_3,
+          // ),
+          // ActivityRecommendationVertical(
+          //   children: List.generate(30, (index) {
+          //     var ran = new Random();
+          //     var ranInt = ran.nextInt(mockupActivities.length - 1);
+          //     return mockupActivities[ranInt];
+          //   }),
+          // ),
+          VerticalSpacing(
+            of: verticalSpacing,
+          ),
+        ],
+      ),
+    );
+    // }
 
-          return CircularProgressIndicator();
-        });
+    return CircularProgressIndicator();
+    // });
   }
 }

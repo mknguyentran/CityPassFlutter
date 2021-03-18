@@ -14,11 +14,12 @@ class TicketTypeDetail {
   TicketTypeDetail.formJson(Map<String, dynamic> json)
       : this.id = new Guid(json['id']),
         this.name = json['name'],
-        this.cityName = json['city']['name'],
+       
         this.urlImage = json['urlImage'],
         this.adultPrice = json['adultPrice'],
         this.childrenPrice = json['childrenPrice'],
-        this.description = json['attraction']['description'],
+         this.cityName = json['atrraction']['city']['name'],
+        this.description = json['atrraction']['description'],
         this.address = json['atrraction']['address'],
         this.attractionName = json['atrraction']['name'];
 

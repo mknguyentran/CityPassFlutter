@@ -8,6 +8,7 @@ import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 
 class ActivityRecommendationVertical extends StatelessWidget {
   const ActivityRecommendationVertical(
@@ -21,6 +22,7 @@ class ActivityRecommendationVertical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     // children.sort((a, b) {
     //   if (a.travelDistance != null && b.travelDistance != null) {
     //     return (a.travelDistance - b.travelDistance).toInt();
@@ -61,7 +63,7 @@ class ActivityRecommendationVertical extends StatelessWidget {
                       activity: children[index],
                     ),
                     openBuilder: (context, action) => ActivityDetail(
-                      activity: children[index],
+                      ticketTypeID: children[index].id,
                     ),
                   ),
                 ),

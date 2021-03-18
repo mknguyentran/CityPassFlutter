@@ -1,11 +1,12 @@
 import 'package:city_pass/model/activity.dart';
 import 'package:city_pass/models/ticketType.dart';
+import 'package:city_pass/models/ticketTypeDetail.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
 class ActivityHeader extends StatelessWidget {
-  //final Activity activity;
-  final TicketType activity;
+  
+  final TicketTypeDetail activity;
   const ActivityHeader({
     Key key,
     @required this.activity,
@@ -20,7 +21,7 @@ class ActivityHeader extends StatelessWidget {
         Container(
           height: percentageOfScreenHeight(30),
           child: SizedBox.expand(
-            child: Image.asset(activity.imageUrl, fit: BoxFit.cover),
+            child: Image.asset(activity.urlImage ?? '', fit: BoxFit.cover),
           ),
         ),
         Positioned(
@@ -67,16 +68,16 @@ class ActivityHeader extends StatelessWidget {
                             size: 16,
                             color: Colors.yellow.shade700,
                           )),
-                      // Expanded(
-                      //   child: Text(
-                      //     activity.add,
-                      //     style: TextStyle(
-                      //       fontSize: 14,
-                      //       height: 1.2,
-                      //       color: Colors.white,
-                      //     ),
-                      //   ),
-                      // )
+                      Expanded(
+                        child: Text(
+                          activity.address,
+                          style: TextStyle(
+                            fontSize: 14,
+                            height: 1.2,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ],

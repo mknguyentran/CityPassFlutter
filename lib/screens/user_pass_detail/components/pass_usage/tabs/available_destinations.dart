@@ -95,7 +95,7 @@ Widget _buildItemName(TicketType activity, BuildContext context) {
           context,
           CupertinoPageRoute(builder: (context) {
             return ActivityDetail(
-              activity: activity,
+              ticketTypeID: activity.id,
             );
           }),
         );
