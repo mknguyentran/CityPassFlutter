@@ -237,21 +237,28 @@ class _LoginFormState extends State<LoginForm> {
 
       if (!_invalidPassword && !_invalidEmail) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            context, CupertinoPageRoute(builder: (context) => HomeScreen()));
       }
     });
   }
 
   void clickToResetPassword() {
-    setState(() {
-      Navigator.push(context,  MaterialPageRoute(builder: (context) => ForgetPassword()));
-    });
+    Navigator.push(
+        context, CupertinoPageRoute(builder: (context) => ForgetPassword()));
   }
-  void clickToLoginByFacebook() {}
-  void clickToLoginByGoogle() {}
+
+  void clickToLoginByFacebook() {
+    Navigator.push(
+        context, CupertinoPageRoute(builder: (context) => HomeScreen()));
+  }
+
+  void clickToLoginByGoogle() {
+    Navigator.push(
+        context, CupertinoPageRoute(builder: (context) => HomeScreen()));
+  }
+
   void clickToRegister() {
-    setState(() {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterForm()));
-    });
+    Navigator.push(
+        context, CupertinoPageRoute(builder: (context) => RegisterForm()));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/screens/history/history.dart';
+import 'package:city_pass/screens/home/components/account/login_register/login.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -57,54 +58,26 @@ class _AccountState extends State<Account> {
                   borderRadius: BorderRadius.circular(10)),
               child: Column(
                 children: [
-                  ListTile(
-                    dense: true,
-                    leading: Icon(
-                      Icons.favorite,
-                      color: Colors.red,
-                    ),
-                    title: Text("Danh sách yêu thích"),
-                  ),
-                  Divider(thickness: 1),
                   GestureDetector(
                     onTap: clickToHistory,
-                      child: ListTile(
-                    dense: true,
-                    leading: Icon(
-                      Icons.history,
-                      color: Colors.yellow.shade700,
+                    child: ListTile(
+                      dense: true,
+                      leading: Icon(
+                        Icons.history,
+                        color: Colors.yellow.shade700,
+                      ),
+                      title: Text("Lịch sử giao dịch"),
                     ),
-                    title: Text("Lịch sử giao dịch"),
                   ),
-                  ),
-                  
-                  Divider(thickness: 1),
-                  ListTile(
-                    dense: true,
-                    leading: Icon(
-                      CupertinoIcons.creditcard_fill,
-                      color: primaryDarkColor,
-                    ),
-                    title: Text("Phương thức thanh toán"),
-                  ),
-                  Divider(thickness: 1),
-                 GestureDetector(
-                   onTap: clickToHistory,
-                    child :ListTile(
-                    dense: true,
-                    leading: Icon(
-                      CupertinoIcons.text_bubble_fill,
-                      color: Colors.orange,
-                    ),
-                    title: Text("Lịch sử đánh giá"),
-                  ),
-                 )
                 ],
               )),
           VerticalSpacing(of: 20),
           Container(
               decoration: BoxDecoration(
-                  color: Colors.white, boxShadow: [kDefaultShadow]),
+                color: Colors.white,
+                boxShadow: [kDefaultShadow],
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: Column(
                 children: [
                   ListTile(
@@ -127,7 +100,18 @@ class _AccountState extends State<Account> {
                 ],
               )),
           VerticalSpacing(of: 50),
-          Container(
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) {
+                    return LoginForm();
+                  },
+                ),
+              );
+            },
+            child: Container(
               padding: EdgeInsets.symmetric(vertical: 15),
               width: double.infinity,
               alignment: Alignment.center,
@@ -147,15 +131,18 @@ class _AccountState extends State<Account> {
                     color: Colors.red,
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
-              ))
+              ),
+            ),
+          )
         ],
       ),
     ));
   }
 
-  void clickToHistory(){
+  void clickToHistory() {
     setState(() {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => HistoryForm()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HistoryForm()));
     });
   }
 }
