@@ -1,19 +1,23 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/model/activity.dart';
 import 'package:city_pass/model/pass.dart';
+import 'package:city_pass/models/passDetailInformation.dart';
+import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/screens/activity_detail/activity_detail.dart';
+import 'package:city_pass/service/ticketType_services.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class PassDetailContent extends StatelessWidget {
+class 
+PassDetailContent extends StatelessWidget {
   const PassDetailContent({
     Key key,
-    @required this.pass,
+    @required this.passDetail,
   }) : super(key: key);
 
-  final Pass pass;
+  final PassDetailInformation passDetail;
 
   @override
   Widget build(BuildContext context) {
@@ -30,26 +34,27 @@ class PassDetailContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ...List.generate(
-                  pass.includingDestination.length,
+                  passDetail.listOfTicket.length,
                   (index) {
                     Widget result;
-                    switch (pass.includingDestination[index].type) {
+                    List<String> list = passDetail.listOfTicket[index];
+                    int type =
+                        IncludingDestination(list, int.parse(list[list.length-1]))
+                            .type;
+                    switch (type) {
                       case IncludingDestination.allIncluded:
                         result = _buildDestinationList(
-                          itemList:
-                              pass.includingDestination[index].destinationList,
+                          itemList: list,
                           context: context,
                           currentIndex: _currentIndex,
                         );
-                        _currentIndex += pass
-                            .includingDestination[index].destinationList.length;
+                        _currentIndex += passDetail.listOfTicket[index].length -
+                            1; // trừ vì list TicketType trả về cuối cùng là maxContraints
                         break;
                       case IncludingDestination.optional:
                         result = _buildOptionalDestinationList(
-                            itemList: pass
-                                .includingDestination[index].destinationList,
-                            includingQuota:
-                                pass.includingDestination[index].includingQuota,
+                            itemList: list,
+                            includingQuota: int.parse(list[list.length - 1]),
                             context: context);
                         break;
                       default:
@@ -68,7 +73,7 @@ class PassDetailContent extends StatelessWidget {
 }
 
 Column _buildOptionalDestinationList({
-  @required List<Activity> itemList,
+  @required List<String> itemList,
   @required int includingQuota,
   @required BuildContext context,
 }) {
@@ -77,7 +82,7 @@ Column _buildOptionalDestinationList({
     children: [
       OptionalDestinationListHeader(includingQuota: includingQuota),
       ...List.generate(
-        itemList.length,
+        itemList.length-1,
         (index) => _buildDestinationListItem(
           activity: itemList[index],
           context: context,
@@ -88,7 +93,7 @@ Column _buildOptionalDestinationList({
 }
 
 Column _buildDestinationList({
-  @required List<Activity> itemList,
+  @required List<String> itemList,
   @required int currentIndex,
   @required BuildContext context,
 }) {
@@ -110,7 +115,7 @@ Column _buildDestinationList({
 Widget _buildDestinationListItem(
     {int index,
     double lineSpacing = 7.0,
-    @required Activity activity,
+    @required String activity,
     @required BuildContext context}) {
   return Padding(
     padding: EdgeInsets.symmetric(vertical: lineSpacing),
@@ -140,22 +145,21 @@ Widget _buildDestinationListItem(
   );
 }
 
-Widget _buildItemName(
-    Activity activity, BuildContext context) {
+Widget _buildItemName(String activity, BuildContext context) {
   return Expanded(
     child: GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          CupertinoPageRoute(builder: (context) {
-            // return ActivityDetail(
-            //   activity: activity,
-            // );
-          }),
-        );
-      },
+      // onTap: () {
+      //   Navigator.push(
+      //     context,
+      //     CupertinoPageRoute(builder: (context) {
+      //       return ActivityDetail(
+      //         ticketTypeID: activity.id,
+      //       );
+      //     }),
+      //   );
+      // },
       child: Text(
-        activity.getShortName.toUpperCase(),
+        activity.toUpperCase(),
         style: TextStyle(fontSize: 14),
       ),
     ),

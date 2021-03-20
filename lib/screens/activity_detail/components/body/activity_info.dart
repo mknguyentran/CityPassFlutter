@@ -1,5 +1,6 @@
 import 'package:city_pass/mockupData/mockup_pass.dart';
 import 'package:city_pass/model/activity.dart';
+import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/models/ticketTypeDetail.dart';
 import 'package:city_pass/screens/map/map_screen.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
@@ -13,9 +14,11 @@ import 'package:flutter/material.dart';
 class ActivityInfo extends StatelessWidget {
   //final Activity activity;
   final TicketTypeDetail activity;
+  final Pass pass;
   const ActivityInfo({
     Key key,
     @required this.activity,
+    @required this.pass
   }) : super(key: key);
 
   @override
@@ -39,37 +42,37 @@ class ActivityInfo extends StatelessWidget {
             ),
           ),
           VerticalSpacing(of: 20),
-          SingleChildScrollView(
-            clipBehavior: Clip.none,
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                ...List.generate(
-                    mockupPasses.length,
-                    (index) => Padding(
-                          padding: index != 0
-                              ? EdgeInsets.only(left: 20)
-                              : EdgeInsets.zero,
-                          child: SizedBox(
-                            width: 350,
-                            child: PassCard(
-                              pass: mockupPasses[index],
-                              press: () => {
-                                Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(builder: (context) {
-                                    return PassDetail(
-                                      pass: mockupPasses[index],
-                                    );
-                                  }),
-                                )
-                              },
-                            ),
-                          ),
-                        )),
-              ],
-            ),
-          ),
+          // SingleChildScrollView(
+          //   clipBehavior: Clip.none,
+          //   scrollDirection: Axis.horizontal,
+          //   child: Row(
+          //     children: [
+          //       ...List.generate(
+          //           // mockupPasses.length,
+          //           // (index) => Padding(
+          //           //       padding: index != 0
+          //           //           ? EdgeInsets.only(left: 20)
+          //           //           : EdgeInsets.zero,
+          //                 child: SizedBox(
+          //                   width: 350,
+          //                   // child: PassCard(
+          //                   //   pass: mockupPasses[index],
+          //                   //   press: () => {
+          //                   //     Navigator.push(
+          //                   //       context,
+          //                   //       CupertinoPageRoute(builder: (context) {
+          //                   //         // return PassDetail(
+          //                   //         //   pass: mockupPasses[index],
+          //                   //         // );
+          //                   //       }),
+          //                   //     )
+          //                   //   },
+          //                   // ),
+          //                 ),
+          //               )),
+          //     ],
+          //   ),
+          // ),
           VerticalSpacing(of: 40),
           Align(
             alignment: Alignment.centerLeft,

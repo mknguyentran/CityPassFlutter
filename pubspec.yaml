@@ -75,7 +75,6 @@ flutter:
     - assets/images/suoi_khoang_than_tai/
     - assets/images/van_mieu_quoc_tu_giam/
     - assets/images/suoi_tien/
-
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

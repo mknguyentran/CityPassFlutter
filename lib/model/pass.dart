@@ -1,5 +1,6 @@
 import 'package:city_pass/model/activity.dart';
 import 'package:city_pass/model/city.dart';
+import 'package:city_pass/models/ticketType.dart';
 import 'package:flutter/material.dart';
 
 class Pass {
@@ -46,7 +47,7 @@ class PassChildrenPrice {
 }
 
 class IncludingDestination {
-  final List<Activity> destinationList;
+  final List<String> destinationList;
   final int includingQuota;
 
   bool get isAllIncluded {

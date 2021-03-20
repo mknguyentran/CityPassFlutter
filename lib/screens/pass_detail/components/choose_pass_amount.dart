@@ -4,6 +4,7 @@ import 'package:city_pass/model/discount_code.dart';
 import 'package:city_pass/model/order_detail.dart';
 import 'package:city_pass/model/pass.dart';
 import 'package:city_pass/model/payment_method.dart';
+import 'package:city_pass/models/passDetailInformation.dart';
 import 'package:city_pass/screens/order_detail/order_result.dart';
 import 'package:city_pass/screens/pass_detail/components/discount_code_picker.dart';
 import 'package:city_pass/screens/pass_detail/components/payment_method_picker.dart';
@@ -12,11 +13,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ChoosePassAmount extends StatefulWidget {
-  final Pass pass;
+  final PassDetailInformation passDetail;
 
   const ChoosePassAmount({
     Key key,
-    @required this.pass,
+    @required this.passDetail,
   }) : super(key: key);
 
   @override
@@ -59,9 +60,9 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
 
   @override
   Widget build(BuildContext context) {
-    total = widget.pass.price * amount;
-    if (widget.pass.childrenPrice != null) {
-      total += widget.pass.childrenPrice.price * childrenAmount;
+    total = widget.passDetail.price * amount;
+    if (widget.passDetail.price != null) {
+      total += widget.passDetail.price * childrenAmount;
     }
     return Scaffold(
       body: Container(
@@ -79,7 +80,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
-                  widget.pass.name,
+                  widget.passDetail.name,
                   style: TextStyle(fontSize: 20),
                 ),
               ),
@@ -202,7 +203,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
                             height: 50,
                             child: _buildBuyButton(
                               context,
-                              pass: widget.pass,
+                              passDetailInformation: widget.passDetail,
                               amount: amount,
                               childrenAmount: childrenAmount,
                             ),
@@ -253,7 +254,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
   }
 
   Widget _buildAmountPicker() {
-    if (widget.pass.childrenPrice != null) {
+    if (widget.passDetail.price != null) {
       return Column(
         children: [
           AmountPicker(
@@ -289,7 +290,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
 
   ElevatedButton _buildBuyButton(
     BuildContext context, {
-    @required Pass pass,
+    @required PassDetailInformation passDetailInformation,
     int amount,
     int childrenAmount,
   }) {
@@ -314,7 +315,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
           Navigator.push(
             context,
             CupertinoPageRoute(builder: (context) {
-              OrderDetail orderDetail = new OrderDetail(pass, amount,
+              OrderDetail orderDetail = new OrderDetail(widget.passDetail, amount,
                   childrenAmount, _currentPaymentMethod, _currentDiscountCode);
               return OrderResult(
                 orderDetail: orderDetail,

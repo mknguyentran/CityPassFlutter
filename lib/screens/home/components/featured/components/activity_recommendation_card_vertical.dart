@@ -37,7 +37,7 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(3),
             image: DecorationImage(
-              image: AssetImage(activity.imageUrl),
+              image: AssetImage(activity.imageUrl ?? ''),
               fit: BoxFit.cover,
             ),
           ),
@@ -54,10 +54,10 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        // Text(
-                        //   "${activity.city.name} • ${activity.visitedCounter} lượt tham quan",
-                        //   style: TextStyle(color: subtitleTextColor),
-                        // ),
+                        Text(
+                          "${activity.city} • 5000 lượt tham quan",
+                          style: TextStyle(color: subtitleTextColor),
+                        ),
                       ],
                     ),
                     VerticalSpacing(of: 5),
@@ -86,18 +86,19 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
                             // ),
                           ],
                         ),
-                        // if (activity.isNew)
-                        //   InfoTag(
-                        //     "Mới",
-                        //     backgroundColor: lightGreenBackgroundColor,
-                        //     foregroundColor: Colors.green[800],
-                        //   ),
-                        // if (activity.isPopular)
-                        //   InfoTag(
-                        //     "Phổ biến",
-                        //     backgroundColor: orangeBackgroundColor,
-                        //     foregroundColor: primaryDarkColor,
-                        //   )
+                        //if (activity.isNew)
+                        if (true)
+                          InfoTag(
+                            "Mới",
+                            backgroundColor: lightGreenBackgroundColor,
+                            foregroundColor: Colors.green[800],
+                          ),
+                        if (true)
+                          InfoTag(
+                            "Phổ biến",
+                            backgroundColor: orangeBackgroundColor,
+                            foregroundColor: primaryDarkColor,
+                          )
                       ],
                     ),
                   ],

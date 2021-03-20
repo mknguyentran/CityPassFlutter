@@ -1,15 +1,16 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/model/pass.dart';
+import 'package:city_pass/models/passDetailInformation.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
 class PassDetailPriceBar extends StatelessWidget {
   const PassDetailPriceBar({
     Key key,
-    @required this.pass,
+    @required this.passDetail,
   }) : super(key: key);
 
-  final Pass pass;
+  final PassDetailInformation passDetail;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class PassDetailPriceBar extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (pass.childrenPrice != null)
+                if (passDetail.price != null)
                   Text("NGƯỜI LỚN", style: _priceTitleTextStyle),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,7 +36,7 @@ class PassDetailPriceBar extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(right: 10),
                       child: Text(
-                        vndCurrencyFormat.format(pass.price),
+                        vndCurrencyFormat.format(passDetail.price),
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -44,7 +45,7 @@ class PassDetailPriceBar extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      vndCurrencyFormat.format(pass.originalPrice),
+                      vndCurrencyFormat.format(passDetail.price),
                       style: TextStyle(
                         fontSize: 18,
                         color: fadedTextColor,
@@ -53,7 +54,7 @@ class PassDetailPriceBar extends StatelessWidget {
                     )
                   ],
                 ),
-                if (pass.childrenPrice != null)
+                if (passDetail.price != null)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -66,7 +67,7 @@ class PassDetailPriceBar extends StatelessWidget {
                             margin: EdgeInsets.only(right: 10),
                             child: Text(
                               vndCurrencyFormat
-                                  .format(pass.childrenPrice.price),
+                                  .format(passDetail.price),
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -76,7 +77,7 @@ class PassDetailPriceBar extends StatelessWidget {
                           ),
                           Text(
                             vndCurrencyFormat
-                                .format(pass.childrenPrice.originalPrice),
+                                .format(passDetail.price),
                             style: TextStyle(
                               fontSize: 18,
                               color: fadedTextColor,
@@ -111,7 +112,7 @@ class PassDetailPriceBar extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "${pass.discountedPercentage}%",
+                    "35%",
                     style: TextStyle(
                       fontSize: 23,
                       fontWeight: FontWeight.bold,

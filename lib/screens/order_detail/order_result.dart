@@ -97,16 +97,16 @@ class _OrderResultState extends State<OrderResult> {
     return Column(
       children: <Widget>[
         OrderDetailItem(
-          passName: orderDetail.pass.name,
+          passName: orderDetail.passDetail.name,
           amount: orderDetail.amount,
-          price: orderDetail.pass.price,
+          price: orderDetail.passDetail.price,
           hasAdultLabel: orderDetail.childrenAmount > 0,
         ),
         if (orderDetail.childrenAmount > 0)
           OrderDetailItem(
-            passName: orderDetail.pass.name,
+            passName: orderDetail.passDetail.name,
             amount: orderDetail.childrenAmount,
-            price: orderDetail.pass.childrenPrice.price,
+            price: orderDetail.passDetail.price,
             hasChildrenLabel: true,
           ),
       ],
@@ -268,7 +268,7 @@ ElevatedButton _buildGoToUserPassButton(BuildContext context) {
       Navigator.push(
         context,
         CupertinoPageRoute(builder: (context) {
-          return UserPasses();
+          // return UserPasses();
         }),
       );
     },

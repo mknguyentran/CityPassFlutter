@@ -16,59 +16,59 @@ class UserPassDetailTopInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          "Đưa mã này cho nhân viên soát vé",
-          style: TextStyle(fontSize: 16),
-        ),
-        Container(
-          padding: EdgeInsets.all(kDefaultPadding),
-          alignment: Alignment.center,
-          child: QrImage(
-            data: pass.name,
-            version: QrVersions.auto,
-            size: percentageOfScreenHeight(27),
-          ),
-        ),
-        Text(
-          "HẾT HẠN VÀO ${simpleDateFormat.format(pass.expiredAt)}"
-              .toUpperCase(),
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              CupertinoPageRoute(
-                builder: (context) {
-                  return PassDetail(
-                    pass: pass.originalPass,
-                  );
-                },
-              ),
-            );
-          },
-          style: ButtonStyle(
-            foregroundColor: MaterialStateProperty.all(primaryLightColor),
-            textStyle: MaterialStateProperty.all(
-              TextStyle(
-                fontSize: 14,
-              ),
-            ),
-          ),
-          child: SizedBox(
-            width: 80,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(CupertinoIcons.arrow_counterclockwise_circle_fill),
-                Text("Mua lại")
-              ],
-            ),
-          ),
-        )
-      ],
-    );
+  //   return Column(
+  //     children: [
+  //       Text(
+  //         "Đưa mã này cho nhân viên soát vé",
+  //         style: TextStyle(fontSize: 16),
+  //       ),
+  //       Container(
+  //         padding: EdgeInsets.all(kDefaultPadding),
+  //         alignment: Alignment.center,
+  //         child: QrImage(
+  //           data: pass.name,
+  //           version: QrVersions.auto,
+  //           size: percentageOfScreenHeight(27),
+  //         ),
+  //       ),
+  //       Text(
+  //         "HẾT HẠN VÀO ${simpleDateFormat.format(pass.expiredAt)}"
+  //             .toUpperCase(),
+  //         style: TextStyle(fontWeight: FontWeight.bold),
+  //       ),
+  //       TextButton(
+  //         onPressed: () {
+  //           Navigator.push(
+  //             context,
+  //             CupertinoPageRoute(
+  //               builder: (context) {
+  //                 return PassDetail(
+  //                   pass: pass.originalPass,
+  //                 );
+  //               },
+  //             ),
+  //           );
+  //         },
+  //         style: ButtonStyle(
+  //           foregroundColor: MaterialStateProperty.all(primaryLightColor),
+  //           textStyle: MaterialStateProperty.all(
+  //             TextStyle(
+  //               fontSize: 14,
+  //             ),
+  //           ),
+  //         ),
+  //         child: SizedBox(
+  //           width: 80,
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: [
+  //               Icon(CupertinoIcons.arrow_counterclockwise_circle_fill),
+  //               Text("Mua lại")
+  //             ],
+  //           ),
+  //         ),
+  //       )
+  //     ],
+  //   );
   }
 }

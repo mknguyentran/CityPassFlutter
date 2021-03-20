@@ -16,7 +16,6 @@ class ActivityRecommendationVertical extends StatelessWidget {
       : super(key: key);
 
   final String title;
-  //final List<Activity> children;
   final List<TicketType> children;
   final bool hasPadding;
 

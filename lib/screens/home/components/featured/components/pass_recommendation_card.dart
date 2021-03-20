@@ -1,5 +1,5 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/model/pass.dart';
+import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/shared/info_tag.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class PassRecommendationCard extends StatelessWidget {
           height: 180,
           decoration: BoxDecoration(
               image: DecorationImage(
-            image: AssetImage(pass.image),
+            image: AssetImage(''),
             fit: BoxFit.cover,
           )),
         ),
@@ -41,20 +41,21 @@ class PassRecommendationCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "${pass.city.name} • ${pass.destinationAmount} địa điểm",
-                    style: TextStyle(color: subtitleTextColor),
-                  ),
+                  // Text(
+                  //   "${"city"} • ${pass.destinationAmount} địa điểm",
+                  //   style: TextStyle(color: subtitleTextColor),
+                  // ),
                   Wrap(
                     spacing: 10,
                     children: [
-                      if(pass.isGoodSeller)
+                      if(true)
                       InfoTag(
                         "Bán chạy",
                         backgroundColor: lightGreenBackgroundColor,
                         foregroundColor: Colors.green[800],
                       ),
-                      if(pass.isBestSaving)
+                      //if(pass.isBestSaving)
+                      if(true)
                       InfoTag(
                         "Tiết kiệm",
                         backgroundColor: orangeBackgroundColor,
@@ -78,14 +79,14 @@ class PassRecommendationCard extends StatelessWidget {
                     color: starYellowColor,
                   ),
                   Text(
-                    pass.overallRating.toString(),
+                    pass.rate.toString(),
                     style: TextStyle(fontSize: 14, color: starYellowColor),
                   )
                 ],
               ),
               VerticalSpacing(of: 35),
               Text(
-                vndCurrencyFormat.format(pass.originalPrice),
+                vndCurrencyFormat.format(pass.price),
                 style: TextStyle(
                   color: fadedTextColor,
                   decoration: TextDecoration.lineThrough,
@@ -100,7 +101,7 @@ class PassRecommendationCard extends StatelessWidget {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "-${pass.discountedPercentage}%",
+                    "30%",
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
     tabs = [
       Explore(city: _currentCity),
       Locations(city: _currentCity),
-      UserPasses(),
+     // UserPasses(),
       Passes(city: _currentCity),
       Account()
     ];
@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Navigator.push(
             context,
             CupertinoPageRoute(builder: (context) {
-              return UserPasses();
+             // return UserPasses();
             }),
           );
         },

@@ -1,13 +1,16 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/model/pass.dart';
+import 'package:city_pass/screens/user_pass_detail/components/user_pass_detail_top_info.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:city_pass/models/passDetailInformation.dart';
 
 class PassDetailHeader extends StatelessWidget {
-  final Pass pass;
+  // final Pass pass;
+  final PassDetailInformation passDetail;
   const PassDetailHeader({
     Key key,
-    @required this.pass,
+    @required this.passDetail,
   }) : super(key: key);
 
   @override
@@ -19,7 +22,7 @@ class PassDetailHeader extends StatelessWidget {
         Container(
             height: percentageOfScreenHeight(30),
             child: SizedBox.expand(
-                child: Image.asset(pass.image, fit: BoxFit.cover))),
+                child: Image.asset('', fit: BoxFit.cover))),
         Positioned(
             bottom: 0,
             child: Container(
@@ -34,7 +37,7 @@ class PassDetailHeader extends StatelessWidget {
                   Expanded(
                     flex: 5,
                     child: Text(
-                      pass.name,
+                      passDetail.name,
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -52,7 +55,7 @@ class PassDetailHeader extends StatelessWidget {
                           color: Colors.amber,
                         ),
                         Text(
-                          pass.overallRating.toString(),
+                          passDetail.rate.toString(),
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

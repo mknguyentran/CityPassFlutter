@@ -1,4 +1,5 @@
 import 'package:city_pass/constants.dart';
+import 'dart:math';
 import 'package:city_pass/mockupData/mockup_activity.dart';
 import 'package:city_pass/model/activity.dart';
 import 'package:city_pass/model/city.dart';
@@ -13,7 +14,6 @@ import 'package:flutter/material.dart';
 
 class Locations extends StatefulWidget {
   final City city;
-  
 
   const Locations({Key key, this.city}) : super(key: key);
 
@@ -22,43 +22,54 @@ class Locations extends StatefulWidget {
 }
 
 class _LocationsState extends State<Locations> {
-
-   List<TicketType> listRealActivitiesNearYou_3;
- void initState() {
+  Future<List<TicketType>> listNearYouActivities;
+  void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      
-      List<TicketType> values =
-          await TicketTypeAPI().getAllTicketTypes(onError: (msg) {
-            
-            print("Mistake: " + msg);
-          });
-      listRealActivitiesNearYou_3 = values;
+    listNearYouActivities = TicketTypeAPI().getAllTicketTypes(onError: (msg) {
+      print(msg);
     });
-    
   }
+
   @override
   Widget build(BuildContext context) {
-    List<Activity> _favoriteList = new List.from(mockupActivities);
-    _favoriteList.shuffle();
-    _favoriteList = _favoriteList.sublist(0, 4);
+    List<TicketType> _favoriteList;
+
+    // void convertList() async {
+    //   _favoriteList = await Future.value(listNearYouActivities);
+    // }
+
+    // convertList();
+
+    // _favoriteList.shuffle();
+    // _favoriteList = _favoriteList.sublist(0, 4);
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: kDefaultPadding, vertical: 10),
-        child: Column(
-          children: [
-            TopDestinations(activityList: _favoriteList),
-            VerticalSpacing(of: 60,),
-            ActivityRecommendationVertical(
-              hasPadding: false,
-              title: "Gần bạn nhất",
-              //children: mockupNearYouActivities_3,
-              children: listRealActivitiesNearYou_3,
-            ),
-          ],
-        ),
-      ),
+          padding: const EdgeInsets.symmetric(
+              horizontal: kDefaultPadding, vertical: 10),
+          child: FutureBuilder(
+            future: listNearYouActivities,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                var rng = new Random();
+                int ranInt =  rng.nextInt(snapshot.data.length - 1 - 4);
+                _favoriteList = snapshot.data.sublist(ranInt,ranInt + 4);
+                return Column(
+                  children: [
+                    TopDestinations(activityList: _favoriteList),
+                    VerticalSpacing(
+                      of: 60,
+                    ),
+                    ActivityRecommendationVertical(
+                      hasPadding: false,
+                      title: "Gần bạn nhất",
+                      children: snapshot.data,
+                    ),
+                  ],
+                );
+              }
+              return CircularProgressIndicator();
+            },
+          )),
     );
   }
 }
@@ -70,7 +81,7 @@ class TopDestinations extends StatelessWidget {
   })  : assert(activityList.length == 4),
         super(key: key);
 
-  final List<Activity> activityList;
+  final List<TicketType> activityList;
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +141,8 @@ class TopDestinationCard extends StatelessWidget {
     @required this.activity,
   }) : super(key: key);
 
-  final Activity activity;
+  // final Activity activity;
+  final TicketType activity;
 
   @override
   Widget build(BuildContext context) {
@@ -140,9 +152,9 @@ class TopDestinationCard extends StatelessWidget {
           context,
           CupertinoPageRoute(
             builder: (context) {
-              // return ActivityDetail(
-              //   activity: activity,
-              // );
+              return ActivityDetail(
+                ticketTypeID: activity.id,
+              );
             },
           ),
         );
@@ -154,7 +166,7 @@ class TopDestinationCard extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
             image: DecorationImage(
-                image: AssetImage(activity.image), fit: BoxFit.cover)),
+                image: AssetImage(activity.imageUrl ?? ''), fit: BoxFit.cover)),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
@@ -164,7 +176,7 @@ class TopDestinationCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(6),
             child: Text(
-              activity.getShortName,
+              activity.name,
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

@@ -1,22 +1,23 @@
 import 'package:city_pass/model/discount_code.dart';
 import 'package:city_pass/model/pass.dart';
 import 'package:city_pass/model/payment_method.dart';
+import 'package:city_pass/models/passDetailInformation.dart';
 
 class OrderDetail {
-  final Pass pass;
+  final PassDetailInformation passDetail;
   final int amount, childrenAmount;
   final PaymentMethod paymentMethod;
   final DiscountCode discountCode;
 
-  OrderDetail(this.pass, this.amount, this.childrenAmount, this.paymentMethod,
+  OrderDetail(this.passDetail, this.amount, this.childrenAmount, this.paymentMethod,
       this.discountCode);
 
   double get total {
-    if (pass.childrenPrice != null) {
-      return (pass.price * amount) +
-          (pass.childrenPrice.price * childrenAmount);
+    if (passDetail.price != null) {
+      return (passDetail.price * amount) +
+          (passDetail.price * childrenAmount);
     } else {
-      return (pass.price * amount);
+      return (passDetail.price * amount);
     }
   }
 

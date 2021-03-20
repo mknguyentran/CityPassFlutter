@@ -1,23 +1,36 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/model/pass.dart';
+import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/screens/pass_detail/components/pass_detail_content.dart';
 import 'package:city_pass/screens/pass_detail/components/pass_detail_header.dart';
 import 'package:city_pass/screens/pass_detail/components/pass_detail_price_bar.dart';
+import 'package:city_pass/service/pass_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_guid/flutter_guid.dart';
+import 'package:city_pass/models/passDetailInformation.dart';
 import 'components/choose_pass_amount.dart';
 
 class PassDetail extends StatefulWidget {
-  final Pass pass;
+  final Guid passId;
 
-  const PassDetail({Key key, @required this.pass}) : super(key: key);
+  const PassDetail({Key key, @required this.passId}) : super(key: key);
 
   @override
   _PassDetailState createState() => _PassDetailState();
 }
 
 class _PassDetailState extends State<PassDetail> {
+  Future<PassDetailInformation> passDetail;
+  @override
+  void initState() {
+    super.initState();
+    passDetail = PassAPI().getPassByID(
+        onError: (msg) {
+          print(msg);
+        },
+        id: widget.passId.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,18 +38,25 @@ class _PassDetailState extends State<PassDetail> {
       appBar: _buildAppBar(context),
       body: SingleChildScrollView(
         clipBehavior: Clip.none,
-        child: Column(
-          children: [
-            PassDetailHeader(pass: widget.pass),
-            PassDetailPriceBar(pass: widget.pass),
-            Divider(
-              color: dividerColor,
-              thickness: 10,
-              height: 20,
-            ),
-            PassDetailContent(pass: widget.pass),
-          ],
-        ),
+        child: FutureBuilder(
+            future: passDetail,
+            builder: (context, snapshot) {
+             if(snapshot.hasData){
+                return Column(
+                children: [
+                  PassDetailHeader(passDetail: snapshot.data),
+                  PassDetailPriceBar(passDetail: snapshot.data),
+                  Divider(
+                    color: dividerColor,
+                    thickness: 10,
+                    height: 20,
+                  ),
+                  PassDetailContent(passDetail: snapshot.data),
+                ],
+              );
+             }
+                return CircularProgressIndicator();
+            }),
       ),
       bottomNavigationBar: BottomAppBar(
         child: Padding(
@@ -53,34 +73,48 @@ class _PassDetailState extends State<PassDetail> {
   }
 
   ElevatedButton _buildBuyButton(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(primaryLightColor),
-        textStyle: MaterialStateProperty.all(
-          TextStyle(
-            fontFamily: "SFProRounded",
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-      ),
-      onPressed: () {
-        showModalBottomSheet<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return ChoosePassAmount(pass: widget.pass);
-            });
-      },
-      child: Text(
-        'Mua ngay',
-        style: TextStyle(fontSize: 20),
-      ),
-    );
+   
+            return ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(primaryLightColor),
+                textStyle: MaterialStateProperty.all(
+                  TextStyle(
+                    fontFamily: "SFProRounded",
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              onPressed: () {
+                showModalBottomSheet<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return FutureBuilder(
+                        future: passDetail,
+                        builder: (context,snapshot){
+                          if(snapshot.hasData){
+                            return ChoosePassAmount(
+                              passDetail: snapshot.data,
+                            );
+                          }
+                            return CircularProgressIndicator();
+                        },
+                      );
+                    });
+              },
+              child: Text(
+                'Mua ngay',
+                style: TextStyle(fontSize: 20),
+              ),
+            );
+          }
+       
+    
   }
 
   AppBar _buildAppBar(BuildContext context) {
@@ -101,4 +135,5 @@ class _PassDetailState extends State<PassDetail> {
       ],
     );
   }
-}
+
+
