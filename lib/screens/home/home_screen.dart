@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:city_pass/mockupData/mockup_city.dart';
 import 'package:city_pass/models/city.dart';
 import 'package:city_pass/screens/home/components/account/account.dart';
 import 'package:city_pass/screens/home/components/city_picker/city_picker.dart';
@@ -41,15 +40,17 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _removeCity() {
-    setState(() {
-      _currentCity = null;
-    });
-  }
+  // void _removeCity() {
+  //   setState(() {
+  //     _currentCity = null;
+  //   });
+  // }
 
   @override
   void initState() {
     super.initState();
+    //default city
+    _currentCity = hcmCity;
     tabs = [
       Explore(city: _currentCity),
       Locations(city: _currentCity),
@@ -74,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
           CustomNavItem(
               icon: CupertinoIcons.compass,
               selectedIcon: CupertinoIcons.compass_fill,
-              label: _currentCity != null ? _currentCity.name : "Khám phá"),
+              label: "Khám phá"),
           CustomNavItem(
               icon: Icons.location_on_outlined,
               selectedIcon: Icons.location_on,
@@ -106,7 +107,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar buildAppBar(int tab, [String hintText]) {
     var _brightness = Brightness.dark;
-    var _foregroundColor = Colors.white;
     var _bottom = PreferredSize(
       preferredSize: Size.fromHeight(55),
       child: Padding(
@@ -137,45 +137,40 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       brightness: _brightness,
       elevation: 5,
+      centerTitle: false,
       leading: Container(),
-      // title: GestureDetector(
-      //   onTap: () {
-      //     _navigateToCityPicker();
-      //   },
-      //   child: Column(
-      //     crossAxisAlignment: CrossAxisAlignment.start,
-      //     children: [
-      //       Text(
-      //         "Hiển thị đề xuất tại".toUpperCase(),
-      //         style: TextStyle(
-      //           fontWeight: FontWeight.w400,
-      //           fontSize: 14
-      //         ),
-      //       ),
-      //       VerticalSpacing(of:3),
-      //       Row(
-      //         children: [
-      //           Text(
-      //             _currentCity != null ? _currentCity.name : "Việt Nam",
-      //             style: TextStyle(
-      //                 color: _foregroundColor,
-      //                 fontSize: 18,
-      //                 fontWeight: FontWeight.bold),
-      //           ),
-      //           Icon(
-      //             Icons.arrow_drop_down,
-      //             color: _foregroundColor,
-      //           ),
-      //         ],
-      //       ),
-      //     ],
-      //   ),
-      // ),
+      leadingWidth: 0,
+      titleSpacing: kDefaultPadding,
       title: GestureDetector(
-        child: Text("CityPass"),
         onTap: () {
-          _onItemTapped(0);
+          _navigateToCityPicker();
         },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Hiển thị đề xuất tại".toUpperCase(),
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+            ),
+            VerticalSpacing(of: 3),
+            Row(
+              children: [
+                Text(
+                  // _currentCity != null ? _currentCity.name : "Việt Nam",
+                  _currentCity.name,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       bottom: _bottom,
     );
@@ -191,8 +186,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (pickedCity is City) {
       _changeCity(pickedCity);
-    } else if (pickedCity is bool) {
-      _removeCity();
     }
+    // else if (pickedCity is bool) {
+    //   _removeCity();
+    // }
   }
 }

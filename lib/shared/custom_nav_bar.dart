@@ -50,9 +50,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
       ),
       child: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: kDefaultPadding,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal:20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: widget.children.map((item) {
@@ -65,11 +63,11 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   isFocused ? _focusedAction() : _changeIndex(index);
                 },
                 child: Container(
-                  padding: EdgeInsets.all(0),
+                  padding: EdgeInsets.symmetric(horizontal:0),
                   height: getProportionateScreenWidth(55),
                   width: getProportionateScreenWidth(55),
                   decoration: BoxDecoration(
-                    color: widget.backgroundColor,
+                    color: isFocused ? widget.backgroundColor : null,
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [if (isFocused) kDefaultShadow],
                   ),
@@ -98,10 +96,12 @@ class _CustomNavBarState extends State<CustomNavBar> {
           Text(
             item.label,
             style: TextStyle(
-              fontSize: 11,
-              fontWeight: FontWeight.bold,
+              fontSize: 10,
+              fontWeight: FontWeight.w600,
               color: isCurrentIndex ? widget.itemColor : kIconColor,
             ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           )
         ],
       );
