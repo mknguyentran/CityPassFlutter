@@ -55,6 +55,7 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
                         Text(
                           "${activity.city.name} • ${activity.visitedCounter} lượt tham quan",
                           style: TextStyle(color: subtitleTextColor),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),

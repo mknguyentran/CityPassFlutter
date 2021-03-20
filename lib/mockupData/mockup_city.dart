@@ -19,7 +19,7 @@ City phanThietCity = City("Phan Thiết");
 City dalatCity = City("Đà Lạt");
 
 
-City hcmCity = City("TP. HCM");
+City hcmCity = City("TP. Hồ Chí Minh");
 City vungTauCity = City("Vũng Tàu");
 City dongThapCity = City("Đồng Tháp");
 City benTreCity = City("Bến Tre");
