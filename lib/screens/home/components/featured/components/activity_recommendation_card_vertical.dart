@@ -55,7 +55,7 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "${activity.city} • 5000 lượt tham quan",
+                          "${activity.city}",
                           style: TextStyle(color: subtitleTextColor),
                         ),
                       ],
@@ -65,8 +65,10 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
                       activity.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 14,),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
                     ),
                     VerticalSpacing(of: 5),
                     Wrap(
@@ -103,20 +105,20 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
                     ),
                   ],
                 ),
-            //     Column(
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //       children: [
-            //         if (activity.travelDistance != null &&
-            //             activity.travelTime != null)
-            //           Padding(
-            //             padding: const EdgeInsets.only(top: 10),
-            //             child: Text(
-            //               "${activity.travelDistance}km • ${activity.travelTime} phút",
-            //               style: TextStyle(color: subtitleTextColor),
-            //             ),
-            //           )
-            //       ],
-            //     )
+                //     Column(
+                //       crossAxisAlignment: CrossAxisAlignment.start,
+                //       children: [
+                //         if (activity.travelDistance != null &&
+                //             activity.travelTime != null)
+                //           Padding(
+                //             padding: const EdgeInsets.only(top: 10),
+                //             child: Text(
+                //               "${activity.travelDistance}km • ${activity.travelTime} phút",
+                //               style: TextStyle(color: subtitleTextColor),
+                //             ),
+                //           )
+                //       ],
+                //     )
               ],
             ),
           ),

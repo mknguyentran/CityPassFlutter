@@ -51,7 +51,7 @@ class ActivityRecommendationCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "${activity.city} • 3000 lượt tham quan",
+                          "${activity.city}",
                           style: TextStyle(color: subtitleTextColor),
                         ),
                       ],

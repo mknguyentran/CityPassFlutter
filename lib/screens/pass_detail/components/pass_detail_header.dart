@@ -20,9 +20,11 @@ class PassDetailHeader extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         Container(
-            height: percentageOfScreenHeight(30),
-            child: SizedBox.expand(
-                child: Image.asset('', fit: BoxFit.cover))),
+          height: percentageOfScreenHeight(30),
+          // child: SizedBox.expand(
+          //   child: Image.asset('', fit: BoxFit.cover),
+          // ),
+        ),
         Positioned(
             bottom: 0,
             child: Container(
