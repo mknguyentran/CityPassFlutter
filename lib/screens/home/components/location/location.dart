@@ -2,7 +2,7 @@ import 'package:city_pass/constants.dart';
 import 'dart:math';
 import 'package:city_pass/mockupData/mockup_activity.dart';
 import 'package:city_pass/model/activity.dart';
-import 'package:city_pass/model/city.dart';
+import 'package:city_pass/models/city.dart';
 import 'package:city_pass/screens/activity_detail/activity_detail.dart';
 import 'package:city_pass/screens/home/components/featured/components/activity_recommendation_vertical.dart';
 import 'package:city_pass/service/ticketType_services.dart';

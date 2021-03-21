@@ -1,4 +1,4 @@
-import 'package:city_pass/model/city.dart';
+import 'package:city_pass/models/city.dart';
 import 'package:flutter/material.dart';
 
 class Activity {

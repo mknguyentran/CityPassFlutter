@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:city_pass/constants.dart';
 
 import 'package:city_pass/mockupData/mockup_pass.dart';
-import 'package:city_pass/model/city.dart';
+import 'package:city_pass/models/city.dart';
 import 'package:city_pass/models/pass.dart';
 
 import 'package:city_pass/screens/home/components/featured/components/activity_recommendation.dart';
