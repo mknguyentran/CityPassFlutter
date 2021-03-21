@@ -7,12 +7,14 @@ class Pass{
   bool isSelling;
   double rate;
   var feedback;
+  String imageUrl;
 
    Pass.formJson(Map<String, dynamic> json)
       : this.id = new Guid(json['id']),
         this.name = json['name'],
         this.price = json['price'],
         this.isSelling = json['isSelling'],
+        this.imageUrl = json['urlImage'],
         this.rate = json['rate'],
         this.feedback = json['feedbacks'];
 

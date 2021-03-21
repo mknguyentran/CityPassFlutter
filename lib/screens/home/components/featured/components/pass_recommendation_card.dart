@@ -28,8 +28,8 @@ class PassRecommendationCard extends StatelessWidget {
           height: 180,
           decoration: BoxDecoration(
               image: DecorationImage(
-            image: AssetImage(''),
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
+            image: NetworkImage(pass.imageUrl ?? ''),
           )),
         ),
         Container(
@@ -48,19 +48,19 @@ class PassRecommendationCard extends StatelessWidget {
                   Wrap(
                     spacing: 10,
                     children: [
-                      if(true)
-                      InfoTag(
-                        "Bán chạy",
-                        backgroundColor: lightGreenBackgroundColor,
-                        foregroundColor: Colors.green[800],
-                      ),
+                      if (true)
+                        InfoTag(
+                          "Bán chạy",
+                          backgroundColor: lightGreenBackgroundColor,
+                          foregroundColor: Colors.green[800],
+                        ),
                       //if(pass.isBestSaving)
-                      if(true)
-                      InfoTag(
-                        "Tiết kiệm",
-                        backgroundColor: orangeBackgroundColor,
-                        foregroundColor: primaryDarkColor,
-                      ),
+                      if (true)
+                        InfoTag(
+                          "Tiết kiệm",
+                          backgroundColor: orangeBackgroundColor,
+                          foregroundColor: primaryDarkColor,
+                        ),
                     ],
                   )
                 ],
