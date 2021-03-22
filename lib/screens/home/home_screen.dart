@@ -2,8 +2,10 @@ import 'dart:ui';
 
 import 'package:city_pass/models/city.dart';
 import 'package:city_pass/screens/home/components/account/account.dart';
+import 'package:city_pass/screens/home/components/account/login_register/login.dart';
 import 'package:city_pass/screens/home/components/city_picker/city_picker.dart';
 import 'package:city_pass/screens/home/components/search/search.dart';
+import 'package:city_pass/screens/home/components/explore/explore.dart';
 import 'package:city_pass/shared/search_field.dart';
 import 'package:city_pass/screens/home/components/location/location.dart';
 import 'package:city_pass/screens/home/components/passes/passes.dart';
@@ -11,11 +13,11 @@ import 'package:city_pass/screens/user_passes/user_passes.dart';
 import 'package:city_pass/shared/custom_nav_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:city_pass/screens/home/components/featured/explore.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:intl/date_symbol_data_local.dart';
-
+import 'package:provider/provider.dart';
+import '../../blocs/auth_bloc.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key, this.currentCity}) : super(key: key);
 
@@ -49,6 +51,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    var authBloc = Provider.of<AuthBloc>(context, listen: false);
+    authBloc.currentUser.listen((user) {
+      if(user == null) {
+        Navigator.push(
+            context, CupertinoPageRoute(builder: (context) => LoginForm()));
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     initializeDateFormatting("vi_VN", null);
     SizeConfig().init(context);
@@ -59,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
       Passes(city: _currentCity),
       Account()
     ];
+
     return Scaffold(
       appBar: buildAppBar(_currentIndex),
       body: tabs.elementAt(_currentIndex),
@@ -173,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       brightness: _brightness,
       elevation: 5,
-      centerTitle: false,
+      leading: Container(),
       title: GestureDetector(
         onTap: () {
           _navigateToCityPicker();
@@ -207,6 +222,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+      // title: GestureDetector(
+      //   child: Text("CityPass"),
+      //   onTap: () {
+      //     _onItemTapped(0);
+      //   },
+      // ),
       bottom: _bottom,
     );
   }

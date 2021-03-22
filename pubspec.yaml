@@ -42,7 +42,13 @@ dependencies:
   dotted_line: ^3.0.0
   http: ^0.12.0+2
   flutter_guid: ^0.1.0
-
+  firebase_core: ^0.7.0
+  firebase_auth: "^0.20.1"
+  google_sign_in: ^4.5.9
+  provider: ^4.3.2+4
+  flutter_signin_button: ^2.0.0-nullsafety.0
+  flutter_facebook_login: ^3.0.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -75,6 +81,9 @@ flutter:
     - assets/images/suoi_khoang_than_tai/
     - assets/images/van_mieu_quoc_tu_giam/
     - assets/images/suoi_tien/
+    - assets/images/activity_category/
+    - assets/images/tini_world/
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

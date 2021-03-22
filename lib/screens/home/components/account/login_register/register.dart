@@ -15,7 +15,6 @@ class _RegisterFormState extends State<RegisterForm> {
   TextEditingController _nameController = new TextEditingController();
   TextEditingController _passwordConfirmController =
       new TextEditingController();
-  
 
   bool _invalidEmail = false;
   bool _invalidPassword = false;
@@ -35,8 +34,8 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: _buildAppBar(context),
         body: Container(
-            constraints: BoxConstraints.expand(),
             color: Colors.white,
             alignment: Alignment.bottomCenter,
             child: SingleChildScrollView(
@@ -182,7 +181,6 @@ class _RegisterFormState extends State<RegisterForm> {
                           ),
                         ),
                       ),
-
                       Container(
                         alignment: Alignment.topLeft,
                         child: Text(
@@ -337,5 +335,23 @@ class _RegisterFormState extends State<RegisterForm> {
         .difference(
             DateTime(comparedTime.year, comparedTime.month, comparedTime.day))
         .inDays;
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      brightness: Brightness.light,
+      leading: IconButton(
+        color: primaryDarkColor,
+        icon: Icon(
+          Icons.chevron_left_rounded,
+          size: 30,
+        ),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+    );
   }
 }

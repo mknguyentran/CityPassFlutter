@@ -1,7 +1,12 @@
 import 'package:city_pass/constants.dart';
+import 'package:city_pass/screens/history/history.dart';
+import 'package:city_pass/screens/home/components/account/login_register/login.dart';
 import 'package:city_pass/size_config.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../../blocs/auth_bloc.dart';
 
 class Account extends StatefulWidget {
   @override
@@ -9,8 +14,28 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
+  User _user;
+  @override
+  void initState() {
+    super.initState();
+    var authBloc = Provider.of<AuthBloc>(context, listen: false);
+    authBloc.currentUser.listen((user) {
+      if (user == null) {
+        setState(() {
+          Navigator.push(
+              context, CupertinoPageRoute(builder: (context) => LoginForm()));
+        });
+      }
+      setState(() {
+        _user = user;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    //var user = context.select<AuthBloc, User>((value) => value.currentUser.first);
+    var authBloc = Provider.of<AuthBloc>(context);
     return SingleChildScrollView(
         child: Padding(
       padding:
@@ -20,12 +45,19 @@ class _AccountState extends State<Account> {
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: Icon(
-                  CupertinoIcons.person_circle_fill,
-                  size: 75,
-                ),
-              ),
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    child: Image(
+                      width: 100,
+                      height: 100,
+                      image: NetworkImage(_user != null ? _user.photoURL : ''),
+                    ),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 1, color: Colors.red)),
+                  )),
               SizedBox(
                 height: 50,
                 child: Column(
@@ -33,7 +65,7 @@ class _AccountState extends State<Account> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Ngô Trường An",
+                      _user != null ? _user.displayName : '',
                       style: TextStyle(
                           fontSize: 20,
                           color: primaryDarkColor,
@@ -56,47 +88,26 @@ class _AccountState extends State<Account> {
                   borderRadius: BorderRadius.circular(10)),
               child: Column(
                 children: [
-                  ListTile(
-                    dense: true,
-                    leading: Icon(
-                      Icons.favorite,
-                      color: Colors.red,
+                  GestureDetector(
+                    onTap: clickToHistory,
+                    child: ListTile(
+                      dense: true,
+                      leading: Icon(
+                        Icons.history,
+                        color: Colors.yellow.shade700,
+                      ),
+                      title: Text("Lịch sử giao dịch"),
                     ),
-                    title: Text("Danh sách yêu thích"),
-                  ),
-                  Divider(thickness: 1),
-                  ListTile(
-                    dense: true,
-                    leading: Icon(
-                      Icons.history,
-                      color: Colors.yellow.shade700,
-                    ),
-                    title: Text("Lịch sử giao dịch"),
-                  ),
-                  Divider(thickness: 1),
-                  ListTile(
-                    dense: true,
-                    leading: Icon(
-                      CupertinoIcons.creditcard_fill,
-                      color: primaryDarkColor,
-                    ),
-                    title: Text("Phương thức thanh toán"),
-                  ),
-                  Divider(thickness: 1),
-                  ListTile(
-                    dense: true,
-                    leading: Icon(
-                      CupertinoIcons.text_bubble_fill,
-                      color: Colors.orange,
-                    ),
-                    title: Text("Lịch sử đánh giá"),
                   ),
                 ],
               )),
           VerticalSpacing(of: 20),
           Container(
               decoration: BoxDecoration(
-                  color: Colors.white, boxShadow: [kDefaultShadow]),
+                color: Colors.white,
+                boxShadow: [kDefaultShadow],
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: Column(
                 children: [
                   ListTile(
@@ -119,29 +130,49 @@ class _AccountState extends State<Account> {
                 ],
               )),
           VerticalSpacing(of: 50),
-          Container(
-              padding: EdgeInsets.symmetric(vertical: 15),
-              width: double.infinity,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(3, 3),
-                      blurRadius: 10,
-                      color: Color(0xFFE5B4AA).withOpacity(0.3),
-                    )
-                  ],
-                  borderRadius: BorderRadius.circular(10)),
-              child: Text(
-                "Đăng xuất",
-                style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
+          GestureDetector(
+              onTap: () {
+                authBloc.logout();
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) {
+                      return LoginForm();
+                    },
+                  ),
+                );
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 15),
+                width: double.infinity,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(3, 3),
+                        blurRadius: 10,
+                        color: Color(0xFFE5B4AA).withOpacity(0.3),
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(10)),
+                child: Text(
+                  "Đăng xuất",
+                  style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
               ))
         ],
       ),
     ));
+  }
+
+  void clickToHistory() {
+    setState(() {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HistoryForm()));
+    });
   }
 }

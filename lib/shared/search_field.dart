@@ -1,3 +1,5 @@
+import 'package:city_pass/screens/search_result/search_result.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -11,7 +13,8 @@ class SearchField extends StatelessWidget {
     this.boxShadow,
     this.onChange,
     this.onTap,
-    this.onSubmit,
+    this.isButton = true,
+    this.onSubmitted,
   }) : super(key: key);
 
   final double width, height;
@@ -19,39 +22,55 @@ class SearchField extends StatelessWidget {
   final List<BoxShadow> boxShadow;
   final void Function(String) onChange;
   final void Function() onTap;
-  final void Function(String) onSubmit;
+  final bool isButton;
+  final Function(String) onSubmitted;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: boxShadow,
-      ),
-      child: TextField(
-        onChanged: this.onChange,
-        onTap: this.onTap,
-        onSubmitted: this.onSubmit,
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: TextStyle(
+    return GestureDetector(
+      onTap: () {
+        if (isButton) {
+          Navigator.push(
+            context,
+            CupertinoPageRoute(
+              builder: (context) {
+                return SearchResult();
+              },
+            ),
+          );
+        }
+      },
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: boxShadow,
+        ),
+        child: TextField(
+          enabled: !isButton,
+          autofocus: !isButton,
+          onSubmitted: onSubmitted,
+          decoration: InputDecoration(
+            hintText: hintText,
+            hintStyle: TextStyle(
               fontSize: 12,
-              color: primaryDarkColor,),
-          border: InputBorder.none,
-          focusedBorder: InputBorder.none,
-          enabledBorder: InputBorder.none,
-          errorBorder: InputBorder.none,
-          disabledBorder: InputBorder.none,
-          suffixIcon: Icon(
-            Icons.search,
-            color: primaryDarkColor,
-          ),
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: kDefaultPadding,
-            vertical: height/4
+              color: primaryDarkColor,
+            ),
+            border: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            errorBorder: InputBorder.none,
+            disabledBorder: InputBorder.none,
+            suffixIcon: Icon(
+              Icons.search,
+              color: primaryDarkColor,
+            ),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: kDefaultPadding,
+              vertical: height / 4,
+            ),
           ),
         ),
       ),

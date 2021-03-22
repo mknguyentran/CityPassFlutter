@@ -35,18 +35,18 @@ class _SearchPageState extends State<SearchPage> {
               width: double.infinity,
               hintText: 'Tìm kiếm combo, địa điểm, ...',
               boxShadow: [kDefaultShadow],
-              onSubmit: (value) {
-                setState(() {
-                  _searchValue = value.trim();
-                });
-                var currentCity;
-                if (widget.city != null) {
-                  currentCity = widget.city;
-                }
+              // onSubmit: (value) {
+              //   setState(() {
+              //     _searchValue = value.trim();
+              //   });
+              //   var currentCity;
+              //   if (widget.city != null) {
+              //     currentCity = widget.city;
+              //   }
                 
-                ticketTypeList = TicketTypeAPI().getAllTicketTypes(city: currentCity, name: value.trim());
-                passList = PassAPI().getAllPasses(city: currentCity, name: value.trim()); 
-              },
+              //   ticketTypeList = TicketTypeAPI().getAllTicketTypes(city: currentCity, name: value.trim());
+              //   passList = PassAPI().getAllPasses(city: currentCity, name: value.trim()); 
+              // },
             ),
             FutureBuilder(
               future: ticketTypeList,
