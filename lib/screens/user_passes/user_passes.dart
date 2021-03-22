@@ -48,7 +48,7 @@ class _UserPassesState extends State<UserPasses> {
                                   context,
                                   CupertinoPageRoute(builder: (context) {
                                     return UserPassDetail(
-                                      pass: snapshot.data[index],
+                                      pass: snapshot.data[index].id,
                                     );
                                   }),
                                 );

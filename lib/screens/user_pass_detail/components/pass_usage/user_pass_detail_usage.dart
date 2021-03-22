@@ -93,7 +93,7 @@ class _UserPassDetailUsageState extends State<UserPassDetailUsage>
             //   visible: _selectedIndex == 0,
             // ),
             Visibility(
-              child: UsedDestinations(entryList: widget.pass.usedDestinationList,),
+             // child: UsedDestinations(entryList: widget.pass.usedDestinationList,),
               maintainState: true,
               visible: _selectedIndex == 1,
             ),
