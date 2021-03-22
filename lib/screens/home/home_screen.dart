@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     authBloc.currentUser.listen((user) {
       if(user == null) {
         Navigator.push(
-            context, CupertinoPageRoute(builder: (context) => LoginForm()));
+            context, CupertinoPageRoute(builder: (context) => HomeScreen()));
       }
     });
   }
