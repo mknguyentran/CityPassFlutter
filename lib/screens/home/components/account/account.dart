@@ -18,18 +18,18 @@ class _AccountState extends State<Account> {
   @override
   void initState() {
     super.initState();
-    var authBloc = Provider.of<AuthBloc>(context, listen: false);
-    authBloc.currentUser.listen((user) {
-      if (user == null) {
-        setState(() {
-          Navigator.push(
-              context, CupertinoPageRoute(builder: (context) => LoginForm()));
-        });
-      }
-      setState(() {
-        _user = user;
-      });
-    });
+    // var authBloc = Provider.of<AuthBloc>(context, listen: false);
+    // authBloc.currentUserChange.listen((user) {
+    //   if (user == null) {
+    //     setState(() {
+    //       Navigator.push(
+    //           context, CupertinoPageRoute(builder: (context) => LoginForm()));
+    //     });
+    //   }
+    //   setState(() {
+    //     _user = user;
+    //   });
+    // });
   }
 
   @override

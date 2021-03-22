@@ -8,6 +8,11 @@ class AuthService {
 
   Future<UserCredential> singnInWithCredential(AuthCredential credential) => auth.signInWithCredential(credential);
   Future<void> logOut() => auth.signOut();
-  Stream<User> get currentUser => auth.authStateChanges();
+  Stream<User> get currentUserChange => auth.authStateChanges();
   final googleSignin = GoogleSignIn(scopes: ['email']);
+
+  // GET UID
+  User getCurrentUser() {
+    return auth.currentUser;
+  }
 }
