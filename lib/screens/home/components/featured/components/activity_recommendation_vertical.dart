@@ -11,13 +11,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_guid/flutter_guid.dart';
 
 class ActivityRecommendationVertical extends StatelessWidget {
-  const ActivityRecommendationVertical(
-      {Key key, this.title, @required this.children, this.hasPadding = true})
-      : super(key: key);
+  const ActivityRecommendationVertical({
+    Key key,
+    this.title,
+    @required this.children,
+    this.hasPadding = true,
+    this.showAllCallback,
+    }) : super(key: key);
 
   final String title;
   final List<TicketType> children;
   final bool hasPadding;
+  final void Function() showAllCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +44,7 @@ class ActivityRecommendationVertical extends StatelessWidget {
           SectionTitle(
             title: title,
             hasPadding: hasPadding,
-            showAllCallback: () {},
+            showAllCallback: showAllCallback,
           ),
         VerticalSpacing(
           of: 20,

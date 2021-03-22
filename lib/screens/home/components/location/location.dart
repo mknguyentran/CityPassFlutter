@@ -23,16 +23,11 @@ class Locations extends StatefulWidget {
 
 class _LocationsState extends State<Locations> {
   Future<List<TicketType>> listNearYouActivities;
-  void initState() {
-    super.initState();
-    listNearYouActivities = TicketTypeAPI().getAllTicketTypes(onError: (msg) {
-      print(msg);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     List<TicketType> _favoriteList;
+    listNearYouActivities = TicketTypeAPI().getAllTicketTypes(city: widget.city);
 
     // void convertList() async {
     //   _favoriteList = await Future.value(listNearYouActivities);
@@ -50,24 +45,28 @@ class _LocationsState extends State<Locations> {
             future: listNearYouActivities,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                var rng = new Random();
-                int ranInt =  rng.nextInt(snapshot.data.length - 1 - 4);
-                _favoriteList = snapshot.data.sublist(ranInt,ranInt + 4);
+                // var rng = new Random();
+                // int ranInt =  rng.nextInt(snapshot.data.length - 1 - 4);
+                // _favoriteList = snapshot.data.sublist(ranInt,ranInt + 4);
                 return Column(
                   children: [
-                    TopDestinations(activityList: _favoriteList),
-                    VerticalSpacing(
-                      of: 60,
-                    ),
+                    // TopDestinations(activityList: _favoriteList),
+                    // VerticalSpacing(
+                    //   of: 60,
+                    // ),
                     ActivityRecommendationVertical(
                       hasPadding: false,
-                      title: "Gần bạn nhất",
+                      title: "",
                       children: snapshot.data,
                     ),
                   ],
                 );
+              } else if (!snapshot.hasData) {
+                return Container();
               }
-              return CircularProgressIndicator();
+              return Center(
+                child: CircularProgressIndicator()
+              );
             },
           )),
     );

@@ -11,10 +11,10 @@ class CityPicker extends StatefulWidget {
   const CityPicker({Key key}) : super(key: key);
 
   @override
-  CityPickerState createState() => CityPickerState();
+  _CityPickerState createState() => _CityPickerState();
 }
 
-class CityPickerState extends State<CityPicker> {
+class _CityPickerState extends State<CityPicker> {
   Future<List<City>> _cityList;
 
   @override
@@ -42,7 +42,7 @@ class CityPickerState extends State<CityPicker> {
                 hintText: "Tìm kiếm điểm đến,...",
                 boxShadow: [kDefaultShadow],
                 onChange: (value) {
-                  Future<List<City>> cityList = CityAPI().getCitiesByName(value);
+                  Future<List<City>> cityList = CityAPI().getAllCities(name: value);
                   setState(() {
                     _cityList = cityList;
                   });

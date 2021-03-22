@@ -21,14 +21,7 @@ class _PassesState extends State<Passes> {
   @override
   Widget build(BuildContext context) {
     Future<List<Pass>> listPasses;
-
-    @override
-    void initState() {
-      super.initState();
-      listPasses = PassAPI().getAllPasses(onError: (msg) {
-        print(msg);
-      });
-    }
+    listPasses = PassAPI().getAllPasses(city: widget.city);
 
     return SingleChildScrollView(
       child: Padding(
@@ -58,8 +51,12 @@ class _PassesState extends State<Passes> {
                     )
                   ],
                 );
+              } else if (!snapshot.data) {
+                return Container();
               }
-               return CircularProgressIndicator();
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             },
           )),
     );

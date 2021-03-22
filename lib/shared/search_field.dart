@@ -9,13 +9,17 @@ class SearchField extends StatelessWidget {
     this.height = 50,
     this.hintText,
     this.boxShadow,
-    @required this.onChange,
+    this.onChange,
+    this.onTap,
+    this.onSubmit,
   }) : super(key: key);
 
   final double width, height;
   final String hintText;
   final List<BoxShadow> boxShadow;
   final void Function(String) onChange;
+  final void Function() onTap;
+  final void Function(String) onSubmit;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +33,8 @@ class SearchField extends StatelessWidget {
       ),
       child: TextField(
         onChanged: this.onChange,
+        onTap: this.onTap,
+        onSubmitted: this.onSubmit,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(
