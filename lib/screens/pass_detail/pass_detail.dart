@@ -20,8 +20,11 @@ class PassDetail extends StatefulWidget {
 }
 
 class _PassDetailState extends State<PassDetail> {
-  Set _chosenList = Set();
+  List _chosenList = [];
+
   Future<PassDetailInformation> passDetail;
+
+  
 
   @override
   void initState() {
@@ -60,6 +63,7 @@ class _PassDetailState extends State<PassDetail> {
                     PassDetailContent(
                       passDetail: snapshot.data,
                       chosenList: _chosenList,
+                    
                       onOptionChose: _onOptionChose,
                     ),
                   ],
@@ -80,11 +84,12 @@ class _PassDetailState extends State<PassDetail> {
                   height: 50,
                   width: double.infinity,
                   child: _buildBuyButton(
-                    context,
-                    _chosenList.length ==
-                        (snapshot.data as PassDetailInformation)
-                            .totalOptionalAmount,
-                  ),
+                      context,
+                      _chosenList.length ==
+                          (snapshot.data as PassDetailInformation)
+                              .totalOptionalAmount,
+                      _chosenList,
+                      ),
                 ),
               ),
             );
@@ -96,7 +101,8 @@ class _PassDetailState extends State<PassDetail> {
     );
   }
 
-  ElevatedButton _buildBuyButton(BuildContext context, bool finishedChoosing) {
+  ElevatedButton _buildBuyButton(
+      BuildContext context, bool finishedChoosing, List<dynamic> chosenList) {
     return ElevatedButton(
       style: ButtonStyle(
         backgroundColor: finishedChoosing
@@ -126,6 +132,8 @@ class _PassDetailState extends State<PassDetail> {
                         if (snapshot.hasData) {
                           return ChoosePassAmount(
                             passDetail: snapshot.data,
+                            chosenList: chosenList,
+                            
                           );
                         }
                         return CircularProgressIndicator();

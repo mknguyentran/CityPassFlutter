@@ -5,19 +5,24 @@ import 'package:city_pass/model/order_detail.dart';
 import 'package:city_pass/model/pass.dart';
 import 'package:city_pass/model/payment_method.dart';
 import 'package:city_pass/models/passDetailInformation.dart';
+import 'package:city_pass/models/user_pass_payment.dart';
 import 'package:city_pass/screens/order_detail/order_result.dart';
 import 'package:city_pass/screens/pass_detail/components/discount_code_picker.dart';
 import 'package:city_pass/screens/pass_detail/components/payment_method_picker.dart';
+import 'package:city_pass/service/userpass_payment_service.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 
 class ChoosePassAmount extends StatefulWidget {
   final PassDetailInformation passDetail;
+  final List<dynamic> chosenList;
 
   const ChoosePassAmount({
     Key key,
     @required this.passDetail,
+    @required this.chosenList,
   }) : super(key: key);
 
   @override
@@ -29,7 +34,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
   double total = 0;
   PaymentMethod _currentPaymentMethod = visa;
   DiscountCode _currentDiscountCode;
-
+  bool flag = true;
   void increaseAmount({bool increaseChild = false}) {
     if (increaseChild) {
       setState(() {
@@ -310,19 +315,71 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
               ),
             )),
         child: Text("Thanh toán"),
-        onPressed: () {
+        onPressed: () => formUserPass(amount, childrenAmount)
+        );
+  }
+
+  Future<void> formUserPass(int amount, int childrenAmount) async {
+    List<String> forceList = [];
+    for (int i = 0; i < widget.passDetail.listOfTicket.length; i++) {
+      List<dynamic> list = widget.passDetail.listOfTicket[i];
+      int type =
+          IncludingDestination(list, int.parse(list[list.length - 1])).type;
+      if (type == 1) {
+        for (int j = 0; j < list.length - 1; j++) {
+          print(list[j][0]);
+          print(list[j][0].runtimeType);
+          // forceList.add(new Guid(list[j][0]));
+          forceList.add(list[j][0]);
+        }
+      }
+      for (int i = 0; i < widget.chosenList.length; i++) {
+        print(widget.chosenList[i][0]);
+        print(widget.chosenList[i][0].runtimeType);
+
+        // Guid id = new Guid(widget.chosenList[i][0]);
+        String id = widget.chosenList[i][0];
+
+        forceList
+            .add(id); // forceList sẽ chưa tất cả các TicketID để đưa xuống DB
+
+      }
+      UserPassPayment userPass = UserPassPayment();
+      userPass.userUid = "123456789qwertyu";
+      print(userPass.userUid);
+      userPass.quantiyChildren = childrenAmount;
+      userPass.quantiyAdult = amount;
+      userPass.passId = widget.passDetail.id.toString();
+
+      userPass.ticketTypeIds = forceList;
+      bool insert = false;
+      if(flag) {
+        insert = await UserPassAPI().insertUserPass((msg) {
+        print(msg);
+      }, userPass);
+      }
+      
+      if (insert) {
+        setState(() {
+          flag = false;
           Navigator.of(context).pop();
           Navigator.push(
             context,
             CupertinoPageRoute(builder: (context) {
-              OrderDetail orderDetail = new OrderDetail(widget.passDetail, amount,
-                  childrenAmount, _currentPaymentMethod, _currentDiscountCode);
+              OrderDetail orderDetail = new OrderDetail(
+                  widget.passDetail,
+                  amount,
+                  childrenAmount,
+                  _currentPaymentMethod,
+                  _currentDiscountCode);
               return OrderResult(
                 orderDetail: orderDetail,
               );
             }),
           );
         });
+      } else {}
+    }
   }
 }
 

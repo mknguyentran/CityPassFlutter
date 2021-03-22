@@ -1,5 +1,6 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/model/user_pass.dart';
+import 'package:city_pass/models/user_pass_available_show.dart';
 import 'package:flutter/material.dart';
 
 class UserPassDetailProgressBar extends StatelessWidget {
@@ -7,7 +8,7 @@ class UserPassDetailProgressBar extends StatelessWidget {
     Key key, @required this.pass,
   }) : super(key: key);
 
-  final UserPass pass;
+  final AvailableUserPass pass;
   @override
   Widget build(BuildContext context) {
     return Padding(

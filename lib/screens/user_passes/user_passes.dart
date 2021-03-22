@@ -1,65 +1,89 @@
-// import 'package:city_pass/constants.dart';
-// import 'package:city_pass/screens/user_pass_detail/user_pass_detail.dart';
-// import 'package:city_pass/shared/user_pass_card.dart';
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:city_pass/mockupData/mockup_user_pass.dart';
+import 'package:city_pass/constants.dart';
+import 'package:city_pass/models/user_pass_available_show.dart';
+import 'package:city_pass/screens/user_pass_detail/user_pass_detail.dart';
+import 'package:city_pass/service/userpass_available_service.dart';
+import 'package:city_pass/shared/user_pass_card.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-// class UserPasses extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         appBar: _buildAppBar(context),
-//         backgroundColor: lightGrayBackground,
-//         body: Padding(
-//           padding: EdgeInsets.all(kDefaultPadding),
-//           child: SingleChildScrollView(
-//             clipBehavior: Clip.none,
-//             child: Column(
-//               children: [
-//                 ...List.generate(
-//                   mockupUserPasses.length,
-//                   (index) => Padding(
-//                     padding: const EdgeInsets.only(bottom: 20),
-//                     child: UserPassCard(
-//                         pass: mockupUserPasses[index],
-//                         press: () {
-//                           Navigator.push(
-//                             context,
-//                             CupertinoPageRoute(builder: (context) {
-//                               return UserPassDetail(
-//                                 pass: mockupUserPasses[index],
-//                               );
-//                             }),
-//                           );
-//                         }),
-//                   ),
-//                 )
-//               ],
-//             ),
-//           ),
-//         ));
-//   }
-// }
+class UserPasses extends StatefulWidget {
+  @override
+  _UserPassesState createState() => _UserPassesState();
+}
 
-// AppBar _buildAppBar(BuildContext context) {
-//   return AppBar(
-//     backgroundColor: Colors.white,
-//     brightness: Brightness.light,
-//     leading: IconButton(
-//       color: primaryDarkColor,
-//       icon: Icon(
-//         Icons.chevron_left_rounded,
-//         size: 30,
-//       ),
-//       onPressed: () {
-//         Navigator.of(context).pop();
-//       },
-//     ),
-//     title: Text(
-//       "CityPass của bạn",
-//       style: TextStyle(color: textBlack),
-//     ),
-//     centerTitle: true,
-//   );
-// }
+class _UserPassesState extends State<UserPasses> {
+  Future<List<AvailableUserPass>> listUserpassAvailable;
+  @override
+  void initState() {
+    super.initState();
+    listUserpassAvailable = UserPassAvailableAPI().getAllAvailablePass((msg) {
+      print(msg);
+    }, "123456789qwertyu");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: _buildAppBar(context),
+        backgroundColor: lightGrayBackground,
+        body: Padding(
+          padding: EdgeInsets.all(kDefaultPadding),
+          child: SingleChildScrollView(
+            clipBehavior: Clip.none,
+            child: FutureBuilder(
+              future: listUserpassAvailable,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  print("co data ne");
+                  return Column(
+                    children: [
+                      ...List.generate(
+                        snapshot.data.length,
+                        (index) => Padding(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: UserPassCard(
+                              pass: snapshot.data[index],
+                              press: () {
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(builder: (context) {
+                                    return UserPassDetail(
+                                      pass: snapshot.data[index],
+                                    );
+                                  }),
+                                );
+                              }),
+                        ),
+                      )
+                    ],
+                  );
+                }
+                return CircularProgressIndicator();
+              },
+            ),
+          ),
+        ));
+  }
+}
+
+AppBar _buildAppBar(BuildContext context) {
+  return AppBar(
+    backgroundColor: Colors.white,
+    brightness: Brightness.light,
+    leading: IconButton(
+      color: primaryDarkColor,
+      icon: Icon(
+        Icons.chevron_left_rounded,
+        size: 30,
+      ),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    ),
+    title: Text(
+      "CityPass của bạn",
+      style: TextStyle(color: textBlack),
+    ),
+    centerTitle: true,
+  );
+}

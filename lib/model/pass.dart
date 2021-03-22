@@ -47,11 +47,11 @@ class PassChildrenPrice {
 }
 
 class IncludingDestination {
-  final List<String> destinationList;
+  final List<dynamic> destinationList;
   final int includingQuota;
 
   bool get isAllIncluded {
-    return includingQuota == destinationList.length;
+    return includingQuota == destinationList.length - 1;
   }
 
   bool get isBinaryOptional {
@@ -69,7 +69,7 @@ class IncludingDestination {
   static const int allIncluded = 1;
   static const int optional = 2;
 
-  IncludingDestination(this.destinationList, this.includingQuota)
-      : assert(includingQuota <= destinationList.length),
-        assert(includingQuota > 0);
+  IncludingDestination(this.destinationList, this.includingQuota);
+      // : assert(includingQuota <= destinationList.length - 1),
+      //   assert(includingQuota > 0);
 }

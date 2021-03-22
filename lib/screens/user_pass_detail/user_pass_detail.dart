@@ -1,16 +1,22 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/model/user_pass.dart';
+import 'package:city_pass/models/user_pass_available_show.dart';
 import 'package:city_pass/screens/user_pass_detail/components/user_pass_detail_progress_bar.dart';
 import 'package:city_pass/screens/user_pass_detail/components/user_pass_detail_top_info.dart';
 import 'package:city_pass/screens/user_pass_detail/components/pass_usage/user_pass_detail_usage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class UserPassDetail extends StatelessWidget {
-  final UserPass pass;
+class UserPassDetail extends StatefulWidget {
+  final AvailableUserPass pass;
 
   const UserPassDetail({Key key, this.pass}) : super(key: key);
 
+  @override
+  _UserPassDetailState createState() => _UserPassDetailState();
+}
+
+class _UserPassDetailState extends State<UserPassDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,9 +28,9 @@ class UserPassDetail extends StatelessWidget {
               horizontal: kDefaultPadding, vertical: 15),
           child: Column(
             children: [
-              UserPassDetailTopInfo(pass: pass),
-              UserPassDetailProgressBar(pass: pass),
-              UserPassDetailUsage(pass: pass,)
+              UserPassDetailTopInfo(pass: widget.pass),
+              UserPassDetailProgressBar(pass: widget.pass),
+              UserPassDetailUsage(pass: widget.pass,)
             ],
           ),
         ),
@@ -47,7 +53,7 @@ class UserPassDetail extends StatelessWidget {
         },
       ),
       title: Text(
-        pass.name,
+        widget.pass.name,
         style: TextStyle(
           color: textBlack,
           fontWeight: FontWeight.bold,

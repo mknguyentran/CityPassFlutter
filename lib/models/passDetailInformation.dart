@@ -34,13 +34,20 @@ class PassDetailInformation {
         this.rate = json['rate'] {
     listOfTicket = [];
     for (int i = 0; i < collections.length; i++) {
-      List<String> ticketInCollection = [];
+      List<dynamic> ticketInCollection = [];
       this.ticketTypes = json['collections'][i]['ticketTypes'];
       int maxCostraints = json['collections'][i]['maxConstrain'];
       for (int j = 0; j < ticketTypes.length; j++) {
         String ticketTypeName =
             json['collections'][i]['ticketTypes'][j]['name'];
-        ticketInCollection.add(ticketTypeName);
+        String id = json['collections'][i]['ticketTypes'][j]['id'];
+        List<Object> ticket = [];
+        ticket.add(id);
+        ticket.add(ticketTypeName);
+        ticketInCollection.add(ticket);
+        // Object ticketTypeName =
+        //     json['collections'][i]['ticketTypes'][j];
+        // ticketInCollection.add(ticketTypeName);
       }
       ticketInCollection.add(maxCostraints.toString());
       listOfTicket.add(ticketInCollection);

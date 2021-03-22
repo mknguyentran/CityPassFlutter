@@ -1,12 +1,13 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/model/user_pass.dart';
+import 'package:city_pass/models/user_pass_available_show.dart';
 import 'package:city_pass/screens/user_pass_detail/components/pass_usage/tabs/available_destinations.dart';
 import 'package:city_pass/screens/user_pass_detail/components/pass_usage/tabs/used_destinations.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
 class UserPassDetailUsage extends StatefulWidget {
-  final UserPass pass;
+  final AvailableUserPass pass;
 
   const UserPassDetailUsage({Key key, @required this.pass}) : super(key: key);
   @override

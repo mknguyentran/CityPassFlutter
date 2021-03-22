@@ -9,6 +9,7 @@ import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 
 class PassDetailContent extends StatefulWidget {
   const PassDetailContent(
@@ -19,7 +20,7 @@ class PassDetailContent extends StatefulWidget {
       : super(key: key);
 
   final PassDetailInformation passDetail;
-  final Set chosenList;
+  final List chosenList;
   final Function onOptionChose;
 
   @override
@@ -45,7 +46,7 @@ class _PassDetailContentState extends State<PassDetailContent> {
                   widget.passDetail.listOfTicket.length,
                   (index) {
                     Widget result;
-                    List<String> list = widget.passDetail.listOfTicket[index];
+                    List<dynamic> list = widget.passDetail.listOfTicket[index];
                     int type = IncludingDestination(
                             list, int.parse(list[list.length - 1]))
                         .type;
@@ -56,17 +57,18 @@ class _PassDetailContentState extends State<PassDetailContent> {
                           context: context,
                           currentIndex: _currentIndex,
                         );
+                       
+
                         _currentIndex += widget
                                 .passDetail.listOfTicket[index].length -
                             1; // trừ vì list TicketType trả về cuối cùng là maxContraints
                         break;
                       case IncludingDestination.optional:
                         result = _buildOptionalDestinationList(
-                          itemList: list,
-                          includingQuota: int.parse(list[list.length - 1]),
-                          context: context,
-                          onOptionChose: widget.onOptionChose
-                        );
+                            itemList: list,
+                            includingQuota: int.parse(list[list.length - 1]),
+                            context: context,
+                            onOptionChose: widget.onOptionChose);
                         break;
                       default:
                         break;
@@ -83,7 +85,7 @@ class _PassDetailContentState extends State<PassDetailContent> {
   }
 
   Column _buildOptionalDestinationList({
-    @required List<String> itemList,
+    @required List<dynamic> itemList,
     @required int includingQuota,
     @required BuildContext context,
     @required Function onOptionChose,
@@ -106,7 +108,7 @@ class _PassDetailContentState extends State<PassDetailContent> {
   }
 
   Column _buildDestinationList({
-    @required List<String> itemList,
+    @required List<dynamic> itemList,
     @required int currentIndex,
     @required BuildContext context,
   }) {
@@ -114,7 +116,7 @@ class _PassDetailContentState extends State<PassDetailContent> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ...List.generate(
-          itemList.length,
+          itemList.length - 1,
           (index) => _buildDestinationListItem(
             activity: itemList[index],
             context: context,
@@ -128,7 +130,7 @@ class _PassDetailContentState extends State<PassDetailContent> {
   Widget _buildDestinationListItem(
       {int index,
       double lineSpacing = 7.0,
-      @required String activity,
+      @required Object activity,
       @required BuildContext context}) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: lineSpacing),
@@ -159,9 +161,9 @@ class _PassDetailContentState extends State<PassDetailContent> {
   }
 
   Widget _buildOptionalDestinationListItem({
-    int index,
+    // int index,
     double lineSpacing = 7.0,
-    @required String activity,
+    @required List<dynamic> activity,
     @required int includingQuota,
     @required Function onOptionChose,
     @required BuildContext context,
@@ -223,20 +225,20 @@ class _PassDetailContentState extends State<PassDetailContent> {
     );
   }
 
-  Widget _buildItemName(String activity, BuildContext context) {
+  Widget _buildItemName(List<dynamic> activity, BuildContext context) {
     return GestureDetector(
-      // onTap: () {
-      //   Navigator.push(
-      //     context,
-      //     CupertinoPageRoute(builder: (context) {
-      //       return ActivityDetail(
-      //         ticketTypeID: activity.id,
-      //       );
-      //     }),
-      //   );
-      // },
+      onTap: () {
+        Navigator.push(
+          context,
+          CupertinoPageRoute(builder: (context) {
+            return ActivityDetail(
+              ticketTypeID: new Guid(activity[0].toString()),
+            );
+          }),
+        );
+      },
       child: Text(
-        activity.toUpperCase(),
+        activity[1].toUpperCase(),
         style: TextStyle(fontSize: 14),
       ),
     );
