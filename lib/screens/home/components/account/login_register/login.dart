@@ -1,17 +1,20 @@
 import 'package:city_pass/screens/home/components/account/login_register/forget_password.dart';
 import 'package:city_pass/screens/home/components/account/login_register/register.dart';
 import 'package:city_pass/screens/home/home_screen.dart';
+import 'package:city_pass/services/auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import '../../../../../constants.dart';
-
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+import '../../../../../blocs/auth_bloc.dart';
 class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
 }
 
 class _LoginFormState extends State<LoginForm> {
+  final AuthService _authService = new AuthService();
   TextEditingController _emailController = new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
   bool _invalidEmail = false;
@@ -19,8 +22,20 @@ class _LoginFormState extends State<LoginForm> {
   var _passwordError = "Mật khẩu không hợp lệ";
   var _emailError = "Email không hợp lệ";
   @override
+  void initState() {
+    var authBloc = Provider.of<AuthBloc>(context, listen: false);
+    authBloc.currentUser.listen((user) {
+      if(user != null) {
+        Navigator.push(
+            context, CupertinoPageRoute(builder: (context) => HomeScreen()));
+      }
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final authBloc = Provider.of<AuthBloc>(context);
+        return Scaffold(
       body: Container(
         alignment: Alignment.center,
         constraints: BoxConstraints.expand(),
@@ -128,67 +143,13 @@ class _LoginFormState extends State<LoginForm> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15),
-                  child: GestureDetector(
-                    onTap: clickToLoginByFacebook,
-                    child: Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(width: 1, color: Colors.green),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 5, 0),
-                              child: CircleAvatar(
-                                foregroundColor: primaryLightColor,
-                                radius: 20.0,
-                                backgroundImage:
-                                    AssetImage("assets/images/facebook.png"),
-                              ),
-                            ),
-                            Text(
-                              " Đăng nhập với Facebook",
-                              style:
-                                  TextStyle(color: Colors.green, fontSize: 20),
-                            )
-                          ],
-                        )),
-                  ),
+                  child: SignInButton(Buttons.Google, onPressed: () => authBloc.loginGoogle())
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: GestureDetector(
-                    onTap: clickToLoginByGoogle,
-                    child: Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(width: 1, color: Colors.green),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 5, 0),
-                              child: CircleAvatar(
-                                foregroundColor: primaryLightColor,
-                                radius: 20.0,
-                                backgroundImage:
-                                    AssetImage("assets/images/google.png"),
-                              ),
-                            ),
-                            Text(
-                              " Đăng nhập với Google",
-                              style:
-                                  TextStyle(color: Colors.green, fontSize: 20),
-                            )
-                          ],
-                        )),
-                  ),
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: SignInButton(Buttons.Facebook, onPressed: () async {
+                  await authBloc.loginFacebook();
+                },)
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15),
@@ -218,17 +179,17 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  void clickToLogin() {
+  Future<void> clickToLogin() {
     setState(() {
       String email = _emailController.text.toString();
       String password = _passwordController.text.toString();
-      if (!RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
-          .hasMatch(email)) {
-        _invalidEmail = true;
-      } else {
-        _invalidEmail = false;
-      }
-
+      // if (!RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
+      //     .hasMatch(email)) {
+      //   _invalidEmail = true;
+      // } else {
+      //   _invalidEmail = false;
+      // }
+      _invalidEmail = false;
       if (password.length < 6 || password.length > 12) {
         _invalidPassword = true;
       } else {
@@ -236,6 +197,7 @@ class _LoginFormState extends State<LoginForm> {
       }
 
       if (!_invalidPassword && !_invalidEmail) {
+        //var user = _authService.singnInWithCredential();
         Navigator.push(
             context, CupertinoPageRoute(builder: (context) => HomeScreen()));
       }

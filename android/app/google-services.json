@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "584972427073",
+    "firebase_url": "https://citypass131999-default-rtdb.firebaseio.com",
+    "project_id": "citypass131999",
+    "storage_bucket": "citypass131999.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584972427073:android:b990f7e9ac6f2807a04bc0",
+        "android_client_info": {
+          "package_name": "com.example.CityPass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584972427073-7o9t9sd9ni773glfhlp2b614qjv3galr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDK9PnLsR4B3o_WEj9oXa-hAw5h8n9yRAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584972427073-7o9t9sd9ni773glfhlp2b614qjv3galr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:city_pass/models/city.dart';
 import 'package:city_pass/screens/home/components/account/account.dart';
+import 'package:city_pass/screens/home/components/account/login_register/login.dart';
 import 'package:city_pass/screens/home/components/city_picker/city_picker.dart';
 import 'package:city_pass/screens/home/components/explore/explore.dart';
 import 'package:city_pass/shared/search_field.dart';
@@ -14,7 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:intl/date_symbol_data_local.dart';
-
+import 'package:provider/provider.dart';
+import '../../blocs/auth_bloc.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key, this.currentCity}) : super(key: key);
 
@@ -57,6 +59,13 @@ class _HomeScreenState extends State<HomeScreen> {
       Passes(city: _currentCity),
       Account()
     ];
+    var authBloc = Provider.of<AuthBloc>(context, listen: false);
+    authBloc.currentUser.listen((user) {
+      if(user == null) {
+        Navigator.push(
+            context, CupertinoPageRoute(builder: (context) => LoginForm()));
+      }
+    });
   }
 
   @override
