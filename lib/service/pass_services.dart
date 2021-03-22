@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:city_pass/models/city.dart';
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/models/passDetailInformation.dart';
 
@@ -6,11 +7,22 @@ import 'package:http/http.dart' as http;
 import 'package:city_pass/api_constant.dart';
 
 class PassAPI {
-  Future<List<Pass>> getAllPasses({Function(String) onError}) async {
+  Future<List<Pass>> getAllPasses({Function(String) onError, City city, String name}) async {
     String endpoint = listPassesGETUrl;
+    String queryString = '';
+    Map<String, dynamic> queryParams = {};
+    if (city != null) {
+      var cityParam = {'cityId': city.id};
+      queryParams.addAll(cityParam);
+    }
+    if (name != null) {
+      var nameParam = {'name': name.trim()};
+      queryParams.addAll(nameParam);
+    }
+    queryString = '?' + Uri(queryParameters: queryParams).query;
 
-    List<Pass> passList = List();
-    http.Response response = await http.get(endpoint);
+    List<Pass> passList = [];
+    http.Response response = await http.get(endpoint + queryString);
     if (response.statusCode == 200) {
       try {
         dynamic jsonRaw = json.decode(response.body);
@@ -21,7 +33,6 @@ class PassAPI {
           });
         }
       } catch (e) {
-        print(e);
         onError("Something get wrong!");
       }
     } else {

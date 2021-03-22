@@ -2,8 +2,7 @@ import 'dart:math';
 
 import 'package:city_pass/constants.dart';
 
-import 'package:city_pass/mockupData/mockup_pass.dart';
-import 'package:city_pass/model/city.dart';
+import 'package:city_pass/models/city.dart';
 import 'package:city_pass/models/pass.dart';
 
 import 'package:city_pass/screens/home/components/featured/components/activity_recommendation.dart';
@@ -29,20 +28,12 @@ class _ExploreState extends State<Explore> {
   Future<List<TicketType>> listRealActivitiesNearYou_3;
   Future<List<Pass>> listPasses;
 
-  void initState() {
-    super.initState();
-    listRealActivitiesNearYou_3 =
-        TicketTypeAPI().getAllTicketTypes(onError: (msg) {
-      print(msg);
-    });
-    listPasses = PassAPI().getAllPasses(onError: (msg) {
-      print(msg);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     var verticalSpacing = 60.0;
+    listRealActivitiesNearYou_3 = TicketTypeAPI().getAllTicketTypes(city: widget.city);
+    listPasses = PassAPI().getAllPasses(city: widget.city);
+
     return SingleChildScrollView(
       clipBehavior: Clip.none,
       child: Column(
@@ -109,13 +100,13 @@ class _ExploreState extends State<Explore> {
                         title: "Điểm đến nổi bật",
                         children: snapshot.data,
                       ),
-                      ActivityRecommendationVertical(
-                        children: List.generate(30, (index) {
-                          var ran = new Random();
-                          var ranInt = ran.nextInt(snapshot.data.length - 1);
-                          return snapshot.data[ranInt];
-                        }),
-                      ),
+                      // ActivityRecommendationVertical(
+                      //   children: List.generate(30, (index) {
+                      //     var ran = new Random();
+                      //     var ranInt = ran.nextInt(snapshot.data.length - 1);
+                      //     return snapshot.data[ranInt];
+                      //   }),
+                      // ),
                       VerticalSpacing(
                         of: verticalSpacing,
                       ),

@@ -1,8 +1,9 @@
 import 'dart:ui';
 
-import 'package:city_pass/model/city.dart';
+import 'package:city_pass/models/city.dart';
 import 'package:city_pass/screens/home/components/account/account.dart';
 import 'package:city_pass/screens/home/components/city_picker/city_picker.dart';
+import 'package:city_pass/screens/home/components/search/search.dart';
 import 'package:city_pass/shared/search_field.dart';
 import 'package:city_pass/screens/home/components/location/location.dart';
 import 'package:city_pass/screens/home/components/passes/passes.dart';
@@ -48,21 +49,16 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    tabs = [
-      Explore(city: _currentCity),
-      Locations(city: _currentCity),
-     // UserPasses(),
-      Passes(city: _currentCity),
-      Account()
-    ];
-  }
-
-  @override
   Widget build(BuildContext context) {
     initializeDateFormatting("vi_VN", null);
     SizeConfig().init(context);
+    tabs = [
+      Explore(city: _currentCity),
+      Locations(city: _currentCity),
+      // UserPasses(),
+      Passes(city: _currentCity),
+      Account()
+    ];
     return Scaffold(
       appBar: buildAppBar(_currentIndex),
       body: tabs.elementAt(_currentIndex),
@@ -113,12 +109,52 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding).add(
           const EdgeInsets.only(bottom: 10),
         ),
-        child: SearchField(
+        // child: SearchField(
+        //   height: 40,
+        //   width: double.infinity,
+        //   hintText: "Tìm kiếm điểm đến, hoạt đông,...",
+        //   boxShadow: [kDefaultShadow],
+        //   onTap: () {
+        //     Navigator.push(
+        //     context,
+        //     CupertinoPageRoute(builder: (context) {
+        //       return SearchPage();
+        //     }),
+        //   );
+        //   },
+        // ),
+        child: Container(
           height: 40,
           width: double.infinity,
-          hintText: "Tìm kiếm điểm đến, hoạt đông,...",
-          boxShadow: [kDefaultShadow],
-        ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [kDefaultShadow],
+          ),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (context) {
+                  return SearchPage(city: _currentCity);
+                }),
+              );
+            },
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: kDefaultPadding,
+                vertical: 12
+              ),
+              child: Text(
+                'Tìm kiếm combo, địa điểm, ...',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: primaryDarkColor
+                ),
+              ),
+            ),
+          ),
+        )
       ),
     );
     if (tab == 4) {
