@@ -1,18 +1,32 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/user_pass_available_show.dart';
+import 'package:city_pass/models/userpass_use_history.dart';
+import 'package:city_pass/screens/user_pass_detail/components/pass_usage/user_pass_detail_usage.dart';
+import 'package:city_pass/screens/user_pass_detail/components/user_pass_detail_progress_bar.dart';
+import 'package:city_pass/screens/user_pass_detail/components/user_pass_detail_top_info.dart';
+import 'package:city_pass/service/userpass_history_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class UserPassDetail extends StatefulWidget {
-  final AvailableUserPass pass;
+  final AvailableUserPass availableUserPass;
 
-  const UserPassDetail({Key key, this.pass}) : super(key: key);
+  const UserPassDetail({Key key, this.availableUserPass}) : super(key: key);
 
   @override
   _UserPassDetailState createState() => _UserPassDetailState();
 }
 
 class _UserPassDetailState extends State<UserPassDetail> {
+  Future<UserPassHistory> historyDetail;
+  @override
+  void initState() {
+    super.initState();
+    historyDetail = UserPassHistoryAPI().getHistoryUserPass((msg) {
+      print(msg);
+    }, widget.availableUserPass.userPassID);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,12 +36,23 @@ class _UserPassDetailState extends State<UserPassDetail> {
         child: Padding(
           padding: const EdgeInsets.symmetric(
               horizontal: kDefaultPadding, vertical: 15),
-          child: Column(
-            children: [
-              // UserPassDetailTopInfo(pass: widget.pass),
-              // UserPassDetailProgressBar(pass: widget.pass),
-              // UserPassDetailUsage(pass: widget.pass,)
-            ],
+          child: FutureBuilder(
+            future: historyDetail,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Column(
+                  children: [
+                    UserPassDetailTopInfo(
+                        availableUserPass: widget.availableUserPass),
+                    UserPassDetailProgressBar(userPassHistory: snapshot.data),
+                    UserPassDetailUsage(
+                      userPassHistory: snapshot.data,
+                    )
+                  ],
+                );
+              }
+              return Center(child: CircularProgressIndicator());
+            },
           ),
         ),
       ),
@@ -49,7 +74,7 @@ class _UserPassDetailState extends State<UserPassDetail> {
         },
       ),
       title: Text(
-        widget.pass.name,
+        widget.availableUserPass.passName,
         style: TextStyle(
           color: textBlack,
           fontWeight: FontWeight.bold,

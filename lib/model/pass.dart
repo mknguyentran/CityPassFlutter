@@ -8,7 +8,7 @@ class Pass {
   final City city;
   final double overallRating, price, originalPrice;
   final PassChildrenPrice childrenPrice;
-  final List<IncludingDestination> includingDestination;
+ final List<IncludingDestination> includingDestination;
   final bool isGoodSeller, isBestSaving;
 
   int get discountedPercentage {

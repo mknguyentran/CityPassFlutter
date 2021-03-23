@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:city_pass/constants.dart';
@@ -33,7 +34,7 @@ class ActivityRecommendationCard extends StatelessWidget {
           height: 180,
           decoration: BoxDecoration(
               image: DecorationImage(
-            image: AssetImage(activity.imageUrl ?? ''),
+            image: NetworkImage(activity.imageUrl ?? ''),
             fit: BoxFit.cover,
           )),
         ),
@@ -73,22 +74,22 @@ class ActivityRecommendationCard extends StatelessWidget {
                               size: 16,
                               color: starYellowColor,
                             ),
-                            // Text(
-                            //   activity.overallRating.toString(),
-                            //   style: TextStyle(
-                            //       fontSize: 14, color: starYellowColor),
-                            // ),
+                            Text(
+                              "${Random().nextDouble()+4}",
+                              style: TextStyle(
+                                  fontSize: 14, color: starYellowColor),
+                            ),
                           ],
                         ),
-                        // if (activity.isNew)
-                        if (true)
+                       // if (activity.isNew)
+                        if (Random().nextBool())
                           InfoTag(
                             "Mới",
                             backgroundColor: lightGreenBackgroundColor,
                             foregroundColor: Colors.green[800],
                           ),
                         //if (activity.isPopular)
-                        if (true)
+                        if (Random().nextBool())
                           InfoTag(
                             "Phổ biến",
                             backgroundColor: orangeBackgroundColor,

@@ -1,15 +1,16 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/model/user_pass.dart';
 import 'package:city_pass/models/user_pass_available_show.dart';
+import 'package:city_pass/models/userpass_use_history.dart';
 import 'package:city_pass/screens/user_pass_detail/components/pass_usage/tabs/available_destinations.dart';
 import 'package:city_pass/screens/user_pass_detail/components/pass_usage/tabs/used_destinations.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
 class UserPassDetailUsage extends StatefulWidget {
-  final AvailableUserPass pass;
+  final UserPassHistory userPassHistory;
 
-  const UserPassDetailUsage({Key key, @required this.pass}) : super(key: key);
+  const UserPassDetailUsage({Key key, @required this.userPassHistory}) : super(key: key);
   @override
   _UserPassDetailUsageState createState() => _UserPassDetailUsageState();
 }
@@ -87,13 +88,13 @@ class _UserPassDetailUsageState extends State<UserPassDetailUsage>
         VerticalSpacing(),
         IndexedStack(
           children: [
-            // Visibility(
-            //   child: AvailableDestinations(destinationList: widget.pass.availableDestinationList,),
-            //   maintainState: true,
-            //   visible: _selectedIndex == 0,
-            // ),
             Visibility(
-             // child: UsedDestinations(entryList: widget.pass.usedDestinationList,),
+              child: AvailableDestinations(inUsedList: widget.userPassHistory.unusedList,),
+              maintainState: true,
+              visible: _selectedIndex == 0,
+            ),
+            Visibility(
+             child: UsedDestinations(entryList: widget.userPassHistory.usedList,),
               maintainState: true,
               visible: _selectedIndex == 1,
             ),

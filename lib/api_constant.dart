@@ -17,7 +17,10 @@ const passByIDGETUrl = BASE_URL + "passes/";
 const userPassPOSTUrl = BASE_URL + "user-passes";
 // *** GET **//
 const userPassAvailableGETUrl = BASE_URL + "user-passes/user-pass-avaiable?uId=";
+// ** GET HISTORY **//
+const userPassHistoryGETUrl = BASE_URL + "user-passes/use-history?userPassId=";
 
 // City
 // ** GET ** //
 const listCitiesGETUrl = BASE_URL + "cities";
+

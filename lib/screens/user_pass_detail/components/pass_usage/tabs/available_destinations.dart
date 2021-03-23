@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 
 class AvailableDestinations extends StatelessWidget {
   //final List<Activity> destinationList;
-  final List<TicketType> destinationList;
+  final List<dynamic> inUsedList;
 
-  const AvailableDestinations({Key key, @required this.destinationList})
+  const AvailableDestinations({Key key, @required this.inUsedList})
       : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class AvailableDestinations extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildDestinationList(
-           itemList: destinationList,
+           itemList: inUsedList,
             context: context,
             currentIndex: _currentIndex,
           ),
@@ -34,7 +34,7 @@ class AvailableDestinations extends StatelessWidget {
 
 Column _buildDestinationList({
   //@required List<Activity> itemList,
-  @required List<TicketType> itemList,
+  @required List<dynamic> itemList,
   @required int currentIndex,
   @required BuildContext context,
 }) {
@@ -57,7 +57,7 @@ Widget _buildDestinationListItem(
     {int index,
     double lineSpacing = 7.0,
     //@required Activity activity,
-    @required TicketType activity,
+    @required Object activity,
     @required BuildContext context}) {
   return Padding(
     padding: EdgeInsets.symmetric(vertical: lineSpacing),
@@ -87,7 +87,7 @@ Widget _buildDestinationListItem(
   );
 }
 
-Widget _buildItemName(TicketType activity, BuildContext context) {
+Widget _buildItemName(Object activity, BuildContext context) {
   return Expanded(
     child: GestureDetector(
       onTap: () {
@@ -95,13 +95,13 @@ Widget _buildItemName(TicketType activity, BuildContext context) {
           context,
           CupertinoPageRoute(builder: (context) {
             return ActivityDetail(
-              ticketTypeID: activity.id,
+              ticketTypeID: (activity as Map)["id"],
             );
           }),
         );
       },
       child: Text(
-        activity.name.toUpperCase(),
+        (activity as Map)["name"].toUpperCase(),
         style: TextStyle(fontSize: 14),
       ),
     ),

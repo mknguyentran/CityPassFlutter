@@ -3,7 +3,7 @@ import 'package:city_pass/model/user_pass.dart';
 import 'package:flutter/material.dart';
 
 class UsedDestinations extends StatelessWidget {
-  final List<UserPassHistoryEntry> entryList;
+  final List<dynamic> entryList;
 
   const UsedDestinations({Key key, @required this.entryList}) : super(key: key);
 
@@ -19,14 +19,14 @@ class UsedDestinations extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: Text(
-                  entryList[index].destination,
+                  entryList[index]["name"],
                   style: TextStyle(fontSize: 15),
                 ),
               ),
               Expanded(
                 flex: 2,
                 child: Text(
-                  simpleDateAndTimeFormat.format(entryList[index].usedAt),
+                  simpleDateAndTimeFormat.format(entryList[index]["usedAt"]),
                   style: TextStyle(fontSize: 15),
                   textAlign: TextAlign.right,
                 ),

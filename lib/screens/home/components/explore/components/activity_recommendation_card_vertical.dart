@@ -37,7 +37,7 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(3),
             image: DecorationImage(
-              image: AssetImage(activity.imageUrl ?? ''),
+              image: NetworkImage(activity.imageUrl ?? ''),
               fit: BoxFit.cover,
             ),
           ),

@@ -1,7 +1,6 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/screens/history/available.dart';
 import 'package:city_pass/screens/history/outdated.dart';
-import 'package:city_pass/screens/history/usedpass.dart';
 import 'package:flutter/material.dart';
 
 class HistoryForm extends StatefulWidget {
@@ -43,9 +42,6 @@ class _HistoryFormState extends State<HistoryForm>
             Tab(
               text: "Còn hiệu lực",
             ),
-            // Tab(
-            //   text: "Đã sử dụng",
-            // ),
             Tab(
               text: "Hết hiệu lực",
             ),
@@ -54,9 +50,7 @@ class _HistoryFormState extends State<HistoryForm>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: <Widget>[AvailablePass(), 
-       // UsedPass(), 
-        OutDatedPass()],
+        children: <Widget>[AvailablePass(), OutDatedPass()],
       ),
     );
   }

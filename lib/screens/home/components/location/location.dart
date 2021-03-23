@@ -65,7 +65,7 @@ class _LocationsState extends State<Locations> {
                 return Container();
               }
               return Center(
-                child: CircularProgressIndicator()
+                child: Center(child: CircularProgressIndicator())
               );
             },
           )),
@@ -165,7 +165,7 @@ class TopDestinationCard extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
             image: DecorationImage(
-                image: AssetImage(activity.imageUrl ?? ''), fit: BoxFit.cover)),
+                image: NetworkImage(activity.imageUrl ?? ''), fit: BoxFit.cover)),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
