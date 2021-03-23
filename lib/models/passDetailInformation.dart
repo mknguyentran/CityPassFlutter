@@ -12,6 +12,7 @@ class PassDetailInformation {
   List<Object> ticketTypes;
   List<List> listOfTicket;
   int type;
+  String imageUrl;
 
   int get totalOptionalAmount {
     int result = 0;
@@ -31,6 +32,7 @@ class PassDetailInformation {
         this.expireDuration = json['expireDuration'],
         this.feedbacks = json['feedbacks'],
         this.collections = json['collections'],
+        this.imageUrl = json['urlImage'],
         this.rate = json['rate'] {
     listOfTicket = [];
     for (int i = 0; i < collections.length; i++) {
