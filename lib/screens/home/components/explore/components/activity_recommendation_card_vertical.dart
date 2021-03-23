@@ -57,6 +57,7 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
                         Text(
                           "${activity.city}",
                           style: TextStyle(color: subtitleTextColor),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),

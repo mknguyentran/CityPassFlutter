@@ -44,14 +44,15 @@ class PassDetailPriceBar extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text(
-                      vndCurrencyFormat.format(passDetail.price),
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: fadedTextColor,
-                        decoration: TextDecoration.lineThrough,
-                      ),
-                    )
+                    //original price
+                    // Text(
+                    //   vndCurrencyFormat.format(passDetail.price),
+                    //   style: TextStyle(
+                    //     fontSize: 18,
+                    //     color: fadedTextColor,
+                    //     decoration: TextDecoration.lineThrough,
+                    //   ),
+                    // )
                   ],
                 ),
                 if (passDetail.price != null)
@@ -66,8 +67,7 @@ class PassDetailPriceBar extends StatelessWidget {
                           Container(
                             margin: EdgeInsets.only(right: 10),
                             child: Text(
-                              vndCurrencyFormat
-                                  .format(passDetail.price),
+                              vndCurrencyFormat.format(passDetail.price),
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -75,15 +75,16 @@ class PassDetailPriceBar extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Text(
-                            vndCurrencyFormat
-                                .format(passDetail.price),
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: fadedTextColor,
-                              decoration: TextDecoration.lineThrough,
-                            ),
-                          )
+                          //original children price
+                          // Text(
+                          //   vndCurrencyFormat
+                          //       .format(passDetail.price),
+                          //   style: TextStyle(
+                          //     fontSize: 18,
+                          //     color: fadedTextColor,
+                          //     decoration: TextDecoration.lineThrough,
+                          //   ),
+                          // )
                         ],
                       ),
                     ],
@@ -91,38 +92,39 @@ class PassDetailPriceBar extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: primaryDarkColor,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(5),
-                bottomRight: Radius.circular(5),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(5, 15, 5, 5),
-              child: Column(
-                children: [
-                  Text(
-                    "TIẾT KIỆM",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    "35%",
-                    style: TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          )
+          //discount percentage
+          // Container(
+          //   decoration: BoxDecoration(
+          //     color: primaryDarkColor,
+          //     borderRadius: BorderRadius.only(
+          //       bottomLeft: Radius.circular(5),
+          //       bottomRight: Radius.circular(5),
+          //     ),
+          //   ),
+          //   child: Padding(
+          //     padding: const EdgeInsets.fromLTRB(5, 15, 5, 5),
+          //     child: Column(
+          //       children: [
+          //         Text(
+          //           "TIẾT KIỆM",
+          //           style: TextStyle(
+          //             fontSize: 12,
+          //             fontWeight: FontWeight.w300,
+          //             color: Colors.white,
+          //           ),
+          //         ),
+          //         Text(
+          //           "35%",
+          //           style: TextStyle(
+          //             fontSize: 23,
+          //             fontWeight: FontWeight.bold,
+          //             color: Colors.white,
+          //           ),
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
