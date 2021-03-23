@@ -6,6 +6,7 @@ import 'package:city_pass/screens/home/components/account/login_register/login.d
 import 'package:city_pass/screens/home/components/city_picker/city_picker.dart';
 import 'package:city_pass/screens/home/components/search/search.dart';
 import 'package:city_pass/screens/home/components/explore/explore.dart';
+import 'package:city_pass/shared/geolocator.dart';
 import 'package:city_pass/shared/search_field.dart';
 import 'package:city_pass/screens/home/components/location/location.dart';
 import 'package:city_pass/screens/home/components/passes/passes.dart';
@@ -16,6 +17,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/size_config.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import '../../blocs/auth_bloc.dart';
@@ -33,6 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
   static List<Widget> tabs;
   int _currentIndex = 0;
   City _currentCity;
+  bool isFirstTime = true;
+
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
@@ -51,12 +56,33 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  Future<List<Placemark>> getCurrentLocations() async {
+    List<Placemark> tmp;
+
+    Position currentPosition = await GeolocatorUtil().determinePosition();
+    tmp = await placemarkFromCoordinates(currentPosition.latitude, currentPosition.longitude);
+    return tmp;
+  }
+
   @override
   Widget build(BuildContext context) {
     var authBloc = Provider.of<AuthBloc>(context, listen: false);
 
     initializeDateFormatting("vi_VN", null);
     SizeConfig().init(context);
+    if (isFirstTime) {
+      getCurrentLocations().then((value) {
+        this.setState(() {
+          isFirstTime = false;
+        });
+
+        if (value[0].administrativeArea.contains('Minh')) {
+          this.setState(() {
+            _currentCity = City('TP. Hồ Chí Minh', id: 1);            
+          });
+        }
+      });
+    }
     tabs = [
       Explore(city: _currentCity),
       Locations(city: _currentCity),
