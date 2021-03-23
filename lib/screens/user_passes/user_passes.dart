@@ -22,6 +22,14 @@ class _UserPassesState extends State<UserPasses> {
     }, "123456789qwertyu");
   }
 
+  void _reload() {
+    setState(() {
+      listUserpassAvailable = UserPassAvailableAPI().getAllAvailablePass((msg) {
+        print(msg);
+      }, "123456789qwertyu");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +42,7 @@ class _UserPassesState extends State<UserPasses> {
             child: FutureBuilder(
               future: listUserpassAvailable,
               builder: (context, snapshot) {
-                if (snapshot.hasData) {
+                if (snapshot.connectionState == ConnectionState.done) {
                   return Column(
                     children: [
                       ...List.generate(
@@ -51,7 +59,7 @@ class _UserPassesState extends State<UserPasses> {
                                       availableUserPass: snapshot.data[index],
                                     );
                                   }),
-                                );
+                                ).then((value) => _reload());
                               }),
                         ),
                       )
