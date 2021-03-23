@@ -1,3 +1,4 @@
+import 'package:city_pass/blocs/auth_bloc.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/mockupData/mockup_payment_method.dart';
 import 'package:city_pass/model/discount_code.dart';
@@ -14,6 +15,7 @@ import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_guid/flutter_guid.dart';
+import 'package:provider/provider.dart';
 
 class ChoosePassAmount extends StatefulWidget {
   final PassDetailInformation passDetail;
@@ -35,6 +37,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
   PaymentMethod _currentPaymentMethod = visa;
   DiscountCode _currentDiscountCode;
   bool flag = true;
+  String defaultUser = "123456789qwertyu";
   void increaseAmount({bool increaseChild = false}) {
     if (increaseChild) {
       setState(() {
@@ -62,6 +65,17 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
       }
     }
   }
+  @override
+  void initState() {
+    super.initState();
+    var authBloc = Provider.of<AuthBloc>(context, listen: false);
+    var user = authBloc.currentUser;
+    
+    if(user != null) {
+      defaultUser = user.uid;
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -337,7 +351,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
 
       }
       UserPassPayment userPass = UserPassPayment();
-      userPass.userUid = "123456789qwertyu";
+      userPass.userUid = defaultUser;
       print(userPass.userUid);
       userPass.quantiyChildren = childrenAmount;
       userPass.quantiyAdult = amount;
