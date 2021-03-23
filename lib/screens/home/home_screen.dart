@@ -53,13 +53,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // var authBloc = Provider.of<AuthBloc>(context, listen: false);
-    // authBloc.currentUser.listen((user) {
-    //   if(user == null) {
-    //     Navigator.push(
-    //         context, CupertinoPageRoute(builder: (context) => HomeScreen()));
-    //   }
-    // });
+    var authBloc = Provider.of<AuthBloc>(context, listen: false);
+    authBloc.currentUser.listen((user) {
+      if(user != null) {
+        Navigator.push(
+            context, CupertinoPageRoute(builder: (context) => HomeScreen()));
+      }
+    });
   }
 
   @override
@@ -231,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
       //     _onItemTapped(0);
       //   },
       // ),
-      bottom: _bottom,
+      // bottom: _bottom,
     );
   }
 

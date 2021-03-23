@@ -2,6 +2,8 @@ import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/models/city.dart';
 import 'package:city_pass/models/ticketType.dart';
+import 'package:city_pass/screens/home/components/explore/components/activity_recommendation_card_vertical.dart';
+import 'package:city_pass/screens/home/components/explore/components/activity_recommendation_vertical.dart';
 import 'package:city_pass/service/pass_services.dart';
 import 'package:city_pass/service/ticketType_services.dart';
 import 'package:city_pass/shared/search_field.dart';
@@ -26,45 +28,48 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       appBar: _buildAppBar(context),
       backgroundColor: lightGrayBackground,
-      body: Padding(
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(kDefaultPadding),
         child: Column(
           children: [
-            SearchField(
-              height: 45,
-              width: double.infinity,
-              hintText: 'Tìm kiếm combo, địa điểm, ...',
-              boxShadow: [kDefaultShadow],
-              // onSubmit: (value) {
-              //   setState(() {
-              //     _searchValue = value.trim();
-              //   });
-              //   var currentCity;
-              //   if (widget.city != null) {
-              //     currentCity = widget.city;
-              //   }
-                
-              //   ticketTypeList = TicketTypeAPI().getAllTicketTypes(city: currentCity, name: value.trim());
-              //   passList = PassAPI().getAllPasses(city: currentCity, name: value.trim()); 
-              // },
-            ),
             FutureBuilder(
               future: ticketTypeList,
               builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator()
+                  );
+                }
+
                 if (snapshot.hasData) {
-                  return Text('Địa điểm tại ${widget.city.name}');
-                } else if (!snapshot.hasData) {
-                  if (_searchValue != null && _searchValue.isNotEmpty) {
-                    return Center(
-                      child: Text('Không tìm thấy dữ liệu'),
+                  if (snapshot.data.length > 0) {
+                    return Padding(
+                      padding: EdgeInsets.all(kDefaultPadding),
+                      child: Column(
+                        children: [
+                          ActivityRecommendationVertical(
+                            hasPadding: false,
+                            title: 'Địa điểm tại ' + (widget.city != null ? widget.city.name: 'Việt Nam'),
+                            children: snapshot.data,
+                          ),
+                        ]
+                      ),
+                    );
+                  } else {
+                    return Padding(
+                      padding: EdgeInsets.all(kDefaultPadding),
+                      child: Text(
+                        'Không tìm thấy dữ liệu',
+                        style: TextStyle(
+                          color: Colors.red
+                        ),
+                      ),
                     );
                   }
-
-                  return Container(width: 0, height: 0,);
                 }
 
                 return Center(
-                  child: Center(child: CircularProgressIndicator()),
+                  child: Container(),
                 );
               },
             ),
@@ -93,6 +98,29 @@ class _SearchPageState extends State<SearchPage> {
         style: TextStyle(color: textBlack),
       ),
       centerTitle: true,
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(70),
+        child: Padding(
+          padding: EdgeInsets.all(kDefaultPadding),
+          child: SearchField(
+            height: 45,
+            width: double.infinity,
+            hintText: 'Tìm kiếm địa điểm',
+            boxShadow: [kDefaultShadow],
+            onSubmit: (value) {
+              setState(() {
+                _searchValue = value.trim();
+              });
+              
+              if (value.isNotEmpty) {
+                ticketTypeList = TicketTypeAPI().getAllTicketTypes(city: widget.city, name: value.trim());
+                passList = PassAPI().getAllPasses(city: widget.city, name: value.trim()); 
+              } 
+              
+            },
+          ),
+        )
+      ),
     );
   }
 }
