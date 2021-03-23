@@ -50,6 +50,7 @@ dependencies:
   flutter_facebook_login: ^3.0.0
   geolocator: ^6.2.1
   geocoding: ^1.0.5
+  location_permissions: ^3.0.0
   
 dev_dependencies:
   flutter_test:

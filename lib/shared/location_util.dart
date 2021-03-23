@@ -1,9 +1,12 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:location_permissions/location_permissions.dart';
 
-class GeolocatorUtil {
+class LocationUtil {
   Future<Position> determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
+    PermissionStatus permissionStatus;
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
@@ -16,5 +19,17 @@ class GeolocatorUtil {
     }
 
     return await Geolocator.getCurrentPosition();
+  }
+
+  Future<List<Placemark>> getCurrentLocations() async {
+    List<Placemark> tmp;
+
+    Position currentPosition = await determinePosition();
+    tmp = await placemarkFromCoordinates(currentPosition.latitude, currentPosition.longitude);
+    return tmp;
+  }
+
+  Future<PermissionStatus> getLocationPermission() {
+    return LocationPermissions().requestPermissions();
   }
 }
