@@ -4,6 +4,7 @@ import 'package:city_pass/screens/pass_detail/components/pass_detail_content.dar
 import 'package:city_pass/screens/pass_detail/components/pass_detail_header.dart';
 import 'package:city_pass/screens/pass_detail/components/pass_detail_price_bar.dart';
 import 'package:city_pass/service/pass_services.dart';
+import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_guid/flutter_guid.dart';
@@ -23,8 +24,6 @@ class _PassDetailState extends State<PassDetail> {
   List _chosenList = [];
 
   Future<PassDetailInformation> passDetail;
-
-  
 
   @override
   void initState() {
@@ -63,13 +62,16 @@ class _PassDetailState extends State<PassDetail> {
                     PassDetailContent(
                       passDetail: snapshot.data,
                       chosenList: _chosenList,
-                    
                       onOptionChose: _onOptionChose,
                     ),
                   ],
                 );
               }
-              return Center(child: CircularProgressIndicator());
+              return Container(
+                height: percentageOfScreenHeight(100),
+                alignment: Alignment.center,
+                child: CircularProgressIndicator(),
+              );
             }),
       ),
       bottomNavigationBar: FutureBuilder(
@@ -84,12 +86,12 @@ class _PassDetailState extends State<PassDetail> {
                   height: 50,
                   width: double.infinity,
                   child: _buildBuyButton(
-                      context,
-                      _chosenList.length ==
-                          (snapshot.data as PassDetailInformation)
-                              .totalOptionalAmount,
-                      _chosenList,
-                      ),
+                    context,
+                    _chosenList.length ==
+                        (snapshot.data as PassDetailInformation)
+                            .totalOptionalAmount,
+                    _chosenList,
+                  ),
                 ),
               ),
             );
@@ -133,7 +135,6 @@ class _PassDetailState extends State<PassDetail> {
                           return ChoosePassAmount(
                             passDetail: snapshot.data,
                             chosenList: chosenList,
-                            
                           );
                         }
                         return Center(child: CircularProgressIndicator());

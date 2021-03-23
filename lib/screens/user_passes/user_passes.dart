@@ -3,6 +3,7 @@ import 'package:city_pass/models/user_pass_available_show.dart';
 import 'package:city_pass/screens/user_pass_detail/user_pass_detail.dart';
 import 'package:city_pass/service/userpass_available_service.dart';
 import 'package:city_pass/shared/user_pass_card.dart';
+import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +58,11 @@ class _UserPassesState extends State<UserPasses> {
                     ],
                   );
                 }
-                return Center(child: CircularProgressIndicator());
+                return Container(
+                  height: percentageOfScreenHeight(20),
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(),
+                );
               },
             ),
           ),

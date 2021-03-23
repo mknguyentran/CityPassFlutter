@@ -55,7 +55,7 @@ class _UserPassCardState extends State<UserPassCard> {
                     vertical: 10,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
+                    color: Colors.black.withOpacity(0.7),
                     boxShadow: [kDefaultShadow],
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(10),
@@ -95,7 +95,7 @@ class _UserPassCardState extends State<UserPassCard> {
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text(
                               "Khả dụng".toUpperCase(),

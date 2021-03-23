@@ -29,6 +29,11 @@ class _UserPassDetailTopInfoState extends State<UserPassDetailTopInfo> {
           "Đưa mã này cho nhân viên soát vé",
           style: TextStyle(fontSize: 16),
         ),
+        VerticalSpacing(),
+        Text(
+          "${widget.availableUserPass.userPassID.toUpperCase()}",
+          style: TextStyle(fontSize: 14),
+        ),
         Container(
           padding: EdgeInsets.all(kDefaultPadding),
           alignment: Alignment.center,
