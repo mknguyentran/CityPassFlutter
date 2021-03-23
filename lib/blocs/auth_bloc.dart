@@ -7,7 +7,10 @@ class AuthBloc {
   final authService = AuthService();
   final googleSignin = GoogleSignIn(scopes: ['email']);
   static final FacebookLogin facebookSignIn = new FacebookLogin();
-  Stream<User> get currentUser => authService.currentUser;
+  Stream<User> get currentUserChange => authService.currentUserChange;
+  
+  User get currentUser => authService.getCurrentUser();
+
   loginGoogle() async {
     try {
       final GoogleSignInAccount googleUser = await googleSignin.signIn();

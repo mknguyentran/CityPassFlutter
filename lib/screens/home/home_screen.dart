@@ -11,6 +11,7 @@ import 'package:city_pass/screens/home/components/location/location.dart';
 import 'package:city_pass/screens/home/components/passes/passes.dart';
 import 'package:city_pass/screens/user_passes/user_passes.dart';
 import 'package:city_pass/shared/custom_nav_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:city_pass/constants.dart';
@@ -18,6 +19,7 @@ import 'package:city_pass/size_config.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import '../../blocs/auth_bloc.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key, this.currentCity}) : super(key: key);
 
@@ -31,7 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
   static List<Widget> tabs;
   int _currentIndex = 0;
   City _currentCity;
-
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
@@ -51,19 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    var authBloc = Provider.of<AuthBloc>(context, listen: false);
-    authBloc.currentUser.listen((user) {
-      if(user != null) {
-        Navigator.push(
-            context, CupertinoPageRoute(builder: (context) => HomeScreen()));
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    var authBloc = Provider.of<AuthBloc>(context, listen: false);
+
     initializeDateFormatting("vi_VN", null);
     SizeConfig().init(context);
     tabs = [
@@ -73,7 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
       Passes(city: _currentCity),
       Account()
     ];
-
     return Scaffold(
       appBar: buildAppBar(_currentIndex),
       body: tabs.elementAt(_currentIndex),
@@ -121,56 +111,50 @@ class _HomeScreenState extends State<HomeScreen> {
     var _bottom = PreferredSize(
       preferredSize: Size.fromHeight(55),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding).add(
-          const EdgeInsets.only(bottom: 10),
-        ),
-        // child: SearchField(
-        //   height: 40,
-        //   width: double.infinity,
-        //   hintText: "Tìm kiếm điểm đến, hoạt đông,...",
-        //   boxShadow: [kDefaultShadow],
-        //   onTap: () {
-        //     Navigator.push(
-        //     context,
-        //     CupertinoPageRoute(builder: (context) {
-        //       return SearchPage();
-        //     }),
-        //   );
-        //   },
-        // ),
-        child: Container(
-          height: 40,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [kDefaultShadow],
+          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding).add(
+            const EdgeInsets.only(bottom: 10),
           ),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                CupertinoPageRoute(builder: (context) {
-                  return SearchPage(city: _currentCity);
-                }),
-              );
-            },
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: kDefaultPadding,
-                vertical: 12
-              ),
-              child: Text(
-                'Tìm kiếm combo, địa điểm, ...',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: primaryDarkColor
+          // child: SearchField(
+          //   height: 40,
+          //   width: double.infinity,
+          //   hintText: "Tìm kiếm điểm đến, hoạt đông,...",
+          //   boxShadow: [kDefaultShadow],
+          //   onTap: () {
+          //     Navigator.push(
+          //     context,
+          //     CupertinoPageRoute(builder: (context) {
+          //       return SearchPage();
+          //     }),
+          //   );
+          //   },
+          // ),
+          child: Container(
+            height: 40,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [kDefaultShadow],
+            ),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (context) {
+                    return SearchPage(city: _currentCity);
+                  }),
+                );
+              },
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: kDefaultPadding, vertical: 12),
+                child: Text(
+                  'Tìm kiếm combo, địa điểm, ...',
+                  style: TextStyle(fontSize: 12, color: primaryDarkColor),
                 ),
               ),
             ),
-          ),
-        )
-      ),
+          )),
     );
     if (tab == 4) {
       return AppBar(
@@ -201,12 +185,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Text(
               "Hiển thị đề xuất tại".toUpperCase(),
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 14
-              ),
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
             ),
-            VerticalSpacing(of:3),
+            VerticalSpacing(of: 3),
             Row(
               children: [
                 Text(

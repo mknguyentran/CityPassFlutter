@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/shared/info_tag.dart';
@@ -79,14 +81,15 @@ class PassRecommendationCard extends StatelessWidget {
                     color: starYellowColor,
                   ),
                   Text(
-                    pass.rate.toString(),
-                    style: TextStyle(fontSize: 14, color: starYellowColor),
-                  )
+                    "${(Random().nextDouble()+4).toStringAsFixed(1)}",
+                    style: TextStyle(
+                        fontSize: 14, color: starYellowColor),
+                  ),
                 ],
               ),
               VerticalSpacing(of: 35),
               Text(
-                vndCurrencyFormat.format(pass.price),
+                vndCurrencyFormat.format(pass.price * 1.3),
                 style: TextStyle(
                   color: fadedTextColor,
                   decoration: TextDecoration.lineThrough,

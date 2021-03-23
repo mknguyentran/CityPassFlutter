@@ -75,7 +75,7 @@ class ActivityRecommendationCard extends StatelessWidget {
                               color: starYellowColor,
                             ),
                             Text(
-                              "${Random().nextDouble()+4}",
+                              "${(Random().nextDouble()+4).toStringAsFixed(1)}",
                               style: TextStyle(
                                   fontSize: 14, color: starYellowColor),
                             ),

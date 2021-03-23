@@ -29,7 +29,6 @@ class _SearchPageState extends State<SearchPage> {
       appBar: _buildAppBar(context),
       backgroundColor: lightGrayBackground,
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(kDefaultPadding),
         child: Column(
           children: [
             FutureBuilder(
