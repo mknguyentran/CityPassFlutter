@@ -57,7 +57,6 @@ class _PassDetailContentState extends State<PassDetailContent> {
                           context: context,
                           currentIndex: _currentIndex,
                         );
-                       
 
                         _currentIndex += widget
                                 .passDetail.listOfTicket[index].length -
@@ -161,7 +160,6 @@ class _PassDetailContentState extends State<PassDetailContent> {
   }
 
   Widget _buildOptionalDestinationListItem({
-    // int index,
     double lineSpacing = 7.0,
     @required List<dynamic> activity,
     @required int includingQuota,
@@ -170,30 +168,8 @@ class _PassDetailContentState extends State<PassDetailContent> {
   }) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: lineSpacing),
-      // child: Row(
-      //   children: [
-      //     Container(
-      //       margin: EdgeInsets.only(right: 10),
-      //       alignment: Alignment.center,
-      //       width: getProportionateScreenWidth(25),
-      //       height: getProportionateScreenWidth(25),
-      //       decoration: BoxDecoration(
-      //         shape: BoxShape.circle,
-      //         color: dividerColor,
-      //       ),
-      //       child: Text(
-      //         (index != null) ? index.toString() : "",
-      //         style: TextStyle(
-      //           color: primaryDarkColor,
-      //           fontWeight: FontWeight.bold,
-      //           fontSize: 14,
-      //         ),
-      //       ),
-      //     ),
-      //     _buildItemName(activity, context)
-      //   ],
-      // ),
       child: CheckboxListTile(
+        contentPadding: EdgeInsets.zero,
         dense: true,
         title: _buildItemName(activity, context),
         shape: RoundedRectangleBorder(
