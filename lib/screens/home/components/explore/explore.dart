@@ -161,7 +161,7 @@ class _ExploreState extends State<Explore> {
                     ],
                   );
                 }
-                return Center(child: CircularProgressIndicator());
+                return Container();
               }),
         ],
       ),

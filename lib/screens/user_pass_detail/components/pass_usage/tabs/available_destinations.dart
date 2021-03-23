@@ -5,6 +5,7 @@ import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 
 class AvailableDestinations extends StatelessWidget {
   //final List<Activity> destinationList;
@@ -22,7 +23,7 @@ class AvailableDestinations extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildDestinationList(
-           itemList: inUsedList,
+            itemList: inUsedList,
             context: context,
             currentIndex: _currentIndex,
           ),
@@ -95,7 +96,7 @@ Widget _buildItemName(Object activity, BuildContext context) {
           context,
           CupertinoPageRoute(builder: (context) {
             return ActivityDetail(
-              ticketTypeID: (activity as Map)["id"],
+              ticketTypeID: Guid((activity as Map)["id"]),
             );
           }),
         );
