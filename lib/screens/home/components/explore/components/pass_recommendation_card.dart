@@ -16,7 +16,7 @@ class PassRecommendationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _cardWidth = 340.0;
+    var _cardWidth = percentageOfScreenWidth(80);
     return Container(
       clipBehavior: Clip.hardEdge,
       width: _cardWidth,

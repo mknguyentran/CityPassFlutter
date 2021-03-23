@@ -1,13 +1,18 @@
+import 'package:city_pass/blocs/auth_bloc.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/pass.dart';
+import 'package:city_pass/screens/home/components/account/login_register/login.dart';
 import 'package:city_pass/screens/pass_detail/components/pass_detail_content.dart';
 import 'package:city_pass/screens/pass_detail/components/pass_detail_header.dart';
 import 'package:city_pass/screens/pass_detail/components/pass_detail_price_bar.dart';
 import 'package:city_pass/service/pass_services.dart';
+import 'package:city_pass/size_config.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_guid/flutter_guid.dart';
 import 'package:city_pass/models/passDetailInformation.dart';
+import 'package:provider/provider.dart';
 import 'components/choose_pass_amount.dart';
 
 class PassDetail extends StatefulWidget {
@@ -23,8 +28,6 @@ class _PassDetailState extends State<PassDetail> {
   List _chosenList = [];
 
   Future<PassDetailInformation> passDetail;
-
-  
 
   @override
   void initState() {
@@ -42,6 +45,8 @@ class _PassDetailState extends State<PassDetail> {
 
   @override
   Widget build(BuildContext context) {
+    final authBloc = Provider.of<AuthBloc>(context);
+    var user = authBloc.currentUser;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: _buildAppBar(context),
@@ -63,13 +68,16 @@ class _PassDetailState extends State<PassDetail> {
                     PassDetailContent(
                       passDetail: snapshot.data,
                       chosenList: _chosenList,
-                    
                       onOptionChose: _onOptionChose,
                     ),
                   ],
                 );
               }
-              return Center(child: CircularProgressIndicator());
+              return Container(
+                height: percentageOfScreenHeight(100),
+                alignment: Alignment.center,
+                child: CircularProgressIndicator(),
+              );
             }),
       ),
       bottomNavigationBar: FutureBuilder(
@@ -89,7 +97,7 @@ class _PassDetailState extends State<PassDetail> {
                           (snapshot.data as PassDetailInformation)
                               .totalOptionalAmount,
                       _chosenList,
-                      ),
+                      user),
                 ),
               ),
             );
@@ -101,13 +109,15 @@ class _PassDetailState extends State<PassDetail> {
     );
   }
 
-  ElevatedButton _buildBuyButton(
-      BuildContext context, bool finishedChoosing, List<dynamic> chosenList) {
+  ElevatedButton _buildBuyButton(BuildContext context, bool finishedChoosing,
+      List<dynamic> chosenList, User user) {
     return ElevatedButton(
       style: ButtonStyle(
-        backgroundColor: finishedChoosing
-            ? MaterialStateProperty.all(primaryLightColor)
-            : MaterialStateProperty.all(fadedTextColor),
+        backgroundColor: user == null
+            ? MaterialStateProperty.all(primaryDarkColor)
+            : finishedChoosing
+                ? MaterialStateProperty.all(primaryLightColor)
+                : MaterialStateProperty.all(fadedTextColor),
         textStyle: MaterialStateProperty.all(
           TextStyle(
             fontFamily: "SFProRounded",
@@ -121,31 +131,39 @@ class _PassDetailState extends State<PassDetail> {
           ),
         ),
       ),
-      onPressed: finishedChoosing
+      onPressed: user == null
           ? () {
-              showModalBottomSheet<void>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return FutureBuilder(
-                      future: passDetail,
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return ChoosePassAmount(
-                            passDetail: snapshot.data,
-                            chosenList: chosenList,
-                            
-                          );
-                        }
-                        return Center(child: CircularProgressIndicator());
-                      },
-                    );
-                  });
+              setState(() {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginForm()));
+              });
             }
-          : null,
+          : finishedChoosing
+              ? () {
+                  showModalBottomSheet<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return FutureBuilder(
+                          future: passDetail,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return ChoosePassAmount(
+                                passDetail: snapshot.data,
+                                chosenList: chosenList,
+                              );
+                            }
+                            return Center(child: CircularProgressIndicator());
+                          },
+                        );
+                      });
+                }
+              : null,
       child: Text(
-        finishedChoosing
-            ? "Mua ngay"
-            : "Chọn các địa điểm tùy chọn trước khi mua",
+        user == null
+            ? "Bạn phải đăng nhập để mua"
+            : finishedChoosing
+                ? "Mua ngay"
+                : "Chọn các địa điểm tùy chọn trước khi mua",
         style: TextStyle(fontSize: finishedChoosing ? 20 : 16),
         textAlign: TextAlign.center,
       ),
@@ -167,7 +185,12 @@ AppBar _buildAppBar(BuildContext context) {
       },
     ),
     actions: [
-      IconButton(icon: Icon(Icons.favorite_border_rounded), onPressed: () {})
+      IconButton(
+        icon: Icon(CupertinoIcons.home),
+        onPressed: () {
+          Navigator.of(context).popUntil((route) => route.isFirst);
+        },
+      )
     ],
   );
 }

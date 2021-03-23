@@ -5,6 +5,7 @@ import 'package:city_pass/screens/user_pass_detail/components/pass_usage/user_pa
 import 'package:city_pass/screens/user_pass_detail/components/user_pass_detail_progress_bar.dart';
 import 'package:city_pass/screens/user_pass_detail/components/user_pass_detail_top_info.dart';
 import 'package:city_pass/service/userpass_history_service.dart';
+import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +52,11 @@ class _UserPassDetailState extends State<UserPassDetail> {
                   ],
                 );
               }
-              return Center(child: CircularProgressIndicator());
+              return Container(
+                height: percentageOfScreenHeight(20),
+                alignment: Alignment.center,
+                child: CircularProgressIndicator(),
+              );
             },
           ),
         ),
@@ -81,6 +86,17 @@ class _UserPassDetailState extends State<UserPassDetail> {
         ),
       ),
       centerTitle: true,
+      actions: [
+        IconButton(
+          icon: Icon(
+            CupertinoIcons.home,
+            color: primaryDarkColor,
+          ),
+          onPressed: () {
+            Navigator.of(context).popUntil((route) => route.isFirst);
+          },
+        )
+      ],
     );
   }
 }

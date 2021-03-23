@@ -1,3 +1,4 @@
+import 'package:city_pass/blocs/auth_bloc.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/mockupData/mockup_payment_method.dart';
 import 'package:city_pass/model/discount_code.dart';
@@ -14,6 +15,8 @@ import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_guid/flutter_guid.dart';
+import 'package:loading_overlay/loading_overlay.dart';
+import 'package:provider/provider.dart';
 
 class ChoosePassAmount extends StatefulWidget {
   final PassDetailInformation passDetail;
@@ -34,7 +37,8 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
   double total = 0;
   PaymentMethod _currentPaymentMethod = visa;
   DiscountCode _currentDiscountCode;
-  bool flag = true;
+  bool flag = true, _isLoading = false;
+  String defaultUser = "123456789qwertyu";
   void increaseAmount({bool increaseChild = false}) {
     if (increaseChild) {
       setState(() {
@@ -64,42 +68,74 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    var authBloc = Provider.of<AuthBloc>(context, listen: false);
+    var user = authBloc.currentUser;
+    
+    if(user != null) {
+      defaultUser = user.uid;
+    }
+  }
+
+  void _toggleLoading(bool isOn) {
+    setState(() {
+      _isLoading = isOn;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     total = widget.passDetail.price * amount;
     if (widget.passDetail.price != null) {
       total += widget.passDetail.price * childrenAmount;
     }
-    return Scaffold(
+    return LoadingOverlay(
+      isLoading: _isLoading,
+      color: Colors.black87,
+      progressIndicator: const CircularProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(primaryLightColor),
+      ),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          leading: Container(),
+          title: Text(
+            widget.passDetail.name,
+            style: TextStyle(
+              fontSize: 20,
+              color: textBlack,
+            ),
+          ),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: Icon(
+                CupertinoIcons.xmark,
+                color: subtitleTextColor,
+                size: 20,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        ),
       body: Container(
         height: 500,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                boxShadow: [kDefaultShadow],
-                color: Colors.white,
-              ),
-              height: 50,
-              child: Align(
-                alignment: Alignment.center,
-                child: Text(
-                  widget.passDetail.name,
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(
-                  kDefaultPadding, 0, kDefaultPadding, 50),
+                    kDefaultPadding, 30, kDefaultPadding, 50),
               child: _buildAmountPicker(),
             ),
             Container(
               height: 150,
               width: double.infinity,
-              padding:
-                  EdgeInsets.fromLTRB(kDefaultPadding, 10, kDefaultPadding, 10),
+                padding: EdgeInsets.fromLTRB(
+                    kDefaultPadding, 10, kDefaultPadding, 10),
               decoration: BoxDecoration(
                 boxShadow: [kDefaultShadow],
                 color: Colors.white,
@@ -197,7 +233,8 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
                                         total.withDiscountCode(
                                             _currentDiscountCode)),
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
                               ),
                             ],
                           ),
@@ -222,6 +259,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
             ),
           ],
         ),
+      ),
       ),
     );
   }
@@ -337,7 +375,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
 
       }
       UserPassPayment userPass = UserPassPayment();
-      userPass.userUid = "123456789qwertyu";
+      userPass.userUid = defaultUser;
       print(userPass.userUid);
       userPass.quantiyChildren = childrenAmount;
       userPass.quantiyAdult = amount;
@@ -346,15 +384,17 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
       userPass.ticketTypeIds = forceList;
       bool insert = false;
       if (flag) {
+        _toggleLoading(true);
         insert = await UserPassAPI().insertUserPass((msg) {
           print(msg);
         }, userPass);
+        _toggleLoading(false);
       }
 
       if (insert) {
         setState(() {
           flag = false;
-          Navigator.of(context).pop();
+          Navigator.of(context).popUntil((route) => route.isFirst);
           Navigator.push(
             context,
             CupertinoPageRoute(builder: (context) {
@@ -370,7 +410,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
             }),
           );
         });
-      } else {}
+      }
     }
   }
 }

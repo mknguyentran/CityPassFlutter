@@ -1,10 +1,13 @@
+import 'package:city_pass/blocs/auth_bloc.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/user_pass_available_show.dart';
 import 'package:city_pass/screens/user_pass_detail/user_pass_detail.dart';
 import 'package:city_pass/service/userpass_available_service.dart';
 import 'package:city_pass/shared/user_pass_card.dart';
+import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserPasses extends StatefulWidget {
   @override
@@ -13,12 +16,27 @@ class UserPasses extends StatefulWidget {
 
 class _UserPassesState extends State<UserPasses> {
   Future<List<AvailableUserPass>> listUserpassAvailable;
+  String defaultUser = "123456789qwertyu";
   @override
   void initState() {
     super.initState();
+    var authBloc = Provider.of<AuthBloc>(context, listen: false);
+    var user = authBloc.currentUser;
+
+    if (user != null) {
+      defaultUser = user.uid;
+    }
     listUserpassAvailable = UserPassAvailableAPI().getAllAvailablePass((msg) {
       print(msg);
-    }, "123456789qwertyu");
+    }, defaultUser);
+  }
+
+  void _reload() {
+    setState(() {
+      listUserpassAvailable = UserPassAvailableAPI().getAllAvailablePass((msg) {
+        print(msg);
+      }, defaultUser);
+    });
   }
 
   @override
@@ -33,7 +51,7 @@ class _UserPassesState extends State<UserPasses> {
             child: FutureBuilder(
               future: listUserpassAvailable,
               builder: (context, snapshot) {
-                if (snapshot.hasData) {
+                if (snapshot.connectionState == ConnectionState.done) {
                   return Column(
                     children: [
                       ...List.generate(
@@ -50,14 +68,18 @@ class _UserPassesState extends State<UserPasses> {
                                       availableUserPass: snapshot.data[index],
                                     );
                                   }),
-                                );
+                                ).then((value) => _reload());
                               }),
                         ),
                       )
                     ],
                   );
                 }
-                return Center(child: CircularProgressIndicator());
+                return Container(
+                  height: percentageOfScreenHeight(20),
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(),
+                );
               },
             ),
           ),

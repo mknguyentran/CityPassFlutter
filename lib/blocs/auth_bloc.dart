@@ -50,6 +50,7 @@ class AuthBloc {
   logout() {
     authService.logOut();
     googleSignin.signOut();
+    facebookSignIn.logOut();
   }
 
   Future<Null> _logOut() async {

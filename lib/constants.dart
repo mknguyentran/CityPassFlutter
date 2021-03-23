@@ -1,3 +1,4 @@
+import 'package:city_pass/model/activity.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -56,12 +57,27 @@ final smallShadow = BoxShadow(
   color: Color(0xFFA0A0A0).withOpacity(0.56),
 );
 
-final textShadow = BoxShadow(
+final darkShadow = BoxShadow(
   offset: Offset(0, 3),
-  blurRadius: 10,
-  color: Color(0xFF000000),
+  blurRadius: 3,
+  color: Color(0xFF2C2C2C).withOpacity(0.4),
 );
 
 final DateFormat simpleDateFormat = new DateFormat("d LLL y", "vi_VN");
 final DateFormat simpleDateAndTimeFormat =
     new DateFormat.Hm("vi_VN").addPattern(", d LLL y");
+
+   var activityTimetable =[
+    ActivityTimetable(
+        dayOfWeek: "Thứ Hai", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Ba", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Tư", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Năm", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(
+        dayOfWeek: "Thứ Sáu", openTime: "07:30 - 11:30 và 13:00 - 19:00"),
+    ActivityTimetable(dayOfWeek: "Thứ Bảy", openTime: "07:30 - 17:30"),
+    ActivityTimetable(dayOfWeek: "Chủ Nhật", openTime: "07:30 - 17:30"),
+  ];
