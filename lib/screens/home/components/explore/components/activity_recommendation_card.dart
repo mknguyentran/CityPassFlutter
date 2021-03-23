@@ -12,8 +12,7 @@ class ActivityRecommendationCard extends StatelessWidget {
   const ActivityRecommendationCard({
     Key key,
     @required this.activity,
-  }) : 
-  super(key: key);
+  }) : super(key: key);
 
   final TicketType activity;
 
@@ -54,6 +53,7 @@ class ActivityRecommendationCard extends StatelessWidget {
                         Text(
                           "${activity.city}",
                           style: TextStyle(color: subtitleTextColor),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),

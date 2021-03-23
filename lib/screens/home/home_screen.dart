@@ -189,6 +189,9 @@ class _HomeScreenState extends State<HomeScreen> {
       brightness: _brightness,
       elevation: 5,
       leading: Container(),
+      centerTitle: false,
+      leadingWidth: 0,
+      titleSpacing: kDefaultPadding,
       title: GestureDetector(
         onTap: () {
           _navigateToCityPicker();
