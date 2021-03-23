@@ -1,35 +1,43 @@
-import 'package:geolocator/geolocator.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:location_permissions/location_permissions.dart';
+import 'package:geocoding/geocoding.dart' hide Location;
+import 'package:location/location.dart';
 
 class LocationUtil {
-  Future<Position> determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-    PermissionStatus permissionStatus;
+  Location location = new Location();
 
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled');
+  bool _serviceEnabled;
+  PermissionStatus _permissionGranted;
+  LocationData _locationData;
+
+  Future<LocationData> _getCurrentLocationData() async {
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return null;
+      }
     }
 
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
-      return Future.error('Location permission is denied');
+    if(_permissionGranted == PermissionStatus.granted) {
+      _serviceEnabled = await location.serviceEnabled();
+      if (!_serviceEnabled) {
+        _serviceEnabled = await location.requestService();
+        if (!_serviceEnabled) {
+          return null;
+        }
+      }
     }
 
-    return await Geolocator.getCurrentPosition();
+    _locationData = await location.getLocation();
+    
+    return _locationData;
   }
 
-  Future<List<Placemark>> getCurrentLocations() async {
-    List<Placemark> tmp;
+  Future<List<Placemark>> getCurrentLocationMarks() async {
+    List<Placemark> listPlaceMarks;
 
-    Position currentPosition = await determinePosition();
-    tmp = await placemarkFromCoordinates(currentPosition.latitude, currentPosition.longitude);
-    return tmp;
-  }
-
-  Future<PermissionStatus> getLocationPermission() {
-    return LocationPermissions().requestPermissions();
+    LocationData locationData = await _getCurrentLocationData();
+    if (locationData != null)
+      listPlaceMarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+    return listPlaceMarks;
   }
 }

@@ -17,7 +17,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/size_config.dart';
-
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import '../../blocs/auth_bloc.dart';
@@ -62,19 +61,17 @@ class _HomeScreenState extends State<HomeScreen> {
     initializeDateFormatting("vi_VN", null);
     SizeConfig().init(context);
     if (isFirstTime) {
-      // LocationUtil().getCurrentLocations().then((value) {
-      //   this.setState(() {
-      //     isFirstTime = false;
-      //   });
+      LocationUtil().getCurrentLocationMarks().then((value) {
+        setState(() {
+          isFirstTime = false;
+        });
 
-      //   if (value[0].administrativeArea.contains('Minh')) {
-      //     this.setState(() {
-      //       _currentCity = City('TP. Hồ Chí Minh', id: 1);            
-      //     });
-      //   }
-      // });
-
-      LocationUtil().getLocationPermission().then((value) => print(value));
+        if (value[0].administrativeArea.contains('Minh')) {
+          setState(() {
+            _currentCity = City('TP. Hồ Chí Minh', id: 1);
+          });
+        }
+      });
     }
     tabs = [
       Explore(city: _currentCity),
