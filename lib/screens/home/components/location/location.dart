@@ -27,7 +27,8 @@ class _LocationsState extends State<Locations> {
   @override
   Widget build(BuildContext context) {
     List<TicketType> _favoriteList;
-    listNearYouActivities = TicketTypeAPI().getAllTicketTypes(city: widget.city);
+    listNearYouActivities =
+        TicketTypeAPI().getAllTicketTypes(city: widget.city);
 
     // void convertList() async {
     //   _favoriteList = await Future.value(listNearYouActivities);
@@ -61,12 +62,13 @@ class _LocationsState extends State<Locations> {
                     ),
                   ],
                 );
-              } else if (!snapshot.hasData) {
-                return Container();
+              } else {
+                return Container(
+                  height: percentageOfScreenHeight(20),
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(),
+                );
               }
-              return Center(
-                child: Center(child: CircularProgressIndicator())
-              );
             },
           )),
     );
@@ -165,7 +167,8 @@ class TopDestinationCard extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
             image: DecorationImage(
-                image: NetworkImage(activity.imageUrl ?? ''), fit: BoxFit.cover)),
+                image: NetworkImage(activity.imageUrl ?? ''),
+                fit: BoxFit.cover)),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(

@@ -1,5 +1,5 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/model/pass.dart';
+import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:city_pass/extensions.dart';
@@ -27,7 +27,7 @@ class PassCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                    image: NetworkImage(pass.image ?? ''),
+                    image: NetworkImage(pass.imageUrl ?? ''),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -60,7 +60,7 @@ class PassCard extends StatelessWidget {
                             size: getProportionateScreenWidth(12),
                           ),
                           Text(
-                            pass.overallRating.toString(),
+                            pass.rate.toString(),
                             style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.normal,

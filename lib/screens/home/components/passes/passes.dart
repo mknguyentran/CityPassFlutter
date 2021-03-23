@@ -5,6 +5,7 @@ import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
 import 'package:city_pass/service/pass_services.dart';
 import 'package:city_pass/shared/pass_card.dart';
+import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -25,40 +26,44 @@ class _PassesState extends State<Passes> {
 
     return SingleChildScrollView(
       child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding)
-              .add(EdgeInsets.only(top: 20)),
-          child: FutureBuilder(
-            future: listPasses,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Column(
-                  children: [
-                    ...List.generate(
-                      snapshot.data.length,
-                      (index) => Padding(
-                        padding: EdgeInsets.only(bottom: 20),
-                        child: PassCard(
-                            pass: snapshot.data[index],
-                            press: () {
-                              Navigator.push(context,
-                                  CupertinoPageRoute(builder: (context) {
-                                return PassDetail(
-                                  passId: snapshot.data[index].id,
-                                );
-                              }));
-                            }),
-                      ),
-                    )
-                  ],
-                );
-              } else if (!snapshot.data) {
-                return Container();
-              }
-              return Center(
-                child: Center(child: CircularProgressIndicator()),
+        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding)
+            .add(EdgeInsets.only(top: 20)),
+        child: FutureBuilder(
+          future: listPasses,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Column(
+                children: [
+                  ...List.generate(
+                    snapshot.data.length,
+                    (index) => Padding(
+                      padding: EdgeInsets.only(bottom: 20),
+                      child: PassCard(
+                          pass: snapshot.data[index],
+                          press: () {
+                            Navigator.push(context,
+                                CupertinoPageRoute(builder: (context) {
+                              return PassDetail(
+                                passId: snapshot.data[index].id,
+                              );
+                            }));
+                          }),
+                    ),
+                  )
+                ],
               );
-            },
-          )),
+            } else {
+              return Center(
+                child: Container(
+                  height: percentageOfScreenHeight(20),
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+          },
+        ),
+      ),
     );
   }
 }
