@@ -29,18 +29,16 @@ class _UserPassDetailTopInfoState extends State<UserPassDetailTopInfo> {
           "Đưa mã này cho nhân viên soát vé",
           style: TextStyle(fontSize: 16),
         ),
-        VerticalSpacing(),
-        Text(
-          "${widget.availableUserPass.userPassID.toUpperCase()}",
-          style: TextStyle(fontSize: 14),
-        ),
         Container(
           padding: EdgeInsets.all(kDefaultPadding),
           alignment: Alignment.center,
-          child: QrImage(
-            data: widget.availableUserPass.userPassID,
-            version: QrVersions.auto,
-            size: percentageOfScreenHeight(27),
+          child: GestureDetector(
+            onLongPress: _showUserPassIDDialog,
+            child: QrImage(
+              data: widget.availableUserPass.userPassID,
+              version: QrVersions.auto,
+              size: percentageOfScreenHeight(27),
+            ),
           ),
         ),
         Text(
@@ -81,6 +79,27 @@ class _UserPassDetailTopInfoState extends State<UserPassDetailTopInfo> {
           ),
         )
       ],
+    );
+  }
+
+  Future<void> _showUserPassIDDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title:
+              Text('${widget.availableUserPass.userPassID.toUpperCase()}'),
+          actions: [
+            TextButton(
+              child: Text('Ok'.toUpperCase()),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
