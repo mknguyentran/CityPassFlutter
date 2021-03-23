@@ -24,7 +24,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   void initState() {
     var authBloc = Provider.of<AuthBloc>(context, listen: false);
-    authBloc.currentUser.listen((user) {
+    authBloc.currentUserChange.listen((user) {
       if(user != null) {
         Navigator.push(
             context, CupertinoPageRoute(builder: (context) => HomeScreen()));
