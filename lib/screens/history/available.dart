@@ -1,7 +1,9 @@
+import 'package:city_pass/blocs/auth_bloc.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/user_pass_available_show.dart';
 import 'package:city_pass/service/userpass_available_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AvailablePass extends StatefulWidget {
   @override
@@ -10,13 +12,18 @@ class AvailablePass extends StatefulWidget {
 
 class _AvailablePassState extends State<AvailablePass> {
   Future<List<AvailableUserPass>> availablePass;
-
   @override
   void initState() {
     super.initState();
+    var authBloc = Provider.of<AuthBloc>(context, listen: false);
+    var user = authBloc.currentUser;
+    String defaultUser = "123456789qwertyu";
+    if(user != null) {
+      defaultUser = user.uid;
+    }
     availablePass = UserPassAvailableAPI().getAllAvailablePass((msg) {
       print(msg);
-    }, "123456789qwertyu");
+    }, defaultUser);
   }
 
   @override

@@ -36,6 +36,7 @@ class _AccountState extends State<Account> {
   Widget build(BuildContext context) {
     //var user = context.select<AuthBloc, User>((value) => value.currentUser.first);
     var authBloc = Provider.of<AuthBloc>(context);
+    _user = authBloc.currentUser;
     return SingleChildScrollView(
         child: Padding(
       padding:
@@ -132,7 +133,7 @@ class _AccountState extends State<Account> {
           VerticalSpacing(of: 50),
           GestureDetector(
               onTap: () {
-              //  authBloc.logout();
+                authBloc.logout();
                 Navigator.push(
                   context,
                   CupertinoPageRoute(
