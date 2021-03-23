@@ -66,6 +66,9 @@ class _ExploreState extends State<Explore> {
           //     ),
           //   ),
           // ),
+          VerticalSpacing(
+            of: verticalSpacing,
+          ),
           AttractionCategory(),
           VerticalSpacing(
             of: verticalSpacing,
