@@ -17,12 +17,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/size_config.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import '../../blocs/auth_bloc.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:geocoding/geocoding.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key, this.currentCity}) : super(key: key);
@@ -37,24 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static List<Widget> tabs;
   int _currentIndex = 0;
   City _currentCity;
-  Future<List<Placemark>> currentLocations;
-  bool isFirstTime = false;
-
-  Future<List<Placemark>> getCurrentLocations() {
-    Future<List<Placemark>> listPlacemarks;
-
-    Future<Position> position =  GeolocatorUtil().determinePosition();
-    position.then((value) => {
-      listPlacemarks = placemarkFromCoordinates(value.latitude, value.longitude)
-    });
-    return listPlacemarks;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    currentLocations = getCurrentLocations();
-  }
+  bool isFirstTime = true;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -74,17 +56,33 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  Future<List<Placemark>> getCurrentLocations() async {
+    List<Placemark> tmp;
+
+    Position currentPosition = await GeolocatorUtil().determinePosition();
+    tmp = await placemarkFromCoordinates(currentPosition.latitude, currentPosition.longitude);
+    return tmp;
+  }
+
   @override
   Widget build(BuildContext context) {
     var authBloc = Provider.of<AuthBloc>(context, listen: false);
 
     initializeDateFormatting("vi_VN", null);
     SizeConfig().init(context);
-    // currentLocations.then((value) => {
-    //   this.setState(() {
-    //     isFirstTime = true,        
-    //   });
-    // })
+    if (isFirstTime) {
+      getCurrentLocations().then((value) {
+        this.setState(() {
+          isFirstTime = false;
+        });
+
+        if (value[0].administrativeArea.contains('Minh')) {
+          this.setState(() {
+            _currentCity = City('TP. Hồ Chí Minh', id: 1);            
+          });
+        }
+      });
+    }
     tabs = [
       Explore(city: _currentCity),
       Locations(city: _currentCity),
