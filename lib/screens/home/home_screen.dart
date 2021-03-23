@@ -37,12 +37,23 @@ class _HomeScreenState extends State<HomeScreen> {
   static List<Widget> tabs;
   int _currentIndex = 0;
   City _currentCity;
-  Future<Position> position;
+  Future<List<Placemark>> currentLocations;
+  bool isFirstTime = false;
+
+  Future<List<Placemark>> getCurrentLocations() {
+    Future<List<Placemark>> listPlacemarks;
+
+    Future<Position> position =  GeolocatorUtil().determinePosition();
+    position.then((value) => {
+      listPlacemarks = placemarkFromCoordinates(value.latitude, value.longitude)
+    });
+    return listPlacemarks;
+  }
 
   @override
   void initState() {
     super.initState();
-    position = GeolocatorUtil().determinePosition();
+    currentLocations = getCurrentLocations();
   }
 
   void _onItemTapped(int index) {
@@ -69,13 +80,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
     initializeDateFormatting("vi_VN", null);
     SizeConfig().init(context);
-    position.then((value) => {
-      placemarkFromCoordinates(value.latitude, value.longitude).then((value) => {
-        if (value[0].administrativeArea.contains('Minh')) {
-          _currentCity = City('TP. Hồ Chí Minh', id: '1')
-        }
-      })
-    });
+    // currentLocations.then((value) => {
+    //   this.setState(() {
+    //     isFirstTime = true,        
+    //   });
+    // })
     tabs = [
       Explore(city: _currentCity),
       Locations(city: _currentCity),
