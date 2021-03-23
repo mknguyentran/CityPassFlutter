@@ -2,7 +2,7 @@ class City {
   int id;
   String name;
 
-  City(name);
+  City(name, {id});
 
   City.fromJson(Map<String, dynamic> json) {
     this.id = json['id'];

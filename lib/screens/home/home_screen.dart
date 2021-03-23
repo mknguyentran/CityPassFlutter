@@ -6,6 +6,7 @@ import 'package:city_pass/screens/home/components/account/login_register/login.d
 import 'package:city_pass/screens/home/components/city_picker/city_picker.dart';
 import 'package:city_pass/screens/home/components/search/search.dart';
 import 'package:city_pass/screens/home/components/explore/explore.dart';
+import 'package:city_pass/shared/geolocator.dart';
 import 'package:city_pass/shared/search_field.dart';
 import 'package:city_pass/screens/home/components/location/location.dart';
 import 'package:city_pass/screens/home/components/passes/passes.dart';
@@ -19,6 +20,9 @@ import 'package:city_pass/size_config.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import '../../blocs/auth_bloc.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key, this.currentCity}) : super(key: key);
@@ -33,6 +37,14 @@ class _HomeScreenState extends State<HomeScreen> {
   static List<Widget> tabs;
   int _currentIndex = 0;
   City _currentCity;
+  Future<Position> position;
+
+  @override
+  void initState() {
+    super.initState();
+    position = GeolocatorUtil().determinePosition();
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
@@ -57,6 +69,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
     initializeDateFormatting("vi_VN", null);
     SizeConfig().init(context);
+    position.then((value) => {
+      placemarkFromCoordinates(value.latitude, value.longitude).then((value) => {
+        if (value[0].administrativeArea.contains('Minh')) {
+          _currentCity = City('TP. Hồ Chí Minh', id: '1')
+        }
+      })
+    });
     tabs = [
       Explore(city: _currentCity),
       Locations(city: _currentCity),
