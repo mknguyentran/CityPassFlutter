@@ -168,7 +168,12 @@ AppBar _buildAppBar(BuildContext context) {
       },
     ),
     actions: [
-      IconButton(icon: Icon(Icons.favorite_border_rounded), onPressed: () {})
+      IconButton(
+        icon: Icon(CupertinoIcons.home),
+        onPressed: () {
+          Navigator.of(context).popUntil((route) => route.isFirst);
+        },
+      )
     ],
   );
 }

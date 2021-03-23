@@ -86,6 +86,17 @@ class _UserPassDetailState extends State<UserPassDetail> {
         ),
       ),
       centerTitle: true,
+      actions: [
+        IconButton(
+          icon: Icon(
+            CupertinoIcons.home,
+            color: primaryDarkColor,
+          ),
+          onPressed: () {
+            Navigator.of(context).popUntil((route) => route.isFirst);
+          },
+        )
+      ],
     );
   }
 }
