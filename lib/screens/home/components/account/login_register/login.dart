@@ -65,12 +65,38 @@ class _LoginFormState extends State<LoginForm> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: Icon(
-                    CupertinoIcons.person_crop_circle_fill,
-                    size: 100,
-                    color: Colors.white,
-                  )),
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(
+                      CupertinoIcons.tree,
+                      size: 30,
+                      color: Colors.white.withOpacity(0.4),
+                    ),
+                    Icon(
+                      CupertinoIcons.airplane,
+                      size: 60,
+                      color: Colors.white.withOpacity(0.6),
+                    ),
+                    Icon(
+                      CupertinoIcons.person_crop_circle_fill,
+                      size: 110,
+                      color: Colors.white,
+                    ),
+                    Icon(
+                      Icons.wallet_travel_rounded,
+                      size: 60,
+                      color: Colors.white.withOpacity(0.6),
+                    ),
+                    Icon(
+                      Icons.beach_access_rounded,
+                      size: 30,
+                      color: Colors.white.withOpacity(0.4),
+                    ),
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: Text(
