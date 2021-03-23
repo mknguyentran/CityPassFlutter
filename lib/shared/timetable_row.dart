@@ -1,3 +1,4 @@
+import 'package:city_pass/constants.dart';
 import 'package:flutter/material.dart';
 
 class TimetableRow extends StatelessWidget {
@@ -26,7 +27,7 @@ class TimetableRow extends StatelessWidget {
               dayOfWeek,
               style: TextStyle(
                 fontSize: _fontSize,
-                color: isToday ? Colors.green : null,
+                color: isToday ? primaryLightColor : null,
                 fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
               ),
             ),
@@ -37,7 +38,7 @@ class TimetableRow extends StatelessWidget {
               openTime,
               style: TextStyle(
                 fontSize: _fontSize,
-                color: isToday ? Colors.green : null,
+                color: isToday ? primaryLightColor : null,
                 fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
               ),
             ),

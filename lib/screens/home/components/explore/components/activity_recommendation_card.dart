@@ -17,7 +17,7 @@ class ActivityRecommendationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _cardWidth = 250.0;
+    var _cardWidth = percentageOfScreenWidth(60);
     var _cardheight = 350.0;
     return Container(
       clipBehavior: Clip.hardEdge,
