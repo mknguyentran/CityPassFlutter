@@ -21,9 +21,9 @@ class PassDetailHeader extends StatelessWidget {
       children: [
         Container(
           height: percentageOfScreenHeight(30),
-          // child: SizedBox.expand(
-          //   child: Image.asset('', fit: BoxFit.cover),
-          // ),
+          child: SizedBox.expand(
+            child: Image.network(passDetail.imageUrl, fit: BoxFit.cover),
+          ),
         ),
         Positioned(
             bottom: 0,

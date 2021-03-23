@@ -26,7 +26,7 @@ class _AvailablePassState extends State<AvailablePass> {
           child: FutureBuilder(
         future: availablePass,
         builder: (context, snapshot) {
-          AvailableUserPass passAvailable = snapshot.data;
+          List<AvailableUserPass> passAvailableList = snapshot.data;
           if (snapshot.hasData) {
             return Column(
               children: <Widget>[
@@ -41,7 +41,7 @@ class _AvailablePassState extends State<AvailablePass> {
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image:
-                                    NetworkImage(passAvailable.passImageUrl),
+                                    NetworkImage(passAvailableList[index].passImageUrl),
                                 fit: BoxFit.cover)),
                       ),
                       SizedBox(width: 10),
@@ -51,7 +51,7 @@ class _AvailablePassState extends State<AvailablePass> {
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.only(top: 0),
-                            child: Text(passAvailable.passName,
+                            child: Text(passAvailableList[index].passName,
                                 style: TextStyle(
                                     fontSize: 17, fontWeight: FontWeight.w500)),
                           ),
@@ -62,7 +62,7 @@ class _AvailablePassState extends State<AvailablePass> {
                                   style: TextStyle(
                                       fontSize: 15, color: subtitleTextColor)),
                               SizedBox(width: 20),
-                              Text(passAvailable.expiredDate.toString(),
+                              Text(passAvailableList[index].expiredDate.toString(),
                                   style: TextStyle(
                                       fontSize: 15,
                                       color: Colors.redAccent,
