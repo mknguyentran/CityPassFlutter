@@ -50,7 +50,10 @@ class _UserPassCardState extends State<UserPassCard> {
                 child: Container(
                   height: 80,
                   alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: getProportionateScreenWidth(12),
+                    vertical: 10,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.5),
                     boxShadow: [kDefaultShadow],
@@ -62,53 +65,63 @@ class _UserPassCardState extends State<UserPassCard> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            widget.pass.passName,
-                            style: TextStyle(
-                                fontSize: 20,
+                      Expanded(
+                        flex: 4,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              widget.pass.passName,
+                              style: TextStyle(
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          Text(
-                            "HẾT HẠN VÀO ${simpleDateFormat.format(widget.pass.expiredDate)}"
-                                .toUpperCase(),
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w300,
-                                color: Colors.white),
-                          ),
-                        ],
+                                color: Colors.white,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              "HẾT HẠN VÀO ${simpleDateFormat.format(widget.pass.expiredDate)}"
+                                  .toUpperCase(),
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.white),
+                            ),
+                          ],
+                        ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "ĐANG SỬ DỤNG",
-                            style: TextStyle(
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Khả dụng".toUpperCase(),
+                              style: TextStyle(
                                 fontSize: 12,
-                                fontWeight: FontWeight.w300,
-                                color: Colors.white),
-                          ),
-                          // Text(
-                          //   "${widget.pass.usedDestination}/${widget.pass.totalDestination}",
-                          //   style: TextStyle(
-                          //       fontSize: 20,
-                          //       fontWeight: FontWeight.bold,
-                          //       color: Colors.white),
-                          // ),
-                          // Text(
-                          //   "ĐỊA ĐIỂM",
-                          //   style: TextStyle(
-                          //       fontSize: 12,
-                          //       fontWeight: FontWeight.w300,
-                          //       color: Colors.white),
-                          // ),
-                        ],
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white,
+                              ),
+                              textAlign: TextAlign.right,
+                            ),
+                            // Text(
+                            //   "${widget.pass.usedDestination}/${widget.pass.totalDestination}",
+                            //   style: TextStyle(
+                            //       fontSize: 20,
+                            //       fontWeight: FontWeight.bold,
+                            //       color: Colors.white),
+                            // ),
+                            // Text(
+                            //   "ĐỊA ĐIỂM",
+                            //   style: TextStyle(
+                            //       fontSize: 12,
+                            //       fontWeight: FontWeight.w300,
+                            //       color: Colors.white),
+                            // ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
