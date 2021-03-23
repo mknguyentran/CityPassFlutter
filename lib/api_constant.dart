@@ -1,5 +1,5 @@
 
-const BASE_URL = "https://citypasswebapi.azurewebsites.net/api/";
+const BASE_URL = "https://citypasswebapi.azurewebsites.net/api/v1.0/";
 
 // TicketType
 // ** GET ** //

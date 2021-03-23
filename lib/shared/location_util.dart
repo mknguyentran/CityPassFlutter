@@ -1,24 +1,4 @@
-// import 'package:geolocator/geolocator.dart';
-
-// class GeolocatorUtil {
-//   Future<Position> determinePosition() async {
-//     bool serviceEnabled;
-//     LocationPermission permission;
-
-//     serviceEnabled = await Geolocator.isLocationServiceEnabled();
-//     if (!serviceEnabled) {
-//       return Future.error('Location services are disabled');
-//     }
-
-//     permission = await Geolocator.checkPermission();
-//     if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
-//       return Future.error('Location permission is denied');
-//     }
-
-//     return await Geolocator.getCurrentPosition();
-//   }
-// }
-
+import 'package:geocoding/geocoding.dart' hide Location;
 import 'package:location/location.dart';
 
 class LocationUtil {
@@ -28,7 +8,7 @@ class LocationUtil {
   PermissionStatus _permissionGranted;
   LocationData _locationData;
 
-  Future<LocationData> getCurrentLocation() async {
+  Future<LocationData> _getCurrentLocationData() async {
     _permissionGranted = await location.hasPermission();
     if (_permissionGranted == PermissionStatus.denied) {
       _permissionGranted = await location.requestPermission();
@@ -50,5 +30,14 @@ class LocationUtil {
     _locationData = await location.getLocation();
     
     return _locationData;
+  }
+
+  Future<List<Placemark>> getCurrentLocationMarks() async {
+    List<Placemark> listPlaceMarks;
+
+    LocationData locationData = await _getCurrentLocationData();
+    if (locationData != null)
+      listPlaceMarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+    return listPlaceMarks;
   }
 }

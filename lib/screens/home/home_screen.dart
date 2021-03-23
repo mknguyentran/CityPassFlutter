@@ -56,36 +56,23 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  // Future<List<Placemark>> getCurrentLocations() async {
-  //   List<Placemark> tmp;
-
-  //   Position currentPosition = await GeolocatorUtil().determinePosition();
-  //   tmp = await placemarkFromCoordinates(currentPosition.latitude, currentPosition.longitude);
-  //   return tmp;
-  // }
-
   @override
   Widget build(BuildContext context) {
     var authBloc = Provider.of<AuthBloc>(context, listen: false);
 
     initializeDateFormatting("vi_VN", null);
     SizeConfig().init(context);
-    // if (isFirstTime) {
-    //   getCurrentLocations().then((value) {
-    //     this.setState(() {
-    //       isFirstTime = false;
-    //     });
-
-    //     if (value[0].administrativeArea.contains('Minh')) {
-    //       this.setState(() {
-    //         _currentCity = City('TP. Hồ Chí Minh', id: 1);            
-    //       });
-    //     }
-    //   });
-    // }
     if (isFirstTime) {
-      LocationUtil().getCurrentLocation().then((value) {
-        print(value);
+      LocationUtil().getCurrentLocationMarks().then((value) {
+        setState(() {
+          isFirstTime = false;
+        });
+
+        if (value[0].administrativeArea.contains('Minh')) {
+          setState(() {
+            _currentCity = City('TP. Hồ Chí Minh', id: 1);
+          });
+        }
       });
     }
     tabs = [
