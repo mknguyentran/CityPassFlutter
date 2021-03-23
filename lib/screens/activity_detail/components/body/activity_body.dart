@@ -93,11 +93,11 @@ class _ActivityBodyState extends State<ActivityBody>
           VerticalSpacing(),
           IndexedStack(
             children: [
-              Visibility(
-                child: ActivityInfo(activity: widget.activity),
-                maintainState: true,
-                visible: selectedIndex == 0,
-              ),
+              // Visibility(
+              //   child: ActivityInfo(activity: widget.activity),
+              //   maintainState: true,
+              //   visible: selectedIndex == 0,
+              // ),
               Visibility(
                 child: ActivityImages(activity: widget.activity),
                 maintainState: true,

@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:city_pass/models/city.dart';
 import 'package:city_pass/screens/home/components/account/account.dart';
-import 'package:city_pass/screens/home/components/account/login_register/login.dart';
+import 'package:city_pass/screens/home/components/account/login_register/login.dart'; 
 import 'package:city_pass/screens/home/components/city_picker/city_picker.dart';
 import 'package:city_pass/screens/home/components/search/search.dart';
 import 'package:city_pass/screens/home/components/explore/explore.dart';
@@ -53,13 +53,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    var authBloc = Provider.of<AuthBloc>(context, listen: false);
-    authBloc.currentUser.listen((user) {
-      if(user == null) {
-        Navigator.push(
-            context, CupertinoPageRoute(builder: (context) => HomeScreen()));
-      }
-    });
+    // var authBloc = Provider.of<AuthBloc>(context, listen: false);
+    // authBloc.currentUser.listen((user) {
+    //   if(user == null) {
+    //     Navigator.push(
+    //         context, CupertinoPageRoute(builder: (context) => HomeScreen()));
+    //   }
+    // });
   }
 
   @override
@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
     tabs = [
       Explore(city: _currentCity),
       Locations(city: _currentCity),
-      // UserPasses(),
+      UserPasses(),
       Passes(city: _currentCity),
       Account()
     ];

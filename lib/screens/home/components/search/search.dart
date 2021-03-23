@@ -64,7 +64,7 @@ class _SearchPageState extends State<SearchPage> {
                 }
 
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: Center(child: CircularProgressIndicator()),
                 );
               },
             ),

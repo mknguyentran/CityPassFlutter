@@ -55,7 +55,7 @@ class _ActivityDetailState extends State<ActivityDetail> {
                   );
            
                 }
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               })
           
         

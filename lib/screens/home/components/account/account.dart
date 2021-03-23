@@ -132,7 +132,7 @@ class _AccountState extends State<Account> {
           VerticalSpacing(of: 50),
           GestureDetector(
               onTap: () {
-                authBloc.logout();
+              //  authBloc.logout();
                 Navigator.push(
                   context,
                   CupertinoPageRoute(

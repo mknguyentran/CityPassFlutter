@@ -60,7 +60,7 @@ class _CityPickerState extends State<CityPicker> {
                   }
 
                   return Center(
-                    child: CircularProgressIndicator(),
+                    child: Center(child: CircularProgressIndicator()),
                   );
                 }
               ),

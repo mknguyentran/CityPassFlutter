@@ -55,7 +55,7 @@ class _PassesState extends State<Passes> {
                 return Container();
               }
               return Center(
-                child: CircularProgressIndicator(),
+                child: Center(child: CircularProgressIndicator()),
               );
             },
           )),

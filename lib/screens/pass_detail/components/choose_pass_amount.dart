@@ -315,8 +315,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
               ),
             )),
         child: Text("Thanh toán"),
-        onPressed: () => formUserPass(amount, childrenAmount)
-        );
+        onPressed: () => formUserPass(amount, childrenAmount));
   }
 
   Future<void> formUserPass(int amount, int childrenAmount) async {
@@ -327,17 +326,10 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
           IncludingDestination(list, int.parse(list[list.length - 1])).type;
       if (type == 1) {
         for (int j = 0; j < list.length - 1; j++) {
-          print(list[j][0]);
-          print(list[j][0].runtimeType);
-          // forceList.add(new Guid(list[j][0]));
           forceList.add(list[j][0]);
         }
       }
       for (int i = 0; i < widget.chosenList.length; i++) {
-        print(widget.chosenList[i][0]);
-        print(widget.chosenList[i][0].runtimeType);
-
-        // Guid id = new Guid(widget.chosenList[i][0]);
         String id = widget.chosenList[i][0];
 
         forceList
@@ -353,12 +345,12 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
 
       userPass.ticketTypeIds = forceList;
       bool insert = false;
-      if(flag) {
+      if (flag) {
         insert = await UserPassAPI().insertUserPass((msg) {
-        print(msg);
-      }, userPass);
+          print(msg);
+        }, userPass);
       }
-      
+
       if (insert) {
         setState(() {
           flag = false;

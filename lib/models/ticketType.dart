@@ -14,6 +14,8 @@ class TicketType {
         this.imageUrl = json['urlImage'],
         this.isDelete = json['isDelete'];
 
+
+  
   Map<String, dynamic> toJson() => {
         'id': this.id,
         'name': this.name,

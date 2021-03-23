@@ -38,34 +38,34 @@ class _ExploreState extends State<Explore> {
       clipBehavior: Clip.none,
       child: Column(
         children: [
-          // Padding(
-          //   padding:
-          //       EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: 20),
-          //   child: GestureDetector(
-          //     onTap: () {
-          //       Navigator.push(
-          //         context,
-          //         CupertinoPageRoute(
-          //           builder: (context) {
-          //             return ActivityDetail(
-          //               activity: tiniWorld,
-          //             );
-          //           },
-          //         ),
-          //       );
-          //     },
-          //     child: Container(
-          //       clipBehavior: Clip.hardEdge,
-          //       decoration: BoxDecoration(
-          //           borderRadius: BorderRadius.circular(10),
-          //           boxShadow: [kDefaultShadow]),
-          //       child: Image(
-          //         image: AssetImage("assets/images/tiniworld.png"),
-          //         fit: BoxFit.fill,
-          //       ),
-          //     ),
-          //   ),
-          // ),
+          Padding(
+            padding:
+                EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: 20),
+            // child: GestureDetector(
+            //   onTap: () {
+            //     Navigator.push(
+            //       context,
+            //       CupertinoPageRoute(
+            //         builder: (context) {
+            //           return ActivityDetail(
+            //             activity: tiniWorld,
+            //           );
+            //         },
+            //       ),
+            //     );
+            //   },
+            //   child: Container(
+            //     clipBehavior: Clip.hardEdge,
+            //     decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(10),
+            //         boxShadow: [kDefaultShadow]),
+            //     child: Image(
+            //       image: AssetImage("assets/images/tiniworld.png"),
+            //       fit: BoxFit.fill,
+            //     ),
+            //   ),
+            // ),
+          ),
           AttractionCategory(),
           VerticalSpacing(
             of: verticalSpacing,
@@ -94,7 +94,7 @@ class _ExploreState extends State<Explore> {
                   ],
                 );
               }
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             },
           ),
           FutureBuilder(
@@ -127,7 +127,7 @@ class _ExploreState extends State<Explore> {
                     ],
                   );
                 }
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               }),
         ],
       ),

@@ -34,7 +34,6 @@ class _UserPassesState extends State<UserPasses> {
               future: listUserpassAvailable,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  print("co data ne");
                   return Column(
                     children: [
                       ...List.generate(
@@ -48,7 +47,7 @@ class _UserPassesState extends State<UserPasses> {
                                   context,
                                   CupertinoPageRoute(builder: (context) {
                                     return UserPassDetail(
-                                      pass: snapshot.data[index].id,
+                                      availableUserPass: snapshot.data[index],
                                     );
                                   }),
                                 );
@@ -58,7 +57,7 @@ class _UserPassesState extends State<UserPasses> {
                     ],
                   );
                 }
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               },
             ),
           ),

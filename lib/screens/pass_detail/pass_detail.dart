@@ -69,7 +69,7 @@ class _PassDetailState extends State<PassDetail> {
                   ],
                 );
               }
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             }),
       ),
       bottomNavigationBar: FutureBuilder(
@@ -136,7 +136,7 @@ class _PassDetailState extends State<PassDetail> {
                             
                           );
                         }
-                        return CircularProgressIndicator();
+                        return Center(child: CircularProgressIndicator());
                       },
                     );
                   });
