@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     var authBloc = Provider.of<AuthBloc>(context, listen: false);
     authBloc.currentUser.listen((user) {
-      if(user == null) {
+      if(user != null) {
         Navigator.push(
             context, CupertinoPageRoute(builder: (context) => HomeScreen()));
       }
@@ -228,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
       //     _onItemTapped(0);
       //   },
       // ),
-      bottom: _bottom,
+      // bottom: _bottom,
     );
   }
 

@@ -12,7 +12,7 @@ class PassAPI {
     String queryString = '';
     Map<String, dynamic> queryParams = {};
     if (city != null) {
-      var cityParam = {'cityId': city.id};
+      var cityParam = {'cityId': city.id.toString()};
       queryParams.addAll(cityParam);
     }
     if (name != null) {

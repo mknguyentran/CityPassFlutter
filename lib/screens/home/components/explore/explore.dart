@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/city.dart';
 import 'package:city_pass/models/pass.dart';
+import 'package:city_pass/screens/home/components/search/search.dart';
 import 'package:city_pass/service/ticketType_services.dart';
 import 'package:city_pass/service/pass_services.dart';
 import 'package:city_pass/models/ticketType.dart';
@@ -66,6 +67,39 @@ class _ExploreState extends State<Explore> {
           //     ),
           //   ),
           // ),
+          Container(
+            margin: EdgeInsets.all(kDefaultPadding),
+            height: 40,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [kDefaultShadow],
+            ),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (context) {
+                    return SearchPage(city: widget.city);
+                  }),
+                );
+              },
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: kDefaultPadding,
+                  vertical: 12
+                ),
+                child: Text(
+                  'Tìm kiếm địa điểm',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: primaryDarkColor
+                  ),
+                ),
+              ),
+            ),
+          ),
           AttractionCategory(),
           VerticalSpacing(
             of: verticalSpacing,
