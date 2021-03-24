@@ -13,9 +13,9 @@ class OrderDetail {
       this.discountCode);
 
   double get total {
-    if (passDetail.price != null) {
+    if (passDetail.childrenPrice != null) {
       return (passDetail.price * amount) +
-          (passDetail.price * childrenAmount);
+          (passDetail.childrenPrice * childrenAmount);
     } else {
       return (passDetail.price * amount);
     }
