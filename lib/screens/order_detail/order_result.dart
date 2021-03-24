@@ -106,7 +106,7 @@ class _OrderResultState extends State<OrderResult> {
           OrderDetailItem(
             passName: orderDetail.passDetail.name,
             amount: orderDetail.childrenAmount,
-            price: orderDetail.passDetail.price,
+            price: orderDetail.passDetail.childrenPrice,
             hasChildrenLabel: true,
           ),
       ],
