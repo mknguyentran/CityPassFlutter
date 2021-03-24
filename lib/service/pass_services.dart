@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:city_pass/api_constant.dart';
 
 class PassAPI {
-  Future<List<Pass>> getAllPasses({Function(String) onError, City city, String name}) async {
+  Future<List<Pass>> getAllPasses({Function(String) onError, City city, String name, String ticketTypeId}) async {
     String endpoint = listPassesGETUrl;
     String queryString = '';
     Map<String, dynamic> queryParams = {};
@@ -18,6 +18,10 @@ class PassAPI {
     if (name != null) {
       var nameParam = {'name': name.trim()};
       queryParams.addAll(nameParam);
+    }
+    if(ticketTypeId != null){
+      var ticketTypeIdParam = {'ticketTypeId': ticketTypeId.trim()};
+      queryParams.addAll(ticketTypeIdParam);
     }
     queryString = '?' + Uri(queryParameters: queryParams).query;
 

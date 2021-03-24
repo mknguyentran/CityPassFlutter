@@ -13,9 +13,7 @@ class _OutDatedPassState extends State<OutDatedPass> {
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 10,
-            ),
+            
             Card(
                 child: Row(
               children: <Widget>[
