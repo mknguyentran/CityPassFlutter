@@ -3,6 +3,8 @@ import 'package:city_pass/model/user_pass.dart';
 import 'package:city_pass/models/user_pass_available_show.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
 import 'package:city_pass/size_config.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_guid/flutter_guid.dart';
@@ -21,6 +23,13 @@ class UserPassDetailTopInfo extends StatefulWidget {
 }
 
 class _UserPassDetailTopInfoState extends State<UserPassDetailTopInfo> {
+  Future<String> _deviceToken;
+  @override
+  void initState() {
+    super.initState();
+    _deviceToken = FirebaseMessaging.instance.getToken();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,11 +43,21 @@ class _UserPassDetailTopInfoState extends State<UserPassDetailTopInfo> {
           alignment: Alignment.center,
           child: GestureDetector(
             onLongPress: _showUserPassIDDialog,
-            child: QrImage(
-              data: widget.availableUserPass.userPassID,
-              version: QrVersions.auto,
-              size: percentageOfScreenHeight(27),
-            ),
+            child: FutureBuilder(
+              future: _deviceToken,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return QrImage(
+                    data: widget.availableUserPass.userPassID + ' ' + snapshot.data,
+                    version: QrVersions.auto,
+                    size: percentageOfScreenHeight(27),
+                  );
+                }
+
+                return CircularProgressIndicator();
+              },
+            )
+            
           ),
         ),
         Text(
