@@ -59,65 +59,79 @@ class _AvailablePassState extends State<AvailablePass> {
                                       passAvailable[index].passImageUrl),
                                   fit: BoxFit.cover)),
                         ),
-                        SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          // mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(top: 0),
-                              child: Text(passAvailable[index].passName,
-                                  style: TextStyle(
-                                      fontSize: 17, fontWeight: FontWeight.w500)),
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              children: <Widget>[
-                                Text("Hết hạn:",
-                                    style: TextStyle(
-                                        fontSize: 15, color: subtitleTextColor)),
-                                SizedBox(width: 20),
-                                Text(passAvailable[index].expiredDate.toString(),
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        color: subtitleTextColor)),
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Row(
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  "Còn hiệu lực",
+                                  passAvailable[index].passName,
                                   style: TextStyle(
-                                      color: subtitleTextColor, fontSize: 15),
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w500),
                                 ),
-                                SizedBox(width: 45),
-                                RaisedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      CupertinoPageRoute(builder: (context) {
-                                        return PassDetail(
-                                          
-                                            passId: new Guid(
-                                                passAvailable[index].passID));
-                                      }),
-                                    );
-                                  },
-                                  color: primaryDarkColor,
-                                  child: Text(
-                                    "Đặt lại",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 17),
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(6))),
+                                SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text("Hết hạn:",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: subtitleTextColor)),
+                                    SizedBox(width: 20),
+                                    Text(
+                                        simpleDateAndTimeFormat.format(
+                                          passAvailable[index].expiredDate,
+                                        ),
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            color: subtitleTextColor)),
+                                  ],
                                 ),
+                                SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      "Còn hiệu lực",
+                                      style: TextStyle(
+                                          color: subtitleTextColor,
+                                          fontSize: 15),
+                                    ),
+                                    SizedBox(
+                                      height: 30,
+                                      child: RaisedButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            CupertinoPageRoute(
+                                                builder: (context) {
+                                              return PassDetail(
+                                                  passId: new Guid(
+                                                      passAvailable[index]
+                                                          .passID));
+                                            }),
+                                          );
+                                        },
+                                        color: primaryDarkColor,
+                                        child: Text(
+                                          "Đặt lại",
+                                          style: TextStyle(
+                                              color: Colors.white, fontSize: 17),
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(6))),
+                                      ),
+                                    ),
+                                  ],
+                                )
                               ],
-                            )
-                          ],
+                            ),
+                          ),
                         )
                       ],
                     )),
@@ -129,7 +143,11 @@ class _AvailablePassState extends State<AvailablePass> {
               ],
             );
           }
-          return Center(child: CircularProgressIndicator());
+          return Container(
+            height: percentageOfScreenHeight(20),
+            alignment: Alignment.center,
+            child: CircularProgressIndicator(),
+          );
         },
       )),
     );
