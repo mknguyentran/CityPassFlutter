@@ -78,7 +78,7 @@ class PassDetailPriceBar extends StatelessWidget {
                           //original children price
                           Text(
                             vndCurrencyFormat
-                                .format(passDetail.childrenPrice * 130/100),
+                                .format(passDetail.childrenPrice * 130 /100),
                             style: TextStyle(
                               fontSize: 18,
                               color: fadedTextColor,

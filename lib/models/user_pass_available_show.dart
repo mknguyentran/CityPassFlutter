@@ -8,7 +8,7 @@ class AvailableUserPass {
 
   AvailableUserPass.formJson(Map<String, dynamic> json) {
     this.userPassID = json['id'];
-    this.passID = json['passId'];
+    this.passID = json['pass']['id'];
     this.expiredDate = DateTime.parse(json['willExpireAt']);
     expiredDate = expiredDate.add(Duration(hours: 7));
     this.passName = json['pass']['name'];
