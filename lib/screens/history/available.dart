@@ -77,7 +77,7 @@ class _AvailablePassState extends State<AvailablePass> {
                                     style: TextStyle(
                                         fontSize: 15, color: subtitleTextColor)),
                                 SizedBox(width: 20),
-                                Text(passAvailable[index].expiredDate.toString(),
+                                Text(simpleDateAndTimeFormat.format( passAvailable[index].expiredDate,),
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
