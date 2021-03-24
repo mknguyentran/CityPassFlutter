@@ -32,44 +32,64 @@ class _AvailablePassState extends State<AvailablePass> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10),
-      child: Container(
-        child: SingleChildScrollView(
-            child: FutureBuilder(
-          future: availablePass,
-          builder: (context, snapshot) {
-            List<AvailableUserPass> passAvailableList = snapshot.data;
-            if (snapshot.hasData) {
-              return Column(
-                children: <Widget>[
-                  ...List.generate(
-                    snapshot.data.length,
-                    (index) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Card(
-                          child: Row(
+    return Container(
+      child: SingleChildScrollView(
+          child: FutureBuilder(
+        future: availablePass,
+        builder: (context, snapshot) {
+          List<AvailableUserPass> passAvailable = snapshot.data;
+          if (snapshot.hasData) {
+            return Column(
+              children: <Widget>[
+                ...List.generate(
+                  snapshot.data.length,
+                  (index) => Card(
+                      child: Row(
+                    children: <Widget>[
+                      Container(
+                        height: 120,
+                        width: 120,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image:
+                                    NetworkImage(passAvailable[index].passImageUrl),
+                                fit: BoxFit.cover)),
+                      ),
+                      SizedBox(width: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        // mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Container(
-                            height: 120,
-                            width: 120,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        passAvailableList[index].passImageUrl),
-                                    fit: BoxFit.cover)),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 0),
+                            child: Text(passAvailable[index].passName,
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.w500)),
                           ),
                           SizedBox(width: 10),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             // mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.only(top: 0),
-                                child: Text(passAvailableList[index].passName,
-                                    style: TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w500)),
+                              Text("Hết hạn:",
+                                  style: TextStyle(
+                                      fontSize: 15, color: subtitleTextColor)),
+                              SizedBox(width: 20),
+                              Text(passAvailable[index].expiredDate.toString(),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.redAccent,
+                                      fontWeight: FontWeight.w500,
+                                      decoration: TextDecoration.lineThrough)),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                "Còn hiệu lực",
+                                style: TextStyle(
+                                    color: subtitleTextColor, fontSize: 15),
                               ),
                               SizedBox(height: 10),
                               Row(
