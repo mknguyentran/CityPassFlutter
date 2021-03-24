@@ -18,12 +18,9 @@ class UserPasses extends StatefulWidget {
 
 class _UserPassesState extends State<UserPasses> {
   Future<List<AvailableUserPass>> listUserpassAvailable;
-<<<<<<< HEAD
   var _user;
 
-=======
   String defaultUser = "rlGWU9R0bkSEByvoDXjWHpiaCvr1";
->>>>>>> 876da5c2682ec844130f438b7e0918d30c43f209
   @override
   void initState() {
     super.initState();
