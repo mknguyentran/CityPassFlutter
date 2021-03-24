@@ -13,6 +13,7 @@ class PassDetailInformation {
   List<List> listOfTicket;
   int type;
   String imageUrl;
+  double childrenPrice;
 
   int get totalOptionalAmount {
     int result = 0;
@@ -28,6 +29,7 @@ class PassDetailInformation {
       : this.id = new Guid(json['id']),
         this.name = json['name'],
         this.price = json['price'],
+        this.childrenPrice = json['childrenPrice'],
         this.description = json['description'],
         this.expireDuration = json['expireDuration'],
         this.feedbacks = json['feedbacks'],

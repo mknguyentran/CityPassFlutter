@@ -45,14 +45,14 @@ class PassDetailPriceBar extends StatelessWidget {
                       ),
                     ),
                     //original price
-                    // Text(
-                    //   vndCurrencyFormat.format(passDetail.price),
-                    //   style: TextStyle(
-                    //     fontSize: 18,
-                    //     color: fadedTextColor,
-                    //     decoration: TextDecoration.lineThrough,
-                    //   ),
-                    // )
+                    Text(
+                      vndCurrencyFormat.format(passDetail.price * 130 /100),
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: fadedTextColor,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    )
                   ],
                 ),
                 if (passDetail.price != null)
@@ -67,7 +67,7 @@ class PassDetailPriceBar extends StatelessWidget {
                           Container(
                             margin: EdgeInsets.only(right: 10),
                             child: Text(
-                              vndCurrencyFormat.format(passDetail.price),
+                              vndCurrencyFormat.format(passDetail.childrenPrice),
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -76,15 +76,15 @@ class PassDetailPriceBar extends StatelessWidget {
                             ),
                           ),
                           //original children price
-                          // Text(
-                          //   vndCurrencyFormat
-                          //       .format(passDetail.price),
-                          //   style: TextStyle(
-                          //     fontSize: 18,
-                          //     color: fadedTextColor,
-                          //     decoration: TextDecoration.lineThrough,
-                          //   ),
-                          // )
+                          Text(
+                            vndCurrencyFormat
+                                .format(passDetail.childrenPrice * 130/100),
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: fadedTextColor,
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          )
                         ],
                       ),
                     ],

@@ -37,7 +37,7 @@ class LocationUtil {
 
     LocationData locationData = await _getCurrentLocationData();
     if (locationData != null)
-      listPlaceMarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+      listPlaceMarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude, localeIdentifier: 'vi_VN');
     return listPlaceMarks;
   }
 }

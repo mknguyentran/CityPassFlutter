@@ -21,8 +21,9 @@ class TicketTypeAPI {
     queryString = '?' + Uri(queryParameters: queryParams).query;
 
     List<TicketType> ticketTypes = [];
+    try {
     http.Response response = await http.get(endpoint + queryString);
-    if (response.statusCode == 200) {
+if (response.statusCode == 200) {
       try {
         dynamic jsonRaw = json.decode(response.body);
         List<dynamic> data = jsonRaw["data"];
@@ -37,6 +38,10 @@ class TicketTypeAPI {
     } else {
       onError("Something get wrong! Status code ${response.statusCode}");
     }
+    } catch (e) {
+      print(e);
+    }
+    
     return ticketTypes;
   }
 

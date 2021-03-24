@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "584972427073-ev1kjsqti1ud2ed4kum0oe3blhch427t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.CityPass",
+            "certificate_hash": "dc5423091198a76bd98df9724d3b3713328e56e2"
+          }
+        },
+        {
+          "client_id": "584972427073-ps9anot3lsaem2qsiihnm3ba9of58hk6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.CityPass",
+            "certificate_hash": "c1958efad6241617af6adcc874ff4dfaa6713228"
+          }
+        },
+        {
           "client_id": "584972427073-7o9t9sd9ni773glfhlp2b614qjv3galr.apps.googleusercontent.com",
           "client_type": 3
         }

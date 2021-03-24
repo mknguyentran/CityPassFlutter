@@ -108,6 +108,7 @@ class _ExploreState extends State<Explore> {
             future: listPasses,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                print(snapshot.data.length);
                 return Column(
                   children: [
                     PassRecommendation(
