@@ -19,6 +19,8 @@ const userPassPOSTUrl = BASE_URL + "user-passes";
 const userPassAvailableGETUrl = BASE_URL + "user-passes/user-pass-avaiable?uId=";
 // ** GET HISTORY **//
 const userPassHistoryGETUrl = BASE_URL + "user-passes/use-history?userPassId=";
+//** GET OUTDATEDPASS **/
+const userPassOutdatedGETUrl = BASE_URL + "user-passes/user-pass-expire?uId=";
 
 // City
 // ** GET ** //
