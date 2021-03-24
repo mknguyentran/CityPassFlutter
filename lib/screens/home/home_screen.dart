@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:city_pass/models/city.dart';
 import 'package:city_pass/screens/home/components/account/account.dart';
-import 'package:city_pass/screens/home/components/account/login_register/login.dart'; 
+import 'package:city_pass/screens/home/components/account/login_register/login.dart';
 import 'package:city_pass/screens/home/components/city_picker/city_picker.dart';
 import 'package:city_pass/screens/home/components/search/search.dart';
 import 'package:city_pass/screens/home/components/explore/explore.dart';
@@ -37,9 +37,26 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isFirstTime = true;
 
   void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
+    if (index == 4) {
+      var authBloc = Provider.of<AuthBloc>(context, listen: false);
+      var _user = authBloc.currentUser;
+      if (_user == null) {
+        Navigator.push(
+          context,
+          CupertinoPageRoute(
+            builder: (context) => LoginForm(),
+          ),
+        );
+      } else {
+        setState(() {
+          _currentIndex = index;
+        });
+      }
+    } else {
+      setState(() {
+        _currentIndex = index;
+      });
+    }
   }
 
   void _changeCity(City city) {
@@ -53,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _currentCity = null;
     });
   }
+
   void initState() {
     var authBloc = Provider.of<AuthBloc>(context, listen: false);
     // authBloc.currentUserChange.listen((user) {
@@ -67,6 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // }
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     var authBloc = Provider.of<AuthBloc>(context, listen: false);
@@ -91,7 +110,11 @@ class _HomeScreenState extends State<HomeScreen> {
       Locations(city: _currentCity),
       UserPasses(),
       Passes(city: _currentCity),
-      Account()
+      Account(
+        backHome: () {
+          _onItemTapped(0);
+        },
+      )
     ];
     return Scaffold(
       appBar: buildAppBar(_currentIndex),
@@ -104,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
           CustomNavItem(
               icon: CupertinoIcons.compass,
               selectedIcon: CupertinoIcons.compass_fill,
-              label: _currentCity != null ? _currentCity.name : "Khám phá"),
+              label: "Khám phá"),
           CustomNavItem(
               icon: Icons.location_on_outlined,
               selectedIcon: Icons.location_on,
@@ -187,6 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
     if (tab == 4) {
       return AppBar(
+        leading: Container(),
         brightness: Brightness.light,
         backgroundColor: Colors.transparent,
         elevation: 0,

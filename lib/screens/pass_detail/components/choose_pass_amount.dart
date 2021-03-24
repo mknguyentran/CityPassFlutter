@@ -88,7 +88,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
   Widget build(BuildContext context) {
     total = widget.passDetail.price * amount;
     if (widget.passDetail.price != null) {
-      total += widget.passDetail.price * childrenAmount;
+      total += widget.passDetail.childrenPrice * childrenAmount;
     }
     return LoadingOverlay(
       isLoading: _isLoading,

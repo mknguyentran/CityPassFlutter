@@ -29,8 +29,7 @@ class _LoginFormState extends State<LoginForm> {
     var authBloc = Provider.of<AuthBloc>(context, listen: false);
     authBloc.currentUserChange.listen((user) {
       if (user != null) {
-        Navigator.push(
-            context, CupertinoPageRoute(builder: (context) => HomeScreen()));
+        Navigator.of(context).pop();
       }
     });
     super.initState();
@@ -103,9 +102,10 @@ class _LoginFormState extends State<LoginForm> {
                   "Chào mừng bạn đến với CityPass!",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 23,
+                    fontSize: 21,
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
               Padding(
@@ -116,6 +116,7 @@ class _LoginFormState extends State<LoginForm> {
                     color: Colors.white,
                     fontSize: 16,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
               // Padding(

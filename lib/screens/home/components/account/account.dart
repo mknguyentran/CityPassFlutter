@@ -9,6 +9,9 @@ import 'package:provider/provider.dart';
 import '../../../../blocs/auth_bloc.dart';
 
 class Account extends StatefulWidget {
+  final Function backHome;
+
+  const Account({Key key, @required this.backHome}) : super(key: key);
   @override
   _AccountState createState() => _AccountState();
 }
@@ -18,18 +21,6 @@ class _AccountState extends State<Account> {
   @override
   void initState() {
     super.initState();
-    // var authBloc = Provider.of<AuthBloc>(context, listen: false);
-    // authBloc.currentUserChange.listen((user) {
-    //   if (user == null) {
-    //     setState(() {
-    //       Navigator.push(
-    //           context, CupertinoPageRoute(builder: (context) => LoginForm()));
-    //     });
-    //   }
-    //   setState(() {
-    //     _user = user;
-    //   });
-    // });
   }
 
   @override
@@ -46,19 +37,20 @@ class _AccountState extends State<Account> {
           Row(
             children: [
               Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    child: Image(
-                      width: 100,
-                      height: 100,
+                padding: const EdgeInsets.only(right: 10),
+                child: Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [kDefaultShadow],
+                    image: DecorationImage(
                       image: NetworkImage(_user != null ? _user.photoURL : ''),
+                      fit: BoxFit.cover,
                     ),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(width: 1, color: Colors.red)),
-                  )),
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 50,
                 child: Column(
@@ -68,9 +60,11 @@ class _AccountState extends State<Account> {
                     Text(
                       _user != null ? _user.displayName : '',
                       style: TextStyle(
-                          fontSize: 20,
-                          color: primaryDarkColor,
-                          fontWeight: FontWeight.bold),
+                        fontSize: 20,
+                        color: primaryDarkColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                     Text(
                       "Chỉnh sửa thông tin",
@@ -81,7 +75,7 @@ class _AccountState extends State<Account> {
               )
             ],
           ),
-          VerticalSpacing(of: 10),
+          VerticalSpacing(of: 30),
           Container(
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -132,39 +126,40 @@ class _AccountState extends State<Account> {
               )),
           VerticalSpacing(of: 50),
           GestureDetector(
-              onTap: () {
-                authBloc.logout();
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) {
-                      return LoginForm();
-                    },
-                  ),
-                );
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 15),
-                width: double.infinity,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        offset: Offset(3, 3),
-                        blurRadius: 10,
-                        color: Color(0xFFE5B4AA).withOpacity(0.3),
-                      )
-                    ],
-                    borderRadius: BorderRadius.circular(10)),
-                child: Text(
-                  "Đăng xuất",
-                  style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
+            onTap: () {
+              authBloc.logout();
+              widget.backHome();
+              setState(() {});
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => LoginForm(),
                 ),
-              ))
+              );
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 15),
+              width: double.infinity,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(3, 3),
+                      blurRadius: 10,
+                      color: Color(0xFFE5B4AA).withOpacity(0.3),
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(10)),
+              child: Text(
+                "Đăng xuất",
+                style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          )
         ],
       ),
     ));

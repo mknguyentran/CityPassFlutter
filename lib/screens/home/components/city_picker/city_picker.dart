@@ -5,6 +5,7 @@ import 'package:city_pass/models/city.dart';
 import 'package:city_pass/service/city_services.dart';
 import 'package:city_pass/shared/search_field.dart';
 import 'package:city_pass/shared/section_title.dart';
+import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
 class CityPicker extends StatefulWidget {
@@ -31,8 +32,7 @@ class _CityPickerState extends State<CityPicker> {
       appBar: _buildAppBar(context),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: kDefaultPadding),
+          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -42,28 +42,32 @@ class _CityPickerState extends State<CityPicker> {
                 hintText: "Tìm kiếm điểm đến,...",
                 boxShadow: [kDefaultShadow],
                 onChange: (value) {
-                  Future<List<City>> cityList = CityAPI().getAllCities(name: value);
+                  Future<List<City>> cityList =
+                      CityAPI().getAllCities(name: value);
                   setState(() {
                     _cityList = cityList;
                   });
                 },
               ),
               FutureBuilder(
-                future: _cityList,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return CityButtonGroup(
-                      groupName: "",
-                      cityList: snapshot.data,
-                      padding: buttonGroupPadding,
-                    );
-                  }
+                  future: _cityList,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return CityButtonGroup(
+                        groupName: "",
+                        cityList: snapshot.data,
+                        padding: buttonGroupPadding,
+                      );
+                    }
 
-                  return Center(
-                    child: Center(child: CircularProgressIndicator()),
-                  );
-                }
-              ),
+                    return Center(
+                      child: Container(
+                        height: percentageOfScreenHeight(20),
+                        alignment: Alignment.center,
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }),
               // CityButtonGroup(
               //   groupName: "Miền Bắc",
               //   cityList: mockupCities[0],
@@ -100,11 +104,14 @@ class _CityPickerState extends State<CityPicker> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(child: Text("Bạn cũng có thể khám phá CityPass trên khắp cả nước",style: TextStyle(color: Colors.white),)),
+                  Expanded(
+                      child: Text(
+                    "Bạn cũng có thể khám phá CityPass trên khắp cả nước",
+                    style: TextStyle(color: Colors.white),
+                  )),
                   ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.white),
+                      backgroundColor: MaterialStateProperty.all(Colors.white),
                       elevation: MaterialStateProperty.all(0),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
@@ -117,7 +124,7 @@ class _CityPickerState extends State<CityPicker> {
                     },
                     child: Text(
                       'Khám phá',
-                      style: TextStyle(fontSize: 16,color: primaryDarkColor),
+                      style: TextStyle(fontSize: 16, color: primaryDarkColor),
                       textAlign: TextAlign.center,
                     ),
                   )
