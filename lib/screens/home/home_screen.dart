@@ -53,7 +53,20 @@ class _HomeScreenState extends State<HomeScreen> {
       _currentCity = null;
     });
   }
-
+  void initState() {
+    var authBloc = Provider.of<AuthBloc>(context, listen: false);
+    // authBloc.currentUserChange.listen((user) {
+    //   if (user == null) {
+    //     Navigator.push(
+    //         context, CupertinoPageRoute(builder: (context) => LoginForm()));
+    //   }
+    // });
+    // if(authBloc.currentUser == null) {
+    //   Navigator.push(
+    //         context, CupertinoPageRoute(builder: (context) => LoginForm()));
+    // }
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var authBloc = Provider.of<AuthBloc>(context, listen: false);
