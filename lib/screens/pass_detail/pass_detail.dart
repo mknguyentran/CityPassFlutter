@@ -160,7 +160,7 @@ class _PassDetailState extends State<PassDetail> {
               : null,
       child: Text(
         user == null
-            ? "Login"
+            ? "Bạn phải đăng nhập để mua"
             : finishedChoosing
                 ? "Mua ngay"
                 : "Chọn các địa điểm tùy chọn trước khi mua",

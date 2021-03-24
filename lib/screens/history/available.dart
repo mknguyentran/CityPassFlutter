@@ -1,10 +1,12 @@
 import 'package:city_pass/blocs/auth_bloc.dart';
 import 'package:city_pass/constants.dart';
+import 'package:city_pass/models/passDetailInformation.dart';
 import 'package:city_pass/models/user_pass_available_show.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
 import 'package:city_pass/service/userpass_available_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_guid/flutter_guid.dart';
 
