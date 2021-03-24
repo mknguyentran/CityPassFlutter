@@ -4,6 +4,7 @@ import 'package:city_pass/models/user_pass_available_show.dart';
 import 'package:city_pass/screens/home/components/account/login_register/login.dart';
 import 'package:city_pass/screens/user_pass_detail/user_pass_detail.dart';
 import 'package:city_pass/service/userpass_available_service.dart';
+import 'package:city_pass/shared/push_notification_util.dart';
 import 'package:city_pass/shared/user_pass_card.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,8 +18,12 @@ class UserPasses extends StatefulWidget {
 
 class _UserPassesState extends State<UserPasses> {
   Future<List<AvailableUserPass>> listUserpassAvailable;
+<<<<<<< HEAD
   var _user;
 
+=======
+  String defaultUser = "rlGWU9R0bkSEByvoDXjWHpiaCvr1";
+>>>>>>> 876da5c2682ec844130f438b7e0918d30c43f209
   @override
   void initState() {
     super.initState();
@@ -56,6 +61,8 @@ class _UserPassesState extends State<UserPasses> {
 
   @override
   Widget build(BuildContext context) {
+    
+
     return Scaffold(
         appBar: _buildAppBar(context),
         backgroundColor: lightGrayBackground,
@@ -76,6 +83,19 @@ class _UserPassesState extends State<UserPasses> {
                           child: UserPassCard(
                               pass: snapshot.data[index],
                               press: () {
+                                var onReceiveNoti = () {
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(builder: (context) {
+                                      return UserPassDetail(
+                                        availableUserPass: snapshot.data[index],
+                                      );
+                                    })
+                                  );
+                                };
+                                PushNotificationUtil().registerNotification(onReceiveNoti);
+
                                 Navigator.push(
                                   context,
                                   CupertinoPageRoute(builder: (context) {
