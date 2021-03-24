@@ -16,14 +16,14 @@ class UserPasses extends StatefulWidget {
 
 class _UserPassesState extends State<UserPasses> {
   Future<List<AvailableUserPass>> listUserpassAvailable;
+  String defaultUser = "123456789qwertyu";
   @override
   void initState() {
     super.initState();
-    String defaultUser = "123456789qwertyu";
     var authBloc = Provider.of<AuthBloc>(context, listen: false);
     var user = authBloc.currentUser;
-    
-    if(user != null) {
+
+    if (user != null) {
       defaultUser = user.uid;
     }
     listUserpassAvailable = UserPassAvailableAPI().getAllAvailablePass((msg) {
@@ -35,7 +35,7 @@ class _UserPassesState extends State<UserPasses> {
     setState(() {
       listUserpassAvailable = UserPassAvailableAPI().getAllAvailablePass((msg) {
         print(msg);
-      }, "123456789qwertyu");
+      }, defaultUser);
     });
   }
 

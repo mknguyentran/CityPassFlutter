@@ -48,8 +48,11 @@ dependencies:
   provider: ^4.3.2+4
   flutter_signin_button: ^2.0.0-nullsafety.0
   flutter_facebook_login: ^3.0.0
-  geolocator: ^6.2.1
   geocoding: ^1.0.5
+  location: ^3.2.4
+  loading_overlay: ^0.2.1
+  firebase_messaging: ^8.0.0-dev.15
+  flutter_local_notifications: ^4.0.1+2
   
 dev_dependencies:
   flutter_test:
@@ -85,6 +88,7 @@ flutter:
     - assets/images/suoi_tien/
     - assets/images/activity_category/
     - assets/images/tini_world/
+    - assets/images/login_icons/
 
   #   - images/a_dot_ham.jpeg
 
