@@ -1,6 +1,7 @@
 import 'package:city_pass/blocs/auth_bloc.dart';
 import 'package:city_pass/models/user_pass_outdated_show.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
+import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:city_pass/service/outdated_pass_service.dart';
@@ -67,7 +68,8 @@ class _OutDatedPassState extends State<OutDatedPass> {
                               padding: const EdgeInsets.only(top: 0),
                               child: Text(outdatedPass[index].passName,
                                   style: TextStyle(
-                                      fontSize: 17, fontWeight: FontWeight.w500)),
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w500)),
                             ),
                             SizedBox(height: 10),
                             Row(
@@ -113,7 +115,11 @@ class _OutDatedPassState extends State<OutDatedPass> {
               ],
             );
           }
-          return Center(child: CircularProgressIndicator());
+          return Container(
+            height: percentageOfScreenHeight(20),
+            alignment: Alignment.center,
+            child: CircularProgressIndicator(),
+          );
         },
       )),
     );
