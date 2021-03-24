@@ -2,7 +2,6 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/model/activity.dart';
 import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/shared/info_tag.dart';
 import 'package:city_pass/size_config.dart';
@@ -18,7 +17,7 @@ class ActivityRecommendationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _cardWidth = 250.0;
+    var _cardWidth = percentageOfScreenWidth(60);
     var _cardheight = 350.0;
     return Container(
       clipBehavior: Clip.hardEdge,

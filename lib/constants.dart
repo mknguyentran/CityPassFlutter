@@ -57,10 +57,10 @@ final smallShadow = BoxShadow(
   color: Color(0xFFA0A0A0).withOpacity(0.56),
 );
 
-final textShadow = BoxShadow(
+final darkShadow = BoxShadow(
   offset: Offset(0, 3),
-  blurRadius: 10,
-  color: Color(0xFF000000),
+  blurRadius: 3,
+  color: Color(0xFF2C2C2C).withOpacity(0.4),
 );
 
 final DateFormat simpleDateFormat = new DateFormat("d LLL y", "vi_VN");
