@@ -26,27 +26,34 @@ class PassDetail extends StatefulWidget {
 
 class _PassDetailState extends State<PassDetail> {
   List _chosenList = [];
-
+  var _user;
   Future<PassDetailInformation> passDetail;
 
   @override
   void initState() {
     super.initState();
     passDetail = PassAPI().getPassByID(
-        onError: (msg) {
-          print(msg);
-        },
-        id: widget.passId.toString());
+      onError: (msg) {
+        print(msg);
+      },
+      id: widget.passId.toString(),
+    );
   }
 
   void _onOptionChose() {
     setState(() {});
   }
 
+  void _loadUser() {
+    final authBloc = Provider.of<AuthBloc>(context, listen: false);
+    setState(() {
+      _user = authBloc.currentUser;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final authBloc = Provider.of<AuthBloc>(context);
-    var user = authBloc.currentUser;
+    _loadUser();
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: _buildAppBar(context),
@@ -92,12 +99,13 @@ class _PassDetailState extends State<PassDetail> {
                   height: 50,
                   width: double.infinity,
                   child: _buildBuyButton(
-                      context,
-                      _chosenList.length ==
-                          (snapshot.data as PassDetailInformation)
-                              .totalOptionalAmount,
-                      _chosenList,
-                      user),
+                    context,
+                    _chosenList.length ==
+                        (snapshot.data as PassDetailInformation)
+                            .totalOptionalAmount,
+                    _chosenList,
+                    _user,
+                  ),
                 ),
               ),
             );
@@ -133,10 +141,12 @@ class _PassDetailState extends State<PassDetail> {
       ),
       onPressed: user == null
           ? () {
-              setState(() {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginForm()));
-              });
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => LoginForm(),
+                ),
+              ).then((value) => _loadUser());
             }
           : finishedChoosing
               ? () {
