@@ -27,7 +27,7 @@ class PassCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                    image: AssetImage(pass.image),
+                    image: NetworkImage(pass.imageUrl ?? ''),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -60,7 +60,7 @@ class PassCard extends StatelessWidget {
                             size: getProportionateScreenWidth(12),
                           ),
                           Text(
-                            pass.overallRating.toString(),
+                            pass.rate.toString(),
                             style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.normal,

@@ -1,14 +1,17 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/activity.dart';
+import 'package:city_pass/model/activity.dart';
 import 'package:city_pass/screens/activity_detail/activity_detail.dart';
+import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 
 class AvailableDestinations extends StatelessWidget {
-  final List<Activity> destinationList;
+  //final List<Activity> destinationList;
+  final List<dynamic> inUsedList;
 
-  const AvailableDestinations({Key key, @required this.destinationList})
+  const AvailableDestinations({Key key, @required this.inUsedList})
       : super(key: key);
 
   @override
@@ -20,7 +23,7 @@ class AvailableDestinations extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildDestinationList(
-            itemList: destinationList,
+            itemList: inUsedList,
             context: context,
             currentIndex: _currentIndex,
           ),
@@ -31,7 +34,8 @@ class AvailableDestinations extends StatelessWidget {
 }
 
 Column _buildDestinationList({
-  @required List<Activity> itemList,
+  //@required List<Activity> itemList,
+  @required List<dynamic> itemList,
   @required int currentIndex,
   @required BuildContext context,
 }) {
@@ -53,7 +57,8 @@ Column _buildDestinationList({
 Widget _buildDestinationListItem(
     {int index,
     double lineSpacing = 7.0,
-    @required Activity activity,
+    //@required Activity activity,
+    @required Object activity,
     @required BuildContext context}) {
   return Padding(
     padding: EdgeInsets.symmetric(vertical: lineSpacing),
@@ -83,7 +88,7 @@ Widget _buildDestinationListItem(
   );
 }
 
-Widget _buildItemName(Activity activity, BuildContext context) {
+Widget _buildItemName(Object activity, BuildContext context) {
   return Expanded(
     child: GestureDetector(
       onTap: () {
@@ -91,13 +96,13 @@ Widget _buildItemName(Activity activity, BuildContext context) {
           context,
           CupertinoPageRoute(builder: (context) {
             return ActivityDetail(
-              activity: activity,
+              ticketTypeID: Guid((activity as Map)["id"]),
             );
           }),
         );
       },
       child: Text(
-        activity.getShortName.toUpperCase(),
+        (activity as Map)["name"].toUpperCase(),
         style: TextStyle(fontSize: 14),
       ),
     ),

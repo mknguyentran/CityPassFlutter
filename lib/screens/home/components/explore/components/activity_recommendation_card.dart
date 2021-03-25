@@ -1,7 +1,8 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/activity.dart';
+import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/shared/info_tag.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
@@ -12,11 +13,11 @@ class ActivityRecommendationCard extends StatelessWidget {
     @required this.activity,
   }) : super(key: key);
 
-  final Activity activity;
+  final TicketType activity;
 
   @override
   Widget build(BuildContext context) {
-    var _cardWidth = 250.0;
+    var _cardWidth = percentageOfScreenWidth(60);
     var _cardheight = 350.0;
     return Container(
       clipBehavior: Clip.hardEdge,
@@ -32,7 +33,7 @@ class ActivityRecommendationCard extends StatelessWidget {
           height: 180,
           decoration: BoxDecoration(
               image: DecorationImage(
-            image: AssetImage(activity.image),
+            image: NetworkImage(activity.imageUrl ?? ''),
             fit: BoxFit.cover,
           )),
         ),
@@ -49,8 +50,9 @@ class ActivityRecommendationCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "${activity.city.name} • ${activity.visitedCounter} lượt tham quan",
+                          "${activity.city}",
                           style: TextStyle(color: subtitleTextColor),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
@@ -72,19 +74,21 @@ class ActivityRecommendationCard extends StatelessWidget {
                               color: starYellowColor,
                             ),
                             Text(
-                              activity.overallRating.toString(),
+                              "${(Random().nextDouble()+4).toStringAsFixed(1)}",
                               style: TextStyle(
                                   fontSize: 14, color: starYellowColor),
                             ),
                           ],
                         ),
-                        if (activity.isNew)
+                       // if (activity.isNew)
+                        if (Random().nextBool())
                           InfoTag(
                             "Mới",
                             backgroundColor: lightGreenBackgroundColor,
                             foregroundColor: Colors.green[800],
                           ),
-                        if (activity.isPopular)
+                        //if (activity.isPopular)
+                        if (Random().nextBool())
                           InfoTag(
                             "Phổ biến",
                             backgroundColor: orangeBackgroundColor,
@@ -94,18 +98,18 @@ class ActivityRecommendationCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (activity.travelDistance != null &&
-                        activity.travelTime != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Text(
-                            "${activity.travelDistance}km • ${activity.travelTime} phút",style: TextStyle(color: subtitleTextColor),),
-                      )
-                  ],
-                )
+                // Column(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: [
+                //     if (activity.travelDistance != null &&
+                //         activity.travelTime != null)
+                //       Padding(
+                //         padding: const EdgeInsets.only(top: 10),
+                //         child: Text(
+                //             "${activity.travelDistance}km • ${activity.travelTime} phút",style: TextStyle(color: subtitleTextColor),),
+                //       )
+                //   ],
+                // )
               ],
             ),
           ),

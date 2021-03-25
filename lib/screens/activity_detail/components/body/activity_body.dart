@@ -1,12 +1,15 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/activity.dart';
+import 'package:city_pass/model/activity.dart';
+import 'package:city_pass/models/ticketTypeDetail.dart';
 import 'package:city_pass/screens/activity_detail/components/body/activity_images.dart';
 import 'package:city_pass/screens/activity_detail/components/body/activity_info.dart';
+import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
 class ActivityBody extends StatefulWidget {
-  final Activity activity;
+ // final Activity activity;
+  final TicketTypeDetail activity;
 
   const ActivityBody({
     Key key,

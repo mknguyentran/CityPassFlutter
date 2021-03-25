@@ -2,17 +2,32 @@ import 'package:city_pass/constants.dart';
 import 'package:city_pass/screens/history/history.dart';
 import 'package:city_pass/screens/home/components/account/login_register/login.dart';
 import 'package:city_pass/size_config.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../../blocs/auth_bloc.dart';
 
 class Account extends StatefulWidget {
+  final Function backHome;
+
+  const Account({Key key, @required this.backHome}) : super(key: key);
   @override
   _AccountState createState() => _AccountState();
 }
 
 class _AccountState extends State<Account> {
+  User _user;
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    //var user = context.select<AuthBloc, User>((value) => value.currentUser.first);
+    var authBloc = Provider.of<AuthBloc>(context);
+    _user = authBloc.currentUser;
     return SingleChildScrollView(
         child: Padding(
       padding:
@@ -22,10 +37,18 @@ class _AccountState extends State<Account> {
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: Icon(
-                  CupertinoIcons.person_circle_fill,
-                  size: 75,
+                padding: const EdgeInsets.only(right: 10),
+                child: Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [kDefaultShadow],
+                    image: DecorationImage(
+                      image: NetworkImage(_user != null ? _user.photoURL : ''),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -35,11 +58,13 @@ class _AccountState extends State<Account> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Ngô Trường An",
+                      _user != null ? _user.displayName : '',
                       style: TextStyle(
-                          fontSize: 20,
-                          color: primaryDarkColor,
-                          fontWeight: FontWeight.bold),
+                        fontSize: 20,
+                        color: primaryDarkColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                     Text(
                       "Chỉnh sửa thông tin",
@@ -50,7 +75,7 @@ class _AccountState extends State<Account> {
               )
             ],
           ),
-          VerticalSpacing(of: 10),
+          VerticalSpacing(of: 30),
           Container(
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -102,12 +127,13 @@ class _AccountState extends State<Account> {
           VerticalSpacing(of: 50),
           GestureDetector(
             onTap: () {
+              authBloc.logout();
+              widget.backHome();
+              setState(() {});
               Navigator.push(
                 context,
                 CupertinoPageRoute(
-                  builder: (context) {
-                    return LoginForm();
-                  },
+                  builder: (context) => LoginForm(),
                 ),
               );
             },

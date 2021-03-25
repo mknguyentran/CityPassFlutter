@@ -1,74 +1,31 @@
-import 'package:city_pass/models/activity.dart';
-import 'package:city_pass/models/city.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 
-class Pass {
-  final String name, image;
-  final City city;
-  final double overallRating, price, originalPrice;
-  final PassChildrenPrice childrenPrice;
-  final List<IncludingDestination> includingDestination;
-  final bool isGoodSeller, isBestSaving;
+class Pass{
+  Guid id;
+  String name;
+  double price;
+  bool isSelling;
+  double rate;
+  var feedback;
+  String imageUrl;
 
-  int get discountedPercentage {
-    return ((originalPrice - price) / originalPrice * 100).floor();
-  }
+   Pass.formJson(Map<String, dynamic> json)
+      : this.id = new Guid(json['id']),
+        this.name = json['name'],
+        this.price = json['price'],
+        this.isSelling = json['isSelling'],
+        this.imageUrl = json['urlImage'],
+        this.rate = json['rate'],
+        this.feedback = json['feedbacks'];
 
-  int get destinationAmount {
-    int result = 0;
-    for (var destinationCollection in includingDestination) {
-      result += destinationCollection.includingQuota;
-    }
-    return result;
-  }
 
-  Pass({
-    @required this.overallRating,
-    @required this.name,
-    @required this.image,
-    @required this.price,
-    @required this.originalPrice,
-    @required this.includingDestination,
-    @required this.city,
-    this.childrenPrice,
-    this.isBestSaving = false,
-    this.isGoodSeller = false,
-  });
-}
-
-class PassChildrenPrice {
-  final double price, originalPrice;
-
-  PassChildrenPrice({
-    @required this.price,
-    @required this.originalPrice,
-  });
-}
-
-class IncludingDestination {
-  final List<Activity> destinationList;
-  final int includingQuota;
-
-  bool get isAllIncluded {
-    return includingQuota == destinationList.length;
-  }
-
-  bool get isBinaryOptional {
-    return destinationList.length == 2 && includingQuota == 1;
-  }
-
-  int get type {
-    if (isAllIncluded) {
-      return allIncluded;
-    } else {
-      return optional;
-    }
-  }
-
-  static const int allIncluded = 1;
-  static const int optional = 2;
-
-  IncludingDestination(this.destinationList, this.includingQuota)
-      : assert(includingQuota <= destinationList.length),
-        assert(includingQuota > 0);
+  Map<String, dynamic> toJson() => {
+        'id': this.id,
+        'name': this.name,
+        'price': this.price,
+        'isSelling': this.isSelling,
+        'rate': this.rate,
+        
+        'feedbacks': this.feedback
+      };
 }

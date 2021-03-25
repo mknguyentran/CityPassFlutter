@@ -97,10 +97,9 @@ class _CustomNavBarState extends State<CustomNavBar> {
             item.label,
             style: TextStyle(
               fontSize: 10,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.bold,
               color: isCurrentIndex ? widget.itemColor : kIconColor,
             ),
-            maxLines: 1,
             overflow: TextOverflow.ellipsis,
           )
         ],

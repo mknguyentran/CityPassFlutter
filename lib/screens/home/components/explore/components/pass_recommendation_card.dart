@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/shared/info_tag.dart';
@@ -14,7 +16,7 @@ class PassRecommendationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _cardWidth = 340.0;
+    var _cardWidth = percentageOfScreenWidth(80);
     return Container(
       clipBehavior: Clip.hardEdge,
       width: _cardWidth,
@@ -28,8 +30,8 @@ class PassRecommendationCard extends StatelessWidget {
           height: 180,
           decoration: BoxDecoration(
               image: DecorationImage(
-            image: AssetImage(pass.image),
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
+            image: NetworkImage(pass.imageUrl ?? ''),
           )),
         ),
         Container(
@@ -41,25 +43,26 @@ class PassRecommendationCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "${pass.city.name} • ${pass.destinationAmount} địa điểm",
-                    style: TextStyle(color: subtitleTextColor),
-                  ),
+                  // Text(
+                  //   "${"city"} • ${pass.destinationAmount} địa điểm",
+                  //   style: TextStyle(color: subtitleTextColor),
+                  // ),
                   Wrap(
                     spacing: 10,
                     children: [
-                      if(pass.isGoodSeller)
-                      InfoTag(
-                        "Bán chạy",
-                        backgroundColor: lightGreenBackgroundColor,
-                        foregroundColor: Colors.green[800],
-                      ),
-                      if(pass.isBestSaving)
-                      InfoTag(
-                        "Tiết kiệm",
-                        backgroundColor: orangeBackgroundColor,
-                        foregroundColor: primaryDarkColor,
-                      ),
+                      if (true)
+                        InfoTag(
+                          "Bán chạy",
+                          backgroundColor: lightGreenBackgroundColor,
+                          foregroundColor: Colors.green[800],
+                        ),
+                      //if(pass.isBestSaving)
+                      if (true)
+                        InfoTag(
+                          "Tiết kiệm",
+                          backgroundColor: orangeBackgroundColor,
+                          foregroundColor: primaryDarkColor,
+                        ),
                     ],
                   )
                 ],
@@ -78,14 +81,15 @@ class PassRecommendationCard extends StatelessWidget {
                     color: starYellowColor,
                   ),
                   Text(
-                    pass.overallRating.toString(),
-                    style: TextStyle(fontSize: 14, color: starYellowColor),
-                  )
+                    "${(Random().nextDouble()+4).toStringAsFixed(1)}",
+                    style: TextStyle(
+                        fontSize: 14, color: starYellowColor),
+                  ),
                 ],
               ),
               VerticalSpacing(of: 35),
               Text(
-                vndCurrencyFormat.format(pass.originalPrice),
+                vndCurrencyFormat.format(pass.price * 1.3),
                 style: TextStyle(
                   color: fadedTextColor,
                   decoration: TextDecoration.lineThrough,
@@ -100,7 +104,7 @@ class PassRecommendationCard extends StatelessWidget {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "-${pass.discountedPercentage}%",
+                    "30%",
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

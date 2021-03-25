@@ -1,9 +1,11 @@
-import 'package:city_pass/models/activity.dart';
+
+import 'package:city_pass/models/ticketTypeDetail.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
 class ActivityHeader extends StatelessWidget {
-  final Activity activity;
+  
+  final TicketTypeDetail activity;
   const ActivityHeader({
     Key key,
     @required this.activity,
@@ -18,7 +20,7 @@ class ActivityHeader extends StatelessWidget {
         Container(
           height: percentageOfScreenHeight(30),
           child: SizedBox.expand(
-            child: Image.asset(activity.image, fit: BoxFit.cover),
+            child: Image.network(activity.urlImage ?? '', fit: BoxFit.cover),
           ),
         ),
         Positioned(

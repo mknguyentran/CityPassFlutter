@@ -1,6 +1,6 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/mockupData/mockup_discount_code.dart';
-import 'package:city_pass/models/discount_code.dart';
+import 'package:city_pass/model/discount_code.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_line/dotted_line.dart';

@@ -23,11 +23,11 @@ class ActivityCategoryScreen extends StatelessWidget {
         child: Column(
           children: [
             ActivityCategoryHeader(category: category),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 60),
-              child: ActivityRecommendationVertical(
-                  children: category.activityList),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(vertical: 60),
+            //   child: ActivityRecommendationVertical(
+            //       children: category.activityList),
+            // ),
           ],
         ),
       ),

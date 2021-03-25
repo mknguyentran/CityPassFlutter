@@ -1,13 +1,29 @@
 import 'dart:ui';
 
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/mockupData/mockup_city.dart';
 import 'package:city_pass/models/city.dart';
+import 'package:city_pass/service/city_services.dart';
 import 'package:city_pass/shared/search_field.dart';
 import 'package:city_pass/shared/section_title.dart';
+import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
-class CityPicker extends StatelessWidget {
+class CityPicker extends StatefulWidget {
+  const CityPicker({Key key}) : super(key: key);
+
+  @override
+  _CityPickerState createState() => _CityPickerState();
+}
+
+class _CityPickerState extends State<CityPicker> {
+  Future<List<City>> _cityList;
+
+  @override
+  void initState() {
+    super.initState();
+    _cityList = CityAPI().getAllCities();
+  }
+
   @override
   Widget build(BuildContext context) {
     var buttonGroupPadding = EdgeInsets.only(bottom: 20);
@@ -16,74 +32,108 @@ class CityPicker extends StatelessWidget {
       appBar: _buildAppBar(context),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: kDefaultPadding),
+          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CityButtonGroup(
-                groupName: "Miền Bắc",
-                cityList: mockupCities[0],
-                padding: buttonGroupPadding,
+              SearchField(
+                height: 45,
+                width: double.infinity,
+                hintText: "Tìm kiếm điểm đến,...",
+                boxShadow: [kDefaultShadow],
+                onChange: (value) {
+                  Future<List<City>> cityList =
+                      CityAPI().getAllCities(name: value);
+                  setState(() {
+                    _cityList = cityList;
+                  });
+                },
               ),
-              CityButtonGroup(
-                groupName: "Miền Trung",
-                cityList: mockupCities[1],
-                padding: buttonGroupPadding,
-              ),
-              CityButtonGroup(
-                groupName: "Miền Nam",
-                cityList: mockupCities[2],
-                padding: buttonGroupPadding,
-              ),
-              Padding(padding: EdgeInsets.symmetric(vertical: 50))
+              FutureBuilder(
+                  future: _cityList,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return CityButtonGroup(
+                        groupName: "",
+                        cityList: snapshot.data,
+                        padding: buttonGroupPadding,
+                      );
+                    }
+
+                    return Center(
+                      child: Container(
+                        height: percentageOfScreenHeight(20),
+                        alignment: Alignment.center,
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }),
+              // CityButtonGroup(
+              //   groupName: "Miền Bắc",
+              //   cityList: mockupCities[0],
+              //   padding: buttonGroupPadding,
+              // ),
+              // CityButtonGroup(
+              //   groupName: "Miền Trung",
+              //   cityList: mockupCities[1],
+              //   padding: buttonGroupPadding,
+              // ),
+              // CityButtonGroup(
+              //   groupName: "Miền Nam",
+              //   cityList: mockupCities[2],
+              //   padding: buttonGroupPadding,
+              // ),
+              // Padding(padding: EdgeInsets.symmetric(vertical: 50))
             ],
           ),
         ),
       ),
-      // bottomNavigationBar: Padding(
-      //   padding: const EdgeInsets.all(kDefaultPadding),
-      //   child: ClipRect(
-      //     child: BackdropFilter(
-      //       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-      //       child: Container(
-      //         decoration: BoxDecoration(
-      //             color: Colors.black.withOpacity(0.75),
-      //             borderRadius: BorderRadius.circular(10)),
-      //         height: 70,
-      //         padding: const EdgeInsets.symmetric(
-      //           horizontal: kDefaultPadding,
-      //         ),
-      //         child: Row(
-      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //           children: [
-      //             Expanded(child: Text("Bạn cũng có thể khám phá CityPass trên khắp cả nước",style: TextStyle(color: Colors.white),)),
-      //             ElevatedButton(
-      //               style: ButtonStyle(
-      //                 backgroundColor:
-      //                     MaterialStateProperty.all(Colors.white),
-      //                 elevation: MaterialStateProperty.all(0),
-      //                 shape: MaterialStateProperty.all(
-      //                   RoundedRectangleBorder(
-      //                     borderRadius: BorderRadius.circular(10),
-      //                   ),
-      //                 ),
-      //               ),
-      //               onPressed: () {
-      //                 Navigator.of(context).pop(false);
-      //               },
-      //               child: Text(
-      //                 'Khám phá',
-      //                 style: TextStyle(fontSize: 16,color: primaryDarkColor),
-      //                 textAlign: TextAlign.center,
-      //               ),
-      //             )
-      //           ],
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(kDefaultPadding),
+        child: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.75),
+                  borderRadius: BorderRadius.circular(10)),
+              height: 70,
+              padding: const EdgeInsets.symmetric(
+                horizontal: kDefaultPadding,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                      child: Text(
+                    "Bạn cũng có thể khám phá CityPass trên khắp cả nước",
+                    style: TextStyle(color: Colors.white),
+                  )),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.white),
+                      elevation: MaterialStateProperty.all(0),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop(false);
+                    },
+                    child: Text(
+                      'Khám phá',
+                      style: TextStyle(fontSize: 16, color: primaryDarkColor),
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -187,18 +237,21 @@ AppBar _buildAppBar(BuildContext context) {
       style: TextStyle(color: textBlack),
     ),
     centerTitle: true,
-    bottom: PreferredSize(
-      preferredSize: Size.fromHeight(80),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding)
-            .add(const EdgeInsets.only(bottom: 20)),
-        child: SearchField(
-          height: 45,
-          width: double.infinity,
-          hintText: "Tìm kiếm điểm đến,...",
-          boxShadow: [kDefaultShadow],
-        ),
-      ),
-    ),
+    // bottom: PreferredSize(
+    //   preferredSize: Size.fromHeight(80),
+    //   child: Padding(
+    //     padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding)
+    //         .add(const EdgeInsets.only(bottom: 20)),
+    //     child: SearchField(
+    //       height: 45,
+    //       width: double.infinity,
+    //       hintText: "Tìm kiếm điểm đến,...",
+    //       boxShadow: [kDefaultShadow],
+    //       onChange: (value) {
+    //         Future<List<City>> cityList = CityAPI().getCitiesByName(value);
+    //       },
+    //     ),
+    //   ),
+    // ),
   );
 }

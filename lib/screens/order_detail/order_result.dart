@@ -1,6 +1,5 @@
-
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/order_detail.dart';
+import 'package:city_pass/model/order_detail.dart';
 import 'package:city_pass/screens/pass_detail/components/choose_pass_amount.dart';
 import 'package:city_pass/screens/user_passes/user_passes.dart';
 import 'package:city_pass/shared/section_title.dart';
@@ -97,16 +96,16 @@ class _OrderResultState extends State<OrderResult> {
     return Column(
       children: <Widget>[
         OrderDetailItem(
-          passName: orderDetail.pass.name,
+          passName: orderDetail.passDetail.name,
           amount: orderDetail.amount,
-          price: orderDetail.pass.price,
+          price: orderDetail.passDetail.price,
           hasAdultLabel: orderDetail.childrenAmount > 0,
         ),
         if (orderDetail.childrenAmount > 0)
           OrderDetailItem(
-            passName: orderDetail.pass.name,
+            passName: orderDetail.passDetail.name,
             amount: orderDetail.childrenAmount,
-            price: orderDetail.pass.childrenPrice.price,
+            price: orderDetail.passDetail.childrenPrice,
             hasChildrenLabel: true,
           ),
       ],
@@ -208,37 +207,47 @@ class OrderDetailItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var productName = passName;
     if (hasAdultLabel) {
-      productName += " - Người lớn";
+      productName = "Người lớn - " + productName;
     } else if (hasChildrenLabel) {
-      productName += " - Trẻ em";
+      productName = "Trẻ em - " + productName;
     }
     return Padding(
       padding: EdgeInsets.symmetric(vertical: lineSpacing),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(right: percentageOfScreenWidth(3)),
-                child: Text(
-                  "${amount}x",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+          Expanded(
+            flex: 3,
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(right: percentageOfScreenWidth(3)),
+                  child: Text(
+                    "${amount}x",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-              Text(
-                productName,
-                style: TextStyle(color: Colors.black, fontSize: 15),
-              ),
-            ],
+                Expanded(
+                  child: Text(
+                    productName,
+                    style: TextStyle(color: Colors.black, fontSize: 15),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ),
+              ],
+            ),
           ),
-          Text(
-            vndCurrencyFormat.format(price * amount),
-            style: TextStyle(color: Colors.black, fontSize: 15),
+          Expanded(
+            child: Text(
+              vndCurrencyFormat.format(price * amount),
+              style: TextStyle(color: Colors.black, fontSize: 15),
+              textAlign: TextAlign.right,
+            ),
           )
         ],
       ),

@@ -11,32 +11,21 @@ class SearchField extends StatelessWidget {
     this.height = 50,
     this.hintText,
     this.boxShadow,
-    this.isButton = true,
-    this.onSubmitted,
+    this.onChange,
+    this.onTap,
+    this.onSubmit,
   }) : super(key: key);
 
   final double width, height;
   final String hintText;
   final List<BoxShadow> boxShadow;
-  final bool isButton;
-  final Function(String) onSubmitted;
+  final void Function(String) onChange;
+  final void Function() onTap;
+  final void Function(String) onSubmit;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if (isButton) {
-          Navigator.push(
-            context,
-            CupertinoPageRoute(
-              builder: (context) {
-                return SearchResult();
-              },
-            ),
-          );
-        }
-      },
-      child: Container(
+    return Container(
         width: width,
         height: height,
         decoration: BoxDecoration(
@@ -45,9 +34,9 @@ class SearchField extends StatelessWidget {
           boxShadow: boxShadow,
         ),
         child: TextField(
-          enabled: !isButton,
-          autofocus: !isButton,
-          onSubmitted: onSubmitted,
+          onTap: onTap,
+          onChanged: onChange,
+          onSubmitted: onSubmit,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(
@@ -69,7 +58,6 @@ class SearchField extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

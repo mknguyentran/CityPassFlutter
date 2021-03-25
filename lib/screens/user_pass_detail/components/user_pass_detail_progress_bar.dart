@@ -1,13 +1,23 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/user_pass.dart';
+
+import 'package:city_pass/models/userpass_use_history.dart';
+
 import 'package:flutter/material.dart';
 
-class UserPassDetailProgressBar extends StatelessWidget {
+class UserPassDetailProgressBar extends StatefulWidget {
   const UserPassDetailProgressBar({
-    Key key, @required this.pass,
+    Key key,
+    @required this.userPassHistory,
   }) : super(key: key);
 
-  final UserPass pass;
+  final UserPassHistory userPassHistory;
+
+  @override
+  _UserPassDetailProgressBarState createState() =>
+      _UserPassDetailProgressBarState();
+}
+
+class _UserPassDetailProgressBarState extends State<UserPassDetailProgressBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,7 +42,7 @@ class UserPassDetailProgressBar extends StatelessWidget {
                 ),
               ),
               Text(
-                "${pass.usedDestination}/${pass.totalDestination}",
+                "${widget.userPassHistory.usedList.length}/${widget.userPassHistory.unusedList.length + widget.userPassHistory.usedList.length}",
                 style: TextStyle(
                   fontSize: 36,
                   fontWeight: FontWeight.bold,

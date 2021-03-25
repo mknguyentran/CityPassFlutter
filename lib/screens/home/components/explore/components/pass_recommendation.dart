@@ -59,7 +59,7 @@ class PassRecommendation extends StatelessWidget {
                       pass: _passList[index],
                     ),
                     openBuilder: (context, action) => PassDetail(
-                      pass: _passList[index],
+                      passId: _passList[index].id,
                     ),
                   ),
                 ),

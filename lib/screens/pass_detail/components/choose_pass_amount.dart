@@ -1,22 +1,31 @@
+import 'package:city_pass/blocs/auth_bloc.dart';
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/mockupData/mockup_payment_method.dart';
-import 'package:city_pass/models/discount_code.dart';
-import 'package:city_pass/models/order_detail.dart';
-import 'package:city_pass/models/pass.dart';
-import 'package:city_pass/models/payment_method.dart';
+import 'package:city_pass/model/discount_code.dart';
+import 'package:city_pass/model/order_detail.dart';
+import 'package:city_pass/model/pass.dart';
+import 'package:city_pass/model/payment_method.dart';
+import 'package:city_pass/models/passDetailInformation.dart';
+import 'package:city_pass/models/user_pass_payment.dart';
 import 'package:city_pass/screens/order_detail/order_result.dart';
 import 'package:city_pass/screens/pass_detail/components/discount_code_picker.dart';
 import 'package:city_pass/screens/pass_detail/components/payment_method_picker.dart';
+import 'package:city_pass/service/userpass_payment_service.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_guid/flutter_guid.dart';
+import 'package:loading_overlay/loading_overlay.dart';
+import 'package:provider/provider.dart';
 
 class ChoosePassAmount extends StatefulWidget {
-  final Pass pass;
+  final PassDetailInformation passDetail;
+  final List<dynamic> chosenList;
 
   const ChoosePassAmount({
     Key key,
-    @required this.pass,
+    @required this.passDetail,
+    @required this.chosenList,
   }) : super(key: key);
 
   @override
@@ -28,7 +37,8 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
   double total = 0;
   PaymentMethod _currentPaymentMethod = visa;
   DiscountCode _currentDiscountCode;
-
+  bool flag = true, _isLoading = false;
+  String defaultUser = "123456789qwertyu";
   void increaseAmount({bool increaseChild = false}) {
     if (increaseChild) {
       setState(() {
@@ -58,42 +68,74 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    total = widget.pass.price * amount;
-    if (widget.pass.childrenPrice != null) {
-      total += widget.pass.childrenPrice.price * childrenAmount;
+  void initState() {
+    super.initState();
+    var authBloc = Provider.of<AuthBloc>(context, listen: false);
+    var user = authBloc.currentUser;
+    
+    if(user != null) {
+      defaultUser = user.uid;
     }
-    return Scaffold(
+  }
+
+  void _toggleLoading(bool isOn) {
+    setState(() {
+      _isLoading = isOn;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    total = widget.passDetail.price * amount;
+    if (widget.passDetail.price != null) {
+      total += widget.passDetail.childrenPrice * childrenAmount;
+    }
+    return LoadingOverlay(
+      isLoading: _isLoading,
+      color: Colors.black87,
+      progressIndicator: const CircularProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(primaryLightColor),
+      ),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          leading: Container(),
+          title: Text(
+            widget.passDetail.name,
+            style: TextStyle(
+              fontSize: 20,
+              color: textBlack,
+            ),
+          ),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: Icon(
+                CupertinoIcons.xmark,
+                color: subtitleTextColor,
+                size: 20,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        ),
       body: Container(
         height: 500,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                boxShadow: [kDefaultShadow],
-                color: Colors.white,
-              ),
-              height: 50,
-              child: Align(
-                alignment: Alignment.center,
-                child: Text(
-                  widget.pass.name,
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(
-                  kDefaultPadding, 0, kDefaultPadding, 50),
+                    kDefaultPadding, 30, kDefaultPadding, 50),
               child: _buildAmountPicker(),
             ),
             Container(
               height: 150,
               width: double.infinity,
-              padding:
-                  EdgeInsets.fromLTRB(kDefaultPadding, 10, kDefaultPadding, 10),
+                padding: EdgeInsets.fromLTRB(
+                    kDefaultPadding, 10, kDefaultPadding, 10),
               decoration: BoxDecoration(
                 boxShadow: [kDefaultShadow],
                 color: Colors.white,
@@ -191,7 +233,8 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
                                         total.withDiscountCode(
                                             _currentDiscountCode)),
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
                               ),
                             ],
                           ),
@@ -202,7 +245,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
                             height: 50,
                             child: _buildBuyButton(
                               context,
-                              pass: widget.pass,
+                              passDetailInformation: widget.passDetail,
                               amount: amount,
                               childrenAmount: childrenAmount,
                             ),
@@ -216,6 +259,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
             ),
           ],
         ),
+      ),
       ),
     );
   }
@@ -253,7 +297,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
   }
 
   Widget _buildAmountPicker() {
-    if (widget.pass.childrenPrice != null) {
+    if (widget.passDetail.price != null) {
       return Column(
         children: [
           AmountPicker(
@@ -289,7 +333,7 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
 
   ElevatedButton _buildBuyButton(
     BuildContext context, {
-    @required Pass pass,
+    @required PassDetailInformation passDetailInformation,
     int amount,
     int childrenAmount,
   }) {
@@ -309,19 +353,65 @@ class _ChoosePassAmountState extends State<ChoosePassAmount> {
               ),
             )),
         child: Text("Thanh toán"),
-        onPressed: () {
-          Navigator.of(context).pop();
+        onPressed: () => formUserPass(amount, childrenAmount));
+  }
+
+  Future<void> formUserPass(int amount, int childrenAmount) async {
+    List<String> forceList = [];
+    for (int i = 0; i < widget.passDetail.listOfTicket.length; i++) {
+      List<dynamic> list = widget.passDetail.listOfTicket[i];
+      int type =
+          IncludingDestination(list, int.parse(list[list.length - 1])).type;
+      if (type == 1) {
+        for (int j = 0; j < list.length - 1; j++) {
+          forceList.add(list[j][0]);
+        }
+      }
+      for (int i = 0; i < widget.chosenList.length; i++) {
+        String id = widget.chosenList[i][0];
+
+        forceList
+            .add(id); // forceList sẽ chưa tất cả các TicketID để đưa xuống DB
+
+      }
+      UserPassPayment userPass = UserPassPayment();
+      userPass.userUid = defaultUser;
+      print(userPass.userUid);
+      userPass.quantiyChildren = childrenAmount;
+      userPass.quantiyAdult = amount;
+      userPass.passId = widget.passDetail.id.toString();
+
+      userPass.ticketTypeIds = forceList;
+      bool insert = false;
+      if (flag) {
+        _toggleLoading(true);
+        insert = await UserPassAPI().insertUserPass((msg) {
+          print(msg);
+        }, userPass);
+        _toggleLoading(false);
+      }
+
+      if (insert) {
+        setState(() {
+          flag = false;
+          Navigator.of(context).popUntil((route) => route.isFirst);
           Navigator.push(
             context,
             CupertinoPageRoute(builder: (context) {
-              OrderDetail orderDetail = new OrderDetail(pass, amount,
-                  childrenAmount, _currentPaymentMethod, _currentDiscountCode);
+              OrderDetail orderDetail = new OrderDetail(
+                  widget.passDetail,
+                  amount,
+                  childrenAmount,
+                  _currentPaymentMethod,
+                  _currentDiscountCode);
               return OrderResult(
                 orderDetail: orderDetail,
               );
             }),
           );
         });
+      }
+    }
   }
 }
 

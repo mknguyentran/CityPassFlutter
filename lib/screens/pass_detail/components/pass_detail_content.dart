@@ -1,20 +1,33 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/activity.dart';
-import 'package:city_pass/models/pass.dart';
+import 'package:city_pass/model/activity.dart';
+import 'package:city_pass/model/pass.dart';
+import 'package:city_pass/models/passDetailInformation.dart';
+import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/screens/activity_detail/activity_detail.dart';
+import 'package:city_pass/service/ticketType_services.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 
-class PassDetailContent extends StatelessWidget {
-  const PassDetailContent({
-    Key key,
-    @required this.pass,
-  }) : super(key: key);
+class PassDetailContent extends StatefulWidget {
+  const PassDetailContent(
+      {Key key,
+      @required this.passDetail,
+      @required this.chosenList,
+      this.onOptionChose})
+      : super(key: key);
 
-  final Pass pass;
+  final PassDetailInformation passDetail;
+  final List chosenList;
+  final Function onOptionChose;
 
+  @override
+  _PassDetailContentState createState() => _PassDetailContentState();
+}
+
+class _PassDetailContentState extends State<PassDetailContent> {
   @override
   Widget build(BuildContext context) {
     int _currentIndex = 1;
@@ -30,27 +43,31 @@ class PassDetailContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ...List.generate(
-                  pass.includingDestination.length,
+                  widget.passDetail.listOfTicket.length,
                   (index) {
                     Widget result;
-                    switch (pass.includingDestination[index].type) {
+                    List<dynamic> list = widget.passDetail.listOfTicket[index];
+                    int type = IncludingDestination(
+                            list, int.parse(list[list.length - 1]))
+                        .type;
+                    switch (type) {
                       case IncludingDestination.allIncluded:
                         result = _buildDestinationList(
-                          itemList:
-                              pass.includingDestination[index].destinationList,
+                          itemList: list,
                           context: context,
                           currentIndex: _currentIndex,
                         );
-                        _currentIndex += pass
-                            .includingDestination[index].destinationList.length;
+
+                        _currentIndex += widget
+                                .passDetail.listOfTicket[index].length -
+                            1; // trừ vì list TicketType trả về cuối cùng là maxContraints
                         break;
                       case IncludingDestination.optional:
                         result = _buildOptionalDestinationList(
-                            itemList: pass
-                                .includingDestination[index].destinationList,
-                            includingQuota:
-                                pass.includingDestination[index].includingQuota,
-                            context: context);
+                            itemList: list,
+                            includingQuota: int.parse(list[list.length - 1]),
+                            context: context,
+                            onOptionChose: widget.onOptionChose);
                         break;
                       default:
                         break;
@@ -65,101 +82,143 @@ class PassDetailContent extends StatelessWidget {
       ),
     );
   }
-}
 
-Column _buildOptionalDestinationList({
-  @required List<Activity> itemList,
-  @required int includingQuota,
-  @required BuildContext context,
-}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      OptionalDestinationListHeader(includingQuota: includingQuota),
-      ...List.generate(
-        itemList.length,
-        (index) => _buildDestinationListItem(
-          activity: itemList[index],
-          context: context,
-        ),
-      )
-    ],
-  );
-}
-
-Column _buildDestinationList({
-  @required List<Activity> itemList,
-  @required int currentIndex,
-  @required BuildContext context,
-}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      ...List.generate(
-        itemList.length,
-        (index) => _buildDestinationListItem(
-          activity: itemList[index],
-          context: context,
-          index: currentIndex++,
-        ),
-      )
-    ],
-  );
-}
-
-Widget _buildDestinationListItem(
-    {int index,
-    double lineSpacing = 7.0,
-    @required Activity activity,
-    @required BuildContext context}) {
-  return Padding(
-    padding: EdgeInsets.symmetric(vertical: lineSpacing),
-    child: Row(
+  Column _buildOptionalDestinationList({
+    @required List<dynamic> itemList,
+    @required int includingQuota,
+    @required BuildContext context,
+    @required Function onOptionChose,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          margin: EdgeInsets.only(right: 10),
-          alignment: Alignment.center,
-          width: getProportionateScreenWidth(25),
-          height: getProportionateScreenWidth(25),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: dividerColor,
+        OptionalDestinationListHeader(includingQuota: includingQuota),
+        ...List.generate(
+          itemList.length - 1,
+          (index) => _buildOptionalDestinationListItem(
+            activity: itemList[index],
+            context: context,
+            includingQuota: includingQuota,
+            onOptionChose: onOptionChose,
           ),
-          child: Text(
-            (index != null) ? index.toString() : "",
-            style: TextStyle(
-              color: primaryDarkColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
+        )
+      ],
+    );
+  }
+
+  Column _buildDestinationList({
+    @required List<dynamic> itemList,
+    @required int currentIndex,
+    @required BuildContext context,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ...List.generate(
+          itemList.length - 1,
+          (index) => _buildDestinationListItem(
+            activity: itemList[index],
+            context: context,
+            index: currentIndex++,
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildDestinationListItem(
+      {int index,
+      double lineSpacing = 7.0,
+      @required Object activity,
+      @required BuildContext context}) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: lineSpacing),
+      child: Row(
+        children: [
+          Container(
+            margin: EdgeInsets.only(right: 10),
+            alignment: Alignment.center,
+            width: getProportionateScreenWidth(25),
+            height: getProportionateScreenWidth(25),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: dividerColor,
+            ),
+            child: Text(
+              (index != null) ? index.toString() : "",
+              style: TextStyle(
+                color: primaryDarkColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
             ),
           ),
-        ),
-        _buildItemName(activity, context)
-      ],
-    ),
-  );
-}
+          _buildItemName(activity, context)
+        ],
+      ),
+    );
+  }
 
-Widget _buildItemName(
-    Activity activity, BuildContext context) {
-  return Expanded(
-    child: GestureDetector(
+  Widget _buildOptionalDestinationListItem({
+    double lineSpacing = 7.0,
+    @required List<dynamic> activity,
+    @required int includingQuota,
+    @required Function onOptionChose,
+    @required BuildContext context,
+  }) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: lineSpacing),
+      child: CheckboxListTile(
+        contentPadding: EdgeInsets.zero,
+        dense: true,
+        title: _buildItemName(activity, context),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        activeColor: primaryLightColor,
+        value: widget.chosenList.contains(activity),
+        onChanged: (widget.chosenList.length == includingQuota &&
+                !widget.chosenList.contains(activity))
+            ? null
+            : (isChosen) {
+                if (isChosen) {
+                  setState(
+                    () {
+                      widget.chosenList.add(activity);
+                    },
+                  );
+                } else {
+                  setState(
+                    () {
+                      widget.chosenList.remove(activity);
+                    },
+                  );
+                }
+                onOptionChose();
+              },
+        controlAffinity: ListTileControlAffinity.leading,
+      ),
+    );
+  }
+
+  Widget _buildItemName(List<dynamic> activity, BuildContext context) {
+    return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           CupertinoPageRoute(builder: (context) {
             return ActivityDetail(
-              activity: activity,
+              ticketTypeID: new Guid(activity[0].toString()),
             );
           }),
         );
       },
       child: Text(
-        activity.getShortName.toUpperCase(),
+        activity[1].toUpperCase(),
         style: TextStyle(fontSize: 14),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class OptionalDestinationListHeader extends StatelessWidget {

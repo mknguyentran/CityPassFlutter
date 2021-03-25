@@ -1,18 +1,34 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/models/user_pass.dart';
+import 'package:city_pass/model/user_pass.dart';
+import 'package:city_pass/models/user_pass_available_show.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
 import 'package:city_pass/size_config.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-class UserPassDetailTopInfo extends StatelessWidget {
+class UserPassDetailTopInfo extends StatefulWidget {
   const UserPassDetailTopInfo({
     Key key,
-    @required this.pass,
+    @required this.availableUserPass,
   }) : super(key: key);
 
-  final UserPass pass;
+  final AvailableUserPass availableUserPass;
+
+  @override
+  _UserPassDetailTopInfoState createState() => _UserPassDetailTopInfoState();
+}
+
+class _UserPassDetailTopInfoState extends State<UserPassDetailTopInfo> {
+  Future<String> _deviceToken;
+  @override
+  void initState() {
+    super.initState();
+    _deviceToken = FirebaseMessaging.instance.getToken();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +41,27 @@ class UserPassDetailTopInfo extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(kDefaultPadding),
           alignment: Alignment.center,
-          child: QrImage(
-            data: pass.name,
-            version: QrVersions.auto,
-            size: percentageOfScreenHeight(27),
+          child: GestureDetector(
+            onLongPress: _showUserPassIDDialog,
+            child: FutureBuilder(
+              future: _deviceToken,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return QrImage(
+                    data: widget.availableUserPass.userPassID + ' ' + snapshot.data,
+                    version: QrVersions.auto,
+                    size: percentageOfScreenHeight(27),
+                  );
+                }
+
+                return CircularProgressIndicator();
+              },
+            )
+            
           ),
         ),
         Text(
-          "HẾT HẠN VÀO ${simpleDateFormat.format(pass.expiredAt)}"
+          "HẾT HẠN VÀO ${simpleDateFormat.format(widget.availableUserPass.expiredDate)}"
               .toUpperCase(),
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -43,7 +72,7 @@ class UserPassDetailTopInfo extends StatelessWidget {
               CupertinoPageRoute(
                 builder: (context) {
                   return PassDetail(
-                    pass: pass.originalPass,
+                    passId: new Guid(widget.availableUserPass.passID),
                   );
                 },
               ),
@@ -69,6 +98,27 @@ class UserPassDetailTopInfo extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+
+  Future<void> _showUserPassIDDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title:
+              Text('${widget.availableUserPass.userPassID.toUpperCase()}'),
+          actions: [
+            TextButton(
+              child: Text('Ok'.toUpperCase()),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -1,19 +1,37 @@
-import 'package:city_pass/mockupData/mockup_pass.dart';
-import 'package:city_pass/models/activity.dart';
+
+import 'package:city_pass/models/pass.dart';
+import 'package:city_pass/models/ticketTypeDetail.dart';
 import 'package:city_pass/screens/map/map_screen.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
+import 'package:city_pass/service/pass_services.dart';
 import 'package:city_pass/shared/pass_card.dart';
 import 'package:city_pass/shared/timetable_row.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ActivityInfo extends StatelessWidget {
-  final Activity activity;
+import '../../../../constants.dart';
+
+class ActivityInfo extends StatefulWidget {
+  final TicketTypeDetail activity;
+
   const ActivityInfo({
     Key key,
     @required this.activity,
   }) : super(key: key);
+
+  @override
+  _ActivityInfoState createState() => _ActivityInfoState();
+}
+
+class _ActivityInfoState extends State<ActivityInfo> {
+  Future<List<Pass>> listPass;
+  @override
+  void initState() {
+    super.initState();
+    listPass =
+        PassAPI().getAllPasses(ticketTypeId: widget.activity.id.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +41,7 @@ class ActivityInfo extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              activity.detailedDescription,
+              widget.activity.description,
               style: TextStyle(fontSize: 14, height: 1.4),
             ),
           ),
@@ -39,32 +57,41 @@ class ActivityInfo extends StatelessWidget {
           SingleChildScrollView(
             clipBehavior: Clip.none,
             scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                ...List.generate(
-                    mockupPasses.length,
-                    (index) => Padding(
-                          padding: index != 0
-                              ? EdgeInsets.only(left: 20)
-                              : EdgeInsets.zero,
-                          child: SizedBox(
-                            width: 350,
-                            child: PassCard(
-                              pass: mockupPasses[index],
-                              press: () => {
-                                Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(builder: (context) {
-                                    return PassDetail(
-                                      pass: mockupPasses[index],
-                                    );
-                                  }),
-                                )
-                              },
-                            ),
-                          ),
-                        )),
-              ],
+            child: FutureBuilder(
+              future: listPass,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<Pass> listPass = snapshot.data;
+                  return Row(
+                    children: [
+                      ...List.generate(
+                          listPass.length,
+                          (index) => Padding(
+                                padding: index != 0
+                                    ? EdgeInsets.only(left: 20)
+                                    : EdgeInsets.zero,
+                                child: SizedBox(
+                                  width: 350,
+                                  child: PassCard(
+                                    pass: listPass[index],
+                                    press: () => {
+                                      Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(builder: (context) {
+                                          return PassDetail(
+                                            passId: listPass[index].id,
+                                          );
+                                        }),
+                                      )
+                                    },
+                                  ),
+                                ),
+                              )),
+                    ],
+                  );
+                }
+                return CircularProgressIndicator();
+              },
             ),
           ),
           VerticalSpacing(of: 40),
@@ -112,14 +139,11 @@ class ActivityInfo extends StatelessWidget {
                   VerticalSpacing(of: 10),
                   Column(
                     children: [
-                      ...List.generate(activity.activityTimetable.length,
-                          (index) {
+                      ...List.generate(activityTimetable.length, (index) {
                         int todayWeekday = DateTime.now().weekday - 1;
                         return TimetableRow(
-                          dayOfWeek:
-                              activity.activityTimetable[index].dayOfWeek,
-                          openTime:
-                              activity.activityTimetable[index].openTime,
+                          dayOfWeek: activityTimetable[index].dayOfWeek,
+                          openTime: activityTimetable[index].openTime,
                           isToday: todayWeekday == index,
                         );
                       })
