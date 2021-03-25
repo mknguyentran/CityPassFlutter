@@ -1,10 +1,21 @@
 import 'package:city_pass/constants.dart';
-import 'package:city_pass/screens/activity_detail/components/body/activity_including_passes.dart';
+import 'package:city_pass/model/activity.dart';
+import 'package:city_pass/models/ticketTypeDetail.dart';
+import 'package:city_pass/screens/activity_detail/components/body/activity_images.dart';
 import 'package:city_pass/screens/activity_detail/components/body/activity_info.dart';
+import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
 class ActivityBody extends StatefulWidget {
+ // final Activity activity;
+  final TicketTypeDetail activity;
+
+  const ActivityBody({
+    Key key,
+    @required this.activity,
+  }) : super(key: key);
+
   @override
   _ActivityBodyState createState() => _ActivityBodyState();
 }
@@ -26,6 +37,13 @@ class _ActivityBodyState extends State<ActivityBody>
     _tabController.dispose();
   }
 
+  _changeTab(index) {
+    setState(() {
+      selectedIndex = index;
+      _tabController.animateTo(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,8 +51,9 @@ class _ActivityBodyState extends State<ActivityBody>
       child: Column(
         children: [
           Container(
+            alignment: Alignment.center,
             width: getProportionateScreenWidth(300),
-            height: getProportionateScreenHeight(35),
+            height: 35,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey[300], width: 4),
               color: Colors.grey[300],
@@ -45,10 +64,7 @@ class _ActivityBodyState extends State<ActivityBody>
             child: TabBar(
               controller: _tabController,
               onTap: (index) {
-                setState(() {
-                  selectedIndex = index;
-                  _tabController.animateTo(index);
-                });
+                _changeTab(index);
               },
               indicator: BoxDecoration(
                 boxShadow: [smallShadow],
@@ -59,12 +75,17 @@ class _ActivityBodyState extends State<ActivityBody>
               ),
               labelColor: Colors.white,
               unselectedLabelColor: Colors.black,
+              labelStyle: TextStyle(
+                fontWeight: FontWeight.w500,
+                letterSpacing: -1,
+                fontSize: 16,
+              ),
               tabs: [
                 Tab(
                   text: "Thông tin",
                 ),
                 Tab(
-                  text: "Mua CityPass",
+                  text: "Hình ảnh",
                 ),
               ],
             ),
@@ -73,12 +94,12 @@ class _ActivityBodyState extends State<ActivityBody>
           IndexedStack(
             children: [
               Visibility(
-                child: ActivityInfo(),
+                child: ActivityInfo(activity: widget.activity),
                 maintainState: true,
                 visible: selectedIndex == 0,
               ),
               Visibility(
-                child: ActivityIncludingPasses(),
+                child: ActivityImages(activity: widget.activity),
                 maintainState: true,
                 visible: selectedIndex == 1,
               ),

@@ -1,36 +1,31 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 
-class Pass {
-  final String name, image;
-  final double overallRating, price, childrenPrice;
+class Pass{
+  Guid id;
+  String name;
+  double price;
+  bool isSelling;
+  double rate;
+  var feedback;
+  String imageUrl;
 
-  Pass( {
-    @required this.overallRating,
-    @required this.name,
-    @required this.image,
-    @required this.price,
-    this.childrenPrice
-  });
+   Pass.formJson(Map<String, dynamic> json)
+      : this.id = new Guid(json['id']),
+        this.name = json['name'],
+        this.price = json['price'],
+        this.isSelling = json['isSelling'],
+        this.imageUrl = json['urlImage'],
+        this.rate = json['rate'],
+        this.feedback = json['feedbacks'];
+
+
+  Map<String, dynamic> toJson() => {
+        'id': this.id,
+        'name': this.name,
+        'price': this.price,
+        'isSelling': this.isSelling,
+        'rate': this.rate,
+        
+        'feedbacks': this.feedback
+      };
 }
-
-List<Pass> mockupPasses = [
-  Pass(
-    name: "Đi hết Hồ Chí Minh",
-    image: "assets/images/thao_cam_vien.jpg",
-    overallRating: 4.7,
-    price: 250000,
-  ),
-  Pass(
-    name: "Thổ địa Sài Gòn",
-    image: "assets/images/dinh_doc_lap.jpg",
-    overallRating: 4.5,
-    price: 250000,
-    childrenPrice: 100000
-  ),
-  Pass(
-    name: "Thổ địa Sài Gòn",
-    image: "assets/images/dia_dao_cu_chi.jpg",
-    overallRating: 4.5,
-    price: 250000,
-  ),
-];

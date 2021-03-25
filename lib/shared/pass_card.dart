@@ -2,6 +2,7 @@ import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:city_pass/extensions.dart';
 
 class PassCard extends StatelessWidget {
   const PassCard({
@@ -18,7 +19,6 @@ class PassCard extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: Container(
-        decoration: BoxDecoration(boxShadow: [kDefaultShadow],),
         child: Stack(
           children: [
             AspectRatio(
@@ -27,7 +27,7 @@ class PassCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                    image: AssetImage(pass.image),
+                    image: NetworkImage(pass.imageUrl ?? ''),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -40,7 +40,7 @@ class PassCard extends StatelessWidget {
                 child: Container(
                   height: 70,
                   alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.fromLTRB(15,10,15,10),
+                  padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.5),
                     boxShadow: [kDefaultShadow],
@@ -54,9 +54,13 @@ class PassCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.star_rounded, color: Colors.yellow, size: getProportionateScreenWidth(12),),
+                          Icon(
+                            Icons.star_rounded,
+                            color: Colors.yellow,
+                            size: getProportionateScreenWidth(12),
+                          ),
                           Text(
-                            pass.overallRating.toString(),
+                            pass.rate.toString(),
                             style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.normal,
@@ -81,7 +85,7 @@ class PassCard extends StatelessWidget {
             )
           ],
         ),
-      ),
+      ).addNeumorphism(offset: Offset(3, 3), blurRadius: 7),
     );
   }
 }

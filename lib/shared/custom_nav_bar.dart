@@ -28,7 +28,6 @@ class CustomNavBar extends StatefulWidget {
 }
 
 class _CustomNavBarState extends State<CustomNavBar> {
-
   void _changeIndex(int index) {
     if (widget.onChange != null) {
       widget.onChange(index);
@@ -44,18 +43,16 @@ class _CustomNavBarState extends State<CustomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: getProportionateScreenWidth(80),
+      height: getProportionateScreenWidth(70),
       decoration: BoxDecoration(
-        boxShadow: [kDefaultShadow],
-        color: Colors.white,
+        boxShadow: [topShadow],
+        color: widget.backgroundColor,
       ),
       child: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(10),
-          ),
+          padding: const EdgeInsets.symmetric(horizontal:20),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: widget.children.map((item) {
               int index = widget.children.indexOf(item);
               bool isCurrent = widget.currentIndex == index;
@@ -66,11 +63,11 @@ class _CustomNavBarState extends State<CustomNavBar> {
                   isFocused ? _focusedAction() : _changeIndex(index);
                 },
                 child: Container(
-                  padding: EdgeInsets.all(5),
-                  height: getProportionateScreenWidth(60),
-                  width: getProportionateScreenWidth(60),
+                  padding: EdgeInsets.symmetric(horizontal:0),
+                  height: getProportionateScreenWidth(55),
+                  width: getProportionateScreenWidth(55),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: isFocused ? widget.backgroundColor : null,
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [if (isFocused) kDefaultShadow],
                   ),
@@ -86,23 +83,24 @@ class _CustomNavBarState extends State<CustomNavBar> {
 
   Column _buildNavItem(
       CustomNavItem item, bool isCurrentIndex, bool isFocused) {
+    var _selectedIcon = item.selectedIcon ?? item.icon;
     if (item.label != null) {
       return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Icon(
-            item.icon,
+            isCurrentIndex ? _selectedIcon : item.icon,
             size: 28,
             color: isCurrentIndex ? widget.itemColor : kIconColor,
           ),
-          Spacer(),
           Text(
             item.label,
             style: TextStyle(
-              fontSize: 11,
+              fontSize: 10,
               fontWeight: FontWeight.bold,
               color: isCurrentIndex ? widget.itemColor : kIconColor,
             ),
+            overflow: TextOverflow.ellipsis,
           )
         ],
       );
@@ -123,7 +121,8 @@ class _CustomNavBarState extends State<CustomNavBar> {
 
 class CustomNavItem {
   final IconData icon;
+  final IconData selectedIcon;
   final String label;
 
-  CustomNavItem({@required this.icon, this.label});
+  CustomNavItem({@required this.icon, this.label, this.selectedIcon});
 }
