@@ -89,7 +89,7 @@ class _UserPassesState extends State<UserPasses> {
                                         availableUserPass: snapshot.data[index],
                                       );
                                     })
-                                  );
+                                  ).then((value) => _reload());
                                 };
                                 PushNotificationUtil().registerNotification(onReceiveNoti);
 
