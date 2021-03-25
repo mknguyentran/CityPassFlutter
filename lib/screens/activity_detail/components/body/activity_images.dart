@@ -5,11 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ActivityImages extends StatelessWidget {
- // final Activity activity;
+  // final Activity activity;
   final TicketTypeDetail activity;
 
-  const ActivityImages({Key key, @required this.activity})
-      : super(key: key);
+  const ActivityImages({Key key, @required this.activity}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,6 +23,13 @@ class ActivityImages extends StatelessWidget {
         //     ),
         //   ),
         // )
+        Padding(
+          padding: EdgeInsets.only(bottom: 20),
+          child: SizedBox(
+            width: 400,
+            child: Image.network(activity.urlImage),
+          ),
+        ),
       ],
     );
   }
