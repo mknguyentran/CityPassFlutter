@@ -11,7 +11,7 @@ class UserPassAPI {
     Map<String, dynamic> userPassPayment = userPassPay.toJson();
 
     final response = await http.post(
-      "https://citypasswebapi.azurewebsites.net/api/v1.0/user-passes",
+      "https://citypassappservice.azurewebsites.net/api/v1.0/user-passes",
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
