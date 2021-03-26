@@ -58,8 +58,6 @@ class _UserPassesState extends State<UserPasses> {
 
   @override
   Widget build(BuildContext context) {
-    
-
     return Scaffold(
         appBar: _buildAppBar(context),
         backgroundColor: lightGrayBackground,
@@ -80,19 +78,6 @@ class _UserPassesState extends State<UserPasses> {
                           child: UserPassCard(
                               pass: snapshot.data[index],
                               press: () {
-                                var onReceiveNoti = () {
-                                  Navigator.pop(context);
-                                  Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(builder: (context) {
-                                      return UserPassDetail(
-                                        availableUserPass: snapshot.data[index],
-                                      );
-                                    })
-                                  ).then((value) => _reload());
-                                };
-                                PushNotificationUtil().registerNotification(onReceiveNoti);
-
                                 Navigator.push(
                                   context,
                                   CupertinoPageRoute(builder: (context) {
