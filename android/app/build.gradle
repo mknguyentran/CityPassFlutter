@@ -70,10 +70,18 @@ plugins {
   id "org.sonarqube" version "3.1.1"
 }
 
+apply plugin: 'org.sonarqube'
+
 sonarqube {
   properties {
     property "sonar.projectKey", "mknguyentran_CityPassFlutter"
     property "sonar.organization", "citypass"
     property "sonar.host.url", "https://sonarcloud.io"
   }
+}
+
+buildscript {
+dependencies.classpath
+"org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:
+${project.properties.get('sonarqubeVersion', 3.0)}"
 }
