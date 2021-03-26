@@ -12,6 +12,21 @@ buildscript {
     }
 }
 
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.1.1"
+  }
+}
+
+plugins {
+  id "org.sonarqube" version "3.1.1"
+}
+
 allprojects {
     repositories {
         google()
@@ -29,21 +44,6 @@ subprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-plugins {
-  id "org.sonarqube" version "3.1.1"
-}
-
-buildscript {
-  repositories {
-    maven {
-      url "https://plugins.gradle.org/m2/"
-    }
-  }
-  dependencies {
-    classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.1.1"
-  }
 }
 
 sonarqube {
