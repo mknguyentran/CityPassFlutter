@@ -5,6 +5,7 @@ import 'package:city_pass/screens/user_pass_detail/components/pass_usage/user_pa
 import 'package:city_pass/screens/user_pass_detail/components/user_pass_detail_progress_bar.dart';
 import 'package:city_pass/screens/user_pass_detail/components/user_pass_detail_top_info.dart';
 import 'package:city_pass/service/userpass_history_service.dart';
+import 'package:city_pass/shared/push_notification_util.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +29,17 @@ class _UserPassDetailState extends State<UserPassDetail> {
     }, widget.availableUserPass.userPassID);
   }
 
+  void _reload() {
+    setState(() {
+      historyDetail = UserPassHistoryAPI().getHistoryUserPass((msg) {
+        print(msg);
+      }, widget.availableUserPass.userPassID);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    PushNotificationUtil().registerNotification(_reload);
     return Scaffold(
       appBar: _buildAppBar(context),
       backgroundColor: Colors.grey[50],
@@ -40,7 +50,7 @@ class _UserPassDetailState extends State<UserPassDetail> {
           child: FutureBuilder(
             future: historyDetail,
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
+              if (snapshot.connectionState == ConnectionState.done) {
                 return Column(
                   children: [
                     UserPassDetailTopInfo(
