@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">CityPass</string> 
     <string name="facebook_app_id">747278732864822</string> <string name="fb_login_protocol_scheme">fb747278732864822</string>
+    <string name="google_map_api_key">AIzaSyDT79EIo-6glYkkZdmqHApuAyaTDyE-hYA</string>
 </resources>

@@ -9,6 +9,7 @@ import 'package:city_pass/shared/timetable_row.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../constants.dart';
 
@@ -26,11 +27,29 @@ class ActivityInfo extends StatefulWidget {
 
 class _ActivityInfoState extends State<ActivityInfo> {
   Future<List<Pass>> listPass;
+  GoogleMapController mapController;
+  Set<Marker> _markers;
+
   @override
   void initState() {
     super.initState();
     listPass =
         PassAPI().getAllPasses(ticketTypeId: widget.activity.id.toString());
+  }
+
+  Set<Marker> generateMapMarkers() {
+    Marker currentLocation = Marker(
+      markerId: MarkerId(widget.activity.id.toString()),
+      position: LatLng(widget.activity.latitude, widget.activity.longitude),
+      infoWindow: InfoWindow(
+        title: widget.activity.attractionName,
+        snippet: widget.activity.address,
+      )
+    );
+
+    Set<Marker> markers = new Set();
+    markers.add(currentLocation);
+    return markers;
   }
 
   @override
@@ -103,15 +122,26 @@ class _ActivityInfoState extends State<ActivityInfo> {
             ),
           ),
           VerticalSpacing(of: 20),
-          GestureDetector(
-            onTap: () => {
-              Navigator.push(context, CupertinoPageRoute(builder: (context) {
-                return MapScreen();
-              })),
-            },
-            child: SizedBox(
-              width: 400,
-              child: Image.asset("assets/images/map_small.png"),
+          // GestureDetector(
+          //   onTap: () => {
+          //     Navigator.push(context, CupertinoPageRoute(builder: (context) {
+          //       return MapScreen();
+          //     })),
+          //   },
+          //   child: SizedBox(
+          //     width: 400,
+          //     child: Image.asset("assets/images/map_small.png"),
+          //   ),
+          // ),
+          Container(
+            height: 300,
+            child: GoogleMap(
+              onMapCreated: (controller) { mapController = controller; },
+              initialCameraPosition: CameraPosition(
+                target: LatLng(widget.activity.latitude, widget.activity.longitude),
+                zoom: 11.0
+              ),
+              markers: generateMapMarkers(),
             ),
           ),
           VerticalSpacing(of: 40),
