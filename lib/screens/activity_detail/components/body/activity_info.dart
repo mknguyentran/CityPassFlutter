@@ -1,7 +1,7 @@
 
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/models/ticketTypeDetail.dart';
-import 'package:city_pass/screens/map/map_screen.dart';
+import 'package:city_pass/screens/map/map_ticket_type.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
 import 'package:city_pass/service/pass_services.dart';
 import 'package:city_pass/shared/pass_card.dart';
@@ -27,8 +27,6 @@ class ActivityInfo extends StatefulWidget {
 
 class _ActivityInfoState extends State<ActivityInfo> {
   Future<List<Pass>> listPass;
-  GoogleMapController mapController;
-  Set<Marker> _markers;
 
   @override
   void initState() {
@@ -122,26 +120,27 @@ class _ActivityInfoState extends State<ActivityInfo> {
             ),
           ),
           VerticalSpacing(of: 20),
-          // GestureDetector(
-          //   onTap: () => {
-          //     Navigator.push(context, CupertinoPageRoute(builder: (context) {
-          //       return MapScreen();
-          //     })),
-          //   },
-          //   child: SizedBox(
-          //     width: 400,
-          //     child: Image.asset("assets/images/map_small.png"),
-          //   ),
-          // ),
           Container(
-            height: 300,
+            height: 200,
             child: GoogleMap(
-              onMapCreated: (controller) { mapController = controller; },
               initialCameraPosition: CameraPosition(
                 target: LatLng(widget.activity.latitude, widget.activity.longitude),
                 zoom: 11.0
               ),
               markers: generateMapMarkers(),
+              zoomGesturesEnabled: false,
+              tiltGesturesEnabled: false,
+              rotateGesturesEnabled: false,
+              scrollGesturesEnabled: false,
+              zoomControlsEnabled: false,
+              onTap: (_) {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (context) {
+                    return MapForTicketType(widget.activity);
+                  })
+                );
+              },
             ),
           ),
           VerticalSpacing(of: 40),
