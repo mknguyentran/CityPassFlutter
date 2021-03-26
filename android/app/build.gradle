@@ -65,3 +65,15 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+
+plugins {
+  id "org.sonarqube" version "3.1.1"
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "mknguyentran_CityPassFlutter"
+    property "sonar.organization", "citypass"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
+}
