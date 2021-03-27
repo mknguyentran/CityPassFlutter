@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'package:city_pass/models/city.dart';
 import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/models/ticketTypeDetail.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 import 'package:http/http.dart' as http;
 import 'package:city_pass/api_constant.dart';
 
 class TicketTypeAPI {
-  Future<List<TicketType>> getAllTicketTypes({Function(String) onError, City city, String name}) async {
+  Future<List<TicketType>> getAllTicketTypes(
+      {Function(String) onError, City city, String name, String cateId}) async {
     String endpoint = listTicketTypeGETUrl;
     String queryString = '';
     Map<String, dynamic> queryParams = {};
@@ -18,35 +20,39 @@ class TicketTypeAPI {
       var nameParam = {'Name': name.trim()};
       queryParams.addAll(nameParam);
     }
+    if (cateId != null) {
+      var cateParam = {'CategoryId': cateId.trim()};
+      queryParams.addAll(cateParam);
+    }
     queryString = '?' + Uri(queryParameters: queryParams).query;
 
     List<TicketType> ticketTypes = [];
     try {
-    http.Response response = await http.get(endpoint + queryString);
-if (response.statusCode == 200) {
-      try {
-        dynamic jsonRaw = json.decode(response.body);
-        List<dynamic> data = jsonRaw["data"];
-        if (data.length > 0) {
-          data.forEach((p) {
-            ticketTypes.add(TicketType.formJson(p));
-          });
+      http.Response response = await http.get(endpoint + queryString);
+      if (response.statusCode == 200) {
+        try {
+          dynamic jsonRaw = json.decode(response.body);
+          List<dynamic> data = jsonRaw["data"];
+          if (data.length > 0) {
+            data.forEach((p) {
+              ticketTypes.add(TicketType.formJson(p));
+            });
+          }
+        } catch (e) {
+          onError("Something get wrong!");
         }
-      } catch (e) {
-        onError("Something get wrong!");
+      } else {
+        onError("Something get wrong! Status code ${response.statusCode}");
       }
-    } else {
-      onError("Something get wrong! Status code ${response.statusCode}");
-    }
     } catch (e) {
       print(e);
     }
-    
+
     return ticketTypes;
   }
 
-
-  Future<TicketTypeDetail> getTicketTypeByID({Function(String) onError, String id}) async {
+  Future<TicketTypeDetail> getTicketTypeByID(
+      {Function(String) onError, String id}) async {
     String endpoint = ticketTypeByIDGETUrl + id;
 
     TicketTypeDetail ticketType;
@@ -54,8 +60,7 @@ if (response.statusCode == 200) {
     if (response.statusCode == 200) {
       try {
         dynamic jsonRaw = json.decode(response.body);
-         ticketType = TicketTypeDetail.formJson(jsonRaw);
-        
+        ticketType = TicketTypeDetail.formJson(jsonRaw);
       } catch (e) {
         print(e);
         onError("Something get wrong!");

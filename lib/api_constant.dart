@@ -26,3 +26,7 @@ const userPassOutdatedGETUrl = BASE_URL + "user-passes/user-pass-expire?uId=";
 // ** GET ** //
 const listCitiesGETUrl = BASE_URL + "cities";
 
+// Category
+// ** GET **//
+const listCategoryGETUrl = BASE_URL + "categories";
+
