@@ -45,9 +45,13 @@ class PassDetailInformation {
         String ticketTypeName =
             json['collections'][i]['ticketTypes'][j]['name'];
         String id = json['collections'][i]['ticketTypes'][j]['id'];
+        double latitude = json['collections'][i]['ticketTypes'][j]['lat'];
+        double longitude = json['collections'][i]['ticketTypes'][j]['lng'];
         List<Object> ticket = [];
         ticket.add(id);
         ticket.add(ticketTypeName);
+        ticket.add(latitude);
+        ticket.add(longitude);
         ticketInCollection.add(ticket);
         // Object ticketTypeName =
         //     json['collections'][i]['ticketTypes'][j];
