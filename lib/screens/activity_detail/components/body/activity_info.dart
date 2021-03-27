@@ -1,7 +1,7 @@
 
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/models/ticketTypeDetail.dart';
-import 'package:city_pass/screens/map/map_screen.dart';
+import 'package:city_pass/screens/map/map_ticket_type.dart';
 import 'package:city_pass/screens/pass_detail/pass_detail.dart';
 import 'package:city_pass/service/pass_services.dart';
 import 'package:city_pass/shared/pass_card.dart';
@@ -9,6 +9,7 @@ import 'package:city_pass/shared/timetable_row.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../constants.dart';
 
@@ -26,11 +27,27 @@ class ActivityInfo extends StatefulWidget {
 
 class _ActivityInfoState extends State<ActivityInfo> {
   Future<List<Pass>> listPass;
+
   @override
   void initState() {
     super.initState();
     listPass =
         PassAPI().getAllPasses(ticketTypeId: widget.activity.id.toString());
+  }
+
+  Set<Marker> generateMapMarkers() {
+    Marker currentLocation = Marker(
+      markerId: MarkerId(widget.activity.id.toString()),
+      position: LatLng(widget.activity.latitude, widget.activity.longitude),
+      infoWindow: InfoWindow(
+        title: widget.activity.attractionName,
+        snippet: widget.activity.address,
+      )
+    );
+
+    Set<Marker> markers = new Set();
+    markers.add(currentLocation);
+    return markers;
   }
 
   @override
@@ -103,15 +120,27 @@ class _ActivityInfoState extends State<ActivityInfo> {
             ),
           ),
           VerticalSpacing(of: 20),
-          GestureDetector(
-            onTap: () => {
-              Navigator.push(context, CupertinoPageRoute(builder: (context) {
-                return MapScreen();
-              })),
-            },
-            child: SizedBox(
-              width: 400,
-              child: Image.asset("assets/images/map_small.png"),
+          Container(
+            height: 200,
+            child: GoogleMap(
+              initialCameraPosition: CameraPosition(
+                target: LatLng(widget.activity.latitude, widget.activity.longitude),
+                zoom: 11.0
+              ),
+              markers: generateMapMarkers(),
+              zoomGesturesEnabled: false,
+              tiltGesturesEnabled: false,
+              rotateGesturesEnabled: false,
+              scrollGesturesEnabled: false,
+              zoomControlsEnabled: false,
+              onTap: (_) {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (context) {
+                    return MapForTicketType(widget.activity);
+                  })
+                );
+              },
             ),
           ),
           VerticalSpacing(of: 40),

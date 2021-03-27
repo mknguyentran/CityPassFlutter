@@ -4,12 +4,14 @@ import 'package:city_pass/model/pass.dart';
 import 'package:city_pass/models/passDetailInformation.dart';
 import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/screens/activity_detail/activity_detail.dart';
+import 'package:city_pass/screens/map/map_pass.dart';
 import 'package:city_pass/service/ticketType_services.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_guid/flutter_guid.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PassDetailContent extends StatefulWidget {
   const PassDetailContent(
@@ -28,6 +30,18 @@ class PassDetailContent extends StatefulWidget {
 }
 
 class _PassDetailContentState extends State<PassDetailContent> {
+  Set<Marker> getFirstLocationMark() {
+    Marker firstLocation = Marker(
+      markerId: MarkerId(widget.passDetail.listOfTicket[0][0][0]),
+      position: LatLng(widget.passDetail.listOfTicket[0][0][2], widget.passDetail.listOfTicket[0][0][3]),
+      infoWindow: InfoWindow(title: widget.passDetail.listOfTicket[0][0][1])
+    );
+
+    Set<Marker> markers = new Set();
+    markers.add(firstLocation);
+    return markers;
+  }
+
   @override
   Widget build(BuildContext context) {
     int _currentIndex = 1;
@@ -77,7 +91,31 @@ class _PassDetailContentState extends State<PassDetailContent> {
                 ),
               ],
             ),
-          )
+          ),
+          SectionTitle(title: 'Bản đồ'),
+          Container(
+            height: 200,
+            child: GoogleMap(
+              initialCameraPosition: CameraPosition(
+                target: LatLng(widget.passDetail.listOfTicket[0][0][2], widget.passDetail.listOfTicket[0][0][3]),
+                zoom: 11.0
+              ),
+              markers: getFirstLocationMark(),
+              zoomGesturesEnabled: false,
+              tiltGesturesEnabled: false,
+              rotateGesturesEnabled: false,
+              scrollGesturesEnabled: false,
+              zoomControlsEnabled: false,
+              onTap: (_) {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(builder: (context) {
+                    return MapForPass(widget.passDetail.listOfTicket);
+                  })
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

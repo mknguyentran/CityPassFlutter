@@ -53,6 +53,7 @@ dependencies:
   loading_overlay: ^0.2.1
   firebase_messaging: ^8.0.0-dev.15
   flutter_local_notifications: ^4.0.1+2
+  google_maps_flutter: ^1.0.3
   
 dev_dependencies:
   flutter_test:
