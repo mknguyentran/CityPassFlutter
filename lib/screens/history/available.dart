@@ -93,7 +93,8 @@ class _AvailablePassState extends State<AvailablePass> {
                                 ),
                                 SizedBox(height: 10),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                     Text(
                                       "Còn hiệu lực",
@@ -120,7 +121,8 @@ class _AvailablePassState extends State<AvailablePass> {
                                         child: Text(
                                           "Đặt lại",
                                           style: TextStyle(
-                                              color: Colors.white, fontSize: 17),
+                                              color: Colors.white,
+                                              fontSize: 17),
                                         ),
                                         shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
@@ -146,7 +148,9 @@ class _AvailablePassState extends State<AvailablePass> {
           return Container(
             height: percentageOfScreenHeight(20),
             alignment: Alignment.center,
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(primaryLightColor),
+            ),
           );
         },
       )),

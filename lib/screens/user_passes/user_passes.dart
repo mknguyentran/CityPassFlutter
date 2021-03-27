@@ -95,7 +95,10 @@ class _UserPassesState extends State<UserPasses> {
                   return Container(
                     height: percentageOfScreenHeight(20),
                     alignment: Alignment.center,
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(primaryLightColor),
+                    ),
                   );
                 } else {
                   return Container(

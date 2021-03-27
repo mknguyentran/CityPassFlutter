@@ -96,7 +96,10 @@ class _AttractionCategoryState extends State<AttractionCategory> {
                     ],
                   );
                 }
-                return Center(child: CircularProgressIndicator());
+                return Center(
+                    child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(primaryLightColor),
+                ));
               },
             )
           ],

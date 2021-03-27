@@ -1,3 +1,4 @@
+import 'package:city_pass/constants.dart';
 import 'package:city_pass/model/activity.dart';
 import 'package:city_pass/models/ticketTypeDetail.dart';
 import 'package:city_pass/screens/activity_detail/components/activity_header.dart';
@@ -56,7 +57,9 @@ class _ActivityDetailState extends State<ActivityDetail> {
             return Container(
               height: percentageOfScreenHeight(100),
               alignment: Alignment.center,
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(primaryLightColor),
+              ),
             );
           },
         ),

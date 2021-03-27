@@ -1,4 +1,3 @@
-
 import 'package:city_pass/models/pass.dart';
 import 'package:city_pass/models/ticketTypeDetail.dart';
 import 'package:city_pass/screens/map/map_ticket_type.dart';
@@ -107,7 +106,9 @@ class _ActivityInfoState extends State<ActivityInfo> {
                     ],
                   );
                 }
-                return CircularProgressIndicator();
+                return CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(primaryLightColor),
+                );
               },
             ),
           ),

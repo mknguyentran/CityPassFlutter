@@ -14,7 +14,7 @@ class SearchPage extends StatefulWidget {
   final City city;
 
   const SearchPage({Key key, this.city}) : super(key: key);
-  
+
   _SearchPageState createState() => _SearchPageState();
 }
 
@@ -36,32 +36,33 @@ class _SearchPageState extends State<SearchPage> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
-                    child: CircularProgressIndicator()
-                  );
+                      child: CircularProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(primaryLightColor),
+                  ));
                 }
 
                 if (snapshot.hasData) {
                   if (snapshot.data.length > 0) {
                     return Padding(
                       padding: EdgeInsets.all(kDefaultPadding),
-                      child: Column(
-                        children: [
-                          ActivityRecommendationVertical(
-                            hasPadding: false,
-                            title: 'Địa điểm tại ' + (widget.city != null ? widget.city.name: 'Việt Nam'),
-                            children: snapshot.data,
-                          ),
-                        ]
-                      ),
+                      child: Column(children: [
+                        ActivityRecommendationVertical(
+                          hasPadding: false,
+                          title: 'Địa điểm tại ' +
+                              (widget.city != null
+                                  ? widget.city.name
+                                  : 'Việt Nam'),
+                          children: snapshot.data,
+                        ),
+                      ]),
                     );
                   } else {
                     return Padding(
                       padding: EdgeInsets.all(kDefaultPadding),
                       child: Text(
                         'Không tìm thấy dữ liệu',
-                        style: TextStyle(
-                          color: Colors.red
-                        ),
+                        style: TextStyle(color: Colors.red),
                       ),
                     );
                   }
@@ -98,28 +99,28 @@ class _SearchPageState extends State<SearchPage> {
       ),
       centerTitle: true,
       bottom: PreferredSize(
-        preferredSize: Size.fromHeight(70),
-        child: Padding(
-          padding: EdgeInsets.all(kDefaultPadding),
-          child: SearchField(
-            height: 45,
-            width: double.infinity,
-            hintText: 'Tìm kiếm địa điểm',
-            boxShadow: [kDefaultShadow],
-            onSubmit: (value) {
-              setState(() {
-                _searchValue = value.trim();
-              });
-              
-              if (value.isNotEmpty) {
-                ticketTypeList = TicketTypeAPI().getAllTicketTypes(city: widget.city, name: value.trim());
-                passList = PassAPI().getAllPasses(city: widget.city, name: value.trim()); 
-              } 
-              
-            },
-          ),
-        )
-      ),
+          preferredSize: Size.fromHeight(70),
+          child: Padding(
+            padding: EdgeInsets.all(kDefaultPadding),
+            child: SearchField(
+              height: 45,
+              width: double.infinity,
+              hintText: 'Tìm kiếm địa điểm',
+              boxShadow: [kDefaultShadow],
+              onSubmit: (value) {
+                setState(() {
+                  _searchValue = value.trim();
+                });
+
+                if (value.isNotEmpty) {
+                  ticketTypeList = TicketTypeAPI()
+                      .getAllTicketTypes(city: widget.city, name: value.trim());
+                  passList = PassAPI()
+                      .getAllPasses(city: widget.city, name: value.trim());
+                }
+              },
+            ),
+          )),
     );
   }
 }

@@ -118,7 +118,9 @@ class _OutDatedPassState extends State<OutDatedPass> {
           return Container(
             height: percentageOfScreenHeight(20),
             alignment: Alignment.center,
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(primaryLightColor),
+            ),
           );
         },
       )),

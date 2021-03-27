@@ -4,6 +4,7 @@ import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/screens/activity_category/components/activity_category_header.dart';
 import 'package:city_pass/screens/home/components/explore/components/activity_recommendation_vertical.dart';
 import 'package:city_pass/service/ticketType_services.dart';
+import 'package:city_pass/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -29,8 +30,8 @@ class _ActivityCategoryScreenState extends State<ActivityCategoryScreen> {
   @override
   void initState() {
     super.initState();
-    listTicketType =
-        TicketTypeAPI().getAllTicketTypes(cateId: widget.category.id.toString());
+    listTicketType = TicketTypeAPI()
+        .getAllTicketTypes(cateId: widget.category.id.toString());
   }
 
   @override
@@ -53,11 +54,17 @@ class _ActivityCategoryScreenState extends State<ActivityCategoryScreen> {
                 if (snapshot.hasData) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 60),
-                    child: ActivityRecommendationVertical(
-                        children: snapshot.data),
+                    child:
+                        ActivityRecommendationVertical(children: snapshot.data),
                   );
                 }
-                return Center(child: CircularProgressIndicator());
+                return Container(
+                  height: percentageOfScreenHeight(40),
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(widget.color),
+                  ),
+                );
               },
             )
           ],
