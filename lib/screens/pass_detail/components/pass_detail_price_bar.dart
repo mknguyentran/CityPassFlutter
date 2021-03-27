@@ -93,38 +93,38 @@ class PassDetailPriceBar extends StatelessWidget {
             ),
           ),
           //discount percentage
-          // Container(
-          //   decoration: BoxDecoration(
-          //     color: primaryDarkColor,
-          //     borderRadius: BorderRadius.only(
-          //       bottomLeft: Radius.circular(5),
-          //       bottomRight: Radius.circular(5),
-          //     ),
-          //   ),
-          //   child: Padding(
-          //     padding: const EdgeInsets.fromLTRB(5, 15, 5, 5),
-          //     child: Column(
-          //       children: [
-          //         Text(
-          //           "TIẾT KIỆM",
-          //           style: TextStyle(
-          //             fontSize: 12,
-          //             fontWeight: FontWeight.w300,
-          //             color: Colors.white,
-          //           ),
-          //         ),
-          //         Text(
-          //           "35%",
-          //           style: TextStyle(
-          //             fontSize: 23,
-          //             fontWeight: FontWeight.bold,
-          //             color: Colors.white,
-          //           ),
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // )
+          Container(
+            decoration: BoxDecoration(
+              color: primaryDarkColor,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(5),
+                bottomRight: Radius.circular(5),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(5, 15, 5, 5),
+              child: Column(
+                children: [
+                  Text(
+                    "TIẾT KIỆM",
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    "30%",
+                    style: TextStyle(
+                      fontSize: 23,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
