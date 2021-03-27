@@ -147,9 +147,12 @@ class _HomeScreenState extends State<HomeScreen> {
         focusedAction: () {
           Navigator.push(
             context,
-            CupertinoPageRoute(builder: (context) {
-              return UserPasses();
-            }),
+            CupertinoPageRoute(
+              builder: (context) {
+                return UserPasses();
+              },
+              fullscreenDialog: true,
+            ),
           );
         },
       ),
@@ -270,9 +273,12 @@ class _HomeScreenState extends State<HomeScreen> {
   _navigateToCityPicker() async {
     final pickedCity = await Navigator.push(
       context,
-      CupertinoPageRoute(builder: (context) {
-        return CityPicker();
-      }),
+      CupertinoPageRoute(
+        builder: (context) {
+          return CityPicker();
+        },
+        fullscreenDialog: true,
+      ),
     );
 
     if (pickedCity is City) {

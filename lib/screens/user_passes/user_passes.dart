@@ -157,8 +157,9 @@ AppBar _buildAppBar(BuildContext context) {
     leading: IconButton(
       color: primaryDarkColor,
       icon: Icon(
-        Icons.chevron_left_rounded,
-        size: 30,
+        CupertinoIcons.chevron_down,
+        size: 22,
+        color: primaryDarkColor,
       ),
       onPressed: () {
         Navigator.of(context).pop();
