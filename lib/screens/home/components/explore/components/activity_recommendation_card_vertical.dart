@@ -24,12 +24,14 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       height: _cardheight,
       decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border(
-              bottom: BorderSide(
+        color: Colors.white,
+        border: Border(
+          bottom: BorderSide(
             color: fadedTextColor,
             width: 0.5,
-          ))),
+          ),
+        ),
+      ),
       child: Row(children: [
         Container(
           height: 120,

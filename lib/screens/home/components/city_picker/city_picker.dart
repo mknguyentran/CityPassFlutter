@@ -6,6 +6,7 @@ import 'package:city_pass/service/city_services.dart';
 import 'package:city_pass/shared/search_field.dart';
 import 'package:city_pass/shared/section_title.dart';
 import 'package:city_pass/size_config.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CityPicker extends StatefulWidget {
@@ -224,9 +225,9 @@ AppBar _buildAppBar(BuildContext context) {
     brightness: Brightness.light,
     leading: IconButton(
       icon: Icon(
-        Icons.chevron_left_rounded,
-        size: 30,
-        color: textBlack,
+        CupertinoIcons.chevron_down,
+        size: 22,
+        color: primaryDarkColor,
       ),
       onPressed: () {
         Navigator.of(context).pop();

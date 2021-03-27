@@ -39,15 +39,23 @@ class _AccountState extends State<Account> {
               Padding(
                 padding: const EdgeInsets.only(right: 10),
                 child: Container(
+                  clipBehavior: Clip.hardEdge,
                   width: 60,
                   height: 60,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     boxShadow: [kDefaultShadow],
-                    image: DecorationImage(
-                      image: NetworkImage(_user != null ? _user.photoURL : ''),
-                      fit: BoxFit.cover,
-                    ),
+                    // image: DecorationImage(
+                    //   image: NetworkImage(_user != null ? _user.photoURL : ''),
+                    //   fit: BoxFit.cover,
+                    // ),
+                  ),
+                  child: FadeInImage(
+                    placeholder: AssetImage("assets/images/user.png"),
+                    image: NetworkImage(_user != null ? _user.photoURL : ''),
+                    fit: BoxFit.cover,
+                    fadeInDuration: const Duration(milliseconds: 125),
+                    fadeOutDuration: const Duration(milliseconds: 125),
                   ),
                 ),
               ),
