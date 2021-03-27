@@ -1,6 +1,7 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/mockupData/mockup_category.dart';
 import 'package:city_pass/models/category.dart';
+import 'package:city_pass/models/city.dart';
 import 'package:city_pass/screens/activity_category/activity_category.dart';
 import 'package:city_pass/service/category_service.dart';
 import 'package:city_pass/shared/section_title.dart';
@@ -12,7 +13,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class AttractionCategory extends StatefulWidget {
   const AttractionCategory({
     Key key,
+     @required  this.city
   }) : super(key: key);
+ 
+  final City city;
 
   @override
   _AttractionCategoryState createState() => _AttractionCategoryState();
@@ -86,6 +90,7 @@ class _AttractionCategoryState extends State<AttractionCategory> {
                                     category: snapshot.data[index],
                                     color: colorList[index],
                                     icon: iconList[index],
+                                    city: widget.city
                                   );
                                 },
                               ),

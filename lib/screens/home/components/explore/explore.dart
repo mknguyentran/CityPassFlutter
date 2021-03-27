@@ -97,7 +97,7 @@ class _ExploreState extends State<Explore> {
               ),
             ),
           ),
-          AttractionCategory(),
+          AttractionCategory(city:widget.city),
           VerticalSpacing(
             of: verticalSpacing,
           ),
