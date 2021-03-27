@@ -36,13 +36,12 @@ class _ActivityInfoState extends State<ActivityInfo> {
 
   Set<Marker> generateMapMarkers() {
     Marker currentLocation = Marker(
-      markerId: MarkerId(widget.activity.id.toString()),
-      position: LatLng(widget.activity.latitude, widget.activity.longitude),
-      infoWindow: InfoWindow(
-        title: widget.activity.attractionName,
-        snippet: widget.activity.address,
-      )
-    );
+        markerId: MarkerId(widget.activity.id.toString()),
+        position: LatLng(widget.activity.latitude, widget.activity.longitude),
+        infoWindow: InfoWindow(
+          title: widget.activity.attractionName,
+          snippet: widget.activity.address,
+        ));
 
     Set<Marker> markers = new Set();
     markers.add(currentLocation);
@@ -123,11 +122,13 @@ class _ActivityInfoState extends State<ActivityInfo> {
           VerticalSpacing(of: 20),
           Container(
             height: 200,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+            clipBehavior: Clip.hardEdge,
             child: GoogleMap(
               initialCameraPosition: CameraPosition(
-                target: LatLng(widget.activity.latitude, widget.activity.longitude),
-                zoom: 11.0
-              ),
+                  target: LatLng(
+                      widget.activity.latitude, widget.activity.longitude),
+                  zoom: 11.0),
               markers: generateMapMarkers(),
               zoomGesturesEnabled: false,
               tiltGesturesEnabled: false,
@@ -135,12 +136,9 @@ class _ActivityInfoState extends State<ActivityInfo> {
               scrollGesturesEnabled: false,
               zoomControlsEnabled: false,
               onTap: (_) {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(builder: (context) {
-                    return MapForTicketType(widget.activity);
-                  })
-                );
+                Navigator.push(context, CupertinoPageRoute(builder: (context) {
+                  return MapForTicketType(widget.activity);
+                }));
               },
             ),
           ),

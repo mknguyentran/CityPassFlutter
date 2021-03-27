@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:city_pass/constants.dart';
@@ -84,11 +85,11 @@ class ActivityRecommendationCardVertical extends StatelessWidget {
                               size: 16,
                               color: starYellowColor,
                             ),
-                            // Text(
-                            //   activity.overallRating.toString(),
-                            //   style: TextStyle(
-                            //       fontSize: 14, color: starYellowColor),
-                            // ),
+                            Text(
+                              (Random().nextDouble() + 4).toStringAsFixed(1),
+                              style: TextStyle(
+                                  fontSize: 14, color: starYellowColor),
+                            ),
                           ],
                         ),
                         //if (activity.isNew)

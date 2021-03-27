@@ -32,10 +32,10 @@ class PassDetailContent extends StatefulWidget {
 class _PassDetailContentState extends State<PassDetailContent> {
   Set<Marker> getFirstLocationMark() {
     Marker firstLocation = Marker(
-      markerId: MarkerId(widget.passDetail.listOfTicket[0][0][0]),
-      position: LatLng(widget.passDetail.listOfTicket[0][0][2], widget.passDetail.listOfTicket[0][0][3]),
-      infoWindow: InfoWindow(title: widget.passDetail.listOfTicket[0][0][1])
-    );
+        markerId: MarkerId(widget.passDetail.listOfTicket[0][0][0]),
+        position: LatLng(widget.passDetail.listOfTicket[0][0][2],
+            widget.passDetail.listOfTicket[0][0][3]),
+        infoWindow: InfoWindow(title: widget.passDetail.listOfTicket[0][0][1]));
 
     Set<Marker> markers = new Set();
     markers.add(firstLocation);
@@ -92,14 +92,19 @@ class _PassDetailContentState extends State<PassDetailContent> {
               ],
             ),
           ),
-          SectionTitle(title: 'Bản đồ'),
+          SectionTitle(
+            title: 'Bản đồ',
+            lineSpacing: 20,
+          ),
           Container(
             height: 200,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+            clipBehavior: Clip.hardEdge,
             child: GoogleMap(
               initialCameraPosition: CameraPosition(
-                target: LatLng(widget.passDetail.listOfTicket[0][0][2], widget.passDetail.listOfTicket[0][0][3]),
-                zoom: 11.0
-              ),
+                  target: LatLng(widget.passDetail.listOfTicket[0][0][2],
+                      widget.passDetail.listOfTicket[0][0][3]),
+                  zoom: 11.0),
               markers: getFirstLocationMark(),
               zoomGesturesEnabled: false,
               tiltGesturesEnabled: false,
@@ -107,12 +112,9 @@ class _PassDetailContentState extends State<PassDetailContent> {
               scrollGesturesEnabled: false,
               zoomControlsEnabled: false,
               onTap: (_) {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(builder: (context) {
-                    return MapForPass(widget.passDetail.listOfTicket);
-                  })
-                );
+                Navigator.push(context, CupertinoPageRoute(builder: (context) {
+                  return MapForPass(widget.passDetail.listOfTicket);
+                }));
               },
             ),
           ),
