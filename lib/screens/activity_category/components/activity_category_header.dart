@@ -3,14 +3,23 @@ import 'package:city_pass/models/category.dart';
 import 'package:city_pass/size_config.dart';
 import 'package:flutter/material.dart';
 
-class ActivityCategoryHeader extends StatelessWidget {
+class ActivityCategoryHeader extends StatefulWidget {
   const ActivityCategoryHeader({
     Key key,
     @required this.category,
+    @required this.color,
+    @required this.iconData,
   }) : super(key: key);
 
   final ActivityCategory category;
+  final Color color;
+  final IconData iconData;
 
+  @override
+  _ActivityCategoryHeaderState createState() => _ActivityCategoryHeaderState();
+}
+
+class _ActivityCategoryHeaderState extends State<ActivityCategoryHeader> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -21,7 +30,7 @@ class ActivityCategoryHeader extends StatelessWidget {
           height: getProportionateScreenHeight(250),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(category.imagePath),
+              image: NetworkImage(widget.category.imagePath ?? ''),
               fit: BoxFit.cover,
             ),
           ),
@@ -34,7 +43,7 @@ class ActivityCategoryHeader extends StatelessWidget {
             height: 100,
             width: percentageOfScreenWidth(100) - kDefaultPadding * 2,
             decoration: BoxDecoration(
-              color: category.themeColor,
+              color: widget.color,
               borderRadius: BorderRadius.circular(10),
               boxShadow: [kPopShadow],
             ),
@@ -43,7 +52,7 @@ class ActivityCategoryHeader extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: Icon(
-                    category.icon,
+                    widget.iconData,
                     color: Colors.white,
                     size: 40,
                   ),
@@ -54,7 +63,7 @@ class ActivityCategoryHeader extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        category.name,
+                        widget.category.name,
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -63,7 +72,7 @@ class ActivityCategoryHeader extends StatelessWidget {
                       VerticalSpacing(of: 10),
                       Expanded(
                         child: Text(
-                          category.description,
+                          widget.category.description,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,

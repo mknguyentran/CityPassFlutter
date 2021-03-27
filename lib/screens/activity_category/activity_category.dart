@@ -1,33 +1,65 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/category.dart';
+import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/screens/activity_category/components/activity_category_header.dart';
 import 'package:city_pass/screens/home/components/explore/components/activity_recommendation_vertical.dart';
+import 'package:city_pass/service/ticketType_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ActivityCategoryScreen extends StatelessWidget {
+class ActivityCategoryScreen extends StatefulWidget {
   final ActivityCategory category;
+  final Color color;
+  final IconData icon;
 
   const ActivityCategoryScreen({
     Key key,
     @required this.category,
+    @required this.color,
+    @required this.icon,
   }) : super(key: key);
+
+  @override
+  _ActivityCategoryScreenState createState() => _ActivityCategoryScreenState();
+}
+
+class _ActivityCategoryScreenState extends State<ActivityCategoryScreen> {
+  Future<List<TicketType>> listTicketType;
+
+  @override
+  void initState() {
+    super.initState();
+    listTicketType =
+        TicketTypeAPI().getAllTicketTypes(cateId: widget.category.id.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(context, category.themeColor),
+      appBar: _buildAppBar(context, widget.color),
       backgroundColor: darkGrayBackground,
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ActivityCategoryHeader(category: category),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(vertical: 60),
-            //   child: ActivityRecommendationVertical(
-            //       children: category.activityList),
-            // ),
+            ActivityCategoryHeader(
+              category: widget.category,
+              color: widget.color,
+              iconData: widget.icon,
+            ),
+            FutureBuilder(
+              future: listTicketType,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 60),
+                    child: ActivityRecommendationVertical(
+                        children: snapshot.data),
+                  );
+                }
+                return Center(child: CircularProgressIndicator());
+              },
+            )
           ],
         ),
       ),
