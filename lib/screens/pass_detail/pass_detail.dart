@@ -83,7 +83,9 @@ class _PassDetailState extends State<PassDetail> {
               return Container(
                 height: percentageOfScreenHeight(100),
                 alignment: Alignment.center,
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(primaryLightColor),
+                ),
               );
             }),
       ),
@@ -162,7 +164,11 @@ class _PassDetailState extends State<PassDetail> {
                                 chosenList: chosenList,
                               );
                             }
-                            return Center(child: CircularProgressIndicator());
+                            return Center(
+                                child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  primaryLightColor),
+                            ));
                           },
                         );
                       });

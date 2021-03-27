@@ -42,23 +42,26 @@ class _UserPassDetailTopInfoState extends State<UserPassDetailTopInfo> {
           padding: EdgeInsets.all(kDefaultPadding),
           alignment: Alignment.center,
           child: GestureDetector(
-            onLongPress: _showUserPassIDDialog,
-            child: FutureBuilder(
-              future: _deviceToken,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return QrImage(
-                    data: widget.availableUserPass.userPassID + ' ' + snapshot.data,
-                    version: QrVersions.auto,
-                    size: percentageOfScreenHeight(27),
-                  );
-                }
+              onLongPress: _showUserPassIDDialog,
+              child: FutureBuilder(
+                future: _deviceToken,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return QrImage(
+                      data: widget.availableUserPass.userPassID +
+                          ' ' +
+                          snapshot.data,
+                      version: QrVersions.auto,
+                      size: percentageOfScreenHeight(27),
+                    );
+                  }
 
-                return CircularProgressIndicator();
-              },
-            )
-            
-          ),
+                  return CircularProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(primaryLightColor),
+                  );
+                },
+              )),
         ),
         Text(
           "HẾT HẠN VÀO ${simpleDateFormat.format(widget.availableUserPass.expiredDate)}"
@@ -107,8 +110,7 @@ class _UserPassDetailTopInfoState extends State<UserPassDetailTopInfo> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title:
-              Text('${widget.availableUserPass.userPassID.toUpperCase()}'),
+          title: Text('${widget.availableUserPass.userPassID.toUpperCase()}'),
           actions: [
             TextButton(
               child: Text('Ok'.toUpperCase()),

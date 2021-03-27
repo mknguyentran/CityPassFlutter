@@ -116,7 +116,7 @@ class _ExploreState extends State<Explore> {
                       of: verticalSpacing,
                     ),
                     PassRecommendation(
-                      title: "Deal tốt Tháng 3 🎉",                                                                                      
+                      title: "Deal tốt Tháng 3 🎉",
                       subtitle: "Giảm đến 50% khi mua trong tháng này",
                       children: snapshot.data,
                     ),
@@ -126,7 +126,10 @@ class _ExploreState extends State<Explore> {
                   ],
                 );
               }
-              return Center(child: CircularProgressIndicator());
+              return Center(
+                  child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(primaryLightColor),
+              ));
             },
           ),
           FutureBuilder(
