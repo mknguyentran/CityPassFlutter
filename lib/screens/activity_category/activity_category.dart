@@ -1,5 +1,6 @@
 import 'package:city_pass/constants.dart';
 import 'package:city_pass/models/category.dart';
+import 'package:city_pass/models/city.dart';
 import 'package:city_pass/models/ticketType.dart';
 import 'package:city_pass/screens/activity_category/components/activity_category_header.dart';
 import 'package:city_pass/screens/home/components/explore/components/activity_recommendation_vertical.dart';
@@ -12,12 +13,14 @@ class ActivityCategoryScreen extends StatefulWidget {
   final ActivityCategory category;
   final Color color;
   final IconData icon;
+  final City city;
 
   const ActivityCategoryScreen({
     Key key,
     @required this.category,
     @required this.color,
     @required this.icon,
+    @required this.city,
   }) : super(key: key);
 
   @override
@@ -31,7 +34,7 @@ class _ActivityCategoryScreenState extends State<ActivityCategoryScreen> {
   void initState() {
     super.initState();
     listTicketType = TicketTypeAPI()
-        .getAllTicketTypes(cateId: widget.category.id.toString());
+        .getAllTicketTypes(cateId: widget.category.id.toString(), city: widget.city);
   }
 
   @override
